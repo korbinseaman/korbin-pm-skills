@@ -850,7 +850,7 @@ class WorkflowTests(unittest.TestCase):
     def test_plan_skill_contains_domain_core_and_substantive_resources(self) -> None:
         folder = PROJECT / "skills" / "ur-design-survey"
         skill = (folder / "SKILL.md").read_text(encoding="utf-8")
-        for section in ("## 输入", "## 工作流程", "## 输出契约", "## 优化现有问卷", "## 交付说明"):
+        for section in ("## 输入契约", "## 工作流程", "## 输出契约", "## 优化现有问卷", "## 交付给用户"):
             self.assertIn(section, skill)
         self.assertLess(skill.index("## 工作流程"), skill.index("## 输出契约"))
         self.assertLess(len(skill.splitlines()), 170)
@@ -989,6 +989,24 @@ class WorkflowTests(unittest.TestCase):
                 PROJECT / "skills" / "ur-design-survey" / "scripts" / "lint_questionnaire.py",
                 example,
             )
+
+    def test_questionnaire_examples_follow_default_type_distribution(self) -> None:
+        templates = PROJECT / "skills" / "ur-design-survey" / "templates"
+        for example in templates.glob("questionnaire-*.md"):
+            types = re.findall(r"(?m)^Q\d+【([^】]+)】", example.read_text(encoding="utf-8"))
+            counts = {
+                "single": sum(item == "单选题" for item in types),
+                "multi": sum(item == "多选题" for item in types),
+                "scale": sum("量表题" in item for item in types),
+                "ranking": sum(item in {"排序题", "Top-N题"} for item in types),
+                "open": sum(item == "填空题" for item in types),
+            }
+            self.assertLessEqual(len(types), 12, example.name)
+            self.assertTrue(4 <= counts["single"] <= 7, example.name)
+            self.assertTrue(2 <= counts["multi"] <= 3, example.name)
+            self.assertTrue(0 <= counts["scale"] <= 2, example.name)
+            self.assertTrue(0 <= counts["ranking"] <= 1, example.name)
+            self.assertEqual(counts["open"], 1, example.name)
 
     def test_satisfaction_example_preserves_diagnostic_structure(self) -> None:
         template = PROJECT / "skills" / "ur-design-survey" / "templates" / "questionnaire-satisfaction-survey.md"
