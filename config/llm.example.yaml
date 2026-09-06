@@ -1,0 +1,7 @@
+models:
+  deepseek: "sk-e8f43dafad3246529ed8bcfb8ae064d8" # DEEPSEEK_API_KEY
+  zhipu: ""    # ZAI_API_KEY
+  kimi: ""     # MOONSHOT_API_KEY
+  qwen: ""     # DASHSCOPE_API_KEY
+  minimax: ""  # MINIMAX_API_KEY
+  openai: ""   # OPENAI_API_KEY

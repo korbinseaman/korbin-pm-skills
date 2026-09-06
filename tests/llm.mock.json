@@ -1,0 +1,38 @@
+{
+  "providers": [
+    {
+      "name": "mock-qwen-test",
+      "provider_type": "mock",
+      "base_url": "",
+      "model": "deterministic-qwen",
+      "api_key_env": "",
+      "enabled": true,
+      "extra_headers": {}
+    },
+    {
+      "name": "mock-deepseek-test",
+      "provider_type": "mock",
+      "base_url": "",
+      "model": "deterministic-deepseek",
+      "api_key_env": "",
+      "enabled": true,
+      "extra_headers": {}
+    },
+    {
+      "name": "mock-openai-test",
+      "provider_type": "mock",
+      "base_url": "",
+      "model": "deterministic-openai",
+      "api_key_env": "",
+      "enabled": true,
+      "extra_headers": {}
+    }
+  ],
+  "runtime": {
+    "max_concurrency": 3,
+    "timeout_seconds": 5,
+    "max_retries": 0,
+    "temperature": 0,
+    "max_output_tokens": 1000
+  }
+}

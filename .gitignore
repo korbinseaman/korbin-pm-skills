@@ -1,0 +1,12 @@
+# Secrets and private provider configuration
+config/llm.json
+config/*.private.json
+.env
+
+# Runtime output (the checked-in output_example is retained)
+output/
+
+# Python
+__pycache__/
+*.pyc
+tests/.runtime/
