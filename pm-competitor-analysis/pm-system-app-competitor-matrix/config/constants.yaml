@@ -1,0 +1,98 @@
+# 全局常量。重复使用的值统一在此定义，SKILL.md 与各 reference 仅引用，不重复定义。
+
+skill:
+  name: pm-system-app-competitor-matrix
+  display_name: PM System APP Competitor Matrix
+
+research:
+  default_purpose: 综合分析
+  purposes:
+    - 功能借鉴
+    - 差异化竞争
+    - 综合分析
+  default_output_format: markdown
+  output_formats:
+    - markdown
+    - word
+  research_unit: competitor_x_feature
+  dynamic_internet_competitors:
+    min: 2
+    max: 3
+  parallelization:
+    enabled: true
+    min_research_units: 30
+    max_concurrency: 8
+  max_query_passes_per_unit: 3
+
+competitors:
+  default_device:
+    - Apple
+    - Huawei
+    - Honor
+    - Xiaomi
+    - vivo
+    - OPPO
+  optional_device:
+    - Google
+    - Samsung
+  default_target_product:
+    company: Huawei
+    platform: HarmonyOS
+
+output:
+  product_positioning_max_rows: 3
+  key_conclusion_sentence_count: 2
+  manual_confirmation_text: 请人工确认
+  no_reliable_screenshot_text: 未获取可靠界面截图
+  conflicting_evidence_text: 存在信息冲突，请人工确认
+
+feature_status:
+  supported: "✓"
+  partial: "◐"
+  indirect: "○"
+  unsupported: "×"
+  unknown: "?"
+  not_applicable: "N/A"
+
+confidence:
+  A:
+    label: 高可信
+    manual_confirmation_required: false
+  B:
+    label: 中可信
+    manual_confirmation_required: true
+  C:
+    label: 低可信
+    manual_confirmation_required: true
+
+scoring:
+  min_score: 1
+  max_score: 5
+  default_dimension_count:
+    min: 4
+    max: 6
+  radar_recommended_max_competitors: 5
+  generic_dimension_candidates:
+    - 简单易用
+    - 功能完整度
+    - 体验效率
+    - 智能化水平
+    - 差异化竞争力
+    - 生态协同能力
+    - 专业深度
+    - 商业化成熟度
+    - 可靠性与稳定性
+    - 用户价值感知
+
+strategic_labels:
+  - 已领先
+  - 基本持平
+  - 应补齐
+  - 可跟进
+  - 值得领先布局
+  - 不建议跟随
+
+strategic_horizons:
+  - 短期补齐
+  - 中期强化
+  - 长期差异化

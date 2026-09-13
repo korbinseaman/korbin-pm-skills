@@ -1,0 +1,30 @@
+# 功能预研数据模板
+# 当某个功能被多次分析时，可将已知信息填写在此处，减少重复 web 抓取。
+# 文件命名：{app}-{feature}.yaml
+
+app: "图库"              # 应用名称
+feature: "相册自定义排序"  # 功能名称
+
+vendors:
+  # Apple:
+  #   note: ""
+  #   spec_logic: ""
+  #   ux_hierarchy: ""
+  #   design_philosophy: ""
+  #   interaction: ""
+  #   copywriting: ""
+  #   spec_params: ""
+
+  # 华为:
+  #   note: ""
+  #   spec_logic: ""
+  #   ux_hierarchy: ""
+  #   design_philosophy: ""
+  #   interaction: ""
+  #   copywriting: ""
+  #   spec_params: ""
+
+# 填写补充说明：
+# - 所有信息应标注来源 URL
+# - 标注可信度级别（官方文档 / 官方营销 / 媒体评测 / 截图推断 / 待核实）
+# - 格式：信息内容 — [来源](url) · [交叉验证](url)

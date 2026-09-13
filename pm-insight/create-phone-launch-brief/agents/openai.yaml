@@ -1,0 +1,14 @@
+interface:
+  display_name: 手机新品发布会速递
+  short_description: 依据官方与可信主流媒体，分硬件、系统升级及重点应用特性生成速递PPT
+  default_prompt: 使用 $create-phone-launch-brief，依据官方与可信主流媒体资料，按新品硬件概览、系统软件升级、重点应用特性三部分生成手机新品发布会速递
+    PPT，逐项标注来源。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

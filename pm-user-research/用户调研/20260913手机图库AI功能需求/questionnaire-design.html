@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>手机图库 AI 功能使用与需求 · Questionnaire Design Document</title>
+  <style>
+    :root { color-scheme:light; --ink:#172033; --muted:#5f6b7a; --line:#dbe2ea; --panel:#f6f8fb; --accent:#315efb; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:#eef2f7; font:15px/1.65 system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; }
+    main { width:min(1080px,calc(100% - 32px)); margin:32px auto; padding:44px; background:#fff; border-radius:18px; box-shadow:0 14px 40px rgba(23,32,51,.08); }
+    h1 { margin:.2rem 0 .5rem; font-size:2rem; line-height:1.25; }
+    h2 { margin:2.4rem 0 1rem; padding-bottom:.45rem; border-bottom:2px solid var(--line); }
+    h3 { margin:1.25rem 0 .4rem; }
+    .eyebrow { color:var(--accent); font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    .muted,.source-note { color:var(--muted); }
+    .meta,.card,.question { padding:18px 20px; border:1px solid var(--line); border-radius:12px; background:var(--panel); }
+    .meta { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px 24px; }
+    table { width:100%; border-collapse:collapse; margin:12px 0 20px; }
+    th,td { padding:10px 12px; border:1px solid var(--line); text-align:left; vertical-align:top; }
+    th { background:var(--panel); }
+    .goal { margin:12px 0; }
+    .questionnaire-content { display:grid; gap:14px; }
+    .question { background:#fff; }
+    .question ul { margin:.5rem 0 0; }
+    .logic { color:#44506a; background:#eef3ff; border-left:3px solid var(--accent); padding:8px 12px; }
+    @media (max-width:720px) { main { width:100%; margin:0; padding:24px 18px; border-radius:0; } .meta { grid-template-columns:1fr; } table { display:block; overflow-x:auto; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">Questionnaire Design Document</div>
+    <h1>手机图库 AI 功能使用与需求</h1>
+    <p class="muted">以图库 AI 的实际使用行为和问题为基础，识别用户需要的具体功能及第一优先级。</p>
+  </header>
+
+  <section id="confirmed-inputs">
+    <h2>已确认输入</h2>
+    <div class="meta">
+      <div><strong>调研课题：</strong>调查用户对手机图库 AI 功能的使用现状、实际问题及功能诉求。</div>
+      <div><strong>问卷场景：</strong>原始需求洞察</div>
+      <div><strong>产品决策：</strong>确定手机图库 AI 功能的产品机会及优先级，为后续功能规划与概念验证提供依据。</div>
+      <div><strong>目标用户：</strong>近 3 个月使用过手机自带图库或相册的智能手机用户；不要求已经使用过图库 AI。</div>
+      <div><strong>实际引用模板：</strong><code>templates/questionnaire-original-needs-discovery.md</code></div>
+      <div><strong>题量与约束：</strong>共 12 题；最长路径 12 题；只使用单选、多选题，以支持 UserClub 完整导入。</div>
+    </div>
+  </section>
+
+  <section id="respondent-copy">
+    <h2>受访者文案</h2>
+    <p><strong>问卷标题：</strong>手机图库 AI 功能使用与需求调研</p>
+    <p><strong>问卷描述：</strong>感谢您参与本次调研，预计需要 4–5 分钟。我们希望了解您使用手机图库 AI 功能的实际经历、遇到的问题及新的功能诉求。问卷不会要求上传照片，回答仅用于产品研究分析。</p>
+  </section>
+
+  <section id="research-goals">
+    <h2>研究目标与证据</h2>
+    <article class="card goal" data-goal-id="G1" data-question-ids="Q4 Q5 Q6">
+      <h3>G1 · 识别图库 AI 的实际使用现状</h3>
+      <p>判断用户是否使用、使用频率、已用能力及最近一次真实任务。</p>
+      <p><strong>所需证据：</strong>近 3 个月使用频率、实际使用功能、最近一次任务。</p>
+      <p><strong>决策用途：</strong>区分近期用户、流失用户、从未使用者，建立需求解释基线。</p>
+    </article>
+    <article class="card goal" data-goal-id="G2" data-question-ids="Q7 Q8">
+      <h3>G2 · 识别图库 AI 的使用问题及后果</h3>
+      <p>判断现有功能在哪些环节失效，以及问题是否导致返工、任务失败或信任下降。</p>
+      <p><strong>所需证据：</strong>最近一次使用中的具体问题、问题造成的主要结果。</p>
+      <p><strong>决策用途：</strong>确定现有能力的改进重点，避免把未解决的体验问题误判为新功能需求。</p>
+    </article>
+    <article class="card goal" data-goal-id="G3" data-question-ids="Q9 Q10 Q11 Q12">
+      <h3>G3 · 形成具体功能需求及第一优先级</h3>
+      <p>先收集最多三项功能诉求，再从中强制选出第一优先项，并解释选择原因与触发情景。</p>
+      <p><strong>所需证据：</strong>功能需求选择率、第一优先功能、首选原因、具体触发情景。</p>
+      <p><strong>决策用途：</strong>形成 AI 功能机会排序，选择下一轮概念验证对象。</p>
+    </article>
+  </section>
+
+  <section id="module-blueprint">
+    <h2>模块蓝图</h2>
+    <table>
+      <thead><tr><th>顺序</th><th>模块</th><th>模块目标</th><th>对应证据</th><th>题数</th><th>选用理由</th><th>出现条件</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>人口特征</td><td>形成基本样本结构</td><td>性别、年龄、手机品牌</td><td>3</td><td>用于配额及需求差异解释</td><td>全部受访者</td></tr>
+        <tr><td>2</td><td>AI 使用分层</td><td>区分近期、曾用、未用及不确定用户</td><td>近 3 个月使用频率</td><td>1</td><td>确定体验题的回答资格</td><td>全部受访者</td></tr>
+        <tr><td>3</td><td>近期真实行为</td><td>还原用过的能力及最近一次任务</td><td>已用功能、真实任务</td><td>2</td><td>建立图库 AI 的行为证据</td><td>Q4 为近 3 个月使用者</td></tr>
+        <tr><td>4</td><td>问题与后果</td><td>定位使用障碍及实际影响</td><td>具体问题、主要结果</td><td>2</td><td>判断现有功能缺口是否值得解决</td><td>Q7 无明显问题时隐藏 Q8</td></tr>
+        <tr><td>5</td><td>功能优先级</td><td>识别需求广度、第一优先级及选择依据</td><td>Top 3 功能、Top 1 功能、首选原因、触发情景</td><td>4</td><td>形成可解释的功能规划证据</td><td>Q9 全部受访者；Q10–Q12 仅向有功能需求者显示</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>总题数：12</li>
+      <li>最长路径：12 题；近期使用但无明显问题路径 11 题；非近期且有需求用户路径 8 题；明确无需求用户路径 5 题</li>
+      <li>题型分布：单选题 8，多选题 4</li>
+      <li>模板偏离：行为与问题模块聚焦图库 AI，而非一般图库使用；未使用图库 AI 的用户跳过 Q5–Q8，但保留 Q9；有需求者继续回答 Q10–Q12，以比较不同使用分层的功能诉求及其原因。</li>
+    </ul>
+  </section>
+
+  <section id="goal-question-map">
+    <h2>目标—证据—题号映射</h2>
+    <table>
+      <thead><tr><th>研究目标</th><th>所需证据</th><th>题号</th><th>分析或决策用途</th></tr></thead>
+      <tbody>
+        <tr><td>G1</td><td>使用频率、已用能力、最近一次任务</td><td>Q4–Q6</td><td>建立 AI 使用渗透、频率及任务结构</td></tr>
+        <tr><td>G2</td><td>使用问题、问题后果</td><td>Q7–Q8</td><td>确定准确性、可控性、隐私、性能或付费问题的改进优先级</td></tr>
+        <tr><td>G3</td><td>最多三项功能诉求、第一优先功能、优先原因、触发情景</td><td>Q9–Q12</td><td>形成需求覆盖率、强制取舍结果及可解释的优先依据</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="analysis-advice">
+    <h2>分析建议</h2>
+    <ul>
+      <li>按 Q4 将样本分为近期使用者、曾用但近期未用者、从未使用者及无法判断者；不要让未使用者评价 Q5–Q8。</li>
+      <li>在近期使用者中统计 Q5 的能力使用率，并按 Q6 的最近任务解释使用场景。</li>
+      <li>将 Q7 的问题选择率与 Q8 的实际后果交叉，优先处理高发生率且导致任务失败、放弃使用或信任下降的问题。</li>
+      <li>用 Q9 衡量功能需求覆盖率，Q10 在 Q9 已选项中形成第一优先级，Q11–Q12 解释首选原因和触发情景；分别按 Q4 使用分层、Q3 手机品牌及年龄交叉分析。</li>
+      <li>对比 Q5 已用功能与 Q9 期望功能：已用但仍高需求可能代表体验不足，未用但高需求可能代表能力缺失或认知不足。</li>
+      <li>功能选择为自报诉求，不直接等同于实际采用率；优先选择率高且具备明确问题原因、触发情景的功能进入后续概念测试。</li>
+    </ul>
+  </section>
+
+  <section id="user-review-points">
+    <h2>用户审查点</h2>
+    <p>无。</p>
+  </section>
+
+  <section id="questionnaire-appendix" data-questionnaire-source="questionnaire.md">
+    <h2>完整问卷</h2>
+    <p class="source-note">以下内容完整渲染自 <code>questionnaire.md</code>。</p>
+    <article class="questionnaire-content">
+      <div class="card">
+        <h3>手机图库 AI 功能使用与需求调研</h3>
+        <p>感谢您参与本次调研，预计需要 4–5 分钟。我们希望了解您使用手机图库 AI 功能的实际经历、遇到的问题及新的功能诉求。问卷不会要求上传照片，回答仅用于产品研究分析。</p>
+        <p>本问卷中的“图库 AI 功能”，是指图库根据照片内容或您的指令，自动完成搜索、整理、清理、编辑或内容生成等任务。请根据实际经历作答；没有使用过也可以继续参与。</p>
+      </div>
+
+      <div class="question"><h3>Q1【单选题】（必填）您的性别是？</h3><ul><li>男</li><li>女</li><li>不愿透露</li></ul></div>
+      <div class="question"><h3>Q2【单选题】（必填）您的年龄是？</h3><ul><li>18 岁以下</li><li>18–24 岁</li><li>25–34 岁</li><li>35–44 岁</li><li>45–54 岁</li><li>55–64 岁</li><li>65 岁及以上</li><li>不愿透露</li></ul></div>
+      <div class="question"><h3>Q3【单选题】（必填）您当前主要使用的手机品牌是？</h3><ul><li>苹果</li><li>华为</li><li>小米</li><li>OPPO</li><li>vivo</li><li>荣耀</li><li>其他</li></ul></div>
+      <div class="question"><h3>Q4【单选题】（必填）过去 3 个月，您使用手机图库 AI 功能的频率是？</h3><ul><li>每天多次</li><li>每天 1 次</li><li>每周 2–6 次</li><li>每周 1 次</li><li>每月 1–3 次</li><li>过去 3 个月使用过，但少于每月 1 次</li><li>以前使用过，但过去 3 个月没有使用</li><li>从未使用过</li><li>不确定是否使用过图库 AI 功能</li></ul></div>
+      <div class="question">
+        <h3>Q5【多选题】（必填）过去 3 个月，您用过哪些图库 AI 功能？（最多选择 4 项）</h3>
+        <ul><li>找到记不清时间或位置的照片</li><li>按人物、地点或事件自动整理</li><li>找出重复、模糊或无用照片</li><li>从相似照片中自动选出最佳照片</li><li>修复老照片或模糊照片</li><li>按文字要求修改照片</li><li>提取照片中的文字或表格</li><li>自动生成回忆相册</li><li>其他（请说明）</li></ul>
+        <p class="logic"><strong>题目关联：</strong>关联 Q4 的“每天多次”“每天 1 次”“每周 2–6 次”“每周 1 次”“每月 1–3 次”或“过去 3 个月使用过，但少于每月 1 次”。</p>
+      </div>
+      <div class="question">
+        <h3>Q6【单选题】（必填）最近一次使用图库 AI 时，您主要想完成什么任务？</h3>
+        <ul><li>找到特定照片或视频</li><li>自动整理照片</li><li>清理无用照片</li><li>从相似照片中选片</li><li>修复照片画质</li><li>按要求修改照片</li><li>提取文字或信息</li><li>生成回忆相册</li><li>只是尝试，没有明确任务</li><li>其他</li></ul>
+        <p class="logic"><strong>题目关联：</strong>关联 Q4 的“每天多次”“每天 1 次”“每周 2–6 次”“每周 1 次”“每月 1–3 次”或“过去 3 个月使用过，但少于每月 1 次”。</p>
+      </div>
+      <div class="question">
+        <h3>Q7【多选题】（必填）最近一次使用图库 AI 时，您遇到了哪些问题？（最多选择 3 项）</h3>
+        <ul><li>找不到功能入口</li><li>AI 没有理解我的指令</li><li>搜索、识别或分类不准确</li><li>修图或生成结果不符合要求</li><li>结果难以确认或调整</li><li>担心误删原图或无法撤销</li><li>处理慢、耗电或耗流量</li><li>担心上传照片带来隐私风险</li><li>没有遇到明显问题（与其他选项互斥）</li><li>其他（请说明）</li></ul>
+        <p class="logic"><strong>题目关联：</strong>关联 Q4 的“每天多次”“每天 1 次”“每周 2–6 次”“每周 1 次”“每月 1–3 次”或“过去 3 个月使用过，但少于每月 1 次”。</p>
+      </div>
+      <div class="question">
+        <h3>Q8【单选题】（必填）最近一次使用图库 AI 遇到问题后，最主要的影响是什么？</h3>
+        <ul><li>需要反复调整</li><li>改用图库的普通功能</li><li>改用其他工具</li><li>没有完成原本想做的任务</li><li>放弃使用该 AI 功能</li><li>降低了我对图库 AI 功能的信任</li><li>没有产生明显影响</li><li>其他</li></ul>
+        <p class="logic"><strong>题目关联：</strong>关联 Q7 除“没有遇到明显问题”以外的任一选项。</p>
+      </div>
+      <div class="question"><h3>Q9【多选题】（必填）您最希望手机图库优先提供哪些 AI 功能？（最多选择 3 项）</h3><ul><li>找到记不清时间或位置的照片</li><li>按人物、地点或事件自动整理</li><li>找出重复、模糊或无用照片</li><li>从相似照片中自动选出最佳照片</li><li>修复老照片或模糊照片</li><li>按文字要求修改照片</li><li>提取照片中的文字或表格</li><li>自动生成回忆相册</li><li>我目前不需要图库 AI 功能（与其他选项互斥）</li><li>其他（请说明）</li></ul></div>
+      <div class="question">
+        <h3>Q10【单选题】（必填）如果只能优先实现一项，您最需要哪项图库 AI 功能？</h3>
+        <ul><li>找到记不清时间或位置的照片</li><li>按人物、地点或事件自动整理</li><li>找出重复、模糊或无用照片</li><li>从相似照片中自动选出最佳照片</li><li>修复老照片或模糊照片</li><li>按文字要求修改照片</li><li>提取照片中的文字或表格</li><li>自动生成回忆相册</li><li>其他</li></ul>
+        <p class="logic"><strong>题目关联：</strong>关联 Q9 除“我目前不需要图库 AI 功能”以外的任一选项。</p>
+        <p class="logic"><strong>选项关联：</strong>仅显示 Q9 中已选择的功能选项；选择“其他（请说明）”时对应显示“其他”。</p>
+      </div>
+      <div class="question">
+        <h3>Q11【单选题】（必填）您选择最优先提供的图库 AI 功能，最主要的原因是什么？</h3>
+        <ul><li>这类任务经常发生</li><li>现在完成起来很耗时</li><li>现有功能效果不可靠</li><li>现有操作步骤太复杂</li><li>目前没有合适的工具</li><li>希望减少重复操作</li><li>对工作、学习或生活帮助大</li><li>其他</li></ul>
+        <p class="logic"><strong>题目关联：</strong>关联 Q10 的任一选项。</p>
+      </div>
+      <div class="question">
+        <h3>Q12【多选题】（必填）在什么情况下，您最需要手机图库 AI 帮忙？（最多选择 2 项）</h3>
+        <ul><li>找不到记不清时间或地点的照片</li><li>照片太多，需要集中整理</li><li>存储空间不足，需要清理</li><li>一次拍了很多照片，需要快速选片</li><li>重要照片模糊或画质差</li><li>想快速修图并分享</li><li>需要复制照片中的文字或表格</li><li>想回顾旅行、家庭等经历</li><li>其他（请说明）</li></ul>
+        <p class="logic"><strong>题目关联：</strong>关联 Q10 的任一选项。</p>
+      </div>
+
+      <div class="card"><h3>结束语</h3><p>感谢您的参与！您的回答将帮助我们了解图库 AI 功能的实际使用问题，并确定用户最需要优先解决的功能诉求。</p></div>
+    </article>
+  </section>
+</main>
+</body>
+</html>

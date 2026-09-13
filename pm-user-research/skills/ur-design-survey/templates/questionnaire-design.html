@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>[调研课题] · Questionnaire Design Document</title>
+  <style>
+    :root { color-scheme: light; --ink:#172033; --muted:#5f6b7a; --line:#dbe2ea; --panel:#f6f8fb; --accent:#315efb; }
+    * { box-sizing: border-box; }
+    body { margin:0; color:var(--ink); background:#eef2f7; font:15px/1.65 system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; }
+    main { width:min(1080px,calc(100% - 32px)); margin:32px auto; padding:44px; background:#fff; border-radius:18px; box-shadow:0 14px 40px rgba(23,32,51,.08); }
+    h1 { margin:.2rem 0 .5rem; font-size:2rem; line-height:1.25; }
+    h2 { margin:2.4rem 0 1rem; padding-bottom:.45rem; border-bottom:2px solid var(--line); }
+    h3 { margin:1.25rem 0 .4rem; }
+    .eyebrow { color:var(--accent); font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    .muted,.source-note { color:var(--muted); }
+    .meta,.card,.question { padding:18px 20px; border:1px solid var(--line); border-radius:12px; background:var(--panel); }
+    .meta { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px 24px; }
+    .meta div { min-width:0; }
+    table { width:100%; border-collapse:collapse; margin:12px 0 20px; }
+    th,td { padding:10px 12px; border:1px solid var(--line); text-align:left; vertical-align:top; }
+    th { background:var(--panel); }
+    .goal { margin:12px 0; }
+    .questionnaire-content { display:grid; gap:14px; }
+    .question { background:#fff; }
+    .question ul { margin:.5rem 0 0; }
+    .logic { color:#44506a; background:#eef3ff; border-left:3px solid var(--accent); padding:8px 12px; }
+    @media (max-width:720px) { main { width:100%; margin:0; padding:24px 18px; border-radius:0; } .meta { grid-template-columns:1fr; } table { display:block; overflow-x:auto; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">Questionnaire Design Document</div>
+    <h1>[调研课题]</h1>
+    <p class="muted">[一句话说明本问卷支持的产品决策]</p>
+  </header>
+
+  <section id="confirmed-inputs">
+    <h2>已确认输入</h2>
+    <div class="meta">
+      <div><strong>调研课题：</strong><span data-field="topic">[具体课题]</span></div>
+      <div><strong>问卷场景：</strong><span data-field="survey-scenario">[四类之一]</span></div>
+      <div><strong>产品决策：</strong><span data-field="decision">[具体决策]</span></div>
+      <div><strong>目标用户：</strong><span data-field="target-audience">[具体人群与筛选条件]</span></div>
+      <div><strong>实际引用模板：</strong><span data-field="source-template">templates/questionnaire-....md</span></div>
+      <div><strong>题量与约束：</strong><span data-field="constraints">[题数、材料与其他约束]</span></div>
+    </div>
+  </section>
+
+  <section id="respondent-copy">
+    <h2>受访者文案</h2>
+    <p><strong>问卷标题：</strong><span data-field="questionnaire-title">[面向受访者的标题]</span></p>
+    <p><strong>问卷描述：</strong><span data-field="questionnaire-description">[面向受访者的描述]</span></p>
+  </section>
+
+  <section id="research-goals">
+    <h2>研究目标与证据</h2>
+    <article class="card goal" data-goal-id="G1" data-question-ids="Q...">
+      <h3>G1 · [研究目标]</h3>
+      <p data-field="goal-statement">[需要回答的研究问题]</p>
+      <p><strong>所需证据：</strong>[证据]</p>
+      <p><strong>决策用途：</strong>[用途]</p>
+    </article>
+    <article class="card goal" data-goal-id="G2" data-question-ids="Q...">
+      <h3>G2 · [研究目标]</h3>
+      <p data-field="goal-statement">[需要回答的研究问题]</p>
+      <p><strong>所需证据：</strong>[证据]</p>
+      <p><strong>决策用途：</strong>[用途]</p>
+    </article>
+  </section>
+
+  <section id="module-blueprint">
+    <h2>模块蓝图</h2>
+    <table>
+      <thead><tr><th>顺序</th><th>模块</th><th>模块目标</th><th>对应证据</th><th>题数</th><th>选用理由</th><th>出现条件</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>人口特征</td><td>[目标]</td><td>[证据]</td><td>3</td><td>[理由]</td><td>全部受访者</td></tr>
+        <tr><td>2</td><td>[模块]</td><td>[目标]</td><td>[证据]</td><td>[数量]</td><td>[理由]</td><td>[条件]</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>总题数：[数量]</li>
+      <li>最长路径题数：[数量]</li>
+      <li>题型分布：[单选/多选/量表或矩阵/排序或 Top-N/填空]</li>
+      <li>模板偏离：[没有时写“无”]</li>
+    </ul>
+  </section>
+
+  <section id="goal-question-map">
+    <h2>目标—证据—题号映射</h2>
+    <table>
+      <thead><tr><th>研究目标</th><th>所需证据</th><th>题号</th><th>分析或决策用途</th></tr></thead>
+      <tbody><tr><td>G1</td><td>[证据]</td><td>Q...</td><td>[用途]</td></tr></tbody>
+    </table>
+  </section>
+
+  <section id="analysis-advice">
+    <h2>分析建议</h2>
+    <ul>
+      <li>[核心指标]</li>
+      <li>[交叉分析]</li>
+      <li>[解释边界]</li>
+      <li>[需后续定性验证的内容]</li>
+    </ul>
+  </section>
+
+  <section id="user-review-points">
+    <h2>用户审查点</h2>
+    <p>[没有时写“无”；有内容时仅列必须由用户决定、补充材料或接受限制的事项]</p>
+  </section>
+
+  <section id="questionnaire-appendix" data-questionnaire-source="questionnaire.md">
+    <h2>完整问卷</h2>
+    <p class="source-note">以下内容完整渲染自 <code>questionnaire.md</code>。生成时必须替换本提示，并逐项核对标题、描述、题号、题型、必填状态、选项、逻辑注记和结束语。</p>
+    <article class="questionnaire-content">
+      <!-- 在此按 questionnaire.md 的顺序渲染完整问卷；每题使用 class="question" 的独立区块，逻辑注记使用 class="logic"。 -->
+    </article>
+  </section>
+</main>
+</body>
+</html>

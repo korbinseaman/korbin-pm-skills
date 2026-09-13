@@ -1,0 +1,4 @@
+interface:
+  display_name: "软件产品用户调研问卷"
+  short_description: "从产品决策反推证据，设计可直接发放和分析的定量问卷"
+  default_prompt: "使用 $ur-design-survey 从产品决策出发，设计一份低偏差、可直接发放、可分析的定量用户调研问卷，并完成专业质量审查。"
