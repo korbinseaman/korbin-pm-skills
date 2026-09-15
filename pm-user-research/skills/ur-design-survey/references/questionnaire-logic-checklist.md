@@ -46,7 +46,7 @@
 ## 交付一致性
 
 - `questionnaire.md` 是题干、选项和逻辑的唯一来源。
-- `questionnaire-design.html` 的研究设计部分用题号记录证据和分析用途，文末附上 `questionnaire.md` 的完整问卷。
+- `survey-design-desc.html` 的研究设计部分用题号记录证据和分析用途，文末附上 `questionnaire.md` 的完整问卷。
 - HTML 问卷附录的标题、描述、题号、题型、必填状态、选项、逻辑注记和结束语与 `questionnaire.md` 完全一致。
 - 自动检查与已修复问题不写入设计文件；只有需要用户决定、补充材料或接受限制的事项进入“用户审查点”。
 - `lint_questionnaire.py` 通过，且人工检查未发现诱导、双重问题、选项重叠或量表锚点缺失。

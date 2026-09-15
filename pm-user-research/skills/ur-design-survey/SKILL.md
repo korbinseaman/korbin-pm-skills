@@ -18,7 +18,6 @@ description: 根据调研课题、目标和问卷场景设计可直接配置、�
   - 满意度调查：`满意度调查`、`满意度问卷`
 
 关键词仅用于辅助识别，最终以用户要完成的任务为准。
-
 ## 输入契约
 
 用户调用本 Skill 时必须提供：
@@ -75,10 +74,7 @@ description: 根据调研课题、目标和问卷场景设计可直接配置、�
 
 确认卡是可选择的研究方案，不是让用户补写的空表。信息达到确认条件后，读取并严格使用 [确认卡格式](references/confirmation-card.md)；不得输出空白字段、占位符或泛化示例。用户选择“全部采用推荐”、逐字段选项或直接输入内容后，才进入 Step 2。
 
-**输出**：
-
-1. 传给 Step 2 的已确认研究输入摘要：必选字段为课题描述、调研目标、问卷场景；可选字段为产品决策、目标用户、待验证方案/概念材料。不得添加其他字段。
-2. 跨用户研究 Skill 协同时，按 [共享上下文规格](references/shared-context-schema.md) 更新任务根目录的 `shared_context.md`。
+**输出**：传给 Step 2 的已确认研究输入摘要：必选字段为课题描述、调研目标、问卷场景；可选字段为产品决策、目标用户、待验证方案/概念材料。不得添加其他字段或生成任务级共享上下文文件。
 
 ### 2. 建立研究设计与目标—证据清单
 
@@ -167,7 +163,7 @@ description: 根据调研课题、目标和问卷场景设计可直接配置、�
 
 1. 检查所有目标和模块是否有证据题，删除重复、不可回忆或无法分析的问题。
 2. 模拟符合条件且有经历、无经历或不确定、边界答案或无法评价三类路径。
-3. 按 [问卷发布检查清单](references/questionnaire-logic-checklist.md) 检查逻辑、平台可实现性、移动端成本和隐私，并检查 UserClub 导出是否覆盖全部题目。
+3. 按 [问卷发布检查清单](references/questionnaire-logic-checklist.md) 检查逻辑、平台可实现性、移动端成本和隐私，并检查模拟作答版及各平台导出是否覆盖全部题目。
 4. 自动修复明确问题；只有涉及用户决策、材料缺失或无法消除的限制才列为用户审查点。
 
 **输出**：可交付问卷，以及仅包含需要用户决定事项的审查点清单；没有审查点时写“无”。
@@ -178,11 +174,11 @@ description: 根据调研课题、目标和问卷场景设计可直接配置、�
 
 **处理**：
 
-1. 写入 `questionnaire.md` 和 `questionnaire-design.html`；以 `questionnaire.md` 为问卷权威来源，并将其标题、描述、全部题目、选项、逻辑和结束语完整渲染到 HTML 文末。
+1. 写入 `questionnaire.md` 和 `survey-design-desc.html`；以 `questionnaire.md` 为权威来源，并将其标题、描述、全部题目、选项、逻辑和结束语完整渲染到 HTML 文末。
 2. 运行 `python skills/ur-design-survey/scripts/lint_questionnaire.py <questionnaire.md>`；结构阻断修复后再交付。
-3. 读取 [UserClub 批量导入格式](references/userclub-import-format.md)，同步生成 `questionnaire_for_userclub.txt`；遇到平台未定义的题型时返回 Step 5 等价改写或请求补充规格，不得猜测格式、漏题或生成不完整文件。
+3. 按 [模拟作答格式](references/simulator-questionnaire-format.md)、[UserClub 格式](references/userclub-import-format.md) 和 [问卷星格式](references/wenjuanxing-import-format.md) 生成三个派生文件；运行 `export_questionnaire.py` 生成并校验模拟作答版和问卷星版。遇到未定义题型时返回 Step 5 等价改写或列为人工配置，不得猜测格式、漏题或生成不完整文件。
 
-**输出**：三份最终文件及题数、最长路径、预计时长、问卷场景、题型分布和用户审查点摘要。
+**输出**：五份最终文件及题数、最长路径、预计时长、问卷场景、题型分布和用户审查点摘要。
 
 ## 输出契约
 
@@ -191,15 +187,19 @@ description: 根据调研课题、目标和问卷场景设计可直接配置、�
 | 文件 | 内容 | 模板 |
 |---|---|---|
 | `questionnaire.md` | 面向受访者的标题、描述、全部题目及必要逻辑 | 按下表引用当前问卷场景对应模板 |
-| `questionnaire-design.html` | 已确认输入、问卷场景、实际引用模板、研究设计、模块蓝图、目标—证据—题号映射、分析建议、用户审查点，以及 `questionnaire.md` 的完整问卷附录 | [Questionnaire Design Document](templates/questionnaire-design.html) |
+| `survey-design-desc.html` | 已确认输入、问卷场景、实际引用模板、研究设计、模块蓝图、目标—证据—题号映射、分析建议、用户审查点，以及 `questionnaire.md` 的完整问卷附录 | [Survey Design Description](templates/survey-design-desc.html) |
+| `questionnaire_for_simulator.md` | 面向 AI 模拟作答的降噪版；必要规则紧跟题干、位于选项之前 | [AI 模拟作答问卷格式](references/simulator-questionnaire-format.md) |
 | `questionnaire_for_userclub.txt` | 与主问卷同步、可供 UserClub 批量导入的纯文本题目 | [UserClub 批量导入格式](references/userclub-import-format.md) |
+| `questionnaire_for_wenjuanxing.txt` | 与主问卷同步、符合问卷星文本 DSL 的批量导入文件 | [问卷星文本导入格式](references/wenjuanxing-import-format.md) |
 
 ### 平台导出规格
 | 平台 | 受众 | 输出文件 | 格式规格 |
 |---|---|---|---|
+| AI 模拟作答 | 合成用户 | `questionnaire_for_simulator.md` | [降噪、规则前置与同步规则](references/simulator-questionnaire-format.md) |
 | UserClub | 公司内部用户 | `questionnaire_for_userclub.txt` | [单选、多选批量导入规则](references/userclub-import-format.md) |
+| 问卷星 | 外部或内部用户 | `questionnaire_for_wenjuanxing.txt` | [问卷星文本 DSL 与导入后复核](references/wenjuanxing-import-format.md) |
 
-`questionnaire.md` 是问卷内容的权威来源；HTML 问卷附录和平台文件必须与其题意、选项、顺序及逻辑同步。新增平台时为其增加独立格式 reference 和输出文件，不把平台语法混入主问卷。
+`questionnaire.md` 是唯一权威来源；HTML 附录和派生文件必须与其题意、选项、顺序及逻辑同步。新增平台时增加独立 reference 和输出文件，不把平台语法混入主问卷。
 
 ### 问卷模板引用规格
 
@@ -210,8 +210,8 @@ description: 根据调研课题、目标和问卷场景设计可直接配置、�
 | 产品方案选择 | [产品方案选择](templates/questionnaire-solution-selection.md) | 多方案同构呈现、首选、排斥理由与顾虑 |
 | 满意度调查 | [满意度调查](templates/questionnaire-satisfaction-survey.md) | 近期使用、总体满意度、维度诊断与改进优先级 |
 
-每次只引用与问卷场景对应的一份模板，不拼接其他场景模板。继承其证据结构、题序和逻辑模式，但必须按当前课题替换业务内容、时间窗和选项；偏离模板时在 `questionnaire-design.html` 记录理由。
+每次只引用与问卷场景对应的一份模板，不拼接其他场景模板。继承其证据结构、题序和逻辑模式，但必须按当前课题替换业务内容、时间窗和选项；偏离模板时在 `survey-design-desc.html` 记录理由。
 
 ## 交付给用户
 
-直接给出三份文件路径、问卷规格和用户审查点，不复述完整工作过程。用户确认前不启动模拟作答或数据分析。
+直接给出五份文件路径、问卷规格和用户审查点，不复述完整工作过程。用户确认前不启动模拟作答或数据分析。
