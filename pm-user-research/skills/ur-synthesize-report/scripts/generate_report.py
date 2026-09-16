@@ -422,6 +422,25 @@ def clean_completed_records(records: list[dict[str, Any]], questions: list[dict[
 def persons_summary_context(path: Path) -> dict[str, Any]:
     """Extract only batch-level construction context, never individual persona data."""
     text = path.read_text(encoding="utf-8")
+    payload_match = re.search(
+        r'<script[^>]*id=["\']persona-summary-data["\'][^>]*>(.*?)</script>',
+        text,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if payload_match:
+        try:
+            payload = json.loads(html.unescape(payload_match.group(1).strip()))
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"{path.name} 的 persona-summary-data 不是有效 JSON") from exc
+        if not isinstance(payload, dict):
+            raise ValueError(f"{path.name} 的 persona-summary-data 必须是对象")
+        return {
+            "file": str(path.resolve()),
+            "topic": payload.get("topic"),
+            "declared_sample_size": payload.get("total"),
+            "construction_summary": payload.get("construction_summary", []),
+            "evidence_role": "construction_context_only",
+        }
     total_match = re.search(r"画像总数：[：]?\s*(\d+)\s*人?", text)
     topic_match = re.search(r"调研课题：[：]?\s*(.+)", text)
     construction_lines = [line.strip().removeprefix("- ") for line in text.splitlines() if line.strip().startswith("-")]
@@ -496,6 +515,34 @@ def distribution_for(question: dict[str, Any], values: list[tuple[str, Any]]) ->
     return result
 
 
+def interactive_data(questions: list[dict[str, Any]], records: list[dict[str, Any]]) -> dict[str, Any]:
+    """Return the minimum anonymous answer payload needed for in-browser filtering."""
+    closed_questions = [
+        {
+            "id": str(question["id"]),
+            "question": question.get("question"),
+            "type": question.get("type"),
+            "options": [str(option) for option in question.get("options", [])],
+        }
+        for question in questions
+        if question.get("type") != "open_text"
+    ]
+    qids = [question["id"] for question in closed_questions]
+    return {
+        "questions": closed_questions,
+        "responses": [
+            {
+                "answers": {
+                    qid: record.get(qid)
+                    for qid in qids
+                    if record.get(qid) not in (None, "")
+                }
+            }
+            for record in records
+        ],
+    }
+
+
 def prepare_analysis(args: argparse.Namespace) -> dict[str, Any]:
     title, questions = questionnaire_contract(args.questionnaire)
     qids = [str(item["id"]) for item in questions]
@@ -547,7 +594,7 @@ def prepare_analysis(args: argparse.Namespace) -> dict[str, Any]:
         "合成回答只能用于检查研究工具和形成待真实研究验证的假设，不能代表真实用户或市场总体。",
     ]
     if sample_construction:
-        limitations.append("persons_summary.txt 仅用于披露样本构建背景，不能作为问卷发现、分群依据或单个回答的解释。")
+        limitations.append("persons_summary.html 仅用于披露样本构建背景，不能作为问卷发现、分群依据或单个回答的解释。")
     if cleaning["excluded_count"]:
         limitations.append(f"数据清理剔除了 {cleaning['excluded_count']} 个完成回答；具体用户 ID 与理由保留在 data_cleaning 中。")
     if cleaning["manual_review_records"]:
@@ -589,6 +636,7 @@ def prepare_analysis(args: argparse.Namespace) -> dict[str, Any]:
         "data_cleaning": cleaning,
         "goal_coverage": goal_coverage,
         "descriptive_results": descriptive,
+        "interactive_data": interactive_data(questions, completed_records),
         "qualitative_observations": observations,
         "cross_tabulations": [],
         "scale_quality": [],
@@ -631,12 +679,12 @@ def render_report(analysis: dict[str, Any]) -> str:
     segments = analysis.get("segment_observations", [])
     recommendations = analysis.get("recommendations", [])
     limitations = analysis.get("limitations", [])
-    observations = analysis.get("qualitative_observations", [])
     cleaning = analysis.get("data_cleaning", {})
     cross_tabs = analysis.get("cross_tabulations", [])
     scale_quality = analysis.get("scale_quality", [])
+    interactive_payload = json.dumps(analysis.get("interactive_data", {}), ensure_ascii=False).replace("</", "<\\/")
 
-    goal_rows = "".join(f'<tr><td>{esc(goal.get("goal_id"))}</td><td>{esc(goal.get("research_question"))}</td><td>{esc(", ".join(goal.get("question_ids", [])) or "无")}</td><td>{esc(goal.get("status"))}</td><td>{esc(goal.get("finding"))}</td></tr>' for goal in goals) or '<tr><td colspan="5">questionnaire-design.html 未提供可识别的研究目标。</td></tr>'
+    goal_rows = "".join(f'<tr><td>{esc(goal.get("goal_id"))}</td><td>{esc(goal.get("research_question"))}</td><td>{esc(", ".join(goal.get("question_ids", [])) or "无")}</td><td>{esc(goal.get("status"))}</td><td>{esc(goal.get("finding"))}</td></tr>' for goal in goals) or '<tr><td colspan="5">survey-design-desc.html 未提供可识别的研究目标。</td></tr>'
 
     charts = []
     for result in analysis.get("descriptive_results", []):
@@ -666,7 +714,6 @@ def render_report(analysis: dict[str, Any]) -> str:
         theme_cards.append('<p class="empty">尚未完成开放回答与回答原因的主题编码。</p>')
     segment_rows = "".join(f'<tr><td>{esc(item.get("segment"))}</td><td>{esc(item.get("source"))}</td><td>{esc(item.get("n"))}</td><td>{esc(item.get("observation") or item.get("finding"))}</td><td>{esc(item.get("limitation"))}</td></tr>' for item in segments) or '<tr><td colspan="5">未形成可报告的分群观察。</td></tr>'
     rec_items = "".join(f'<li><strong>{esc(item.get("action") or item.get("recommendation"))}</strong><br>{esc(item.get("rationale", ""))}<br><small>证据强度：{esc(item.get("evidence_strength", "未评级"))}；成本/风险：{esc(item.get("cost_risk", "待补充"))}；下一步：{esc(item.get("validation", "待补充"))}</small></li>' for item in recommendations) or '<li>尚未形成证据支持的建议。</li>'
-    evidence_rows = "".join(f'<tr><td>{esc(item.get("evidence_id"))}</td><td>{"模拟原话" if item.get("synthetic_quote") else "回答原文"}</td><td>{esc(item.get("kind"))}</td><td>{esc(item.get("text"))}</td></tr>' for item in observations) or '<tr><td colspan="4">没有开放回答或回答原因。</td></tr>'
     model_items = "".join(f"<li><code>{esc(name)}</code>：{count}</li>" for name, count in sample.get("model_distribution", {}).items()) or "<li>未记录</li>"
     issue_items = "".join(f"<li><code>{esc(name)}</code>：{count}</li>" for name, count in sample.get("issue_counts", {}).items()) or "<li>无已记录问题</li>"
     cleaned_rows = "".join(f"<li><code>{esc(item.get('user_id'))}</code>：{esc(item.get('reason'))}</li>" for item in cleaning.get("excluded_records", [])) or "<li>无自动或人工确认的剔除记录</li>"
@@ -678,28 +725,129 @@ def render_report(analysis: dict[str, Any]) -> str:
         construction_bits.append(f"课题：{esc(construction['topic'])}")
     if construction.get("declared_sample_size") is not None:
         construction_bits.append(f"画像汇总声明样本：{esc(construction['declared_sample_size'])} 人")
-    construction_note = f'<div class="note"><strong>样本构成说明：</strong>{"；".join(construction_bits) or "已读取 persons_summary.txt。"}。该文件只说明样本如何构建，不是回答证据、分群字段或市场比例。</div>' if construction else ""
+    construction_note = f'<div class="note"><strong>样本构成说明：</strong>{"；".join(construction_bits) or "已读取 persons_summary.html。"}。该文件只说明样本如何构建，不是回答证据、分群字段或市场比例。</div>' if construction else ""
     cross_rows = "".join(f"<tr><td>{esc(item.get('group_question_id'))}</td><td>{esc(item.get('target_question_id'))}</td><td>{esc(item.get('base_n'))}</td><td>{esc(item.get('finding'))}</td></tr>" for item in cross_tabs) or '<tr><td colspan="4">尚未形成满足样本量与研究目标要求的交叉分析。</td></tr>'
     scale_rows = "".join(f"<tr><td>{esc(item.get('scale_name') or item.get('question_ids'))}</td><td>{esc(item.get('method'))}</td><td>{esc(item.get('result'))}</td><td>{esc(item.get('interpretation'))}</td></tr>" for item in scale_quality) or '<tr><td colspan="4">没有满足同一构念、同一量表且样本条件足够的信效度检验。</td></tr>'
+    interactive_script = '''<script id="report-interactive-data" type="application/json">__PAYLOAD__</script>
+<script>
+(() => {
+  const data = JSON.parse(document.getElementById("report-interactive-data").textContent || "{}");
+  const questions = data.questions || [];
+  const responses = data.responses || [];
+  const active = Array.isArray(window.__reportFilters) ? [...window.__reportFilters] : [];
+  const questionSelect = document.getElementById("filter-question");
+  const valueSelect = document.getElementById("filter-value");
+  const chips = document.getElementById("active-filters");
+  const status = document.getElementById("filter-status");
+  const chartRoot = document.getElementById("interactive-charts");
+  const esc = value => String(value ?? "").replace(/[&<>\"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[char]));
+  const split = value => String(value || "").split(/[；;]/).map(item => item.trim()).filter(Boolean);
+  const questionById = id => questions.find(question => question.id === id);
+  const valuesFor = question => [...new Set([...(question.options || []), ...responses.flatMap(row => question.type === "multi_choice" || question.type === "ranking" ? split(row.answers[question.id]) : [row.answers[question.id]]).filter(value => value !== undefined && value !== null && value !== "")])];
+  const fillValues = () => {
+    const question = questionById(questionSelect.value);
+    valueSelect.innerHTML = (question ? valuesFor(question) : []).map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join("");
+  };
+  const matches = (row, filter) => {
+    const question = questionById(filter.question_id);
+    const value = row.answers[filter.question_id];
+    return question && (question.type === "multi_choice" || question.type === "ranking" ? split(value).includes(filter.value) : String(value) === filter.value);
+  };
+  const filtered = () => responses.filter(row => active.every(filter => matches(row, filter)));
+  const bars = (distribution, base) => {
+    if (!distribution.length) return '<p class="empty">当前筛选下本题没有有效回答。</p>';
+    const max = Math.max(...distribution.map(item => item.count), 1);
+    return `<div class="interactive-bars">${distribution.map(item => `<div class="bar-row"><span>${esc(item.label)}</span><div class="bar-track"><i style="width:${Math.max(2, item.count / max * 100)}%"></i></div><b>${item.count}（${(item.count / base * 100).toFixed(1)}%）</b></div>`).join("")}</div>`;
+  };
+  const renderCharts = () => {
+    const subset = filtered();
+    status.textContent = `当前筛选样本：${subset.length} / ${responses.length}`;
+    chartRoot.innerHTML = questions.map(question => {
+      const values = subset.map(row => row.answers[question.id]).filter(value => value !== undefined && value !== null && value !== "");
+      const counts = new Map();
+      const ranked = question.type === "ranking" ? values.map(split) : [];
+      (question.type === "multi_choice" ? values.flatMap(split) : question.type === "ranking" ? ranked.map(items => items[0]).filter(Boolean) : values).forEach(value => counts.set(String(value), (counts.get(String(value)) || 0) + 1));
+      const order = [...new Set([...(question.options || []), ...counts.keys()])];
+      const distribution = order.filter(label => counts.has(label)).map(label => ({label, count: counts.get(label)}));
+      let note = `实际分母 ${values.length}；筛选样本中空白/未作答 ${subset.length - values.length}。`;
+      if (question.type === "multi_choice") note += " 多选题的百分比合计可超过 100%。";
+      if (question.type === "ranking") {
+        const averages = order.map(label => {
+          const positions = ranked.map(items => items.indexOf(label) + 1).filter(position => position > 0);
+          return positions.length ? `${esc(label)} ${ (positions.reduce((sum, position) => sum + position, 0) / positions.length).toFixed(2) }` : "";
+        }).filter(Boolean);
+        note += ` 以下按第一选择统计；平均名次：${averages.join("；") || "无有效名次"}。`;
+      }
+      if ((question.type === "likert_scale" || question.type === "nps") && values.length) {
+        const nums = values.map(Number).filter(Number.isFinite);
+        if (nums.length) {
+          const mean = nums.reduce((sum, value) => sum + value, 0) / nums.length;
+          const variance = nums.length > 1 ? nums.reduce((sum, value) => sum + (value - mean) ** 2, 0) / (nums.length - 1) : null;
+          note += ` 均值 ${mean.toFixed(2)}；标准差 ${variance === null ? "样本不足" : Math.sqrt(variance).toFixed(2)}。`;
+        }
+      }
+      return `<section class="evidence"><h3>${esc(question.id)} · ${esc(question.question)}</h3><p>${note}</p>${bars(distribution, values.length || 1)}</section>`;
+    }).join("") || '<p class="empty">当前筛选没有可展示题目。</p>';
+  };
+  const renderFilters = () => {
+    chips.innerHTML = active.length ? active.map((filter, index) => `<button type="button" class="filter-chip" data-index="${index}">${esc(questionById(filter.question_id)?.id)}：${esc(filter.value)} ×</button>`).join("") : '<span class="empty">尚未添加筛选条件</span>';
+    chips.querySelectorAll("button").forEach(button => button.addEventListener("click", () => { active.splice(Number(button.dataset.index), 1); renderFilters(); renderCharts(); }));
+  };
+  questionSelect.innerHTML = questions.map(question => `<option value="${esc(question.id)}">${esc(question.id)} · ${esc(question.question)}</option>`).join("");
+  questionSelect.addEventListener("change", fillValues);
+  document.getElementById("add-filter").addEventListener("click", () => {
+    if (!questionSelect.value || !valueSelect.value) return;
+    const sameQuestion = active.findIndex(filter => filter.question_id === questionSelect.value);
+    if (sameQuestion >= 0) active.splice(sameQuestion, 1);
+    active.push({question_id: questionSelect.value, value: valueSelect.value});
+    renderFilters(); renderCharts();
+  });
+  document.getElementById("clear-filters").addEventListener("click", () => { active.splice(0); renderFilters(); renderCharts(); });
+  const download = (name, blob) => { const url = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = name; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); };
+  const exportedSvg = () => {
+    const original = document.querySelector("main");
+    const width = Math.max(1000, original.scrollWidth, original.offsetWidth);
+    const height = Math.max(800, original.scrollHeight, original.offsetHeight);
+    const report = original.cloneNode(true);
+    report.querySelectorAll("[data-export-exclude]").forEach(node => node.remove());
+    const style = document.querySelector("style").textContent;
+    return {width, height, markup: `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml"><style>${style} body{background:#fff} main{margin:0;box-shadow:none;max-width:none}</style>${report.outerHTML}</div></foreignObject></svg>`};
+  };
+  document.getElementById("save-report").addEventListener("click", () => {
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelectorAll("[data-export-exclude]").forEach(node => node.remove());
+    const state = document.createElement("script"); state.textContent = `window.__reportFilters=${JSON.stringify(active)};`; clone.head.appendChild(state);
+    download(`report_${document.body.dataset.runId || "filtered"}.html`, new Blob(["<!doctype html>\n", clone.outerHTML], {type:"text/html;charset=utf-8"}));
+  });
+  document.getElementById("download-svg").addEventListener("click", () => { const svg = exportedSvg(); download(`report_${document.body.dataset.runId || "filtered"}.svg`, new Blob([svg.markup], {type:"image/svg+xml;charset=utf-8"})); });
+  document.getElementById("download-png").addEventListener("click", () => {
+    const svg = exportedSvg(), image = new Image(), url = URL.createObjectURL(new Blob([svg.markup], {type:"image/svg+xml;charset=utf-8"}));
+    image.onload = () => { const ratio = Math.min(2, 16000 / Math.max(svg.width, svg.height)); const canvas = document.createElement("canvas"); canvas.width = Math.max(1, Math.floor(svg.width * ratio)); canvas.height = Math.max(1, Math.floor(svg.height * ratio)); const context = canvas.getContext("2d"); context.fillStyle = "#fff"; context.fillRect(0, 0, canvas.width, canvas.height); context.drawImage(image, 0, 0, canvas.width, canvas.height); canvas.toBlob(blob => { if (blob) download(`report_${document.body.dataset.runId || "filtered"}.png`, blob); else document.getElementById("download-status").textContent = "PNG 生成失败，可改用 SVG 图片。"; URL.revokeObjectURL(url); }, "image/png"); };
+    image.onerror = () => { URL.revokeObjectURL(url); document.getElementById("download-status").textContent = "PNG 生成失败，可改用 SVG 图片。"; };
+    image.src = url;
+  });
+  fillValues(); renderFilters(); renderCharts();
+})();
+</script>'''.replace("__PAYLOAD__", interactive_payload)
 
     return f'''<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(analysis.get("title"))}</title>
-<style>:root{{--ink:#172033;--muted:#596274;--line:#dce2ec;--soft:#f5f7fb;--brand:#3157d5;--warn:#934800;--warnbg:#fff4e8}}*{{box-sizing:border-box}}body{{margin:0;background:#edf1f6;color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}}main{{max-width:1020px;margin:32px auto;background:#fff;padding:48px;border-radius:16px;box-shadow:0 10px 34px #18213a18}}h1{{font-size:34px;line-height:1.2;margin:0 0 8px}}h2{{margin-top:44px;border-bottom:2px solid var(--line);padding-bottom:8px}}h3{{margin-bottom:6px}}.banner{{padding:16px 18px;background:var(--warnbg);border-left:5px solid #df8427;border-radius:8px;margin:20px 0}}.banner strong{{color:var(--warn)}}.note{{padding:14px 16px;background:#eef4ff;border-radius:8px;margin:16px 0}}.metrics{{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}}.metric{{background:var(--soft);padding:13px;border-radius:10px}}.metric b{{display:block;font-size:23px}}table{{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}}th,td{{text-align:left;vertical-align:top;border:1px solid var(--line);padding:9px}}th{{background:var(--soft)}}.evidence,.card{{border:1px solid var(--line);border-radius:12px;padding:18px;margin:18px 0}}.chart{{overflow-x:auto}}svg{{width:100%;min-width:680px}}.bar{{fill:var(--brand)}}.axis{{font-size:13px;fill:var(--ink)}}.value{{font-size:13px;fill:var(--muted)}}.pill{{display:inline-block;padding:2px 8px;border-radius:99px;background:#e8edff;color:#2544a2;font-size:13px}}.empty,small{{color:var(--muted)}}code{{background:var(--soft);padding:2px 5px;border-radius:4px}}@media(max-width:760px){{main{{margin:0;padding:24px;border-radius:0}}.metrics{{grid-template-columns:repeat(2,1fr)}}h1{{font-size:28px}}}}</style></head><body><main>
+<style>:root{{--ink:#172033;--muted:#596274;--line:#dce2ec;--soft:#f5f7fb;--brand:#3157d5;--warn:#934800;--warnbg:#fff4e8}}*{{box-sizing:border-box}}body{{margin:0;background:#edf1f6;color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}}main{{max-width:1020px;margin:32px auto;background:#fff;padding:48px;border-radius:16px;box-shadow:0 10px 34px #18213a18}}h1{{font-size:34px;line-height:1.2;margin:0 0 8px}}h2{{margin-top:44px;border-bottom:2px solid var(--line);padding-bottom:8px}}h3{{margin-bottom:6px}}.banner{{padding:16px 18px;background:var(--warnbg);border-left:5px solid #df8427;border-radius:8px;margin:20px 0}}.banner strong{{color:var(--warn)}}.note{{padding:14px 16px;background:#eef4ff;border-radius:8px;margin:16px 0}}.controls{{border:1px solid var(--line);border-radius:12px;padding:18px;margin:22px 0;background:var(--soft)}}.control-grid{{display:grid;grid-template-columns:1fr 1fr auto auto;gap:10px;align-items:end}}label{{display:grid;gap:4px;font-size:14px;font-weight:600}}select,button{{font:inherit;padding:8px 10px;border:1px solid #bdc8da;border-radius:7px;background:#fff}}button{{cursor:pointer}}button.primary{{background:var(--brand);color:#fff;border-color:var(--brand)}}.filter-chips{{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}}.filter-chip{{background:#e8edff;color:#2544a2}}.toolbar{{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}}.status{{color:var(--muted);font-size:14px;margin:8px 0}}.metrics{{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}}.metric{{background:var(--soft);padding:13px;border-radius:10px}}.metric b{{display:block;font-size:23px}}table{{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}}th,td{{text-align:left;vertical-align:top;border:1px solid var(--line);padding:9px}}th{{background:var(--soft)}}.evidence,.card{{border:1px solid var(--line);border-radius:12px;padding:18px;margin:18px 0}}.chart{{overflow-x:auto}}svg{{width:100%;min-width:680px}}.bar{{fill:var(--brand)}}.axis{{font-size:13px;fill:var(--ink)}}.value{{font-size:13px;fill:var(--muted)}}.interactive-bars{{display:grid;gap:8px}}.bar-row{{display:grid;grid-template-columns:minmax(180px,1fr) minmax(100px,2fr) 100px;gap:10px;align-items:center;font-size:14px}}.bar-track{{height:16px;background:#e5eaf3;border-radius:9px;overflow:hidden}}.bar-track i{{display:block;height:100%;background:var(--brand);border-radius:9px}}.pill{{display:inline-block;padding:2px 8px;border-radius:99px;background:#e8edff;color:#2544a2;font-size:13px}}.empty,small{{color:var(--muted)}}code{{background:var(--soft);padding:2px 5px;border-radius:4px}}@media(max-width:760px){{main{{margin:0;padding:24px;border-radius:0}}.control-grid{{grid-template-columns:1fr 1fr}}.metrics{{grid-template-columns:repeat(2,1fr)}}.bar-row{{grid-template-columns:1fr;gap:4px}}h1{{font-size:28px}}}}</style></head><body data-run-id="{esc(analysis.get("run_id"))}"><main>
 <h1>{esc(analysis.get("title"))}</h1><p>批次：<code>{esc(analysis.get("run_id"))}</code> · 生成时间：{esc(analysis.get("generated_at"))}</p><div class="banner"><strong>{esc(label)}</strong><br>{esc(disclosure)}</div>{construction_note}
+<section class="controls" data-export-exclude><h2>交互筛选与保存</h2><div class="control-grid"><label>筛选题<select id="filter-question"></select></label><label>选项<select id="filter-value"></select></label><button id="add-filter" class="primary" type="button">添加条件</button><button id="clear-filters" type="button">清除条件</button></div><div id="active-filters" class="filter-chips"></div><p class="status">不同题目的条件按“同时满足”筛选；同一题添加新选项会替换该题已有条件。</p><p id="filter-status" class="status"></p><div class="toolbar"><button id="save-report" type="button">保存当前筛选报告</button><button id="download-png" type="button">下载 PNG 图片</button><button id="download-svg" type="button">下载 SVG 图片</button></div><p id="download-status" class="status">下载仅在本地浏览器完成，不会上传答卷数据。</p></section>
 <h2>研究目标与证据覆盖</h2><p><strong>产品决策：</strong>{esc(context.get("decision", "未提供"))}</p><p><strong>目标用户：</strong>{esc(context.get("target_audience", "未提供"))}</p><table><thead><tr><th>ID</th><th>研究目标</th><th>题目</th><th>状态</th><th>当前结论</th></tr></thead><tbody>{goal_rows}</tbody></table>
 <h2>样本、清理与数据质量</h2><div class="metrics"><div class="metric"><span>总样本</span><b>{sample.get("total", 0)}</b></div><div class="metric"><span>完成</span><b>{sample.get("completed", 0)}</b></div><div class="metric"><span>可分析</span><b>{sample.get("analyzable", 0)}</b></div><div class="metric"><span>失败</span><b>{sample.get("failed", 0)}</b></div><div class="metric"><span>完成率</span><b>{float(sample.get("completion_rate", 0)):.1%}</b></div></div><p>回答质量：<strong>{esc(sample.get("quality_grade"))}</strong>；完成回答清理前 {cleaning.get("completed_before_cleaning", 0)}，清理后 {cleaning.get("analyzable_after_cleaning", 0)}，剔除 {cleaning.get("excluded_count", 0)}。</p><h3>清理剔除记录</h3><ul>{cleaned_rows}</ul><h3>待人工复核</h3><ul>{review_rows}</ul><h3>实际模型</h3><ul>{model_items}</ul><h3>已记录问题</h3><ul>{issue_items}</ul>
-<h2>封闭题描述统计</h2><p>每张图使用本题实际回答分母；失败行不进入题目分母。</p>{"".join(charts)}
+<h2>封闭题描述统计</h2><p>每张图使用本题实际回答分母；失败行不进入题目分母。使用上方筛选条件后，本节将实时重算。</p><div id="interactive-charts">{"".join(charts)}</div>
 <h2>高级与交叉分析</h2><h3>交叉分析</h3><table><thead><tr><th>分组题</th><th>目标题</th><th>有效样本</th><th>观察</th></tr></thead><tbody>{cross_rows}</tbody></table><h3>量表信效度</h3><table><thead><tr><th>量表/题项</th><th>方法</th><th>结果</th><th>解释</th></tr></thead><tbody>{scale_rows}</tbody></table>
 <h2>主题、痛点与需求</h2>{"".join(theme_cards)}
 <h2>分群观察与反例</h2><table><thead><tr><th>分群</th><th>来源</th><th>n</th><th>观察</th><th>限制</th></tr></thead><tbody>{segment_rows}</tbody></table>
 <h2>建议与下一步验证</h2><ol>{rec_items}</ol>
 <h2>限制与未回答问题</h2><ul>{limit_items}</ul>
-<h2>证据索引</h2><table><thead><tr><th>证据 ID</th><th>披露</th><th>类型</th><th>文本</th></tr></thead><tbody>{evidence_rows}</tbody></table>
-</main></body></html>'''
+</main>{interactive_script}</body></html>'''
 
 
 def validate_analysis(base: dict[str, Any], analysis: dict[str, Any]) -> None:
-    protected = ["schema_version", "study_id", "run_id", "data_source", "sample", "data_cleaning", "descriptive_results", "qualitative_observations"]
+    protected = ["schema_version", "study_id", "run_id", "data_source", "sample", "data_cleaning", "descriptive_results", "interactive_data", "qualitative_observations"]
     for key in protected:
         if analysis.get(key) != base.get(key):
             raise ValueError(f"analysis_summary.json 不得修改机械生成字段：{key}")
@@ -722,6 +870,11 @@ def machine_quality(report: str, analysis: dict[str, Any]) -> list[str]:
         problems.append("HTML 未显示 run_id")
     if "合成模拟数据" not in report or "不代表真实用户或市场总体" not in report:
         problems.append("合成数据披露不足")
+    required_controls = ('id="filter-question"', 'id="add-filter"', 'id="save-report"', 'id="download-png"', 'id="download-svg"')
+    if any(control not in report for control in required_controls):
+        problems.append("HTML 缺少筛选、保存或图片下载控件")
+    if "report-interactive-data" not in report:
+        problems.append("HTML 缺少本地筛选所需的匿名答卷数据")
     if not analysis.get("limitations"):
         problems.append("缺少限制")
     return problems
@@ -749,6 +902,7 @@ def quality_markdown(analysis: dict[str, Any], problems: list[str]) -> str:
 
 - 离线资源：{'通过' if 'HTML 包含外部资源' not in problems else '失败'}
 - SVG 图表：{'通过' if '有封闭题数据但没有 SVG 图表' not in problems else '失败'}
+- 交互筛选与导出：{'通过' if 'HTML 缺少筛选、保存或图片下载控件' not in problems and 'HTML 缺少本地筛选所需的匿名答卷数据' not in problems else '失败'}
 - run_id 披露：{'通过' if 'HTML 未显示 run_id' not in problems else '失败'}
 - 数据来源披露：{'通过' if '合成数据披露不足' not in problems else '失败'}
 - 数据清理：完成行清理前 `{analysis.get('data_cleaning', {}).get('completed_before_cleaning', 0)}`，可分析 `{analysis.get('data_cleaning', {}).get('analyzable_after_cleaning', 0)}`，剔除 `{analysis.get('data_cleaning', {}).get('excluded_count', 0)}`。
@@ -761,6 +915,8 @@ def quality_markdown(analysis: dict[str, Any], problems: list[str]) -> str:
 - [ ] 已复核数据清理清单；所有人工剔除均有研究相关或逻辑不自洽的书面理由
 - [ ] 已打开 HTML 检查桌面和窄屏布局
 - [ ] 标题、图表、表格和长文本无明显截断或重叠
+- [ ] 已添加至少一个筛选条件，并确认封闭题统计与当前筛选样本数同步重算
+- [ ] 已在本地浏览器验证“保存当前筛选报告”以及 PNG、SVG 图片下载
 - [ ] 研究目标结论、主题和建议已完成，或明确标为描述性底稿
 """
 

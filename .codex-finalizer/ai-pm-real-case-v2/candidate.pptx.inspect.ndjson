@@ -1,0 +1,560 @@
+{"kind":"deck","id":"pr/14mjsx","name":"Deck"}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"","type":"master","placeholders":[{"name":"body","type":"body","textPreview":"Security Level:"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"探索","placeholders":[{"name":"title","type":"title","textPreview":"单击此处添加标题"},{"name":"body","type":"body","textPreview":"单击此处添加文本"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout2.xml","name":"智能","placeholders":[{"name":"title","type":"title","textPreview":"单击此处添加标题"},{"name":"body","type":"body","textPreview":"单击此处添加文本"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout3.xml","name":"攀登","placeholders":[{"name":"title","type":"title","textPreview":"单击此处添加标题"},{"name":"body","type":"body","textPreview":"单击此处添加文本"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout4.xml","name":"灯塔","placeholders":[{"name":"title","type":"title","textPreview":"单击此处添加标题"},{"name":"body","type":"body","textPreview":"单击此处添加文本"}]}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster2.xml","name":"","type":"master"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout5.xml","name":"1_Contents page","placeholders":[{"name":"body","type":"body","textPreview":"单击此处添加文本"}]}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster3.xml","name":"","type":"master"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout6.xml","name":"1_Chinese text page","placeholders":[{"name":"subtitle","type":"subtitle","textPreview":"单击此处添加标题"},{"name":"content placeholder 2","textPreview":"单击此处添加文本"}]}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster4.xml","name":"","type":"master","placeholders":[{"name":"title","type":"title","textPreview":"Click to edit Master title style"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout7.xml","name":"End page"}
+{"kind":"slide","id":"sl/y90nupkv","slide":1,"title":"Security Level:","textShapes":6}
+{"kind":"shape","id":"sh/k3yl0zql","slide":1,"name":"标题 2","placeholder":"title","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/ts7md4r2","slide":1,"name":"Text Placeholder 7","placeholder":"body","bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/7qp4be9c","slide":1,"name":"Text Placeholder 3","text":"Security Level:","textPreview":"Security Level:","textChars":15,"textLines":1,"bbox":[99.61,657.65,273.69,14.35]}
+{"kind":"shape","id":"sh/sryl4zqx","slide":1,"name":"cover-text-backdrop","bbox":[78,68,730,244]}
+{"kind":"textbox","id":"sh/fu94fe98","slide":1,"text":"从“会聊天”到“能承担决策”","textPreview":"从“会聊天”到“能承担决策”","textChars":14,"textLines":1,"bbox":[96,88,680,72]}
+{"kind":"textbox","id":"sh/utg3698n","slide":1,"text":"我的 AI 产品经理工作系统：Prompt → Context → Agent → Harness","textPreview":"我的 AI 产品经理工作系统：Prompt → Context → Agent → Harness","textChars":49,"textLines":1,"bbox":[98,174,668,54]}
+{"kind":"textbox","id":"sh/wn6dc7eh","slide":1,"text":"用研 × 竞品 × PRD × 原型｜两个真实工作案例","textPreview":"用研 × 竞品 × PRD × 原型｜两个真实工作案例","textChars":27,"textLines":1,"bbox":[98,236,668,38]}
+{"kind":"textbox","id":"sh/hofulsf2","slide":1,"text":"产品经理团队分享  /  45 min","textPreview":"产品经理团队分享  /  45 min","textChars":19,"textLines":1,"bbox":[98,292,480,28]}
+{"kind":"textbox","id":"sh/ul4vaxgb","slide":1,"text":"Internal","textPreview":"Internal","textChars":8,"textLines":1,"bbox":[190,657,90,18]}
+{"kind":"notes","id":"nt/y90nupkv","slide":1,"text":"建议用时：1 分钟\n开场不要从模型或工具名讲起。直接给结论：过去的 AI 工作流帮我写得更快；现在的工作流开始帮我更早暴露错误、更清楚地做取舍，并把结论交给下游继续执行。今天用两个真实交付物证明这一点。\n\n[Sources]\n- 本地文件：workspace/华为PPT模板-浅色版.pptx\n- 本地案例：手机图库 AI 功能需求问卷；鸿蒙图库一句话清理图片产品方案决策汇报"}
+{"kind":"slide","id":"sl/ofy9wn61","slide":2,"title":"AI 工作流的收益来自四类风险被前置控制","textShapes":20}
+{"kind":"shape","id":"sh/cza94vmx","slide":2,"name":"Subtitle 1","placeholder":"subtitle","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/d0jax03i","slide":2,"name":"Content Placeholder 2","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/m5cra54z","slide":2,"name":"TextBox 7","bbox":[594.27,-124.8,19.39,55.47]}
+{"kind":"shape","id":"sh/n6ls3alk","slide":2,"name":"title-accent","bbox":[82,50,54,5]}
+{"kind":"textbox","id":"sh/n2l4fq98","slide":2,"name":"slide-title","text":"AI 工作流的收益来自四类风险被前置控制","textPreview":"AI 工作流的收益来自四类风险被前置控制","textChars":20,"textLines":1,"bbox":[82,62,1116,52]}
+{"kind":"textbox","id":"sh/m1c3mlsn","slide":2,"name":"slide-lead","text":"不是更快生成四份文档，而是更早阻止四次错误决策","textPreview":"不是更快生成四份文档，而是更早阻止四次错误决策","textChars":23,"textLines":1,"bbox":[82,116,1116,32]}
+{"kind":"textbox","id":"sh/943mhgre","slide":2,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[82,174,48,28]}
+{"kind":"shape","id":"sh/83ulovat","slide":2,"bbox":[82,212,238,1]}
+{"kind":"textbox","id":"sh/v6l4jq94","slide":2,"text":"事实风险","textPreview":"事实风险","textChars":4,"textLines":1,"bbox":[82,228,238,44]}
+{"kind":"textbox","id":"sh/a5c3ql8z","slide":2,"text":"证据与版本","textPreview":"证据与版本","textChars":5,"textLines":1,"bbox":[82,278,238,30]}
+{"kind":"textbox","id":"sh/x8nml0ra","slide":2,"text":"不再把“没搜到”写成“不支持”","textPreview":"不再把“没搜到”写成“不支持”","textChars":15,"textLines":1,"bbox":[82,320,238,100]}
+{"kind":"textbox","id":"sh/w7ulsvqp","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[361,174,48,28]}
+{"kind":"shape","id":"sh/ja54na9g","slide":2,"bbox":[361,212,238,1]}
+{"kind":"textbox","id":"sh/i9w3u58v","slide":2,"text":"决策风险","textPreview":"决策风险","textChars":4,"textLines":1,"bbox":[361,228,238,44]}
+{"kind":"textbox","id":"sh/e10f2twf","slide":2,"text":"规则与取舍","textPreview":"规则与取舍","textChars":5,"textLines":1,"bbox":[361,278,238,30]}
+{"kind":"textbox","id":"sh/f29gbyx0","slide":2,"text":"每个结论必须回答做不做、先做什么","textPreview":"每个结论必须回答做不做、先做什么","textChars":16,"textLines":1,"bbox":[361,320,238,100]}
+{"kind":"textbox","id":"sh/03ix43e5","slide":2,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[640,174,48,28]}
+{"kind":"shape","id":"sh/14ryd8fq","slide":2,"bbox":[640,212,238,1]}
+{"kind":"textbox","id":"sh/6d0fytg3","slide":2,"text":"交接风险","textPreview":"交接风险","textChars":4,"textLines":1,"bbox":[640,228,238,44]}
+{"kind":"textbox","id":"sh/re9g7yxo","slide":2,"text":"文件与状态","textPreview":"文件与状态","textChars":5,"textLines":1,"bbox":[640,278,238,30]}
+{"kind":"textbox","id":"sh/sfix03y9","slide":2,"text":"下游读取确定产物，不依赖上轮聊天记忆","textPreview":"下游读取确定产物，不依赖上轮聊天记忆","textChars":18,"textLines":1,"bbox":[640,320,238,100]}
+{"kind":"textbox","id":"sh/tgry9ofu","slide":2,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[919,174,48,28]}
+{"kind":"shape","id":"sh/a9kfadwn","slide":2,"bbox":[919,212,238,1]}
+{"kind":"textbox","id":"sh/batgjixs","slide":2,"text":"上线风险","textPreview":"上线风险","textChars":4,"textLines":1,"bbox":[919,228,238,44]}
+{"kind":"textbox","id":"sh/l4fi9cza","slide":2,"text":"门禁与退出","textPreview":"门禁与退出","textChars":5,"textLines":1,"bbox":[919,278,238,30]}
+{"kind":"textbox","id":"sh/k3m1g7yp","slide":2,"text":"先验证误选、理解、性能、隐私，再立项","textPreview":"先验证误选、理解、性能、隐私，再立项","textChars":18,"textLines":1,"bbox":[919,320,238,100]}
+{"kind":"shape","id":"sh/z2d07mh4","slide":2,"bbox":[82,482,1116,116]}
+{"kind":"textbox","id":"sh/y14jehgj","slide":2,"text":"产品经理的核心产出，从“文档”升级为“可验证的决策系统”","textPreview":"产品经理的核心产出，从“文档”升级为“可验证的决策系统”","textChars":28,"textLines":1,"bbox":[108,500,760,38]}
+{"kind":"textbox","id":"sh/x0vi5czy","slide":2,"text":"证据可追溯  ·  范围可解释  ·  异常可恢复  ·  失败可停损","textPreview":"证据可追溯  ·  范围可解释  ·  异常可恢复  ·  失败可停损","textChars":35,"textLines":1,"bbox":[108,548,980,30]}
+{"kind":"notes","id":"nt/ofy9wn61","slide":2,"text":"建议用时：2 分钟\n这四类风险是全场的导航。后面每个案例不比较‘AI 写得快不快’，而是看它是否改变了产品决策：是否避免了错误事实、是否把优先级规则写清、是否让研究和方案能继续被下游使用、是否设置了退出条件。\n\n[Sources]\n- 本地工作区案例归纳；不包含外部市场数据"}
+{"kind":"slide","id":"sl/miqzqz","slide":3,"title":"四次演变，本质是把控制权逐层移出聊天框","textShapes":26}
+{"kind":"shape","id":"sh/rihkv6xs","slide":3,"name":"Subtitle 1","placeholder":"subtitle","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/6h8j21w7","slide":3,"name":"Content Placeholder 2","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/xcf2pwfq","slide":3,"name":"TextBox 7","bbox":[594.27,-124.8,19.39,55.47]}
+{"kind":"shape","id":"sh/wr61wre5","slide":3,"name":"title-accent","bbox":[82,50,54,5]}
+{"kind":"textbox","id":"sh/mhoba94z","slide":3,"name":"slide-title","text":"四次演变，本质是把控制权逐层移出聊天框","textPreview":"四次演变，本质是把控制权逐层移出聊天框","textChars":19,"textLines":1,"bbox":[82,62,1116,52]}
+{"kind":"textbox","id":"sh/nihsjel4","slide":3,"name":"slide-lead","text":"每一层保留上一层能力，同时补上新的交付契约","textPreview":"每一层保留上一层能力，同时补上新的交付契约","textChars":21,"textLines":1,"bbox":[82,116,1116,32]}
+{"kind":"shape","id":"sh/ojqtcjmp","slide":3,"bbox":[82,188,246,300]}
+{"kind":"textbox","id":"sh/9kzalo3a","slide":3,"text":"Prompt","textPreview":"Prompt","textChars":6,"textLines":1,"bbox":[100,204,210,38]}
+{"kind":"textbox","id":"sh/al8bet4v","slide":3,"text":"回答契约","textPreview":"回答契约","textChars":4,"textLines":1,"bbox":[100,250,210,26]}
+{"kind":"shape","id":"sh/bmhsnylg","slide":3,"bbox":[100,288,210,1]}
+{"kind":"textbox","id":"sh/wnqtg321","slide":3,"text":"意图、角色、格式","textPreview":"意图、角色、格式","textChars":8,"textLines":1,"bbox":[100,300,210,56]}
+{"kind":"textbox","id":"sh/xozup83m","slide":3,"text":"仍依赖模型临场记忆","textPreview":"仍依赖模型临场记忆","textChars":9,"textLines":1,"bbox":[100,370,210,54]}
+{"kind":"textbox","id":"sh/yp8bitkr","slide":3,"text":"PM：会提问","textPreview":"PM：会提问","textChars":6,"textLines":1,"bbox":[100,442,210,28]}
+{"kind":"textbox","id":"sh/jq1crylc","slide":3,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[330,310,28,46]}
+{"kind":"shape","id":"sh/ve1sfi1k","slide":3,"bbox":[361,188,246,300]}
+{"kind":"textbox","id":"sh/utsr6d0z","slide":3,"text":"Context","textPreview":"Context","textChars":7,"textLines":1,"bbox":[379,204,210,38]}
+{"kind":"textbox","id":"sh/hgjah8jq","slide":3,"text":"证据契约","textPreview":"证据契约","textChars":4,"textLines":1,"bbox":[379,250,210,26]}
+{"kind":"shape","id":"sh/gfa983i5","slide":3,"bbox":[379,288,210,1]}
+{"kind":"textbox","id":"sh/7q1sby1o","slide":3,"text":"资料、版本、状态","textPreview":"资料、版本、状态","textChars":8,"textLines":1,"bbox":[379,300,210,56]}
+{"kind":"textbox","id":"sh/6psr2t03","slide":3,"text":"知道事实但不能行动","textPreview":"知道事实但不能行动","textChars":9,"textLines":1,"bbox":[379,370,210,54]}
+{"kind":"textbox","id":"sh/tsjad8je","slide":3,"text":"PM：会组织证据","textPreview":"PM：会组织证据","textChars":8,"textLines":1,"bbox":[379,442,210,28]}
+{"kind":"textbox","id":"sh/8ra943it","slide":3,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[609,310,28,46]}
+{"kind":"shape","id":"sh/jmhs7e1c","slide":3,"bbox":[640,188,246,300]}
+{"kind":"textbox","id":"sh/yl8ryt0r","slide":3,"text":"Agent","textPreview":"Agent","textChars":5,"textLines":1,"bbox":[658,204,210,38]}
+{"kind":"textbox","id":"sh/ofmxsvud","slide":3,"text":"行动契约","textPreview":"行动契约","textChars":4,"textLines":1,"bbox":[658,250,210,26]}
+{"kind":"shape","id":"sh/pgvyl0vy","slide":3,"bbox":[658,288,210,1]}
+{"kind":"textbox","id":"sh/2d4fqlcn","slide":3,"text":"工具选择与循环","textPreview":"工具选择与循环","textChars":7,"textLines":1,"bbox":[658,300,210,56]}
+{"kind":"textbox","id":"sh/nedgjqds","slide":3,"text":"能行动但可能失控","textPreview":"能行动但可能失控","textChars":8,"textLines":1,"bbox":[658,370,210,54]}
+{"kind":"textbox","id":"sh/cjmhwvup","slide":3,"text":"PM：会委派与验收","textPreview":"PM：会委派与验收","textChars":9,"textLines":1,"bbox":[658,442,210,28]}
+{"kind":"textbox","id":"sh/xkfyp0va","slide":3,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[888,310,28,46]}
+{"kind":"shape","id":"sh/ah4fu5cj","slide":3,"bbox":[919,188,246,300]}
+{"kind":"textbox","id":"sh/bidgnad4","slide":3,"text":"Harness","textPreview":"Harness","textChars":7,"textLines":1,"bbox":[937,204,210,38]}
+{"kind":"textbox","id":"sh/sn2xkbu5","slide":3,"text":"交付契约","textPreview":"交付契约","textChars":4,"textLines":1,"bbox":[937,250,210,26]}
+{"kind":"shape","id":"sh/dobydgvq","slide":3,"bbox":[937,288,210,1]}
+{"kind":"textbox","id":"sh/5g7y90z6","slide":3,"text":"权限、门禁、恢复、审计","textPreview":"权限、门禁、恢复、审计","textChars":11,"textLines":1,"bbox":[937,300,210,56]}
+{"kind":"textbox","id":"sh/kvyh0vy1","slide":3,"text":"需要持续治理","textPreview":"需要持续治理","textChars":6,"textLines":1,"bbox":[937,370,210,54]}
+{"kind":"textbox","id":"sh/ju5g7ahg","slide":3,"text":"PM：会设计工作系统","textPreview":"PM：会设计工作系统","textChars":10,"textLines":1,"bbox":[937,442,210,28]}
+{"kind":"textbox","id":"sh/itwzy5gv","slide":3,"text":"关键变化：上下文不再只是“喂资料”，而是把证据、任务状态和质量标准变成可被工具读取的外部对象。","textPreview":"关键变化：上下文不再只是“喂资料”，而是把证据、任务状态和质量标准变成可被工具读取的外部对象。","textChars":47,"textLines":1,"bbox":[82,526,1116,66]}
+{"kind":"notes","id":"nt/miqzqz","slide":3,"text":"建议用时：3 分钟\n不要把这张图讲成四代产品史。讲控制权：Prompt 只控制一次回答；Context 控制模型能看到什么；Agent 控制能做什么；Harness 控制在什么权限、状态和验证条件下完成。PM 的能力也从写提示词，升级到设计任务、证据和验收系统。\n\n[Sources]\n- 基于本次工作流实践的阶段归纳"}
+{"kind":"slide","id":"sl/a1icyo","slide":4,"title":"Agent 工具从回答器演变为有门禁的执行环境","textShapes":19}
+{"kind":"shape","id":"sh/32h0fqtc","slide":4,"name":"Subtitle 1","placeholder":"subtitle","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/218jmlcr","slide":4,"name":"Content Placeholder 2","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/lw32pkbq","slide":4,"name":"TextBox 7","bbox":[594.27,-124.8,19.39,55.47]}
+{"kind":"shape","id":"sh/0vu1wfu5","slide":4,"name":"title-accent","bbox":[82,50,54,5]}
+{"kind":"textbox","id":"sh/u5s3q5k7","slide":4,"name":"slide-title","text":"Agent 工具从回答器演变为有门禁的执行环境","textPreview":"Agent 工具从回答器演变为有门禁的执行环境","textChars":23,"textLines":1,"bbox":[82,62,1116,52]}
+{"kind":"textbox","id":"sh/f614jals","slide":4,"name":"slide-lead","text":"真正的分水岭不是能否调用工具，而是任务是否可恢复、可验证、可审计","textPreview":"真正的分水岭不是能否调用工具，而是任务是否可恢复、可验证、可审计","textChars":32,"textLines":1,"bbox":[82,116,1116,32]}
+{"kind":"shape","id":"sh/g7ulsf2d","slide":4,"bbox":[128,430,998,0]}
+{"kind":"shape","id":"sh/h83mlk3y","slide":4,"bbox":[148,414,22,22]}
+{"kind":"textbox","id":"sh/61s3mlkb","slide":4,"text":"对话助手","textPreview":"对话助手","textChars":4,"textLines":1,"bbox":[90,340,140,28]}
+{"kind":"textbox","id":"sh/7214fqlw","slide":4,"text":"生成回答","textPreview":"生成回答","textChars":4,"textLines":1,"bbox":[78,372,164,36]}
+{"kind":"shape","id":"sh/s3alov2h","slide":4,"bbox":[358,414,22,22]}
+{"kind":"textbox","id":"sh/t4jmh032","slide":4,"text":"知识助手","textPreview":"知识助手","textChars":4,"textLines":1,"bbox":[300,302,140,28]}
+{"kind":"textbox","id":"sh/qxcnypkf","slide":4,"text":"检索资料","textPreview":"检索资料","textChars":4,"textLines":1,"bbox":[288,334,164,36]}
+{"kind":"shape","id":"sh/ryl4rul0","slide":4,"bbox":[570,414,22,22]}
+{"kind":"textbox","id":"sh/nix0jm1c","slide":4,"text":"工具 Agent","textPreview":"工具 Agent","textChars":8,"textLines":1,"bbox":[512,258,140,28]}
+{"kind":"textbox","id":"sh/mhojqh0r","slide":4,"text":"搜索/计算/写文件","textPreview":"搜索/计算/写文件","textChars":9,"textLines":1,"bbox":[500,290,164,36]}
+{"kind":"shape","id":"sh/9kfilwji","slide":4,"bbox":[782,414,22,22]}
+{"kind":"textbox","id":"sh/oj61srix","slide":4,"text":"工作区 Agent","textPreview":"工作区 Agent","textChars":9,"textLines":1,"bbox":[724,214,140,28]}
+{"kind":"textbox","id":"sh/b6xknm1o","slide":4,"text":"跨文件执行与交接","textPreview":"跨文件执行与交接","textChars":8,"textLines":1,"bbox":[712,246,164,36]}
+{"kind":"shape","id":"sh/aloju103","slide":4,"bbox":[994,414,22,22]}
+{"kind":"textbox","id":"sh/x8z2pwju","slide":4,"text":"Harness","textPreview":"Harness","textChars":7,"textLines":1,"bbox":[936,170,140,28]}
+{"kind":"textbox","id":"sh/w761wri9","slide":4,"text":"权限/状态/门禁/恢复","textPreview":"权限/状态/门禁/恢复","textChars":11,"textLines":1,"bbox":[924,202,164,36]}
+{"kind":"textbox","id":"sh/jahkr61k","slide":4,"text":"自动化程度 →","textPreview":"自动化程度 →","textChars":7,"textLines":1,"bbox":[966,472,160,26]}
+{"kind":"textbox","id":"sh/y98jy10z","slide":4,"text":"PM 的价值变化","textPreview":"PM 的价值变化","textChars":8,"textLines":1,"bbox":[82,524,180,26]}
+{"kind":"textbox","id":"sh/gfa18byd","slide":4,"text":"写提示词","textPreview":"写提示词","textChars":4,"textLines":1,"bbox":[260,522,140,30]}
+{"kind":"textbox","id":"sh/hgjihgfy","slide":4,"text":"组织证据","textPreview":"组织证据","textChars":4,"textLines":1,"bbox":[454,522,140,30]}
+{"kind":"textbox","id":"sh/ud8z61g7","slide":4,"text":"定义动作","textPreview":"定义动作","textChars":4,"textLines":1,"bbox":[648,522,140,30]}
+{"kind":"textbox","id":"sh/veh0f6xs","slide":4,"text":"设计门禁","textPreview":"设计门禁","textChars":4,"textLines":1,"bbox":[842,522,140,30]}
+{"kind":"textbox","id":"sh/8bqh4ry1","slide":4,"text":"← 单次内容质量                                      端到端任务可靠性 →","textPreview":"← 单次内容质量                                      端到端任务可靠性 →","textChars":56,"textLines":1,"bbox":[260,570,722,26]}
+{"kind":"notes","id":"nt/a1icyo","slide":4,"text":"建议用时：2 分钟\n工具演变只讲一条线：从回答、检索、工具调用到工作区执行。到 Harness 阶段，Agent 不只是会用浏览器或写文件，而是知道输入输出契约、权限边界、失败停止、恢复方式和验收门槛。这才对应产品经理真正可托付的任务。\n\n[Sources]\n- 基于对话式、检索式、工具调用与工作区 Agent 的能力抽象"}
+{"kind":"slide","id":"sl/hwbqtkby","slide":5,"title":"01","textShapes":4}
+{"kind":"shape","id":"sh/9072xkry","slide":5,"name":"Text Placeholder 1","placeholder":"body","bbox":[108.52,193.5,1054.67,316.4]}
+{"kind":"shape","id":"sh/ozy1ofad","slide":5,"name":"section-number-backdrop","bbox":[108,190,180,108]}
+{"kind":"textbox","id":"sh/b29kza94","slide":5,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[108,190,180,108]}
+{"kind":"shape","id":"sh/a10jqpsj","slide":5,"bbox":[108,320,62,5]}
+{"kind":"textbox","id":"sh/x4r21kru","slide":5,"text":"用户研究：把意见收集改造成决策证据","textPreview":"用户研究：把意见收集改造成决策证据","textChars":17,"textLines":1,"bbox":[108,342,980,72]}
+{"kind":"textbox","id":"sh/w3i1sfa9","slide":5,"text":"真实案例：手机图库 AI 功能使用与需求调研｜12 题｜原始需求洞察","textPreview":"真实案例：手机图库 AI 功能使用与需求调研｜12 题｜原始需求洞察","textChars":34,"textLines":1,"bbox":[108,430,940,66]}
+{"kind":"textbox","id":"sh/r65knqtk","slide":5,"text":"CASE 01 / USER RESEARCH","textPreview":"CASE 01 / USER RESEARCH","textChars":23,"textLines":1,"bbox":[1050,578,120,24]}
+{"kind":"notes","id":"nt/hwbqtkby","slide":5,"text":"建议用时：0.5 分钟\n第一部分只回答一个问题：为什么问卷不是让 AI 多写一些题，而是让产品经理把要做的决策、需要的证据和题目顺序事先写清。\n\n[Sources]\n- pm-user-research/用户调研/20260913手机图库AI功能需求/questionnaire.md"}
+{"kind":"slide","id":"sl/wjfnmh","slide":6,"title":"功能意愿不能直接支持图库 AI 的优先级决策","textShapes":19}
+{"kind":"shape","id":"sh/h87yh8bm","slide":6,"name":"Subtitle 1","placeholder":"subtitle","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/w7yho3u1","slide":6,"name":"Content Placeholder 2","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/re90n2to","slide":6,"name":"TextBox 7","bbox":[594.27,-124.8,19.39,55.47]}
+{"kind":"shape","id":"sh/6d0zuxc3","slide":6,"name":"title-accent","bbox":[82,50,54,5]}
+{"kind":"textbox","id":"sh/snedkba5","slide":6,"name":"slide-title","text":"功能意愿不能直接支持图库 AI 的优先级决策","textPreview":"功能意愿不能直接支持图库 AI 的优先级决策","textChars":22,"textLines":1,"bbox":[82,62,1116,52]}
+{"kind":"textbox","id":"sh/to7edgrq","slide":6,"name":"slide-lead","text":"“你想要什么”只能得到愿望清单；优先级需要行为、问题、后果与强制取舍","textPreview":"“你想要什么”只能得到愿望清单；优先级需要行为、问题、后果与强制取舍","textChars":34,"textLines":1,"bbox":[82,116,1116,32]}
+{"kind":"textbox","id":"sh/6lwvi1sz","slide":6,"text":"表面提问","textPreview":"表面提问","textChars":4,"textLines":1,"bbox":[82,180,220,30]}
+{"kind":"textbox","id":"sh/7m5wb69k","slide":6,"text":"用户最想要哪些\n图库 AI 功能？","textPreview":"用户最想要哪些 | 图库 AI 功能？","textChars":17,"textLines":2,"bbox":[82,218,300,94]}
+{"kind":"textbox","id":"sh/grydova1","slide":6,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[392,248,64,50]}
+{"kind":"textbox","id":"sh/hs7ehgrm","slide":6,"text":"真正要支持的 4 个决策","textPreview":"真正要支持的 4 个决策","textChars":12,"textLines":1,"bbox":[474,180,430,30]}
+{"kind":"textbox","id":"sh/upgvmlsb","slide":6,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[474,220,40,26]}
+{"kind":"textbox","id":"sh/fqpwfq9g","slide":6,"text":"有没有真实发生","textPreview":"有没有真实发生","textChars":7,"textLines":1,"bbox":[526,220,214,28]}
+{"kind":"textbox","id":"sh/4vixsvad","slide":6,"text":"过去 3 个月是否使用，最近一次完成什么任务","textPreview":"过去 3 个月是否使用，最近一次完成什么任务","textChars":22,"textLines":1,"bbox":[754,220,420,38]}
+{"kind":"shape","id":"sh/pwrel0ry","slide":6,"bbox":[474,274,700,1]}
+{"kind":"textbox","id":"sh/xcne50j2","slide":6,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[474,292,40,26]}
+{"kind":"textbox","id":"sh/cbedcv2h","slide":6,"text":"问题是否足够痛","textPreview":"问题是否足够痛","textChars":7,"textLines":1,"bbox":[526,292,214,28]}
+{"kind":"textbox","id":"sh/ba5w3q1w","slide":6,"text":"遇到什么问题，造成返工、换工具还是放弃","textPreview":"遇到什么问题，造成返工、换工具还是放弃","textChars":19,"textLines":1,"bbox":[754,292,420,38]}
+{"kind":"shape","id":"sh/q9cvalkb","slide":6,"bbox":[474,346,700,1]}
+{"kind":"textbox","id":"sh/lgne90jy","slide":6,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[474,364,40,26]}
+{"kind":"textbox","id":"sh/kfedgv2d","slide":6,"text":"只能做一个时选谁","textPreview":"只能做一个时选谁","textChars":8,"textLines":1,"bbox":[526,364,214,28]}
+{"kind":"textbox","id":"sh/ze5w7a1s","slide":6,"text":"功能广度之后强制 Top 1，并追问原因","textPreview":"功能广度之后强制 Top 1，并追问原因","textChars":20,"textLines":1,"bbox":[754,364,420,38]}
+{"kind":"shape","id":"sh/ydwve5kn","slide":6,"bbox":[474,418,700,1]}
+{"kind":"textbox","id":"sh/1k3uxgju","slide":6,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[474,436,40,26]}
+{"kind":"textbox","id":"sh/gjud4b29","slide":6,"text":"方案要加什么边界","textPreview":"方案要加什么边界","textChars":8,"textLines":1,"bbox":[526,436,214,28]}
+{"kind":"textbox","id":"sh/6p8byh07","slide":6,"text":"误删、隐私、时延等问题怎样改变交互","textPreview":"误删、隐私、时延等问题怎样改变交互","textChars":17,"textLines":1,"bbox":[754,436,420,38]}
+{"kind":"shape","id":"sh/rqhs7mhs","slide":6,"bbox":[82,528,1116,72]}
+{"kind":"textbox","id":"sh/srat07ix","slide":6,"text":"普通提示词最容易漏掉：非用户分流、互斥选项、题间关联、分析用途和“若结果出现 X，产品做什么”。","textPreview":"普通提示词最容易漏掉：非用户分流、互斥选项、题间关联、分析用途和“若结果出现 X，产品做什么”。","textChars":48,"textLines":1,"bbox":[104,542,1072,42]}
+{"kind":"notes","id":"nt/wjfnmh","slide":6,"text":"建议用时：2.5 分钟\n这页先把业务问题讲透。直接问偏好会得到每个功能都有人选，无法支持资源取舍。真正需要回答四件事：是否真实发生、问题是否够痛、只能做一个时选谁、体验风险会如何改变方案。Skill 的第一价值不是写题，而是阻止研究目标继续含糊。\n\n[Sources]\n- pm-user-research/用户调研/20260913手机图库AI功能需求/questionnaire.md"}
+{"kind":"slide","id":"sl/8fsecr","slide":7,"title":"Skill 先建立决策—证据—题目映射，再允许写题","textShapes":23}
+{"kind":"shape","id":"sh/kni5oba9","slide":7,"name":"Subtitle 1","placeholder":"subtitle","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/5ormxwbu","slide":7,"name":"Content Placeholder 2","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/ud0nulsb","slide":7,"name":"TextBox 7","bbox":[594.27,-124.8,19.39,55.47]}
+{"kind":"shape","id":"sh/feto3qtw","slide":7,"name":"title-accent","bbox":[82,50,54,5]}
+{"kind":"textbox","id":"sh/ji1cze5o","slide":7,"name":"slide-title","text":"Skill 先建立决策—证据—题目映射，再允许写题","textPreview":"Skill 先建立决策—证据—题目映射，再允许写题","textChars":25,"textLines":1,"bbox":[82,62,1116,52]}
+{"kind":"textbox","id":"sh/ixsb6943","slide":7,"name":"slide-lead","text":"每道题都必须说明分析用途和可能触发的产品动作","textPreview":"每道题都必须说明分析用途和可能触发的产品动作","textChars":22,"textLines":1,"bbox":[82,116,1116,32]}
+{"kind":"textbox","id":"sh/5k3u14nu","slide":7,"text":"产品决策","textPreview":"产品决策","textChars":4,"textLines":1,"bbox":[96,176,220,30]}
+{"kind":"textbox","id":"sh/4jut8zm9","slide":7,"text":"所需证据","textPreview":"所需证据","textChars":4,"textLines":1,"bbox":[350,176,330,30]}
+{"kind":"textbox","id":"sh/rmlc3e50","slide":7,"text":"题目","textPreview":"题目","textChars":2,"textLines":1,"bbox":[718,176,180,30]}
+{"kind":"textbox","id":"sh/6lcva94f","slide":7,"text":"决策用途","textPreview":"决策用途","textChars":4,"textLines":1,"bbox":[914,176,250,30]}
+{"kind":"shape","id":"sh/to3u5on6","slide":7,"bbox":[82,218,1116,72]}
+{"kind":"textbox","id":"sh/snudcjml","slide":7,"text":"是否存在真实需求","textPreview":"是否存在真实需求","textChars":8,"textLines":1,"bbox":[96,228,220,48]}
+{"kind":"textbox","id":"sh/fq5c7ylw","slide":7,"text":"近期使用频率 + 最近一次任务","textPreview":"近期使用频率 + 最近一次任务","textChars":15,"textLines":1,"bbox":[350,228,330,48]}
+{"kind":"textbox","id":"sh/epcvet4b","slide":7,"text":"Q4 / Q6","textPreview":"Q4 / Q6","textChars":7,"textLines":1,"bbox":[718,228,180,48]}
+{"kind":"textbox","id":"sh/algf6xoj","slide":7,"text":"区分真实行为与概念兴趣","textPreview":"区分真实行为与概念兴趣","textChars":11,"textLines":1,"bbox":[914,228,250,48]}
+{"kind":"shape","id":"sh/bmpwf2p4","slide":7,"bbox":[82,304,1116,72]}
+{"kind":"textbox","id":"sh/cnyx8n6p","slide":7,"text":"问题是否值得解决","textPreview":"问题是否值得解决","textChars":8,"textLines":1,"bbox":[96,314,220,48]}
+{"kind":"textbox","id":"sh/x87yhsna","slide":7,"text":"问题类型 + 后果","textPreview":"问题类型 + 后果","textChars":9,"textLines":1,"bbox":[350,314,330,48]}
+{"kind":"textbox","id":"sh/2hwf2don","slide":7,"text":"Q7 / Q8","textPreview":"Q7 / Q8","textChars":7,"textLines":1,"bbox":[718,314,180,48]}
+{"kind":"textbox","id":"sh/nipwbip8","slide":7,"text":"识别效果问题还是信任问题","textPreview":"识别效果问题还是信任问题","textChars":12,"textLines":1,"bbox":[914,314,250,48]}
+{"kind":"shape","id":"sh/ojyx4n6t","slide":7,"bbox":[82,390,1116,72]}
+{"kind":"textbox","id":"sh/pk7eds7e","slide":7,"text":"优先做哪个功能","textPreview":"优先做哪个功能","textChars":7,"textLines":1,"bbox":[96,400,220,48]}
+{"kind":"textbox","id":"sh/md0fehor","slide":7,"text":"需求广度 + 强制 Top 1 + 原因","textPreview":"需求广度 + 强制 Top 1 + 原因","textChars":20,"textLines":1,"bbox":[350,400,330,48]}
+{"kind":"textbox","id":"sh/7e9gnm5c","slide":7,"text":"Q9 / Q10 / Q11","textPreview":"Q9 / Q10 / Q11","textChars":14,"textLines":1,"bbox":[718,400,180,48]}
+{"kind":"textbox","id":"sh/h8bidg7e","slide":7,"text":"形成可解释的优先级假设","textPreview":"形成可解释的优先级假设","textChars":11,"textLines":1,"bbox":[914,400,250,48]}
+{"kind":"shape","id":"sh/w72h4bq9","slide":7,"bbox":[82,476,1116,72]}
+{"kind":"textbox","id":"sh/v6t0b69o","slide":7,"text":"在哪个场景切入","textPreview":"在哪个场景切入","textChars":7,"textLines":1,"bbox":[96,486,220,48]}
+{"kind":"textbox","id":"sh/u5kz2183","slide":7,"text":"任务发生的具体情境","textPreview":"任务发生的具体情境","textChars":9,"textLines":1,"bbox":[350,486,330,48]}
+{"kind":"textbox","id":"sh/94bi9wri","slide":7,"text":"Q12","textPreview":"Q12","textChars":3,"textLines":1,"bbox":[718,486,180,48]}
+{"kind":"textbox","id":"sh/832h0rqx","slide":7,"text":"确定入口、触发和 MVP 场景","textPreview":"确定入口、触发和 MVP 场景","textChars":15,"textLines":1,"bbox":[914,486,250,48]}
+{"kind":"textbox","id":"sh/72t07m9c","slide":7,"text":"删除规则：无法说明决策用途的题目，不进入问卷。","textPreview":"删除规则：无法说明决策用途的题目，不进入问卷。","textChars":23,"textLines":1,"bbox":[82,580,1116,34]}
+{"kind":"notes","id":"nt/8fsecr","slide":7,"text":"建议用时：3 分钟\n逐行讲，不要快速掠过。强调问卷的设计顺序：先写产品决策，再写需要看到的证据，最后才写题。比如 Q7/Q8 不是为了丰富报告，而是判断到底该提升识别效果，还是先解决误删、撤销与信任问题。\n\n[Sources]\n- pm-user-research/skills/ur-design-survey/SKILL.md\n- pm-user-research/用户调研/20260913手机图库AI功能需求/questionnaire.md"}
+{"kind":"slide","id":"sl/ncz1aj","slide":8,"title":"行为先于概念，使用者分流避免把想象当经历","textShapes":15}
+{"kind":"shape","id":"sh/e58bqlgn","slide":8,"name":"Subtitle 1","placeholder":"subtitle","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/f6hszqx8","slide":8,"name":"Content Placeholder 2","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/cfut0fyl","slide":8,"name":"TextBox 7","bbox":[594.27,-124.8,19.39,55.47]}
+{"kind":"shape","id":"sh/dg3a9kf6","slide":8,"name":"title-accent","bbox":[82,50,54,5]}
+{"kind":"textbox","id":"sh/9sn69g7q","slide":8,"name":"slide-title","text":"行为先于概念，使用者分流避免把想象当经历","textPreview":"行为先于概念，使用者分流避免把想象当经历","textChars":20,"textLines":1,"bbox":[82,62,1116,52]}
+{"kind":"textbox","id":"sh/ore5gb6l","slide":8,"name":"slide-lead","text":"Q4 是关键路由：有经历的人谈最近任务，无经历的人直接进入未来诉求","textPreview":"Q4 是关键路由：有经历的人谈最近任务，无经历的人直接进入未来诉求","textChars":33,"textLines":1,"bbox":[82,116,1116,32]}
+{"kind":"shape","id":"sh/nq5o7qp0","slide":8,"bbox":[82,184,170,90]}
+{"kind":"textbox","id":"sh/m5cnelof","slide":8,"text":"Q1–Q3","textPreview":"Q1–Q3","textChars":5,"textLines":1,"bbox":[98,198,138,24]}
+{"kind":"textbox","id":"sh/xwn6d0n2","slide":8,"text":"基本分层","textPreview":"基本分层","textChars":4,"textLines":1,"bbox":[98,228,138,30]}
+{"kind":"textbox","id":"sh/wve5kv6h","slide":8,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[260,208,50,50]}
+{"kind":"shape","id":"sh/bu5obq5w","slide":8,"bbox":[318,184,190,90]}
+{"kind":"textbox","id":"sh/atwnilob","slide":8,"text":"Q4","textPreview":"Q4","textChars":2,"textLines":1,"bbox":[336,198,150,24]}
+{"kind":"textbox","id":"sh/d03m1w7y","slide":8,"text":"近 3 月使用频率","textPreview":"近 3 月使用频率","textChars":9,"textLines":1,"bbox":[336,228,150,30]}
+{"kind":"textbox","id":"sh/czu58r6d","slide":8,"text":"↙","textPreview":"↙","textChars":1,"textLines":1,"bbox":[492,270,80,60]}
+{"kind":"textbox","id":"sh/4je5obe9","slide":8,"text":"↘","textPreview":"↘","textChars":1,"textLines":1,"bbox":[596,270,80,60]}
+{"kind":"shape","id":"sh/5k76hwfe","slide":8,"bbox":[282,336,366,172]}
+{"kind":"textbox","id":"sh/ihwnm1w3","slide":8,"text":"有近期使用经历","textPreview":"有近期使用经历","textChars":7,"textLines":1,"bbox":[304,350,320,30]}
+{"kind":"textbox","id":"sh/3i5of6xo","slide":8,"text":"Q5 用过哪些功能\nQ6 最近一次任务\nQ7 遇到什么问题\nQ8 问题造成什么后果","textPreview":"Q5 用过哪些功能 | Q6 最近一次任务 | Q7 遇到什么问题 | Q8 问题造成什么后果","textChars":41,"textLines":4,"bbox":[304,390,320,100]}
+{"kind":"shape","id":"sh/s7y5sbe5","slide":8,"bbox":[684,336,366,172]}
+{"kind":"textbox","id":"sh/d876lgfq","slide":8,"text":"无近期经历 / 从未使用","textPreview":"无近期经历 / 从未使用","textChars":12,"textLines":1,"bbox":[706,350,320,30]}
+{"kind":"textbox","id":"sh/q5gnq1wz","slide":8,"text":"不要求评价实际体验\n直接进入 Q9–Q12\n只收集未来需求与发生场景","textPreview":"不要求评价实际体验 | 直接进入 Q9–Q12 | 只收集未来需求与发生场景","textChars":34,"textLines":3,"bbox":[706,398,320,80]}
+{"kind":"textbox","id":"sh/r6poj6xk","slide":8,"text":"↓ 两条路径最终汇合到需求广度、强制优先级、原因与场景","textPreview":"↓ 两条路径最终汇合到需求广度、强制优先级、原因与场景","textChars":27,"textLines":1,"bbox":[310,540,714,34]}
+{"kind":"textbox","id":"sh/0bipwve1","slide":8,"text":"PM 价值：避免让从未用过的人评价准确性、速度或撤销体验。","textPreview":"PM 价值：避免让从未用过的人评价准确性、速度或撤销体验。","textChars":29,"textLines":1,"bbox":[82,594,1116,28]}
+{"kind":"notes","id":"nt/ncz1aj","slide":8,"text":"建议用时：3 分钟\n这页讲问卷逻辑里最容易被生成式 AI 忽略的地方：没有使用过的人，没有资格回答最近一次体验。Q4 负责路由；有经历者进入 Q5–Q8 的行为链，无经历者只回答未来诉求。这样可以避免把想象当体验证据。\n\n[Sources]\n- pm-user-research/用户调研/20260913手机图库AI功能需求/questionnaire.md\n- pm-user-research/skills/ur-design-survey/references/questionnaire-logic-checklist.md"}
+{"kind":"slide","id":"sl/2z4ljp","slide":9,"title":"四连问把“想要”转成可执行的优先级假设","textShapes":30}
+{"kind":"shape","id":"sh/3a54jm1w","slide":9,"name":"Subtitle 1","placeholder":"subtitle","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/29w3ah0b","slide":9,"name":"Content Placeholder 2","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/l4rmtgja","slide":9,"name":"TextBox 7","bbox":[594.27,-124.8,19.39,55.47]}
+{"kind":"shape","id":"sh/03i5kbip","slide":9,"name":"title-accent","bbox":[82,50,54,5]}
+{"kind":"textbox","id":"sh/e9gnqpwn","slide":9,"name":"slide-title","text":"四连问把“想要”转成可执行的优先级假设","textPreview":"四连问把“想要”转成可执行的优先级假设","textChars":19,"textLines":1,"bbox":[82,62,1116,52]}
+{"kind":"textbox","id":"sh/fap4zuds","slide":9,"name":"slide-lead","text":"这里展示的是预注册分析规则，不是尚未采集的用户结论","textPreview":"这里展示的是预注册分析规则，不是尚未采集的用户结论","textChars":25,"textLines":1,"bbox":[82,116,1116,32]}
+{"kind":"textbox","id":"sh/0bi5szed","slide":9,"text":"Q9","textPreview":"Q9","textChars":2,"textLines":1,"bbox":[82,182,58,28]}
+{"kind":"textbox","id":"sh/1crm14vy","slide":9,"text":"需求广度","textPreview":"需求广度","textChars":4,"textLines":1,"bbox":[82,216,238,36]}
+{"kind":"textbox","id":"sh/2d0nu9wj","slide":9,"text":"最多选 3 项","textPreview":"最多选 3 项","textChars":7,"textLines":1,"bbox":[82,258,238,46]}
+{"kind":"textbox","id":"sh/ny943ud4","slide":9,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[314,222,38,38]}
+{"kind":"textbox","id":"sh/ozi5wzep","slide":9,"text":"Q10","textPreview":"Q10","textChars":3,"textLines":1,"bbox":[361,182,58,28]}
+{"kind":"textbox","id":"sh/p0rm54va","slide":9,"text":"强制取舍","textPreview":"强制取舍","textChars":4,"textLines":1,"bbox":[361,216,238,36]}
+{"kind":"textbox","id":"sh/ihw3i5wf","slide":9,"text":"只能优先 1 项","textPreview":"只能优先 1 项","textChars":8,"textLines":1,"bbox":[361,258,238,46]}
+{"kind":"textbox","id":"sh/j254rad0","slide":9,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[593,222,38,38]}
+{"kind":"textbox","id":"sh/7mlkz6ts","slide":9,"text":"Q11","textPreview":"Q11","textChars":3,"textLines":1,"bbox":[640,182,58,28]}
+{"kind":"textbox","id":"sh/mlcjq1c7","slide":9,"text":"选择原因","textPreview":"选择原因","textChars":4,"textLines":1,"bbox":[640,216,238,36]}
+{"kind":"textbox","id":"sh/98321gbi","slide":9,"text":"频率 / 耗时 / 复杂 / 无工具","textPreview":"频率 / 耗时 / 复杂 / 无工具","textChars":18,"textLines":1,"bbox":[640,258,238,46]}
+{"kind":"textbox","id":"sh/8nu1sbux","slide":9,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[872,222,38,38]}
+{"kind":"textbox","id":"sh/zi10vmtg","slide":9,"text":"Q12","textPreview":"Q12","textChars":3,"textLines":1,"bbox":[919,182,58,28]}
+{"kind":"textbox","id":"sh/yhsjm1cv","slide":9,"text":"发生场景","textPreview":"发生场景","textChars":4,"textLines":1,"bbox":[919,216,238,36]}
+{"kind":"textbox","id":"sh/lk3ixwbm","slide":9,"text":"空间不足 / 大量整理 / 快速选片","textPreview":"空间不足 / 大量整理 / 快速选片","textChars":18,"textLines":1,"bbox":[919,258,238,46]}
+{"kind":"shape","id":"sh/kja1oru1","slide":9,"bbox":[82,326,1116,1]}
+{"kind":"textbox","id":"sh/je5k7qtk","slide":9,"text":"若结果组合出现……","textPreview":"若结果组合出现……","textChars":9,"textLines":1,"bbox":[82,346,250,28]}
+{"kind":"textbox","id":"sh/idwjylcf","slide":9,"text":"IF","textPreview":"IF","textChars":2,"textLines":1,"bbox":[82,386,44,30]}
+{"kind":"textbox","id":"sh/gnmpcj6l","slide":9,"text":"清理无用照片 + 步骤复杂 + 存储不足","textPreview":"清理无用照片 + 步骤复杂 + 存储不足","textChars":20,"textLines":1,"bbox":[132,386,420,38]}
+{"kind":"textbox","id":"sh/18fq5on6","slide":9,"text":"THEN","textPreview":"THEN","textChars":4,"textLines":1,"bbox":[578,386,66,30]}
+{"kind":"textbox","id":"sh/el47atof","slide":9,"text":"优先验证低步骤清理入口，而不是扩充 AI 效果库","textPreview":"优先验证低步骤清理入口，而不是扩充 AI 效果库","textChars":24,"textLines":1,"bbox":[654,386,520,38]}
+{"kind":"textbox","id":"sh/fmd83e50","slide":9,"text":"IF","textPreview":"IF","textChars":2,"textLines":1,"bbox":[82,452,44,30]}
+{"kind":"textbox","id":"sh/ob6pg36h","slide":9,"text":"误删/无法撤销 + 信任下降/放弃使用","textPreview":"误删/无法撤销 + 信任下降/放弃使用","textChars":19,"textLines":1,"bbox":[132,452,420,38]}
+{"kind":"textbox","id":"sh/pcfq98n2","slide":9,"text":"THEN","textPreview":"THEN","textChars":4,"textLines":1,"bbox":[578,452,66,30]}
+{"kind":"textbox","id":"sh/29o7etob","slide":9,"text":"PRD 必须增加候选预览、显式确认、回收站与恢复","textPreview":"PRD 必须增加候选预览、显式确认、回收站与恢复","textChars":24,"textLines":1,"bbox":[654,452,520,38]}
+{"kind":"textbox","id":"sh/3ax87y5w","slide":9,"text":"IF","textPreview":"IF","textChars":2,"textLines":1,"bbox":[82,518,44,30]}
+{"kind":"textbox","id":"sh/cfqpk36t","slide":9,"text":"识别不准 + 反复调整","textPreview":"识别不准 + 反复调整","textChars":11,"textLines":1,"bbox":[132,518,420,38]}
+{"kind":"textbox","id":"sh/dgzqd8ny","slide":9,"text":"THEN","textPreview":"THEN","textChars":4,"textLines":1,"bbox":[578,518,66,30]}
+{"kind":"textbox","id":"sh/xo7qt8re","slide":9,"text":"先定义候选误选率与可解释理由，再谈一键执行","textPreview":"先定义候选误选率与可解释理由，再谈一键执行","textChars":21,"textLines":1,"bbox":[654,518,520,38]}
+{"kind":"notes","id":"nt/2z4ljp","slide":9,"text":"建议用时：3 分钟\n这里一定说明：这些不是问卷结果，而是发放前写好的解释规则。预注册的好处是减少看到数据后随意讲故事。示例一：如果优先项是清理，原因是步骤复杂，场景是空间不足，才支持验证更短的清理链路。示例二：如果误删担忧直接造成信任下降，方案边界就必须改变。\n\n[Sources]\n- pm-user-research/用户调研/20260913手机图库AI功能需求/questionnaire.md；本页为基于题目结构设计的分析规则"}
+{"kind":"slide","id":"sl/g2fvnh","slide":10,"title":"三份交付物和结构门禁让问卷成为协作资产","textShapes":24}
+{"kind":"shape","id":"sh/oj2p4vet","slide":10,"name":"Subtitle 1","placeholder":"subtitle","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/9kb6d0vy","slide":10,"name":"Content Placeholder 2","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/q9g7u1wf","slide":10,"name":"TextBox 7","bbox":[594.27,-124.8,19.39,55.47]}
+{"kind":"shape","id":"sh/rapo36x0","slide":10,"name":"title-accent","bbox":[82,50,54,5]}
+{"kind":"textbox","id":"sh/7adwb2l8","slide":10,"name":"slide-title","text":"三份交付物和结构门禁让问卷成为协作资产","textPreview":"三份交付物和结构门禁让问卷成为协作资产","textChars":19,"textLines":1,"bbox":[82,62,1116,52]}
+{"kind":"textbox","id":"sh/694fixkn","slide":10,"name":"slide-lead","text":"同一 Markdown 事实源派生评审、平台配置和校验结果，减少版本漂移","textPreview":"同一 Markdown 事实源派生评审、平台配置和校验结果，减少版本漂移","textChars":36,"textLines":1,"bbox":[82,116,1116,32]}
+{"kind":"textbox","id":"sh/tcvedc3e","slide":10,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[82,184,44,24]}
+{"kind":"textbox","id":"sh/8bmxk72t","slide":10,"text":"questionnaire.md","textPreview":"questionnaire.md","textChars":16,"textLines":1,"bbox":[82,218,290,34]}
+{"kind":"textbox","id":"sh/vexwfmlk","slide":10,"text":"事实源","textPreview":"事实源","textChars":3,"textLines":1,"bbox":[82,258,290,26]}
+{"kind":"textbox","id":"sh/ud4fmhkz","slide":10,"text":"题目、选项、分支和配置注记","textPreview":"题目、选项、分支和配置注记","textChars":13,"textLines":1,"bbox":[82,294,290,70]}
+{"kind":"textbox","id":"sh/hgfehc3a","slide":10,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[374,248,30,40]}
+{"kind":"textbox","id":"sh/gf6xo72p","slide":10,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[408,184,44,24]}
+{"kind":"textbox","id":"sh/bitw3il0","slide":10,"text":"questionnaire-design.html","textPreview":"questionnaire-design.html","textChars":25,"textLines":1,"bbox":[408,218,290,34]}
+{"kind":"textbox","id":"sh/ahkvadkf","slide":10,"text":"评审版","textPreview":"评审版","textChars":3,"textLines":1,"bbox":[408,258,290,26]}
+{"kind":"textbox","id":"sh/exszil43","slide":10,"text":"研究目标、题目逻辑与可视化浏览","textPreview":"研究目标、题目逻辑与可视化浏览","textChars":15,"textLines":1,"bbox":[408,294,290,70]}
+{"kind":"textbox","id":"sh/fy10bq5o","slide":10,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[700,248,30,40]}
+{"kind":"textbox","id":"sh/0zahkvm9","slide":10,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[734,184,44,24]}
+{"kind":"textbox","id":"sh/10jid0nu","slide":10,"text":"questionnaire_for_userclub.txt","textPreview":"questionnaire_for_userclub.txt","textChars":30,"textLines":1,"bbox":[734,218,430,34]}
+{"kind":"textbox","id":"sh/q98zel47","slide":10,"text":"配置版","textPreview":"配置版","textChars":3,"textLines":1,"bbox":[734,258,290,26]}
+{"kind":"textbox","id":"sh/rah07q5s","slide":10,"text":"可直接交给问卷平台录入","textPreview":"可直接交给问卷平台录入","textChars":11,"textLines":1,"bbox":[734,294,290,70]}
+{"kind":"shape","id":"sh/sbqhgbmx","slide":10,"bbox":[82,404,1116,166]}
+{"kind":"textbox","id":"sh/dczi9gni","slide":10,"text":"真实结构检查","textPreview":"真实结构检查","textChars":6,"textLines":1,"bbox":[108,422,210,30]}
+{"kind":"textbox","id":"sh/i58za14v","slide":10,"text":"12","textPreview":"12","textChars":2,"textLines":1,"bbox":[108,458,150,62]}
+{"kind":"textbox","id":"sh/36h0365g","slide":10,"text":"题","textPreview":"题","textChars":1,"textLines":1,"bbox":[200,476,50,30]}
+{"kind":"textbox","id":"sh/5c7u58ba","slide":10,"text":"0","textPreview":"0","textChars":1,"textLines":1,"bbox":[354,458,120,62]}
+{"kind":"textbox","id":"sh/kbytw3ap","slide":10,"text":"结构风险信号","textPreview":"结构风险信号","textChars":6,"textLines":1,"bbox":[410,476,180,30]}
+{"kind":"textbox","id":"sh/japc3yt4","slide":10,"text":"PASS","textPreview":"PASS","textChars":4,"textLines":1,"bbox":[700,464,170,52]}
+{"kind":"textbox","id":"sh/y9gbutsj","slide":10,"text":"通过结构门禁","textPreview":"通过结构门禁","textChars":6,"textLines":1,"bbox":[862,476,230,30]}
+{"kind":"textbox","id":"sh/x8nu1obe","slide":10,"text":"注意：通过结构检查 ≠ 问卷已证明效度；仍需研究员复核、认知访谈和小样本试填。","textPreview":"注意：通过结构检查 ≠ 问卷已证明效度；仍需研究员复核、认知访谈和小样本试填。","textChars":39,"textLines":1,"bbox":[108,530,984,28]}
+{"kind":"notes","id":"nt/g2fvnh","slide":10,"text":"建议用时：2.5 分钟\n交付物不是三个各自维护的文档。questionnaire.md 是事实源，HTML 用于评审，UserClub 文本用于配置。脚本对真实问卷给出的结果是 12 题、0 个结构风险信号、通过。但我会明确说，Lint 只能检查可确定的结构问题，不能替代研究效度判断。\n\n[Sources]\n- pm-user-research/用户调研/20260913手机图库AI功能需求/questionnaire.md\n- pm-user-research/skills/ur-design-survey/scripts/lint_questionnaire.py"}
+{"kind":"slide","id":"sl/k2y30o","slide":11,"title":"Harness 在假洞察产生前暴露真实契约错误","textShapes":18}
+{"kind":"shape","id":"sh/98jm9w3a","slide":11,"name":"Subtitle 1","placeholder":"subtitle","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/87algr2p","slide":11,"name":"Content Placeholder 2","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/je14f61c","slide":11,"name":"TextBox 7","bbox":[594.27,-124.8,19.39,55.47]}
+{"kind":"shape","id":"sh/ids3m1kr","slide":11,"name":"title-accent","bbox":[82,50,54,5]}
+{"kind":"textbox","id":"sh/sni903qh","slide":11,"name":"slide-title","text":"Harness 在假洞察产生前暴露真实契约错误","textPreview":"Harness 在假洞察产生前暴露真实契约错误","textChars":23,"textLines":1,"bbox":[82,62,1116,52]}
+{"kind":"textbox","id":"sh/torq987m","slide":11,"name":"slide-lead","text":"合成调研的正确用途是试跑逻辑与管线，而不是制造看似精确的市场比例","textPreview":"合成调研的正确用途是试跑逻辑与管线，而不是制造看似精确的市场比例","textChars":32,"textLines":1,"bbox":[82,116,1116,32]}
+{"kind":"textbox","id":"sh/6l07yt8b","slide":11,"text":"43","textPreview":"43","textChars":2,"textLines":1,"bbox":[82,182,150,80]}
+{"kind":"textbox","id":"sh/rm987ypw","slide":11,"text":"项测试","textPreview":"项测试","textChars":3,"textLines":1,"bbox":[194,218,110,30]}
+{"kind":"textbox","id":"sh/4zipwjq5","slide":11,"text":"28","textPreview":"28","textChars":2,"textLines":1,"bbox":[332,182,130,80]}
+{"kind":"textbox","id":"sh/50rq5o7q","slide":11,"text":"通过","textPreview":"通过","textChars":2,"textLines":1,"bbox":[432,218,80,30]}
+{"kind":"textbox","id":"sh/ixg7ut8z","slide":11,"text":"15","textPreview":"15","textChars":2,"textLines":1,"bbox":[548,182,130,80]}
+{"kind":"textbox","id":"sh/jyp83e9k","slide":11,"text":"失败","textPreview":"失败","textChars":2,"textLines":1,"bbox":[648,218,80,30]}
+{"kind":"textbox","id":"sh/wvypsjq9","slide":11,"text":"不是模型答错，而是接口契约错","textPreview":"不是模型答错，而是接口契约错","textChars":14,"textLines":1,"bbox":[790,196,390,58]}
+{"kind":"shape","id":"sh/hw7q1oru","slide":11,"bbox":[82,286,1116,1]}
+{"kind":"textbox","id":"sh/xgfe9gf6","slide":11,"text":"测试要求","textPreview":"测试要求","textChars":4,"textLines":1,"bbox":[82,314,150,34]}
+{"kind":"textbox","id":"sh/cf6xgbel","slide":11,"text":"画像生成命令支持 sample-size / seed / group-quota","textPreview":"画像生成命令支持 sample-size / seed / group-quota","textChars":41,"textLines":1,"bbox":[246,314,930,42]}
+{"kind":"textbox","id":"sh/bexw76x0","slide":11,"text":"当前实现","textPreview":"当前实现","textChars":4,"textLines":1,"bbox":[82,380,150,34]}
+{"kind":"textbox","id":"sh/adofe1wv","slide":11,"text":"generate_personas.py 未接受这些参数；Windows 中文错误输出还出现乱码","textPreview":"generate_personas.py 未接受这些参数；Windows 中文错误输出还出现乱码","textChars":48,"textLines":1,"bbox":[246,380,930,42]}
+{"kind":"textbox","id":"sh/pcfe5wfa","slide":11,"text":"若无门禁","textPreview":"若无门禁","textChars":4,"textLines":1,"bbox":[82,446,150,34]}
+{"kind":"textbox","id":"sh/ob6xcrep","slide":11,"text":"样本配额不可复现，仍可能继续生成答卷和报告，形成“假稳定”","textPreview":"样本配额不可复现，仍可能继续生成答卷和报告，形成“假稳定”","textChars":29,"textLines":1,"bbox":[246,446,930,42]}
+{"kind":"textbox","id":"sh/naxw36x4","slide":11,"text":"修复顺序","textPreview":"修复顺序","textChars":4,"textLines":1,"bbox":[82,512,150,34]}
+{"kind":"textbox","id":"sh/294fa1wj","slide":11,"text":"先统一 CLI 与文件契约 → 再重跑画像 → 再允许模拟与报告","textPreview":"先统一 CLI 与文件契约 → 再重跑画像 → 再允许模拟与报告","textChars":32,"textLines":1,"bbox":[246,512,930,42]}
+{"kind":"shape","id":"sh/98zyh0fe","slide":11,"bbox":[82,584,1116,42]}
+{"kind":"textbox","id":"sh/87qxovet","slide":11,"text":"PM 价值：阻断错误样本进入“漂亮报告”，把返工从结论阶段提前到接口阶段。","textPreview":"PM 价值：阻断错误样本进入“漂亮报告”，把返工从结论阶段提前到接口阶段。","textChars":37,"textLines":1,"bbox":[100,590,1080,28]}
+{"kind":"notes","id":"nt/k2y30o","slide":11,"text":"建议用时：2.5 分钟\n这是最重要的失败案例。43 项测试里 15 项失败，原因不是内容质量，而是画像生成脚本没有实现测试规定的三个参数。若没有 Harness，系统可能继续往下生成答卷和报告，最终让团队讨论一份不可复现的结果。门禁在这里替 PM 做的是阻断，而不是润色。\n\n[Sources]\n- pm-user-research/tests/test_project.py\n- pm-user-research/skills/ur-generate-personas/scripts/generate_personas.py\n- 本地测试结果：43 tests / 28 pass / 15 fail"}
+{"kind":"slide","id":"sl/4kd8p5","slide":12,"title":"02","textShapes":4}
+{"kind":"shape","id":"sh/bmt8ruxo","slide":12,"name":"Text Placeholder 1","placeholder":"body","bbox":[108.52,193.5,1054.67,316.4]}
+{"kind":"shape","id":"sh/alk7ipw3","slide":12,"name":"section-number-backdrop","bbox":[108,190,180,108]}
+{"kind":"textbox","id":"sh/9kbqpkfi","slide":12,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[108,190,180,108]}
+{"kind":"shape","id":"sh/oj2pgfex","slide":12,"bbox":[108,320,62,5]}
+{"kind":"textbox","id":"sh/nyt8naxc","slide":12,"text":"产品方案：把自然语言能力收敛成可控决策","textPreview":"产品方案：把自然语言能力收敛成可控决策","textChars":19,"textLines":1,"bbox":[108,342,980,72]}
+{"kind":"textbox","id":"sh/mxk7e5wr","slide":12,"text":"真实案例：鸿蒙图库“一句话清理图片”｜竞品证据 × PRD × 原型 × 阶段门","textPreview":"真实案例：鸿蒙图库“一句话清理图片”｜竞品证据 × PRD × 原型 × 阶段门","textChars":40,"textLines":1,"bbox":[108,430,940,66]}
+{"kind":"textbox","id":"sh/tgfq14fm","slide":12,"text":"CASE 02 / PRODUCT DECISION","textPreview":"CASE 02 / PRODUCT DECISION","textChars":26,"textLines":1,"bbox":[1050,578,120,24]}
+{"kind":"notes","id":"nt/4kd8p5","slide":12,"text":"建议用时：0.5 分钟\n第二部分换一个视角：Agent 不只是加速研究，它也能帮助产品经理把一句卖点拆成责任边界、风险等级、异常状态和退出条件。\n\n[Sources]\n- workspace/鸿蒙图库_一句话清理图片_产品方案决策汇报.pptx"}
+{"kind":"slide","id":"sl/rxof0m","slide":13,"title":"一句话删除被重构为责任可控的自动化决策","textShapes":8}
+{"kind":"shape","id":"sh/tofaxgbm","slide":13,"name":"Subtitle 1","placeholder":"subtitle","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/8n694ba1","slide":13,"name":"Content Placeholder 2","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/butsnmt8","slide":13,"name":"TextBox 7","bbox":[594.27,-124.8,19.39,55.47]}
+{"kind":"shape","id":"sh/atkruhcn","slide":13,"name":"title-accent","bbox":[82,50,54,5]}
+{"kind":"textbox","id":"sh/0nm9cze1","slide":13,"name":"slide-title","text":"一句话删除被重构为责任可控的自动化决策","textPreview":"一句话删除被重构为责任可控的自动化决策","textChars":19,"textLines":1,"bbox":[82,62,1116,52]}
+{"kind":"textbox","id":"sh/lovql4vm","slide":13,"name":"slide-lead","text":"系统负责生成可解释候选，用户保留最终删除责任，并获得恢复兜底","textPreview":"系统负责生成可解释候选，用户保留最终删除责任，并获得恢复兜底","textChars":30,"textLines":1,"bbox":[82,116,1116,32]}
+{"kind":"textbox","id":"sh/yl4rapwv","slide":13,"text":"原始卖点","textPreview":"原始卖点","textChars":4,"textLines":1,"bbox":[82,180,180,28]}
+{"kind":"textbox","id":"sh/zmd8judg","slide":13,"text":"“说完即完成”","textPreview":"“说完即完成”","textChars":7,"textLines":1,"bbox":[82,218,340,50]}
+{"kind":"textbox","id":"sh/cjm98fe5","slide":13,"text":"自然语言一旦缺少对象、条件或范围，效率优势就会放大成误删责任。","textPreview":"自然语言一旦缺少对象、条件或范围，效率优势就会放大成误删责任。","textChars":31,"textLines":1,"bbox":[82,282,350,82]}
+{"kind":"textbox","id":"sh/dkvqhkvq","slide":13,"text":"产品决策","textPreview":"产品决策","textChars":4,"textLines":1,"bbox":[82,390,180,28]}
+{"kind":"textbox","id":"sh/qhkr6pwz","slide":13,"text":"搜索 → 解释预览\n→ 显式确认 → 可撤销执行","textPreview":"搜索 → 解释预览 | → 显式确认 → 可撤销执行","textChars":24,"textLines":2,"bbox":[82,428,350,92]}
+{"kind":"shape","id":"sh/bit8fadk","slide":13,"bbox":[82,548,350,58]}
+{"kind":"textbox","id":"sh/wf69kju9","slide":13,"text":"只批准方向与验证资源，不批准工程立项","textPreview":"只批准方向与验证资源，不批准工程立项","textChars":18,"textLines":1,"bbox":[98,556,318,42]}
+{"kind":"shape","id":"sh/xgfadovu","slide":13,"bbox":[468,176,730,420]}
+{"kind":"image","id":"im/6l0bqt0n","slide":13,"name":"","alt":"真实交付物：产品决策基础页","bbox":[480,188,706,396]}
+{"kind":"notes","id":"nt/rxof0m","slide":13,"text":"建议用时：3 分钟\n先展示真实交付物，而不是重讲整份方案。最关键的产品判断是：不做一句话直接删除。系统只承担可解释候选生成，最终删除仍需用户确认，并默认进入回收站。这样既保留效率价值，也限制了 AI 承担不了的责任。\n\n[Sources]\n- workspace/鸿蒙图库_一句话清理图片_产品方案决策汇报.pptx，第 2 页；其中机制与阈值为待验证产品假设"}
+{"kind":"slide","id":"sl/lu1k9d","slide":14,"title":"竞品结论必须先成为证据记录，才能进入 PRD","textShapes":26}
+{"kind":"shape","id":"sh/feh4zix0","slide":14,"name":"Subtitle 1","placeholder":"subtitle","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/ed8n6dgf","slide":14,"name":"Content Placeholder 2","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/58fmt8fi","slide":14,"name":"TextBox 7","bbox":[594.27,-124.8,19.39,55.47]}
+{"kind":"shape","id":"sh/476l03yx","slide":14,"name":"title-accent","bbox":[82,50,54,5]}
+{"kind":"textbox","id":"sh/2d8ruxgr","slide":14,"name":"slide-title","text":"竞品结论必须先成为证据记录，才能进入 PRD","textPreview":"竞品结论必须先成为证据记录，才能进入 PRD","textChars":22,"textLines":1,"bbox":[82,62,1116,52]}
+{"kind":"textbox","id":"sh/neh832xc","slide":14,"name":"slide-lead","text":"“没找到”不等于“不支持”；未知与冲突也必须作为正式结果交付","textPreview":"“没找到”不等于“不支持”；未知与冲突也必须作为正式结果交付","textChars":30,"textLines":1,"bbox":[82,116,1116,32]}
+{"kind":"textbox","id":"sh/ofa9w7yh","slide":14,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[82,180,44,24]}
+{"kind":"textbox","id":"sh/pgjq5cf2","slide":14,"text":"ResearchUnit","textPreview":"ResearchUnit","textChars":12,"textLines":1,"bbox":[82,214,240,34]}
+{"kind":"textbox","id":"sh/e98rqdgf","slide":14,"text":"竞品 × Feature","textPreview":"竞品 × Feature","textChars":12,"textLines":1,"bbox":[82,254,240,28]}
+{"kind":"textbox","id":"sh/fah8zix0","slide":14,"text":"例：某图库 × 重复照片清理","textPreview":"例：某图库 × 重复照片清理","textChars":14,"textLines":1,"bbox":[82,292,240,72]}
+{"kind":"textbox","id":"sh/0bq9snyl","slide":14,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[320,240,34,40]}
+{"kind":"textbox","id":"sh/1czq1sf6","slide":14,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[361,180,44,24]}
+{"kind":"textbox","id":"sh/qlormdgj","slide":14,"text":"EvidenceRecord","textPreview":"EvidenceRecord","textChars":14,"textLines":1,"bbox":[361,214,240,34]}
+{"kind":"textbox","id":"sh/rmx8vix4","slide":14,"text":"主张 + 来源 + 版本 + 地区","textPreview":"主张 + 来源 + 版本 + 地区","textChars":17,"textLines":1,"bbox":[361,254,240,28]}
+{"kind":"textbox","id":"sh/vqdonedw","slide":14,"text":"记录支持/反对方向与原文事实","textPreview":"记录支持/反对方向与原文事实","textChars":14,"textLines":1,"bbox":[361,292,240,72]}
+{"kind":"textbox","id":"sh/up4nu9wb","slide":14,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[599,240,34,40]}
+{"kind":"textbox","id":"sh/hsv6povm","slide":14,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[640,180,44,24]}
+{"kind":"textbox","id":"sh/wrm5wjeh","slide":14,"text":"Confidence","textPreview":"Confidence","textChars":10,"textLines":1,"bbox":[640,214,240,34]}
+{"kind":"textbox","id":"sh/3edoreds","slide":14,"text":"A / B / C","textPreview":"A / B / C","textChars":9,"textLines":1,"bbox":[640,254,240,28]}
+{"kind":"textbox","id":"sh/id4nytw7","slide":14,"text":"官方直接证据优先；间接证据降级","textPreview":"官方直接证据优先；间接证据降级","textChars":15,"textLines":1,"bbox":[640,292,240,72]}
+{"kind":"textbox","id":"sh/5gf6tovy","slide":14,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[878,240,34,40]}
+{"kind":"textbox","id":"sh/4fmp0jed","slide":14,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[919,180,44,24]}
+{"kind":"textbox","id":"sh/zitofudo","slide":14,"text":"Decision Input","textPreview":"Decision Input","textChars":14,"textLines":1,"bbox":[919,214,240,34]}
+{"kind":"textbox","id":"sh/yhknmpw3","slide":14,"text":"事实 / 推断 / 建议分栏","textPreview":"事实 / 推断 / 建议分栏","textChars":14,"textLines":1,"bbox":[919,254,240,28]}
+{"kind":"textbox","id":"sh/onylwvu1","slide":14,"text":"只有可追溯事实进入 PRD 基线","textPreview":"只有可追溯事实进入 PRD 基线","textChars":16,"textLines":1,"bbox":[919,292,240,72]}
+{"kind":"shape","id":"sh/po72p0bm","slide":14,"bbox":[82,392,1116,1]}
+{"kind":"textbox","id":"sh/21g3ulcv","slide":14,"text":"检索停止规则","textPreview":"检索停止规则","textChars":6,"textLines":1,"bbox":[82,414,200,30]}
+{"kind":"shape","id":"sh/n2pknqtg","slide":14,"bbox":[82,462,300,30]}
+{"kind":"textbox","id":"sh/0zylsbup","slide":14,"text":"Tier 1 当前版本直接证据","textPreview":"Tier 1 当前版本直接证据","textChars":15,"textLines":1,"bbox":[90,465,284,24]}
+{"kind":"shape","id":"sh/1072lgba","slide":14,"bbox":[408,462,334,30]}
+{"kind":"textbox","id":"sh/exw3qlcz","slide":14,"text":"两条独立 Tier 2/3 证据一致","textPreview":"两条独立 Tier 2/3 证据一致","textChars":18,"textLines":1,"bbox":[416,465,318,24]}
+{"kind":"shape","id":"sh/fypkj6t4","slide":14,"bbox":[768,462,360,30]}
+{"kind":"textbox","id":"sh/kvil4fu9","slide":14,"text":"达到上限仍冲突 → UNKNOWN","textPreview":"达到上限仍冲突 → UNKNOWN","textChars":17,"textLines":1,"bbox":[776,465,344,24]}
+{"kind":"textbox","id":"sh/lwrmxkbe","slide":14,"text":"案例中的价值：若竞品撤销期限、端侧处理或人物语义没有直接证据，就不能被写成行业基线；它只能进入待核验清单。","textPreview":"案例中的价值：若竞品撤销期限、端侧处理或人物语义没有直接证据，就不能被写成行业基线；它只能进入待核验清单。","textChars":53,"textLines":1,"bbox":[82,532,1116,66]}
+{"kind":"notes","id":"nt/lu1k9d","slide":14,"text":"建议用时：3 分钟\n竞品分析最危险的不是漏一个功能，而是把搜索不到写成对方不支持，或把旧版本、其他地区的能力当成当前基线。Skill 把每个竞品和 Feature 变成 ResearchUnit，再要求 EvidenceRecord 记录来源、版本、地区、支持方向和置信度。未知就是未知，不强行填满矩阵。\n\n[Sources]\n- pm-competitor-analysis/pm-system-app-competitor-matrix/SKILL.md\n- pm-competitor-analysis/pm-system-app-competitor-matrix/references/research-evidence.md"}
+{"kind":"slide","id":"sl/a3sjf6","slide":15,"title":"风险分层让六类请求收敛为低歧义 MVP","textShapes":13}
+{"kind":"shape","id":"sh/2xo7e147","slide":15,"name":"Subtitle 1","placeholder":"subtitle","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/nyh8n6ls","slide":15,"name":"Content Placeholder 2","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/k7a9ovml","slide":15,"name":"TextBox 7","bbox":[594.27,-124.8,19.39,55.47]}
+{"kind":"shape","id":"sh/l8jqxg36","slide":15,"name":"title-accent","bbox":[82,50,54,5]}
+{"kind":"textbox","id":"sh/pcjedorq","slide":15,"name":"slide-title","text":"风险分层让六类请求收敛为低歧义 MVP","textPreview":"风险分层让六类请求收敛为低歧义 MVP","textChars":19,"textLines":1,"bbox":[82,62,1116,52]}
+{"kind":"textbox","id":"sh/obad4jq5","slide":15,"name":"slide-lead","text":"功能范围不按“能不能识别”划分，而按误删后果、可解释性和可恢复性划分","textPreview":"功能范围不按“能不能识别”划分，而按误删后果、可解释性和可恢复性划分","textChars":34,"textLines":1,"bbox":[82,116,1116,32]}
+{"kind":"shape","id":"sh/3a1wbe9k","slide":15,"bbox":[82,184,1116,94]}
+{"kind":"textbox","id":"sh/29sv298z","slide":15,"text":"低风险：进入确认执行","textPreview":"低风险：进入确认执行","textChars":10,"textLines":1,"bbox":[104,198,286,30]}
+{"kind":"textbox","id":"sh/18je94ru","slide":15,"text":"时间 / 明确类型","textPreview":"时间 / 明确类型","textChars":9,"textLines":1,"bbox":[420,198,250,30]}
+{"kind":"textbox","id":"sh/g7ad0zq9","slide":15,"text":"删除上个月截图｜清理明确重复组","textPreview":"删除上个月截图｜清理明确重复组","textChars":15,"textLines":1,"bbox":[690,196,484,52]}
+{"kind":"shape","id":"sh/f6hw7u9o","slide":15,"bbox":[82,302,1116,94]}
+{"kind":"textbox","id":"sh/e58vyps3","slide":15,"text":"中风险：解释后确认","textPreview":"中风险：解释后确认","textChars":9,"textLines":1,"bbox":[104,316,286,30]}
+{"kind":"textbox","id":"sh/l43el8ry","slide":15,"text":"质量 / 组合条件","textPreview":"质量 / 组合条件","textChars":9,"textLines":1,"bbox":[420,316,250,30]}
+{"kind":"textbox","id":"sh/03uxc3qd","slide":15,"text":"模糊判定需说明理由｜候选集过大需二次缩小","textPreview":"模糊判定需说明理由｜候选集过大需二次缩小","textChars":20,"textLines":1,"bbox":[690,314,484,52]}
+{"kind":"shape","id":"sh/4jmp4b2l","slide":15,"bbox":[82,420,1116,94]}
+{"kind":"textbox","id":"sh/5kv6xw36","slide":15,"text":"高风险：仅筛选不删除","textPreview":"高风险：仅筛选不删除","textChars":10,"textLines":1,"bbox":[104,434,286,30]}
+{"kind":"textbox","id":"sh/ih4721kv","slide":15,"text":"人物 / 票据 / 私密 / 事件","textPreview":"人物 / 票据 / 私密 / 事件","textChars":17,"textLines":1,"bbox":[420,434,250,30]}
+{"kind":"textbox","id":"sh/jidov6lg","slide":15,"text":"不提供一句话直接执行；提示降级原因","textPreview":"不提供一句话直接执行；提示降级原因","textChars":17,"textLines":1,"bbox":[690,432,484,52]}
+{"kind":"textbox","id":"sh/wf2p0r2p","slide":15,"text":"砍掉的不是能力，而是未经验证的执行权","textPreview":"砍掉的不是能力，而是未经验证的执行权","textChars":18,"textLines":1,"bbox":[82,560,560,38]}
+{"kind":"textbox","id":"sh/hgv6tw3a","slide":15,"text":"MVP 先验证用户能否理解候选范围，再决定是否扩大自动化。","textPreview":"MVP 先验证用户能否理解候选范围，再决定是否扩大自动化。","textChars":29,"textLines":1,"bbox":[658,562,520,34]}
+{"kind":"notes","id":"nt/a3sjf6","slide":15,"text":"建议用时：3 分钟\n这一页要讲具体砍法。六类自然语言请求并不是都放进 MVP：时间和明确类型可进入预览确认；模糊、重复等质量语义必须解释理由；人物、票据、私密和事件语义只返回筛选结果。产品经理真正增加的不是功能数，而是对执行权的分层。\n\n[Sources]\n- workspace/鸿蒙图库_一句话清理图片_产品方案决策汇报.pptx，第 3、6、8 页；属于待验证范围设计"}
+{"kind":"slide","id":"sl/h7cepr","slide":16,"title":"PRD 是证据、规则、状态与验收的决策账本","textShapes":23}
+{"kind":"shape","id":"sh/8futorex","slide":16,"name":"Subtitle 1","placeholder":"subtitle","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/tg3ahwfi","slide":16,"name":"Content Placeholder 2","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/ilcbu1wz","slide":16,"name":"TextBox 7","bbox":[594.27,-124.8,19.39,55.47]}
+{"kind":"shape","id":"sh/3m5cn6dk","slide":16,"name":"title-accent","bbox":[82,50,54,5]}
+{"kind":"textbox","id":"sh/72dsvahg","slide":16,"name":"slide-title","text":"PRD 是证据、规则、状态与验收的决策账本","textPreview":"PRD 是证据、规则、状态与验收的决策账本","textChars":21,"textLines":1,"bbox":[82,62,1116,52]}
+{"kind":"textbox","id":"sh/614rm5gv","slide":16,"name":"slide-lead","text":"每条需求都能追溯到风险假设，并明确异常状态与可观察验收","textPreview":"每条需求都能追溯到风险假设，并明确异常状态与可观察验收","textChars":27,"textLines":1,"bbox":[82,116,1116,32]}
+{"kind":"shape","id":"sh/t4faxkz6","slide":16,"bbox":[82,176,250,44]}
+{"kind":"textbox","id":"sh/83m9ofyl","slide":16,"text":"证据 / 假设","textPreview":"证据 / 假设","textChars":7,"textLines":1,"bbox":[94,184,226,28]}
+{"kind":"shape","id":"sh/jydsrqh4","slide":16,"bbox":[332,176,286,44]}
+{"kind":"textbox","id":"sh/yx4ri50j","slide":16,"text":"产品规则","textPreview":"产品规则","textChars":4,"textLines":1,"bbox":[344,184,262,28]}
+{"kind":"shape","id":"sh/l0vat0za","slide":16,"bbox":[618,176,250,44]}
+{"kind":"textbox","id":"sh/kzm9kvyp","slide":16,"text":"状态与异常","textPreview":"状态与异常","textChars":5,"textLines":1,"bbox":[630,184,226,28]}
+{"kind":"shape","id":"sh/3uxs3uh8","slide":16,"bbox":[868,176,330,44]}
+{"kind":"textbox","id":"sh/itobupg3","slide":16,"text":"验收口径","textPreview":"验收口径","textChars":4,"textLines":1,"bbox":[880,184,306,28]}
+{"kind":"shape","id":"sh/y1c3ix47","slide":16,"bbox":[82,220,250,84]}
+{"kind":"textbox","id":"sh/z2l4bi5s","slide":16,"text":"自然语言缺少对象/条件/范围","textPreview":"自然语言缺少对象/条件/范围","textChars":14,"textLines":1,"bbox":[94,230,226,64]}
+{"kind":"shape","id":"sh/03ulknmd","slide":16,"bbox":[332,220,286,84]}
+{"kind":"textbox","id":"sh/l43mdsny","slide":16,"text":"缺失项必须追问，不自动补全删除范围","textPreview":"缺失项必须追问，不自动补全删除范围","textChars":17,"textLines":1,"bbox":[344,230,262,64]}
+{"kind":"shape","id":"sh/m5c3mx4j","slide":16,"bbox":[618,220,250,84]}
+{"kind":"textbox","id":"sh/n6l4f254","slide":16,"text":"解析不完整","textPreview":"解析不完整","textChars":5,"textLines":1,"bbox":[630,230,226,64]}
+{"kind":"shape","id":"sh/87ulo7mp","slide":16,"bbox":[868,220,330,84]}
+{"kind":"textbox","id":"sh/98nmhcnu","slide":16,"text":"任何异常分支不绕过确认","textPreview":"任何异常分支不绕过确认","textChars":11,"textLines":1,"bbox":[880,230,306,64]}
+{"kind":"shape","id":"sh/29s3adoz","slide":16,"bbox":[82,304,250,84]}
+{"kind":"textbox","id":"sh/3a143y5k","slide":16,"text":"用户难以核对系统选择","textPreview":"用户难以核对系统选择","textChars":10,"textLines":1,"bbox":[94,314,226,64]}
+{"kind":"shape","id":"sh/5o769g72","slide":16,"bbox":[332,304,286,84]}
+{"kind":"textbox","id":"sh/knypgb6x","slide":16,"text":"预览展示原词、条件、数量、分组与命中理由","textPreview":"预览展示原词、条件、数量、分组与命中理由","textChars":20,"textLines":1,"bbox":[344,314,262,64]}
+{"kind":"shape","id":"sh/j2po76pc","slide":16,"bbox":[618,304,250,84]}
+{"kind":"textbox","id":"sh/i1g7e1or","slide":16,"text":"正常 / 候选过大","textPreview":"正常 / 候选过大","textChars":9,"textLines":1,"bbox":[630,314,226,64]}
+{"kind":"shape","id":"sh/tsr6dg7e","slide":16,"bbox":[868,304,330,84]}
+{"kind":"textbox","id":"sh/sripkb6t","slide":16,"text":"执行前用户可复述选择范围","textPreview":"执行前用户可复述选择范围","textChars":12,"textLines":1,"bbox":[880,314,306,64]}
+{"kind":"shape","id":"sh/7qpob6p8","slide":16,"bbox":[82,388,250,84]}
+{"kind":"textbox","id":"sh/6pg7ilon","slide":16,"text":"删除后果高且可能误选","textPreview":"删除后果高且可能误选","textChars":10,"textLines":1,"bbox":[94,398,226,64]}
+{"kind":"shape","id":"sh/9wn61w7a","slide":16,"bbox":[332,388,286,84]}
+{"kind":"textbox","id":"sh/8ve58r6p","slide":16,"text":"显式确认；默认进入回收站；保留稳定恢复入口","textPreview":"显式确认；默认进入回收站；保留稳定恢复入口","textChars":21,"textLines":1,"bbox":[344,398,262,64]}
+{"kind":"shape","id":"sh/crm9gzqx","slide":16,"bbox":[618,388,250,84]}
+{"kind":"textbox","id":"sh/dsva94ri","slide":16,"text":"确认 / 执行 / 撤销","textPreview":"确认 / 执行 / 撤销","textChars":12,"textLines":1,"bbox":[630,398,226,64]}
+{"kind":"shape","id":"sh/qpkrep87","slide":16,"bbox":[868,388,330,84]}
+{"kind":"textbox","id":"sh/rqts7u9s","slide":16,"text":"执行后可在稳定入口恢复","textPreview":"执行后可在稳定入口恢复","textChars":11,"textLines":1,"bbox":[880,398,306,64]}
+{"kind":"shape","id":"sh/4n29cfq1","slide":16,"bbox":[82,472,250,84]}
+{"kind":"textbox","id":"sh/poba5krm","slide":16,"text":"人物、票据等敏感对象","textPreview":"人物、票据等敏感对象","textChars":10,"textLines":1,"bbox":[94,482,226,64]}
+{"kind":"shape","id":"sh/2lkra58v","slide":16,"bbox":[332,472,286,84]}
+{"kind":"textbox","id":"sh/3mts3a9g","slide":16,"text":"高风险请求降级为筛选，不出现执行按钮","textPreview":"高风险请求降级为筛选，不出现执行按钮","textChars":18,"textLines":1,"bbox":[344,482,262,64]}
+{"kind":"shape","id":"sh/gj298fq5","slide":16,"bbox":[618,472,250,84]}
+{"kind":"textbox","id":"sh/hkba1kra","slide":16,"text":"高风险降级","textPreview":"高风险降级","textChars":5,"textLines":1,"bbox":[630,482,226,64]}
+{"kind":"shape","id":"sh/ju9sratc","slide":16,"bbox":[868,472,330,84]}
+{"kind":"textbox","id":"sh/it0bi5cr","slide":16,"text":"不得以高置信度跳过确认","textPreview":"不得以高置信度跳过确认","textChars":11,"textLines":1,"bbox":[880,482,306,64]}
+{"kind":"textbox","id":"sh/5grat0bi","slide":16,"text":"这张账本让用研、体验、算法、工程和隐私评审讨论同一条可验证链路。","textPreview":"这张账本让用研、体验、算法、工程和隐私评审讨论同一条可验证链路。","textChars":32,"textLines":1,"bbox":[82,572,1116,34]}
+{"kind":"notes","id":"nt/h7cepr","slide":16,"text":"建议用时：3 分钟\n这就是我希望 AI 帮忙生成的 PRD 核心，不是更多页面描述，而是一张 Requirement Ledger。每行从证据或风险假设出发，落到产品规则、状态异常和可观察验收。例如解析不完整时必须追问；高风险对象没有删除按钮；任何异常都不能绕过确认。\n\n[Sources]\n- workspace/鸿蒙图库_一句话清理图片_产品方案决策汇报.pptx，第 4、5、6 页；本页为可追踪 PRD 账本重构"}
+{"kind":"slide","id":"sl/lseuba","slide":17,"title":"原型必须覆盖系统理解、执行后果与恢复入口","textShapes":29}
+{"kind":"shape","id":"sh/ra1kna1g","slide":17,"name":"Subtitle 1","placeholder":"subtitle","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/69sju50v","slide":17,"name":"Content Placeholder 2","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/p4n2x4je","slide":17,"name":"TextBox 7","bbox":[594.27,-124.8,19.39,55.47]}
+{"kind":"shape","id":"sh/o3el4zi9","slide":17,"name":"title-accent","bbox":[82,50,54,5]}
+{"kind":"textbox","id":"sh/u1g3yxwb","slide":17,"name":"slide-title","text":"原型必须覆盖系统理解、执行后果与恢复入口","textPreview":"原型必须覆盖系统理解、执行后果与恢复入口","textChars":20,"textLines":1,"bbox":[82,62,1116,52]}
+{"kind":"textbox","id":"sh/f2pkr2dw","slide":17,"name":"slide-lead","text":"正常主链路只是 1 个状态；真正决定可信度的是异常如何降级","textPreview":"正常主链路只是 1 个状态；真正决定可信度的是异常如何降级","textChars":29,"textLines":1,"bbox":[82,116,1116,32]}
+{"kind":"shape","id":"sh/g3yl0neh","slide":17,"bbox":[82,188,154,96]}
+{"kind":"textbox","id":"sh/h472tsvm","slide":17,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[94,198,36,20]}
+{"kind":"textbox","id":"sh/6dw3udwz","slide":17,"text":"输入意图","textPreview":"输入意图","textChars":4,"textLines":1,"bbox":[94,226,130,38]}
+{"kind":"textbox","id":"sh/7ypknixk","slide":17,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[236,214,32,42]}
+{"kind":"shape","id":"sh/szylwne5","slide":17,"bbox":[268,188,154,96]}
+{"kind":"textbox","id":"sh/t072psfq","slide":17,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[280,198,36,20]}
+{"kind":"textbox","id":"sh/q9036hwj","slide":17,"text":"结构化解析","textPreview":"结构化解析","textChars":5,"textLines":1,"bbox":[280,226,130,38]}
+{"kind":"textbox","id":"sh/ru9kzmd4","slide":17,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[422,214,32,42]}
+{"kind":"shape","id":"sh/ne10redg","slide":17,"bbox":[454,188,154,96]}
+{"kind":"textbox","id":"sh/mdszy9cv","slide":17,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[466,198,36,20]}
+{"kind":"textbox","id":"sh/9g3it4vm","slide":17,"text":"检索候选","textPreview":"检索候选","textChars":4,"textLines":1,"bbox":[466,226,130,38]}
+{"kind":"textbox","id":"sh/ofuh0ju1","slide":17,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[608,214,32,42]}
+{"kind":"shape","id":"sh/bil0vedc","slide":17,"bbox":[640,188,154,96]}
+{"kind":"textbox","id":"sh/ahcz29cr","slide":17,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[652,198,36,20]}
+{"kind":"textbox","id":"sh/x43ixobi","slide":17,"text":"解释预览","textPreview":"解释预览","textChars":4,"textLines":1,"bbox":[652,226,130,38]}
+{"kind":"textbox","id":"sh/wjuh4jux","slide":17,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[794,214,32,42]}
+{"kind":"shape","id":"sh/j6l0zyto","slide":17,"bbox":[826,188,154,96]}
+{"kind":"textbox","id":"sh/i5cz6tc3","slide":17,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[838,198,36,20]}
+{"kind":"textbox","id":"sh/gbehg3a1","slide":17,"text":"显式确认","textPreview":"显式确认","textChars":4,"textLines":1,"bbox":[838,226,130,38]}
+{"kind":"textbox","id":"sh/hcnyp8rm","slide":17,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[980,214,32,42]}
+{"kind":"shape","id":"sh/u9wzetsb","slide":17,"bbox":[1012,188,154,96]}
+{"kind":"textbox","id":"sh/fa5gny9w","slide":17,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1024,198,36,20]}
+{"kind":"textbox","id":"sh/s7ehcja5","slide":17,"text":"执行与撤销","textPreview":"执行与撤销","textChars":5,"textLines":1,"bbox":[1024,226,130,38]}
+{"kind":"textbox","id":"sh/t8nylorq","slide":17,"text":"原型必须单独画出的 4 类状态","textPreview":"原型必须单独画出的 4 类状态","textChars":15,"textLines":1,"bbox":[82,326,320,30]}
+{"kind":"shape","id":"sh/6lcza9sz","slide":17,"bbox":[82,372,530,68]}
+{"kind":"textbox","id":"sh/765gje9k","slide":17,"text":"解析不完整","textPreview":"解析不完整","textChars":5,"textLines":1,"bbox":[98,382,150,26]}
+{"kind":"textbox","id":"sh/kjuh8jat","slide":17,"text":"返回可选条件，不擅自补全范围","textPreview":"返回可选条件，不擅自补全范围","textChars":14,"textLines":1,"bbox":[256,380,340,48]}
+{"kind":"shape","id":"sh/5k3yhore","slide":17,"bbox":[640,372,530,68]}
+{"kind":"textbox","id":"sh/pczmtg3a","slide":17,"text":"候选集过大","textPreview":"候选集过大","textChars":5,"textLines":1,"bbox":[656,382,150,26]}
+{"kind":"textbox","id":"sh/obq50bmp","slide":17,"text":"按时间/来源/类型分组，要求二次缩小","textPreview":"按时间/来源/类型分组，要求二次缩小","textChars":18,"textLines":1,"bbox":[814,380,340,48]}
+{"kind":"shape","id":"sh/nah4r6l4","slide":17,"bbox":[82,460,530,68]}
+{"kind":"textbox","id":"sh/29ony14j","slide":17,"text":"高风险对象","textPreview":"高风险对象","textChars":5,"textLines":1,"bbox":[98,470,150,26]}
+{"kind":"textbox","id":"sh/xgzmx036","slide":17,"text":"仅提供筛选，并解释为什么不能直接执行","textPreview":"仅提供筛选，并解释为什么不能直接执行","textChars":18,"textLines":1,"bbox":[256,468,340,48]}
+{"kind":"shape","id":"sh/cfq54vml","slide":17,"bbox":[640,460,530,68]}
+{"kind":"textbox","id":"sh/beh4vql0","slide":17,"text":"执行失败/需恢复","textPreview":"执行失败/需恢复","textChars":8,"textLines":1,"bbox":[656,470,150,26]}
+{"kind":"textbox","id":"sh/ad8n2l4f","slide":17,"text":"展示结果、回收站期限和稳定恢复入口","textPreview":"展示结果、回收站期限和稳定恢复入口","textChars":17,"textLines":1,"bbox":[814,468,340,48]}
+{"kind":"textbox","id":"sh/dkfmlw32","slide":17,"text":"原型测试的不是“看起来顺不顺”，而是用户能否解释范围、排除误选、理解降级并找到恢复。","textPreview":"原型测试的不是“看起来顺不顺”，而是用户能否解释范围、排除误选、理解降级并找到恢复。","textChars":42,"textLines":1,"bbox":[82,570,1116,38]}
+{"kind":"notes","id":"nt/lseuba","slide":17,"text":"建议用时：3 分钟\n讲原型时不要只放高保真图。原型的任务是把不确定性显性化：系统理解了什么、候选为什么被选中、执行会发生什么、失败后如何恢复。至少要画四类异常状态，并用任务测试验证用户能否复述范围、排除误选、理解降级、找到恢复。\n\n[Sources]\n- workspace/鸿蒙图库_一句话清理图片_产品方案决策汇报.pptx，第 4 页；本页为原型状态测试清单"}
+{"kind":"slide","id":"sl/h94zqo","slide":18,"title":"阶段门只批准下一步，阻止过早工程承诺","textShapes":12}
+{"kind":"shape","id":"sh/q9cnmlc3","slide":18,"name":"Subtitle 1","placeholder":"subtitle","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/ba54vqdo","slide":18,"name":"Content Placeholder 2","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/8jy5wfuh","slide":18,"name":"TextBox 7","bbox":[594.27,-124.8,19.39,55.47]}
+{"kind":"shape","id":"sh/9k765kv2","slide":18,"name":"title-accent","bbox":[82,50,54,5]}
+{"kind":"textbox","id":"sh/l8jq1wny","slide":18,"name":"slide-title","text":"阶段门只批准下一步，阻止过早工程承诺","textPreview":"阶段门只批准下一步，阻止过早工程承诺","textChars":18,"textLines":1,"bbox":[82,62,1116,52]}
+{"kind":"textbox","id":"sh/knap8rmd","slide":18,"name":"slide-lead","text":"方向、可用性、技术与隐私分别过门；任一红线失败即停止立项","textPreview":"方向、可用性、技术与隐私分别过门；任一红线失败即停止立项","textChars":28,"textLines":1,"bbox":[82,116,1116,32]}
+{"kind":"shape","id":"sh/zm18zm58","slide":18,"bbox":[82,178,690,390]}
+{"kind":"textbox","id":"sh/xkzqxcn2","slide":18,"text":"P0 方案冻结","textPreview":"P0 方案冻结","textChars":7,"textLines":1,"bbox":[806,184,356,28]}
+{"kind":"textbox","id":"sh/cjqp47mh","slide":18,"text":"交互原型 / 意图词表 / 风险分级","textPreview":"交互原型 / 意图词表 / 风险分级","textChars":18,"textLines":1,"bbox":[806,216,356,38]}
+{"kind":"textbox","id":"sh/bih8v25w","slide":18,"text":"P1 可用性验证","textPreview":"P1 可用性验证","textChars":8,"textLines":1,"bbox":[806,266,356,28]}
+{"kind":"textbox","id":"sh/ah872h4b","slide":18,"text":"任务脚本 / 理解偏差 / 口径达标","textPreview":"任务脚本 / 理解偏差 / 口径达标","textChars":18,"textLines":1,"bbox":[806,298,356,38]}
+{"kind":"textbox","id":"sh/hg3q9g36","slide":18,"text":"P2 技术预研","textPreview":"P2 技术预研","textChars":7,"textLines":1,"bbox":[806,348,356,28]}
+{"kind":"textbox","id":"sh/wfu9gbml","slide":18,"text":"端侧样机 / 索引能力 / 隐私红线","textPreview":"端侧样机 / 索引能力 / 隐私红线","textChars":18,"textLines":1,"bbox":[806,380,356,38]}
+{"kind":"textbox","id":"sh/0vm1sjy9","slide":18,"text":"P3 工程立项","textPreview":"P3 工程立项","textChars":7,"textLines":1,"bbox":[806,430,356,28]}
+{"kind":"textbox","id":"sh/1wv214fu","slide":18,"text":"MVP / 灰度 / 监控 / 回滚","textPreview":"MVP / 灰度 / 监控 / 回滚","textChars":18,"textLines":1,"bbox":[806,462,356,38]}
+{"kind":"shape","id":"sh/etkjq9g3","slide":18,"bbox":[806,526,356,74]}
+{"kind":"textbox","id":"sh/fudkzexo","slide":18,"text":"退出条件","textPreview":"退出条件","textChars":4,"textLines":1,"bbox":[824,536,92,24]}
+{"kind":"textbox","id":"sh/sr21ozyx","slide":18,"text":"误选不可控 / 不可理解 / 性能不达标 / 隐私不过线","textPreview":"误选不可控 / 不可理解 / 性能不达标 / 隐私不过线","textChars":28,"textLines":1,"bbox":[824,562,318,28]}
+{"kind":"image","id":"im/lwja9sbq","slide":18,"name":"","alt":"真实交付物：分阶段验证与退出条件","bbox":[94,190,666,366]}
+{"kind":"notes","id":"nt/h94zqo","slide":18,"text":"建议用时：2.5 分钟\n这页体现方案汇报的产品价值：本次不是批准完整开发，而是批准下一阶段资源。P0 输出可评审，P1 验证用户是否理解，P2 验证端侧和隐私，只有都通过才进 P3。退出条件必须提前写：误选不可控、无法理解、性能不达标或隐私不过线时停止立项。\n\n[Sources]\n- workspace/鸿蒙图库_一句话清理图片_产品方案决策汇报.pptx，第 11 页；阶段门为方案建议"}
+{"kind":"slide","id":"sl/jnbhnd","slide":19,"title":"Skill 要通过契约、资源、校验与评估才可复用","textShapes":26}
+{"kind":"shape","id":"sh/5wbex4b6","slide":19,"name":"Subtitle 1","placeholder":"subtitle","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/4v2dozul","slide":19,"name":"Content Placeholder 2","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/729cnat8","slide":19,"name":"TextBox 7","bbox":[594.27,-124.8,19.39,55.47]}
+{"kind":"shape","id":"sh/610ve5cn","slide":19,"name":"title-accent","bbox":[82,50,54,5]}
+{"kind":"textbox","id":"sh/cr21476h","slide":19,"name":"slide-title","text":"Skill 要通过契约、资源、校验与评估才可复用","textPreview":"Skill 要通过契约、资源、校验与评估才可复用","textChars":24,"textLines":1,"bbox":[82,62,1116,52]}
+{"kind":"textbox","id":"sh/xsb2xcn2","slide":19,"name":"slide-lead","text":"不是把长提示词保存起来，而是把判断方法拆成可维护的系统","textPreview":"不是把长提示词保存起来，而是把判断方法拆成可维护的系统","textChars":27,"textLines":1,"bbox":[82,116,1116,32]}
+{"kind":"shape","id":"sh/apkj2xob","slide":19,"bbox":[82,180,132,62]}
+{"kind":"textbox","id":"sh/bqtkv25w","slide":19,"text":"一次性提示词","textPreview":"一次性提示词","textChars":6,"textLines":1,"bbox":[90,190,116,42]}
+{"kind":"textbox","id":"sh/kfm1876d","slide":19,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[214,192,26,38]}
+{"kind":"shape","id":"sh/lgv21cny","slide":19,"bbox":[240,180,132,62]}
+{"kind":"textbox","id":"sh/ytkj6ho7","slide":19,"text":"触发与输入契约","textPreview":"触发与输入契约","textChars":7,"textLines":1,"bbox":[248,190,116,42]}
+{"kind":"textbox","id":"sh/zedkzm5s","slide":19,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[372,192,26,38]}
+{"kind":"shape","id":"sh/0ji1wn69","slide":19,"bbox":[398,180,132,62]}
+{"kind":"textbox","id":"sh/1kripsnu","slide":19,"text":"步骤与停止条件","textPreview":"步骤与停止条件","textChars":7,"textLines":1,"bbox":[406,190,116,42]}
+{"kind":"textbox","id":"sh/h4zqdkb6","slide":19,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[530,192,26,38]}
+{"kind":"shape","id":"sh/w3qp4ful","slide":19,"bbox":[556,180,132,62]}
+{"kind":"textbox","id":"sh/v2h8bat0","slide":19,"text":"references / templates","textPreview":"references / templates","textChars":22,"textLines":1,"bbox":[564,190,116,42]}
+{"kind":"textbox","id":"sh/u18725cv","slide":19,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[688,192,26,38]}
+{"kind":"shape","id":"sh/58jqhkbi","slide":19,"bbox":[714,180,132,62]}
+{"kind":"textbox","id":"sh/47a98zux","slide":19,"text":"scripts 门禁","textPreview":"scripts 门禁","textChars":10,"textLines":1,"bbox":[722,190,116,42]}
+{"kind":"textbox","id":"sh/j618futc","slide":19,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[846,192,26,38]}
+{"kind":"shape","id":"sh/i5s76pcr","slide":19,"bbox":[872,180,132,62]}
+{"kind":"textbox","id":"sh/tw3ql4be","slide":19,"text":"真实案例 eval","textPreview":"真实案例 eval","textChars":9,"textLines":1,"bbox":[880,190,116,42]}
+{"kind":"textbox","id":"sh/sba9czut","slide":19,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[1004,192,26,38]}
+{"kind":"shape","id":"sh/ah4n61sb","slide":19,"bbox":[1030,180,132,62]}
+{"kind":"textbox","id":"sh/bid4f6tw","slide":19,"text":"版本与复盘","textPreview":"版本与复盘","textChars":5,"textLines":1,"bbox":[1038,190,116,42]}
+{"kind":"shape","id":"sh/cjm58bah","slide":19,"bbox":[82,270,1116,1]}
+{"kind":"textbox","id":"sh/xkv6hgr2","slide":19,"text":"$ur-design-survey","textPreview":"$ur-design-survey","textChars":17,"textLines":1,"bbox":[82,292,250,30]}
+{"kind":"textbox","id":"sh/yl4na1sn","slide":19,"text":"输入：课题 / 目标 / 场景 / 约束","textPreview":"输入：课题 / 目标 / 场景 / 约束","textChars":20,"textLines":1,"bbox":[82,332,330,28]}
+{"kind":"textbox","id":"sh/z6xoj69s","slide":19,"text":"方法：目标—证据—题目、分支与互斥规则","textPreview":"方法：目标—证据—题目、分支与互斥规则","textChars":19,"textLines":1,"bbox":[82,366,470,28]}
+{"kind":"textbox","id":"sh/k765cbad","slide":19,"text":"门禁：12 题、0 风险信号；效度仍需人工验证","textPreview":"门禁：12 题、0 风险信号；效度仍需人工验证","textChars":23,"textLines":1,"bbox":[82,400,470,28]}
+{"kind":"textbox","id":"sh/l8f6lgry","slide":19,"text":"$pm-system-app-competitor-matrix","textPreview":"$pm-system-app-competitor-matrix","textChars":32,"textLines":1,"bbox":[620,292,430,30]}
+{"kind":"textbox","id":"sh/m9onelsj","slide":19,"text":"输入：研究问题 / 竞品 / FeatureSchema","textPreview":"输入：研究问题 / 竞品 / FeatureSchema","textChars":28,"textLines":1,"bbox":[620,332,520,28]}
+{"kind":"textbox","id":"sh/7axonq94","slide":19,"text":"方法：ResearchUnit、EvidenceRecord、停止规则","textPreview":"方法：ResearchUnit、EvidenceRecord、停止规则","textChars":35,"textLines":1,"bbox":[620,366,520,28]}
+{"kind":"textbox","id":"sh/v6t47q18","slide":19,"text":"门禁：事实、冲突、未知分栏；证据等级保留","textPreview":"门禁：事实、冲突、未知分栏；证据等级保留","textChars":20,"textLines":1,"bbox":[620,400,520,28]}
+{"kind":"shape","id":"sh/u5knylkn","slide":19,"bbox":[82,462,1116,74]}
+{"kind":"textbox","id":"sh/hsvm9gje","slide":19,"text":"Command 不是“魔法咒语”","textPreview":"Command 不是“魔法咒语”","textChars":16,"textLines":1,"bbox":[104,474,280,30]}
+{"kind":"textbox","id":"sh/gr250b2t","slide":19,"text":"$ur-design-survey 课题：手机图库 AI；目标：识别高频任务、问题与 Top 1；场景：原始需求洞察；≤12 题","textPreview":"$ur-design-survey 课题：手机图库 AI；目标：识别高频任务、问题与 Top 1；场景：原始需求洞察；≤12 题","textChars":64,"textLines":1,"bbox":[394,470,776,38]}
+{"kind":"textbox","id":"sh/3udobq14","slide":19,"text":"组合方式：机会洞察/竞品追踪 → 用户研究/竞品矩阵 → 产品方案/PRD/原型 → 功能命名/微文案 → 指标与反馈复盘","textPreview":"组合方式：机会洞察/竞品追踪 → 用户研究/竞品矩阵 → 产品方案/PRD/原型 → 功能命名/微文案 → 指标与反馈复盘","textChars":61,"textLines":1,"bbox":[82,560,1116,44]}
+{"kind":"notes","id":"nt/jnbhnd","slide":19,"text":"建议用时：3 分钟\n最后讲开发方法。Skill 不是把长提示词保存起来，而是先定义触发和输入契约，再拆步骤与停止条件，把知识放到 references，把格式放到 templates，把可确定判断交给 scripts，最后用真实案例做 eval。Command 只是入口，真正的可复用性来自后面的契约和门禁。其他 Skill 不逐个介绍，而是沿产品生命周期组合。\n\n[Sources]\n- pm-user-research/skills/ur-design-survey/SKILL.md\n- pm-competitor-analysis/pm-system-app-competitor-matrix/SKILL.md\n- README.md"}
+{"kind":"slide","id":"sl/i107q5of","slide":20,"title":"把 AI 当同事之前，","textShapes":3}
+{"kind":"textbox","id":"sh/qd0bahob","slide":20,"text":"把 AI 当同事之前，\n先把自己的判断系统写出来。","textPreview":"把 AI 当同事之前， | 先把自己的判断系统写出来。","textChars":25,"textLines":2,"bbox":[82,246,660,100]}
+{"kind":"textbox","id":"sh/dgbulwnm","slide":20,"text":"1  先选一个高频、返工昂贵、质量可检查的任务\n2  把输入、证据、状态、输出和停止条件写成契约\n3  让脚本检查可确定的错误，让产品经理保留价值判断","textPreview":"1  先选一个高频、返工昂贵、质量可检查的任务 | 2  把输入、证据、状态、输出和停止条件写成契约 | 3  让脚本检查可确定的错误，让产品经理保留价值判断","textChars":75,"textLines":3,"bbox":[86,380,720,112]}
+{"kind":"textbox","id":"sh/cf2tcr61","slide":20,"text":"Q&A","textPreview":"Q&A","textChars":3,"textLines":1,"bbox":[86,532,160,36]}
+{"kind":"notes","id":"nt/i107q5of","slide":20,"text":"建议用时：0.5 分钟 + Q&A\n收束到三条可执行建议。不要从“做一个万能 Agent”开始；先选高频、跨人协作、返工昂贵、质量可检查的任务。把自己的判断写成契约，再决定哪些部分交给模型、工具和脚本。\n\n[Sources]\n- 本次分享两个案例的总结"}

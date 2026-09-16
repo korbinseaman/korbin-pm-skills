@@ -1,0 +1,33 @@
+{"kind":"deck","id":"pr/9v1nwi","name":"Deck"}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"","type":"master","placeholders":[{"name":"body","type":"body","textPreview":"Security Level:"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"探索","placeholders":[{"name":"title","type":"title","textPreview":"单击此处添加标题"},{"name":"body","type":"body","textPreview":"单击此处添加文本"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout2.xml","name":"智能","placeholders":[{"name":"title","type":"title","textPreview":"单击此处添加标题"},{"name":"body","type":"body","textPreview":"单击此处添加文本"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout3.xml","name":"攀登","placeholders":[{"name":"title","type":"title","textPreview":"单击此处添加标题"},{"name":"body","type":"body","textPreview":"单击此处添加文本"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout4.xml","name":"灯塔","placeholders":[{"name":"title","type":"title","textPreview":"单击此处添加标题"},{"name":"body","type":"body","textPreview":"单击此处添加文本"}]}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster2.xml","name":"","type":"master"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout5.xml","name":"1_Contents page","placeholders":[{"name":"body","type":"body","textPreview":"单击此处添加文本"}]}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster3.xml","name":"","type":"master"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout6.xml","name":"1_Chinese text page","placeholders":[{"name":"subtitle","type":"subtitle","textPreview":"单击此处添加标题"},{"name":"content placeholder 2","textPreview":"单击此处添加文本"}]}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster4.xml","name":"","type":"master","placeholders":[{"name":"title","type":"title","textPreview":"Click to edit Master title style"}]}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout7.xml","name":"End page"}
+{"kind":"slide","id":"sl/y90nupkv","slide":1,"title":"部门：","textShapes":2}
+{"kind":"shape","id":"sh/k3yl0zql","slide":1,"name":"标题 2","placeholder":"title","bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/ts7md4r2","slide":1,"name":"Text Placeholder 7","placeholder":"body","text":"部门：\n作者：\n日期：","textPreview":"部门： | 作者： | 日期：","textChars":11,"textLines":3,"bbox":[0,0,0,0]}
+{"kind":"textbox","id":"sh/7qp4be9c","slide":1,"name":"Text Placeholder 3","text":"Security Level:","textPreview":"Security Level:","textChars":15,"textLines":1,"bbox":[99.61,657.65,273.69,14.35]}
+{"kind":"notes","id":"nt/y90nupkv","slide":1,"text":""}
+{"kind":"slide","id":"sl/hwbqtkby","slide":2,"title":"Slide 2","textShapes":0}
+{"kind":"shape","id":"sh/9072xkry","slide":2,"name":"Text Placeholder 1","placeholder":"body","bbox":[108.52,193.5,1054.67,316.4]}
+{"kind":"notes","id":"nt/hwbqtkby","slide":2,"text":""}
+{"kind":"slide","id":"sl/ofy9wn61","slide":3,"title":"Slide 3","textShapes":0}
+{"kind":"shape","id":"sh/cza94vmx","slide":3,"name":"Subtitle 1","placeholder":"subtitle","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/d0jax03i","slide":3,"name":"Content Placeholder 2","bbox":[0,0,0,0]}
+{"kind":"shape","id":"sh/m5cra54z","slide":3,"name":"TextBox 7","bbox":[594.27,-124.8,19.39,55.47]}
+{"kind":"notes","id":"nt/ofy9wn61","slide":3,"text":""}
+{"kind":"slide","id":"sl/jyx0ra1s","slide":4,"title":"此页为图表配色示意，正式使用时请删除此页","textShapes":1}
+{"kind":"shape","id":"sh/ql8jytsj","slide":4,"name":"Subtitle 11","placeholder":"subtitle","bbox":[76.55,49.53,1127.63,104.29]}
+{"kind":"textbox","id":"sh/3ihk3et8","slide":4,"name":"Text Box 22","text":"此页为图表配色示意，正式使用时请删除此页","textPreview":"此页为图表配色示意，正式使用时请删除此页","textChars":20,"textLines":1,"bbox":[711.55,533.09,561.85,47.44]}
+{"kind":"chart","id":"ch/4vilwfe5","slide":4,"name":"Chart 5","chartType":"bar","bbox":[81.58,273.74,404.42,299.75]}
+{"kind":"table","id":"tb/vylcj6do","slide":4,"name":"Table 4","rows":6,"cols":7,"preview":"T-Mobile | Huawei | Orange | China Mobile | China Telecom | China Unicom","bbox":[520.04,239.81,672.77,389.06]}
+{"kind":"notes","id":"nt/jyx0ra1s","slide":4,"text":""}
+{"kind":"slide","id":"sl/i107q5of","slide":5,"title":"Slide 5","textShapes":0}
+{"kind":"notes","id":"nt/i107q5of","slide":5,"text":""}

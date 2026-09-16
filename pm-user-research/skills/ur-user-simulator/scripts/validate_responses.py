@@ -1,20 +1,56 @@
 #!/usr/bin/env python3
-"""Validate questionnaire Markdown, persona files, and per-user answer Markdown."""
+"""Validate questionnaire Markdown, persona files, and temporary per-user answers."""
 
 from __future__ import annotations
 
 import argparse
 import difflib
+import html
 import json
 import re
+import shutil
 import sys
+import tempfile
 from collections import Counter
 from pathlib import Path
 from typing import Any
 
 
 QUESTION_HEADING = re.compile(r"^##\s+(Q[A-Za-z0-9_.-]+)\s*(?:[｜|]\s*(.+?))?\s*$")
+INLINE_QUESTION_HEADING = re.compile(
+    r"^(Q[A-Za-z0-9_.-]+)【([^】]+)】\s*(（(?:必填|选填)）)?\s*(.+?)\s*$"
+)
+CONFIG_LINE = re.compile(r"^-\s*(题目关联|跳题逻辑|选项关联|填写提示)：\s*(.+)$")
+SIMULATOR_RULE = re.compile(r"^>\s*【(显示条件|跳转规则|动态选项|排他规则|作答约束|作答提示)】\s*(.+)$")
 ANSWER_HEADING = re.compile(r"^###\s+(Q[A-Za-z0-9_.-]+)\s*$")
+
+
+def working_answers_dir(run_id: str) -> Path:
+    """Return the deterministic temporary directory for one simulation run."""
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+", run_id):
+        raise ValueError("run_id 只能包含字母、数字、点、下划线和连字符")
+    return (Path(tempfile.gettempdir()) / "ur-user-simulator" / run_id / "answers").resolve()
+
+
+def cleanup_working_answers_dir(path: Path) -> bool:
+    """Remove only a validated simulator working-answer directory."""
+    target = path.resolve()
+    base = (Path(tempfile.gettempdir()) / "ur-user-simulator").resolve()
+    try:
+        relative = target.relative_to(base)
+    except ValueError as exc:
+        raise ValueError(f"拒绝清理临时根目录以外的路径：{target}") from exc
+    if len(relative.parts) != 2 or relative.parts[-1] != "answers":
+        raise ValueError(f"临时答卷路径必须为 <TEMP>/ur-user-simulator/<run_id>/answers：{target}")
+    if not target.exists():
+        return False
+    if not target.is_dir():
+        raise ValueError(f"临时答卷路径不是目录：{target}")
+    shutil.rmtree(target)
+    run_dir = target.parent
+    if run_dir.exists() and not any(run_dir.iterdir()):
+        run_dir.rmdir()
+    return True
 
 
 def issue(code: str, severity: str, message: str, question_ids: list[str] | None = None,
@@ -32,17 +68,33 @@ def issue(code: str, severity: str, message: str, question_ids: list[str] | None
 
 def parse_persons_summary(path: Path) -> tuple[int, list[str]]:
     text = path.read_text(encoding="utf-8")
-    total_match = re.search(r"画像总数\s*[：:]\s*(\d+)\s*人?", text)
-    ids_match = re.search(r"全量用户ID\s*[：:]\s*(\[[^\r\n]+\])", text)
-    if not total_match or not ids_match:
-        raise ValueError("persons_summary.txt 必须包含画像总数和全量用户ID")
-    try:
-        user_ids = json.loads(ids_match.group(1))
-    except json.JSONDecodeError as exc:
-        raise ValueError("全量用户ID 必须是合法 JSON 数组") from exc
+    payload_match = re.search(
+        r'<script[^>]*id=["\']persona-summary-data["\'][^>]*>(.*?)</script>',
+        text,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if payload_match:
+        try:
+            payload = json.loads(html.unescape(payload_match.group(1).strip()))
+        except json.JSONDecodeError as exc:
+            raise ValueError("persons_summary.html 的 persona-summary-data 不是合法 JSON") from exc
+        total = payload.get("total")
+        user_ids = payload.get("persona_ids")
+    else:
+        # Backward-compatible read for old fixtures; new output is HTML only.
+        total_match = re.search(r"画像总数\s*[：:]\s*(\d+)\s*人?", text)
+        ids_match = re.search(r"全量用户ID\s*[：:]\s*(\[[^\r\n]+\])", text)
+        if not total_match or not ids_match:
+            raise ValueError("persons_summary.html 必须包含 persona-summary-data、画像总数和全量用户ID")
+        try:
+            user_ids = json.loads(ids_match.group(1))
+        except json.JSONDecodeError as exc:
+            raise ValueError("全量用户ID 必须是合法 JSON 数组") from exc
+        total = int(total_match.group(1))
     if not isinstance(user_ids, list) or not user_ids or not all(isinstance(item, str) and item for item in user_ids):
         raise ValueError("全量用户ID 必须是非空字符串数组")
-    total = int(total_match.group(1))
+    if not isinstance(total, int) or total < 1:
+        raise ValueError("画像总数必须是正整数")
     if len(user_ids) != total:
         raise ValueError(f"画像总数为 {total}，但全量用户ID 有 {len(user_ids)} 个")
     if len(set(user_ids)) != len(user_ids):
@@ -110,20 +162,35 @@ def parse_questionnaire(path: Path) -> list[dict[str, Any]]:
         nonlocal current, body
         if current is None:
             return
-        nonempty = [line.strip() for line in body if line.strip()]
-        prompt_lines = [line for line in nonempty if not line.startswith("-") and not line.startswith("【逻辑提示")]
-        options = [line[2:].strip() for line in nonempty if line.startswith("- ")]
-        current["question"] = " ".join(prompt_lines)
-        current["logic_text"] = " ".join(line for line in nonempty if line.startswith("【逻辑提示"))
-        dynamic = next((item for item in options if "动态回填" in item), "")
+        prompt_lines = [current.pop("heading_stem", "")]
+        options: list[str] = []
+        logic_lines: list[str] = []
+        for raw_line in body:
+            stripped = raw_line.strip()
+            if not stripped:
+                continue
+            config = CONFIG_LINE.match(stripped)
+            simulator_rule = SIMULATOR_RULE.match(stripped)
+            if config:
+                logic_lines.append(f"{config.group(1)}：{config.group(2)}")
+            elif simulator_rule:
+                logic_lines.append(f"{simulator_rule.group(1)}：{simulator_rule.group(2)}")
+            elif stripped.startswith("【逻辑提示"):
+                logic_lines.append(stripped)
+            elif raw_line.startswith("- "):
+                options.append(raw_line[2:].strip())
+            elif not raw_line.startswith("  - ") and not stripped.startswith("#"):
+                prompt_lines.append(stripped)
+        current["question"] = " ".join(line for line in prompt_lines if line)
+        current["logic_text"] = " ".join(logic_lines)
+        dynamic = next((item for item in logic_lines if "动态选项" in item or "选项关联" in item), "")
         if dynamic:
             source = re.search(r"Q[A-Za-z0-9_.-]+", dynamic)
             if source:
                 current["options_from_question_id"] = source.group(0)
-            options = [item for item in options if item != dynamic]
         if options and current["type"] in {"single_choice", "multi_choice", "ranking"}:
             current["options"] = options
-        label = current["type_label"]
+        label = f"{current['type_label']} {current['question']}"
         max_match = re.search(r"(?:最多|选)\s*(\d+)\s*项", label)
         if max_match:
             current["max_choices"] = int(max_match.group(1))
@@ -136,7 +203,7 @@ def parse_questionnaire(path: Path) -> list[dict[str, Any]]:
                 values = [float(match.group(1)) for match in numeric_options if match]
                 if values:
                     current["scale"] = {"min": min(values), "max": max(values)}
-        current["required"] = "选填" not in label and "可选" not in label
+        current["required"] = current.pop("required_marker", "") != "选填" and "选填" not in label and "可选" not in label
         questions.append(current)
         current, body = None, []
 
@@ -147,6 +214,16 @@ def parse_questionnaire(path: Path) -> list[dict[str, Any]]:
             label = (match.group(2) or "单选").strip()
             current = {"id": match.group(1), "type_label": label, "type": _question_type(label)}
             continue
+        inline = INLINE_QUESTION_HEADING.match(line.strip())
+        if inline:
+            finish()
+            label = inline.group(2).strip()
+            marker = (inline.group(3) or "").strip("（）")
+            current = {
+                "id": inline.group(1), "type_label": label, "type": _question_type(label),
+                "required_marker": marker, "heading_stem": inline.group(4).strip(),
+            }
+            continue
         if current is not None:
             if line.startswith("## "):
                 finish()
@@ -154,7 +231,7 @@ def parse_questionnaire(path: Path) -> list[dict[str, Any]]:
                 body.append(line)
     finish()
     if not questions:
-        raise ValueError("questionnaire.md 中没有识别到以“## Q...”开头的题目")
+        raise ValueError("问卷中没有识别到“## Q...”或“Q1【题型】（必填）...”格式的题目")
     ids = [question["id"] for question in questions]
     if len(set(ids)) != len(ids):
         raise ValueError("questionnaire.md 中存在重复题号")
@@ -187,6 +264,22 @@ def parse_questionnaire(path: Path) -> list[dict[str, Any]]:
             question.setdefault("show_conditions", []).append({
                 "question_id": show_match.group(1), "operator": "not_contains", "value": show_match.group(2),
             })
+        relation = re.search(r"(?:题目关联|显示条件)：(?:关联\s*)?(Q[A-Za-z0-9_.-]+)(.+)", logic)
+        if relation:
+            source_id, clause = relation.group(1), relation.group(2)
+            quoted = re.findall(r"[“「]([^”」]+)[”」]", clause)
+            if "任一选项" in clause and not quoted:
+                condition = {"question_id": source_id, "operator": "answered", "value": None}
+                question.setdefault("show_conditions", []).append(condition)
+            elif quoted and "除" in clause:
+                for value in quoted:
+                    question.setdefault("show_conditions", []).append({
+                        "question_id": source_id, "operator": "not_contains", "value": value,
+                    })
+            elif quoted:
+                question.setdefault("show_conditions", []).append({
+                    "question_id": source_id, "operator": "in", "value": quoted,
+                })
     return questions
 
 
@@ -209,9 +302,11 @@ def condition_matches(condition: dict[str, Any], answers: dict[str, Any]) -> boo
             return False
         return expected not in actual if isinstance(actual, list) else str(expected) not in str(actual)
     if operator == "in":
-        return actual in (expected or [])
+        return any(item in (expected or []) for item in actual) if isinstance(actual, list) else actual in (expected or [])
     if operator == "not_in":
-        return actual is not None and actual not in (expected or [])
+        return actual is not None and (all(item not in (expected or []) for item in actual) if isinstance(actual, list) else actual not in (expected or []))
+    if operator == "answered":
+        return actual not in (None, "", [], "未作答")
     return False
 
 
@@ -318,7 +413,7 @@ def parse_answer_markdown(path: Path, questions: list[dict[str, Any]]) -> dict[s
             key, value = line.split("：", 1)
             headers[key.strip()] = value.strip()
     if not headers.get("用户ID"):
-        raise ValueError("个人答卷缺少用户ID")
+        raise ValueError("临时答卷缺少用户ID")
     return {"headers": headers, "answers": answers, "answer_notes": notes}
 
 
@@ -408,7 +503,7 @@ def batch_authenticity(records: list[dict[str, Any]], questions: list[dict[str, 
 
 
 def validate_answer_directory(questionnaire: Path, persons_summary: Path, persons_dir: Path,
-                              answers_dir: Path, failures: dict[str, str] | None = None) -> dict[str, Any]:
+                              working_dir: Path, failures: dict[str, str] | None = None) -> dict[str, Any]:
     _, user_ids = parse_persons_summary(persons_summary)
     persona_files = resolve_persona_files(persons_dir, user_ids)
     questions = parse_questionnaire(questionnaire)
@@ -417,9 +512,9 @@ def validate_answer_directory(questionnaire: Path, persons_summary: Path, person
     issues: list[dict[str, Any]] = []
     models: Counter[str] = Counter()
     for user_id in user_ids:
-        answer_path = answers_dir / f"{user_id}.md"
+        answer_path = working_dir / f"{user_id}.md"
         if not answer_path.exists():
-            issues.append(issue("missing_response", "error", failures.get(user_id, "没有生成有效个人答卷。"), user_ids=[user_id], suggestion="检查任务错误并重试。"))
+            issues.append(issue("missing_response", "error", failures.get(user_id, "没有生成有效临时答卷。"), user_ids=[user_id], suggestion="检查任务错误并重试。"))
             records.append({"user_id": user_id, "status": "failed", "answers": {}, "answer_notes": {}})
             continue
         try:
@@ -507,11 +602,11 @@ def quality_markdown(run_id: str, quality: dict[str, Any]) -> str:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="校验个人问卷答卷并生成质量报告")
+    parser = argparse.ArgumentParser(description="校验临时问卷答卷并生成质量报告")
     parser.add_argument("--questionnaire", type=Path, required=True)
     parser.add_argument("--persons-summary", type=Path, required=True)
     parser.add_argument("--persons-dir", type=Path, required=True)
-    parser.add_argument("--answers-dir", type=Path, required=True)
+    parser.add_argument("--working-answers-dir", type=Path, required=True)
     parser.add_argument("--quality-report", type=Path, required=True)
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--failure", action="append", default=[], metavar="USER_ID=ERROR")
@@ -525,7 +620,7 @@ def main() -> int:
     try:
         quality = validate_answer_directory(
             args.questionnaire.resolve(), args.persons_summary.resolve(), args.persons_dir.resolve(),
-            args.answers_dir.resolve(), failures,
+            args.working_answers_dir.resolve(), failures,
         )
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         parser.error(str(exc))

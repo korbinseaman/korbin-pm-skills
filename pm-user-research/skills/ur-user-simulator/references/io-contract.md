@@ -6,18 +6,19 @@
 
 ```text
 <WORK_DIR>/用户调研/<YYYYMMDD><课题>/
-├── questionnaire.md
+├── questionnaire_for_simulator.md
+├── questionnaire.md                  # 仅作为回退
 └── survey_response_data/
 
 <WORK_DIR>/用户调研/personas_data/
-├── persons_summary.txt
+├── persons_summary.html
 └── persons/
     ├── P001_<姓名>.txt
     └── ...
 ```
 
-- `questionnaire.md` 已由用户确认，包含完整题号、题干、选项、量表、概念卡和跳转/结束规则。
-- `persons_summary.txt` 包含总人数和有序的全量用户 ID 数组。
+- 优先使用已由用户确认且与主问卷同步的 `questionnaire_for_simulator.md`；它只保留作答所需内容，规则位于题干和选项之间。仅在该文件不存在时回退到 `questionnaire.md` 并记录缺失。
+- `persons_summary.html` 的 `script#persona-summary-data` JSON 包含总人数和有序的全量用户 ID 数组。
 - `persons/` 一人一个 TXT；总人数、唯一 ID 数和文件数一致，每个文件中的用户 ID 与文件名一致。主任务只核对文件路径；每个执行单元开始答题时才读取自己的画像内容。
 
 不满足前置条件时，在分发子任务前停止。
@@ -26,18 +27,15 @@
 
 ```text
 survey_response_data/
-├── answers_<run_id>/
-│   ├── P001.md
-│   └── ...
 ├── survey_responses_<run_id>.xlsx
 └── quality_report_<run_id>.md
 ```
 
-除以上三项外，不生成任务清单、原始 JSON 或结构化 JSON。
+除以上两项外，不保留个人答卷、任务清单、原始 JSON 或结构化 JSON。
 
-### 个人答卷
+## 临时工作文件
 
-成功任务一人一个 `<用户ID>.md`。文件头记录任务 ID（`<run_id>-<用户ID>`）、用户 ID、姓名、问卷来源、模型提供商、实际模型和“合成回答”标识。每题只记录：
+执行期间在 `<TEMP>/ur-user-simulator/<run_id>/answers/` 暂存一人一个 `<用户ID>.md`。文件头记录任务 ID（`<run_id>-<用户ID>`）、用户 ID、姓名、问卷来源、模型提供商、实际模型和“合成回答”标识。每题只记录：
 
 ```markdown
 ### Q1
@@ -45,21 +43,21 @@ survey_response_data/
 回答原因：<可选；没有则省略整行>
 ```
 
-跳过题的回答写“未作答”。个人答卷不重复题目原文和选项。
+跳过题的回答写“未作答”。临时答卷不重复题目原文和选项，只用于中断恢复、校验和 Excel 汇总。Excel 导出并回读校验成功后删除整个临时答卷目录；不得把它复制到最终输出目录。
 
 ### Excel 汇总
 
 `survey_responses_<run_id>.xlsx` 只有一个“问卷回答”工作表：
 
-- 每个用户一行，按 `persons_summary.txt` 的用户 ID 顺序排列；失败用户也保留一行。
+- 每个用户一行，按 `persons_summary.html` 的用户 ID 顺序排列；失败用户也保留一行。
 - 固定列为任务ID、用户ID、姓名、实际模型、状态；之后按问卷顺序设置题号列，最后为错误摘要。
-- 某题至少有一人填写回答原因时，紧跟该题增加 `<题号>_回答原因` 列；全部为空时不创建该列。
+- 每道题的原回答完整保留在对应题号列；某题至少有一人填写回答原因时，紧跟该题增加 `<题号>_回答原因` 列，全部为空时不创建该列。
 - 多选答案使用 `；` 分隔；数字和布尔值保持原类型；未作答和失败答案留空。
 - 冻结首行，启用筛选和自动换行，设置可读列宽。
 
 导出后重新读取关键区域，检查数据行数等于总人数、用户 ID 唯一、用户 ID 集合与全量数组一致、题号顺序与问卷一致，并扫描公式错误。
 
-Python 脚本不生成 Excel；脚本生成个人答卷和质量报告后，由主 Skill 使用平台电子表格能力完成汇总。
+Python 脚本不生成 Excel；脚本生成临时答卷和质量报告后，由主 Skill 使用平台电子表格能力完成汇总，并在校验 Excel 后调用清理命令删除临时答卷。
 
 ### 质量报告
 

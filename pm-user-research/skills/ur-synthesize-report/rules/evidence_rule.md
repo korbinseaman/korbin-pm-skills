@@ -26,6 +26,6 @@
 ## 来源隔离
 
 - 回答工作簿是问卷发现和回答原因的唯一证据来源。
-- `questionnaire-design.html` 是研究意图，不能支持“用户认为”类结论。
+- `survey-design-desc.html` 是研究意图，不能支持“用户认为”类结论。
 - 不读取 `personas.json`、`persona_audit.json`、`persons/` 或其他逐人画像文件。
-- 可选的 `persons_summary.txt` 是合成样本构建材料，不能计入主题频次、痛点发生率、引语或分群；不得用它解释或补齐缺失回答。
+- 可选的 `persons_summary.html` 是合成样本构建材料，不能计入主题频次、痛点发生率、引语或分群；不得用它解释或补齐缺失回答。

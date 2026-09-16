@@ -2,7 +2,7 @@
 
 ## 评测目标
 
-验证 Skill 能否从“课题描述、调研目标、问卷场景”生成专业问卷，并保持三个交付文件职责清晰：`questionnaire.md` 是标准问卷，`questionnaire-design.html` 是含完整问卷附录的研究设计文档，`questionnaire_for_userclub.txt` 是内部平台导入文件。
+验证 Skill 能否从“课题描述、调研目标、问卷场景”生成专业问卷，并保持交付文件职责清晰：`questionnaire.md` 是标准问卷，`survey-design-desc.html` 是含完整问卷附录的研究设计文档，模拟作答版和平台文件各自承担对应格式转换。
 
 ## 通用通过条件
 
@@ -16,9 +16,9 @@
 - Step 3 按问卷场景给出推荐模块顺序；人口特征固定在前，目标用户有内容时加入用户筛选，按需模块只有对应证据时才保留。
 - Step 3 输出完整模块蓝图：问卷场景、所选示例、最终顺序、全卷总题数，以及每个模块的目标、证据、题数、选用理由和出现条件。
 - Step 4 按模块蓝图设计题目，不临时增加无目标、无证据用途的问题。
-- 生成 `questionnaire.md`、`questionnaire-design.html` 和 `questionnaire_for_userclub.txt`；HTML 问卷附录及平台文件与主问卷题意、选项、顺序和逻辑同步。
+- 生成 `questionnaire.md`、`survey-design-desc.html`、模拟作答版和平台导入版；HTML 问卷附录及派生文件与主问卷题意、选项、顺序和逻辑同步。
 - UserClub 文件严格使用规定的单选、多选前缀；遇到平台尚未定义的题型时不猜测、不漏题，先等价改写或请求补充规格。
-- 输出契约按问卷场景一对一指定问卷模板及应继承的结构；实际只读取一份模板，并在 `questionnaire-design.html` 记录模板路径和偏离理由。
+- 输出契约按问卷场景一对一指定问卷模板及应继承的结构；实际只读取一份模板，并在 `survey-design-desc.html` 记录模板路径和偏离理由。
 - 自动修复和内部检查过程不写入交付文件；只有必须由用户决定的事项进入“用户审查点”。
 
 ## Case A：关键假设验证
@@ -92,7 +92,7 @@
 ## 下游兼容
 
 - 模拟作答只读取已确认的 `questionnaire.md` 及共享受众信息。
-- 报告分析从 `questionnaire.md` 读取题目结构，从 `questionnaire-design.html` 读取研究目标和分析建议。
+- 报告分析从 `questionnaire.md` 读取题目结构，从 `survey-design-desc.html` 读取研究目标和分析建议。
 
 ## 评测边界
 

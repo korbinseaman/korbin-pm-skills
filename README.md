@@ -29,7 +29,7 @@
 |---|---|---|
 | [`ur-design-survey`](pm-user-research/skills/ur-design-survey/) | 设计低偏差、可分析的定量问卷 | `questionnaire.md`、`questionnaire-design.html` |
 | [`ur-generate-personas`](pm-user-research/skills/ur-generate-personas/) | 生成分层、可审计的合成用户画像 | `personas.json`、画像文件和审计结果 |
-| [`ur-user-simulator`](pm-user-research/skills/ur-user-simulator/) | 让隔离的合成用户完成问卷 | 个人答卷、Excel 汇总和质量报告 |
+| [`ur-user-simulator`](pm-user-research/skills/ur-user-simulator/) | 让隔离的合成用户完成问卷 | 原回答 Excel 汇总和质量报告 |
 | [`ur-synthesize-report`](pm-user-research/skills/ur-synthesize-report/) | 清理数据并综合定量与开放回答 | `analysis_summary.json`、离线 HTML 报告和质量报告 |
 
 完整说明、数据契约和运行示例见 [`pm-user-research/README.md`](pm-user-research/README.md)。

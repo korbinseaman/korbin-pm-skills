@@ -29,7 +29,7 @@ E:\projects\PM_Studio\pm-user-research-skills\
             ├── references
             ├── templates
             ├── scripts
-    ├── workflows
+    ├── commands
         ├── user-research-plan.md 只完成课题分析和调研设计，仅调用 ur-design-survey
         ├── user-research-pilot.md 完成课题分析和调研设计，用户画像生成，并先运行少量样本，检查问卷和模型表现，调用ur-design-survey、ur-generate-personas、ur-user-simulator
         ├── synthetic-interview.md 完成完整的用户深度访谈流程
@@ -171,7 +171,7 @@ User_interview_plan.md参考这个skill中的 Output: Generate Interview Plan �
 - 可解释的校验结果
 ## 输入输出
 **输入：** `plan.json` 问卷方案、`personas.json`（画像列表）、可选 LLM 配置
-**输出：**所有用户回答汇总到一个 Excel，同时保留个人答卷和质量报告，存储在：output/<时间><调研课题名称>/survey_response_data
+**输出：**所有用户原回答汇总到一个 Excel，同时生成质量报告；不保留逐人答卷原文件。存储在：output/<时间><调研课题名称>/survey_response_data
 ## 执行步骤
 1.读取输入
 2.初始化LLM配置，分配任务
@@ -186,7 +186,7 @@ User_interview_plan.md参考这个skill中的 Output: Generate Interview Plan �
 - 使用问卷提示模板
 
 ## 数据记录（record 方法）
-- 输入任务结果 + `personas` → 输出 `answers_<run_id>/`、`survey_responses_*.xlsx` 和 `quality_report_*.md`
+- 输入任务结果 + `personas` → 输出 `survey_responses_*.xlsx` 和 `quality_report_*.md`；逐人答卷仅作临时校验和汇总输入，Excel 校验后删除
 - 结构化记录含：response_id、persona_id、demographics、answers、status、llm_provider
 - 质量分级：excellent / good / needs_review / poor
 

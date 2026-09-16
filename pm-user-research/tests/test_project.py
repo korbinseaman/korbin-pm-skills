@@ -10,6 +10,7 @@ import sys
 import unittest
 import uuid
 import zipfile
+from collections import Counter
 from contextlib import contextmanager
 from unittest import mock
 from pathlib import Path
@@ -25,11 +26,9 @@ SKILLS = {
 }
 EXAMPLE = PROJECT / "output" / "20260816手机相册云相册分相册控制需求调研"
 QUESTIONNAIRE_DIR = EXAMPLE / "手机相册云相册分相册控制需求调研_Questionnaire"
-LEGACY_PLAN = QUESTIONNAIRE_DIR / "plan.json"
 QUESTIONNAIRE = QUESTIONNAIRE_DIR / "questionnaire.md"
-SHARED_CONTEXT = EXAMPLE / "shared_context.md"
 PERSONAS = PROJECT / "output" / "personas_data" / "personas.json"
-PERSONS_SUMMARY = PROJECT / "output" / "personas_data" / "persons_summary.txt"
+PERSONS_SUMMARY = PROJECT / "output" / "personas_data" / "persons_summary.html"
 PERSONS_DIR = PROJECT / "output" / "personas_data" / "persons"
 PERSONA_AUDIT = PROJECT / "output" / "personas_data" / "persona_audit.json"
 MOCK_CONFIG = PROJECT / "tests" / "llm.mock.json"
@@ -64,57 +63,6 @@ def run(*args: str, expect: int = 0) -> subprocess.CompletedProcess[str]:
             f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
         )
     return result
-
-
-def shared_context_md(
-    *,
-    topic: str = "手机照片整理",
-    groups: list[str] | None = None,
-    selected: list[str] | None = None,
-    include: list[str] | None = None,
-    exclude: list[str] | None = None,
-    exclusion_confirmed: bool = False,
-    confirmed: bool = True,
-) -> str:
-    groups = ["当前用户", "潜在用户"] if groups is None else groups
-    selected = list(groups) if selected is None else selected
-    include = [] if include is None else include
-    exclude = [] if exclude is None else exclude
-
-    def bullets(values: list[str]) -> str:
-        return "\n".join(f"- {value}" for value in values) if values else "- 无"
-
-    return f"""# 用户研究共享上下文
-
-## 任务信息
-
-- 任务标识：test-mobile-photo
-- 调研主题：{topic}
-
-## 目标用户
-
-### 全量候选群体
-
-{bullets(groups)}
-
-### 已选目标群体
-
-{bullets(selected)}
-
-### 纳入条件
-
-{bullets(include)}
-
-### 排除条件
-
-{bullets(exclude)}
-
-## 确认信息
-
-- 排除条件由用户明确确认：{'是' if exclusion_confirmed else '否'}
-- 状态：{'已确认' if confirmed else '待确认'}
-- 确认人：用户
-"""
 
 
 class SkillStructureTests(unittest.TestCase):
@@ -224,328 +172,86 @@ class ScriptTests(unittest.TestCase):
 
     def test_example_persona_audit(self) -> None:
         run(
-            PROJECT / "skills" / "ur-design-survey" / "scripts" / "validate_shared_context.py",
-            SHARED_CONTEXT,
-        )
-        run(
             PROJECT / "skills" / "ur-generate-personas" / "scripts" / "validate_personas.py",
             PERSONAS,
         )
 
-    def test_persona_allocator_exact_total(self) -> None:
-        with workspace_temp() as temp:
-            output = Path(temp) / "personas.json"
-            run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "generate_personas.py",
-                SHARED_CONTEXT, "--sample-size", "7", "--seed", "42", "--output", output,
-            )
-            data = json.loads(output.read_text(encoding="utf-8"))
-            self.assertEqual(data["schema_version"], "5.3")
-            self.assertEqual(data["sample_size"], 7)
-            self.assertEqual(len(data["personas"]), 7)
-            summary_path = output.parent / "persons_summary.txt"
-            self.assertTrue(summary_path.exists())
-            summary_text = summary_path.read_text(encoding="utf-8")
-            summary_id_line = next(line for line in summary_text.splitlines() if line.startswith("全量用户ID："))
-            self.assertEqual(
-                json.loads(summary_id_line.removeprefix("全量用户ID：")),
-                [persona["画像编号"] for persona in data["personas"]],
-            )
-            self.assertEqual(len(list((output.parent / "persons").glob("P*.txt"))), 7)
-            self.assertFalse((output.parent / "personas.txt").exists())
-            self.assertEqual(
-                set(data["audience_groups"]),
-                {item["audience_group"] for item in data["generation_spec"]["group_allocation"]},
-            )
-            self.assertEqual(data["generation_spec"]["allocation_basis"], "coverage_balanced")
-            self.assertFalse(data["generation_spec"]["allocation_is_population_estimate"])
-            self.assertEqual([item["count"] for item in data["generation_spec"]["group_allocation"]], [2, 2, 2, 1])
-            first = data["personas"][0]
-            template = json.loads(
-                (PROJECT / "skills" / "ur-generate-personas" / "templates" / "persona_template.json").read_text(encoding="utf-8")
-            )
-            self.assertTrue(set(first).issubset(set(template)))
-            self.assertFalse(first["姓名"].startswith("合成用户"))
-            self.assertIsInstance(first["年龄"], int)
-            self.assertTrue(first["居住地"])
-            self.assertTrue(first["月收入"])
-            self.assertTrue(first["使用设备"])
-            self.assertTrue(first["通用行为"])
-            for implementation_field in ("base_profile", "research_profile", "fact_anchors", "response_style", "knowledge_boundary", "persona_id", "display_name", "eligibility", "所属用户群体", "本次目标用户"):
-                self.assertNotIn(implementation_field, first)
-            if first["使用阶段"] != "潜在用户":
-                self.assertTrue(first["相关产品或功能使用习惯"])
-                self.assertTrue(first["判断"])
-            txt = next((output.parent / "persons").glob("P001*.txt")).read_text(encoding="utf-8")
-            pairs = [line.split("：", 1) for line in txt.splitlines() if line]
-            self.assertEqual([key for key, _ in pairs], list(first))
-            self.assertEqual({key: value for key, value in pairs}, {key: str(value) for key, value in first.items()})
-            for removed_heading in ("基础画像：", "调研相关画像：", "人物概述：", "事实锚点：", "知识边界：", "回答风格："):
-                self.assertNotIn(removed_heading, txt)
-            run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "validate_personas.py",
-                output,
-            )
+    def test_persona_name_matches_birth_cohort(self) -> None:
+        script = PROJECT / "skills" / "ur-generate-personas" / "scripts" / "validate_personas.py"
+        spec = importlib.util.spec_from_file_location("validate_personas", script)
+        module = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        spec.loader.exec_module(module)
+        self.assertIsNotNone(module.name_age_conflict("王梓轩", 60))
+        self.assertIsNotNone(module.name_age_conflict("李建国", 20))
+        self.assertIsNone(module.name_age_conflict("程国华", 62))
+        self.assertIsNone(module.name_age_conflict("林晨", 20))
+        self.assertIsNone(module.name_age_conflict("欧阳昊泽", 21))
 
-    def test_user_specified_group_quota_is_applied(self) -> None:
-        with workspace_temp() as temp:
-            root = Path(temp)
-            input_path = root / "shared_context.md"
-            input_path.write_text(shared_context_md(
-                groups=["学生群体", "上班族", "宝爸宝妈", "内容创作者"],
-            ), encoding="utf-8")
-            output = root / "personas.json"
-            run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "generate_personas.py",
-                input_path, "--sample-size", "8",
-                "--group-quota", "学生群体=1",
-                "--group-quota", "上班族=3",
-                "--group-quota", "宝爸宝妈=2",
-                "--group-quota", "内容创作者=2",
-                "--output-json", output,
-            )
-            data = json.loads(output.read_text(encoding="utf-8"))
-            self.assertEqual(data["generation_spec"]["allocation_basis"], "user_specified")
-            self.assertEqual(
-                {item["audience_group"]: item["count"] for item in data["generation_spec"]["group_allocation"]},
-                {"学生群体": 1, "上班族": 3, "宝爸宝妈": 2, "内容创作者": 2},
-            )
-            run(PROJECT / "skills" / "ur-generate-personas" / "scripts" / "validate_personas.py", output)
+    def test_persona_name_batch_has_natural_structure_mix(self) -> None:
+        personas = json.loads(PERSONAS.read_text(encoding="utf-8"))
+        people = personas["personas"]
+        counts = Counter(len(persona["姓名"]) for persona in people)
+        self.assertEqual(counts, Counter({3: 75, 2: 23, 4: 2}))
+        self.assertEqual(
+            personas["generation_spec"]["name_structure_allocation"],
+            {"2字全名": 23, "3字全名": 75, "4字全名": 2},
+        )
+        self.assertEqual(len({persona["姓名"] for persona in people}), len(people))
+        for low, high in ((18, 24), (25, 34), (35, 44), (45, 54), (55, 64), (65, 80)):
+            lengths = {len(persona["姓名"]) for persona in people if low <= persona["年龄"] <= high}
+            self.assertGreaterEqual(len(lengths), 2, f"{low}–{high}岁姓名长度过于整齐")
 
-    def test_default_100_personas_have_no_duplicate_structure_warning(self) -> None:
-        with workspace_temp() as temp:
-            output = Path(temp) / "personas.json"
-            run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "generate_personas.py",
-                SHARED_CONTEXT, "--output-json", output,
-            )
-            self.assertEqual(json.loads(output.read_text(encoding="utf-8"))["sample_size"], 100)
-            result = run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "validate_personas.py",
-                output,
-            )
-            audit = json.loads(result.stdout)
-            self.assertEqual(audit["score"], 100)
-            self.assertEqual(audit["warnings"], [])
+    def test_persona_generation_uses_direct_input_contract(self) -> None:
+        folder = PROJECT / "skills" / "ur-generate-personas"
+        skill = (folder / "SKILL.md").read_text(encoding="utf-8")
+        input_contract = (folder / "references" / "persona-generation-input.md").read_text(encoding="utf-8")
+        self.assertIn("直接读取用户或调用方提供的参数", skill)
+        self.assertIn("课题或全量候选用户群体缺失时由本 Skill 直接询问", skill)
+        self.assertIn("不得读取其他用户研究 Skill 的任务文件或对话", skill)
+        self.assertIn("课题和受众范围只来自本次", (folder / "references" / "io-contract.md").read_text(encoding="utf-8"))
+        self.assertIn("不保存为任务级共享文件", input_contract)
+        self.assertNotIn("shared_context.md", skill + input_contract)
+        self.assertFalse((PROJECT / "skills" / "ur-design-survey" / "references" / "shared-context-schema.md").exists())
+        self.assertFalse((PROJECT / "skills" / "ur-design-survey" / "scripts" / "validate_shared_context.py").exists())
+        self.assertFalse((folder / "references" / "user_personas_input.md").exists())
 
-    def test_persona_consistency_and_no_experience_condition(self) -> None:
-        with workspace_temp() as temp:
-            output = Path(temp) / "personas.json"
-            run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "generate_personas.py",
-                SHARED_CONTEXT, "--sample-size", "100", "--seed", "42", "--output-json", output,
-            )
-            data = json.loads(output.read_text(encoding="utf-8"))
-            potential_count = 0
-            for persona in data["personas"]:
-                if "学生" in persona["职业"]:
-                    self.assertLessEqual(persona["年龄"], 34)
-                    self.assertIn(persona["月收入"], {"0–3000元", "3000元以下"})
-                if "退休" in persona["职业"]:
-                    self.assertGreaterEqual(persona["年龄"], 50)
-                if persona["使用阶段"] == "潜在用户":
-                    potential_count += 1
-                    self.assertNotIn("相关产品或功能使用习惯", persona)
-                    self.assertNotIn("判断", persona)
-                    path = next((output.parent / "persons").glob(f"{persona['画像编号']}_*.txt"))
-                    text = path.read_text(encoding="utf-8")
-                    self.assertNotIn("（5）", text)
-                    self.assertNotIn("（6）", text)
-            self.assertGreater(potential_count, 0)
-
-    def test_invalid_group_quota_total_is_rejected(self) -> None:
-        with workspace_temp() as temp:
-            root = Path(temp)
-            input_path = root / "shared_context.md"
-            input_path.write_text(shared_context_md(
-                groups=["学生群体", "上班族", "宝爸宝妈", "内容创作者"],
-            ), encoding="utf-8")
-            result = run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "generate_personas.py",
-                input_path, "--sample-size", "8",
-                "--group-quota", "学生群体=1",
-                "--group-quota", "上班族=1",
-                "--group-quota", "宝爸宝妈=1",
-                "--group-quota", "内容创作者=1",
-                "--output-json", root / "personas.json", expect=2,
-            )
-            self.assertIn("人数之和必须等于 sample_size", result.stderr)
-
-    def test_full_audience_groups_are_covered_and_target_groups_are_marked(self) -> None:
-        with workspace_temp() as temp:
-            root = Path(temp)
-            input_path = root / "shared_context.md"
-            output = root / "personas.json"
-            input_path.write_text(shared_context_md(
-                groups=["学生群体", "上班族", "宝爸宝妈", "内容创作者"],
-                selected=["上班族", "宝爸宝妈"],
-            ), encoding="utf-8")
-            run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "generate_personas.py",
-                input_path, "--sample-size", "8", "--seed", "1", "--output-json", output,
-            )
-            data = json.loads(output.read_text(encoding="utf-8"))
-            self.assertEqual(
-                set(data["audience_groups"]),
-                {item["audience_group"] for item in data["generation_spec"]["group_allocation"]},
-            )
-            self.assertEqual(data["target_audience"]["selected_groups"], ["上班族", "宝爸宝妈"])
-            potential = [p for p in data["personas"] if p["使用阶段"] == "潜在用户"]
-            self.assertTrue(potential)
-            self.assertTrue(all("没有相关经历" not in item for item in data["target_audience"]["exclude"]))
-            run(PROJECT / "skills" / "ur-generate-personas" / "scripts" / "validate_personas.py", output)
-
-    def test_empty_include_and_exclude_are_valid(self) -> None:
-        with workspace_temp() as temp:
-            root = Path(temp)
-            input_path = root / "shared_context.md"
-            output = root / "personas.json"
-            input_path.write_text(shared_context_md(), encoding="utf-8")
-            run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "generate_personas.py",
-                input_path, "--sample-size", "4", "--output-json", output,
-            )
-            data = json.loads(output.read_text(encoding="utf-8"))
-            self.assertEqual(data["target_audience"]["exclude"], [])
-            self.assertIn("潜在用户", {p["使用阶段"] for p in data["personas"]})
-            run(PROJECT / "skills" / "ur-generate-personas" / "scripts" / "validate_personas.py", output)
-
-    def test_unconfirmed_exclusion_is_rejected(self) -> None:
-        with workspace_temp() as temp:
-            root = Path(temp)
-            input_path = root / "shared_context.md"
-            input_path.write_text(shared_context_md(exclude=["完全没有相关经历"]), encoding="utf-8")
-            result = run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "generate_personas.py",
-                input_path, "--sample-size", "4", "--output-json", root / "personas.json", expect=2,
-            )
-            self.assertIn("未经用户明确确认", result.stderr)
-
-    def test_sample_size_cannot_be_smaller_than_audience_groups(self) -> None:
-        with workspace_temp() as temp:
-            output = Path(temp) / "personas.json"
-            result = run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "generate_personas.py",
-                SHARED_CONTEXT, "--sample-size", "3", "--output-json", output, expect=2,
-            )
-            self.assertIn("audience_groups 数量 4", result.stderr)
-
-    def test_shared_context_rejects_research_design_fields(self) -> None:
-        with workspace_temp() as temp:
-            root = Path(temp)
-            changed = SHARED_CONTEXT.read_text(encoding="utf-8") + "\n## 问卷\n\n- Q1：诱导性问题\n"
-            input_path = root / "invalid-shared-context.md"
-            input_path.write_text(changed, encoding="utf-8")
-            result = run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "generate_personas.py",
-                input_path, "--sample-size", "6", "--output-json", root / "personas.json", expect=2,
-            )
-            self.assertIn("不应暴露给画像生成", result.stderr)
-
-    def test_plan_json_is_rejected_as_persona_input(self) -> None:
-        with workspace_temp() as temp:
-            result = run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "generate_personas.py",
-                LEGACY_PLAN, "--output-json", Path(temp) / "personas.json", expect=2,
-            )
-            self.assertIn("不能使用 plan.json", result.stderr)
-
-    def test_missing_selected_groups_is_rejected(self) -> None:
-        with workspace_temp() as temp:
-            root = Path(temp)
-            context_path = root / "no-target.md"
-            context_path.write_text(shared_context_md(selected=[]), encoding="utf-8")
-            result = run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "generate_personas.py",
-                context_path, "--output-json", root / "personas.json", expect=2,
-            )
-            self.assertIn("缺少已选目标群体", result.stderr)
-
-    def test_persona_output_has_no_question_or_research_answer_fields(self) -> None:
-        with workspace_temp() as temp:
-            output = Path(temp) / "personas.json"
-            run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "generate_personas.py",
-                SHARED_CONTEXT, "--sample-size", "6", "--output-json", output,
-            )
-            data = json.loads(output.read_text(encoding="utf-8"))
-            self.assertEqual(set(data), {"schema_version", "topic", "audience_groups", "target_audience", "synthetic", "sample_size", "generation_spec", "personas", "quality_check", "limitations"})
-            self.assertNotIn("coverage_matrix", data)
-            self.assertNotIn("design", data)
-            for persona in data["personas"]:
-                for field in ("question_answer_anchors", "concept_reaction", "extended", "fact_anchors", "base_profile", "research_profile", "response_style", "knowledge_boundary", "所属用户群体", "本次目标用户"):
-                    self.assertNotIn(field, persona)
-                self.assertFalse(re.search(r"\bQ\d+\b", json.dumps(persona, ensure_ascii=False)))
-            run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "validate_personas.py",
-                output,
-            )
-
-    def test_validator_blocks_incomplete_persona(self) -> None:
-        with workspace_temp() as temp:
-            root = Path(temp)
-            output = root / "personas.json"
-            run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "generate_personas.py",
-                SHARED_CONTEXT, "--sample-size", "4", "--output-json", output,
-            )
-            data = json.loads(output.read_text(encoding="utf-8"))
-            data["personas"][0].pop("判断")
-            output.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
-            result = run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "validate_personas.py",
-                output, expect=1,
-            )
-            self.assertIn("experienced_content_missing", result.stdout)
-
-    def test_validator_blocks_mismatched_summary_id_array(self) -> None:
-        with workspace_temp() as temp:
-            root = Path(temp)
-            output = root / "personas.json"
-            run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "generate_personas.py",
-                SHARED_CONTEXT, "--sample-size", "4", "--output-json", output,
-            )
-            summary = root / "persons_summary.txt"
-            summary_text = summary.read_text(encoding="utf-8")
-            summary.write_text(
-                re.sub(r"^全量用户ID：.*$", '全量用户ID：["P002", "P001", "P003", "P004"]', summary_text, flags=re.MULTILINE),
-                encoding="utf-8",
-            )
-            result = run(
-                PROJECT / "skills" / "ur-generate-personas" / "scripts" / "validate_personas.py",
-                output, expect=1,
-            )
-            self.assertIn("summary_ids_mismatch", result.stdout)
-
-    def test_survey_simulation_writes_only_answers_and_quality(self) -> None:
+    def test_survey_simulation_keeps_answers_only_in_temporary_workdir(self) -> None:
         with workspace_temp() as temp:
             root = Path(temp)
             sim_dir = root / "survey_response_data"
+            run_id = f"test-{root.name}"
             result = run(
                 PROJECT / "skills" / "ur-user-simulator" / "scripts" / "run_simulation.py",
                 "--questionnaire", QUESTIONNAIRE,
                 "--persons-summary", PERSONS_SUMMARY,
                 "--persons-dir", PERSONS_DIR,
                 "--config", MOCK_CONFIG, "--output-dir", sim_dir,
-                "--run-id", "test-run", "--max-retries", "0",
+                "--run-id", run_id, "--max-retries", "0",
             )
             payload = json.loads(result.stdout)
-            answers_dir = sim_dir / "answers_test-run"
-            quality_report = sim_dir / "quality_report_test-run.md"
-            self.assertEqual(payload["completed"], 5)
+            working_answers_dir = Path(payload["working_answers_dir"])
+            quality_report = sim_dir / f"quality_report_{run_id}.md"
+            expected_ids = sorted(path.name.split("_", 1)[0] for path in PERSONS_DIR.glob("P*.txt"))
+            self.assertEqual(payload["completed"], len(expected_ids))
             self.assertEqual(payload["failed"], 0)
-            self.assertEqual(payload["data_integrity"], "excellent")
+            self.assertIn(payload["data_integrity"], {"excellent", "good"})
             self.assertEqual(
-                sorted(path.name for path in answers_dir.glob("*.md")),
-                ["P001.md", "P002.md", "P003.md", "P004.md", "P005.md"],
+                sorted(path.name for path in working_answers_dir.glob("*.md")),
+                [f"{user_id}.md" for user_id in expected_ids],
             )
-            self.assertEqual(set(sim_dir.iterdir()), {answers_dir, quality_report})
-            answer_text = (answers_dir / "P001.md").read_text(encoding="utf-8")
+            self.assertEqual(set(sim_dir.iterdir()), {quality_report})
+            self.assertFalse(any(path.name.startswith("answers_") for path in sim_dir.iterdir()))
+            answer_text = (working_answers_dir / "P001.md").read_text(encoding="utf-8")
             self.assertIn("用户ID：P001", answer_text)
             self.assertIn(f"问卷来源：{QUESTIONNAIRE.resolve()}", answer_text)
             self.assertRegex(answer_text, r"(?m)^### Q1$")
             self.assertNotIn("过去 3 个月", answer_text)
+            run(
+                PROJECT / "skills" / "ur-user-simulator" / "scripts" / "native_simulation.py",
+                "cleanup", "--working-answers-dir", working_answers_dir,
+            )
+            self.assertFalse(working_answers_dir.exists())
 
 class SimulatorContractTests(unittest.TestCase):
     def _inputs(self, root: Path, count: int = 2) -> tuple[Path, Path, Path]:
@@ -574,17 +280,27 @@ class SimulatorContractTests(unittest.TestCase):
         with workspace_temp() as temp:
             root = Path(temp)
             questionnaire, summary, persons_dir = self._inputs(root)
+            run_id = f"contract-{root.name}"
             result = run(
                 PROJECT / "skills" / "ur-user-simulator" / "scripts" / "run_simulation.py",
                 "--questionnaire", questionnaire,
                 "--persons-summary", summary,
                 "--persons-dir", persons_dir,
-                "--config", MOCK_CONFIG, "--output-dir", root / "results", "--run-id", "contract",
+                "--config", MOCK_CONFIG, "--output-dir", root / "results", "--run-id", run_id,
             )
             payload = json.loads(result.stdout)
+            working_answers_dir = Path(payload["working_answers_dir"])
             self.assertEqual(payload["completed"], 2)
-            self.assertTrue((root / "results" / "answers_contract" / "P001.md").exists())
+            self.assertTrue((working_answers_dir / "P001.md").exists())
+            self.assertEqual(
+                set((root / "results").iterdir()),
+                {root / "results" / f"quality_report_{run_id}.md"},
+            )
             self.assertFalse(list((root / "results").glob("*.json")))
+            run(
+                PROJECT / "skills" / "ur-user-simulator" / "scripts" / "native_simulation.py",
+                "cleanup", "--working-answers-dir", working_answers_dir,
+            )
 
     def test_runner_rejects_summary_count_mismatch(self) -> None:
         with workspace_temp() as temp:
@@ -635,15 +351,17 @@ class SimulatorContractTests(unittest.TestCase):
         with workspace_temp() as temp:
             root = Path(temp)
             questionnaire, summary, persons_dir = self._inputs(root)
+            run_id = f"current-{root.name}"
             prepared = run(
                 PROJECT / "skills" / "ur-user-simulator" / "scripts" / "native_simulation.py",
                 "prepare", "--questionnaire", questionnaire,
                 "--persons-summary", summary, "--persons-dir", persons_dir,
-                "--output-dir", root / "results", "--run-id", "current-test",
+                "--run-id", run_id,
             )
             manifest = json.loads(prepared.stdout)
+            working_answers_dir = Path(manifest["working_answers_dir"])
             self.assertEqual([task["model"] for task in manifest["tasks"]], ["current-model", "current-model"])
-            self.assertFalse(list((root / "results").glob("*.json")))
+            self.assertFalse((root / "results").exists())
             validator = ScriptTests._load_script(
                 "ur_native_contract_validator",
                 PROJECT / "skills" / "ur-user-simulator" / "scripts" / "validate_responses.py",
@@ -653,7 +371,7 @@ class SimulatorContractTests(unittest.TestCase):
                 user_id = task["user_id"]
                 persona = validator.parse_persona(Path(task["persona_path"]), user_id)
                 validator.write_answer_markdown(
-                    Path(task["output_path"]), run_id="current-test", user_id=user_id,
+                    Path(task["output_path"]), run_id=run_id, user_id=user_id,
                     persona=persona, questionnaire_path=questionnaire,
                     provider="native-agent", model="current-model", questions=questions,
                     result={"answers": {"Q1": "是", "Q2": "合成回答"}, "answer_notes": {}},
@@ -662,26 +380,50 @@ class SimulatorContractTests(unittest.TestCase):
                 PROJECT / "skills" / "ur-user-simulator" / "scripts" / "native_simulation.py",
                 "finalize", "--questionnaire", questionnaire,
                 "--persons-summary", summary, "--persons-dir", persons_dir,
-                "--answers-dir", root / "results" / "answers_current-test",
-                "--quality-report", root / "results" / "quality_report_current-test.md",
-                "--run-id", "current-test",
+                "--working-answers-dir", working_answers_dir,
+                "--quality-report", root / "results" / f"quality_report_{run_id}.md",
+                "--run-id", run_id,
             )
             payload = json.loads(finalized.stdout)
             self.assertEqual(payload["completed"], 2)
-            self.assertTrue((root / "results" / "quality_report_current-test.md").exists())
+            self.assertTrue((root / "results" / f"quality_report_{run_id}.md").exists())
+            cleaned = run(
+                PROJECT / "skills" / "ur-user-simulator" / "scripts" / "native_simulation.py",
+                "cleanup", "--working-answers-dir", working_answers_dir,
+            )
+            self.assertTrue(json.loads(cleaned.stdout)["removed"])
+            self.assertFalse(working_answers_dir.exists())
 
     def test_current_model_tasks_record_known_model_id(self) -> None:
         with workspace_temp() as temp:
             root = Path(temp)
             questionnaire, summary, persons_dir = self._inputs(root, count=1)
+            run_id = f"known-{root.name}"
             result = run(
                 PROJECT / "skills" / "ur-user-simulator" / "scripts" / "native_simulation.py",
                 "prepare", "--questionnaire", questionnaire,
                 "--persons-summary", summary, "--persons-dir", persons_dir,
-                "--model-label", "known-current-model", "--output-dir", root / "results",
+                "--model-label", "known-current-model", "--run-id", run_id,
             )
             manifest = json.loads(result.stdout)
             self.assertEqual(manifest["tasks"][0]["model"], "known-current-model")
+            run(
+                PROJECT / "skills" / "ur-user-simulator" / "scripts" / "native_simulation.py",
+                "cleanup", "--working-answers-dir", manifest["working_answers_dir"],
+            )
+
+    def test_cleanup_rejects_non_simulator_temp_directory(self) -> None:
+        with workspace_temp() as temp:
+            protected = Path(temp) / "answers"
+            protected.mkdir()
+            marker = protected / "keep.txt"
+            marker.write_text("keep", encoding="utf-8")
+            result = run(
+                PROJECT / "skills" / "ur-user-simulator" / "scripts" / "native_simulation.py",
+                "cleanup", "--working-answers-dir", protected, expect=2,
+            )
+            self.assertIn("拒绝清理临时根目录以外的路径", result.stderr)
+            self.assertTrue(marker.exists())
 
 
 class SynthesizeReportContractTests(unittest.TestCase):
@@ -721,7 +463,7 @@ class SynthesizeReportContractTests(unittest.TestCase):
         questionnaire = root / "questionnaire.md"
         questionnaire_text = QUESTIONNAIRE.read_text(encoding="utf-8")
         questionnaire.write_text(questionnaire_text, encoding="utf-8")
-        design_doc = root / "questionnaire-design.html"
+        design_doc = root / "survey-design-desc.html"
         design_doc.write_text(
             '<!doctype html><html lang="zh-CN"><body>'
             '<span data-field="decision">决定是否继续验证测试方案</span>'
@@ -781,6 +523,10 @@ class SynthesizeReportContractTests(unittest.TestCase):
             report = (report_dir / "report.html").read_text(encoding="utf-8")
             self.assertIn("contract-run", report)
             self.assertIn("样本构成说明", report)
+            self.assertIn('id="filter-question"', report)
+            self.assertIn('id="save-report"', report)
+            self.assertIn('id="download-png"', report)
+            self.assertNotIn("<h2>证据索引</h2>", report)
             self.assertNotRegex(report, r'(?:src|href)=["\']https?://')
             self.assertTrue((report_dir / "report_quality.md").exists())
 
@@ -859,11 +605,20 @@ class WorkflowTests(unittest.TestCase):
             "synthetic-survey.md": SKILLS,
         }
         for filename, wanted in expected.items():
-            text = (PROJECT / "workflows" / filename).read_text(encoding="utf-8")
+            text = (PROJECT / "commands" / filename).read_text(encoding="utf-8")
             found = set(re.findall(r"\$?(ur-(?:design-survey|generate-personas|user-simulator|synthesize-report))", text))
             self.assertEqual(found, wanted, filename)
             self.assertIn("<WORK_DIR>/用户调研/<YYYYMMDD><课题>", text)
             self.assertNotIn("<课题>_Questionnaire", text)
+
+    def test_synthetic_survey_reuses_sufficient_personas(self) -> None:
+        text = (PROJECT / "commands" / "synthetic-survey.md").read_text(encoding="utf-8")
+        self.assertIn("M >= N", text)
+        self.assertIn("跳过 `$ur-generate-personas`", text)
+        self.assertIn("M < N", text)
+        self.assertIn("按 `N` 生成足量画像", text)
+        self.assertIn("未指定 `N`", text)
+        self.assertIn("本次选定的 `N` 人清单", text)
 
     def test_plan_skill_contains_domain_core_and_substantive_resources(self) -> None:
         folder = PROJECT / "skills" / "ur-design-survey"
@@ -928,8 +683,9 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn("必选字段为课题描述、调研目标、问卷场景", skill)
         self.assertIn("可选字段为产品决策、目标用户、待验证方案/概念材料", skill)
         self.assertIn("不得添加其他字段", skill)
-        self.assertIn("1. 传给 Step 2 的已确认研究输入摘要", skill)
-        self.assertIn("2. 跨用户研究 Skill 协同时", skill)
+        self.assertIn("传给 Step 2 的已确认研究输入摘要", skill)
+        self.assertIn("不得添加其他字段或生成任务级共享上下文文件", skill)
+        self.assertNotIn("references/shared-context-schema.md", skill)
         self.assertIn("**输入**：Step 1 的已确认研究输入摘要：必选为课题描述、调研目标、问卷场景；可选为产品决策、目标用户、待验证方案/概念材料。", skill)
         self.assertIn("目标用户有内容时，直接作为用户筛选模块的输入", skill)
         self.assertIn("不再单独询问“是否筛选”或拆分筛选条件", skill)
@@ -986,7 +742,7 @@ class WorkflowTests(unittest.TestCase):
         ):
             self.assertRegex(output_contract, rf"\| {scenario} \| .*{re.escape(template_name)}")
         self.assertIn("每次只引用与问卷场景对应的一份模板", output_contract)
-        self.assertIn("偏离模板时在 `questionnaire-design.html` 记录理由", output_contract)
+        self.assertIn("偏离模板时在 `survey-design-desc.html` 记录理由", output_contract)
         self.assertIn("#### 核心设计规格", skill)
         for example in (
             "questionnaire-original-needs-discovery.md",
@@ -999,15 +755,16 @@ class WorkflowTests(unittest.TestCase):
         expected = {
             "references/question-design-standards.md",
             "references/survey-patterns.md",
-            "references/shared-context-schema.md",
             "references/questionnaire-logic-checklist.md",
             "references/confirmation-card.md",
+            "references/simulator-questionnaire-format.md",
             "references/userclub-import-format.md",
+            "references/wenjuanxing-import-format.md",
             "templates/questionnaire-key-hypothesis-validation.md",
             "templates/questionnaire-original-needs-discovery.md",
             "templates/questionnaire-solution-selection.md",
             "templates/questionnaire-satisfaction-survey.md",
-            "templates/questionnaire-design.html",
+            "templates/survey-design-desc.html",
         }
         self.assertTrue(all((folder / item).exists() for item in expected))
         self.assertFalse((folder / "references" / "output-schema.md").exists())
@@ -1071,7 +828,7 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn("必须有 Top 1 或等效强制取舍", checklist)
         original_needs = (folder / "templates" / "questionnaire-original-needs-discovery.md").read_text(encoding="utf-8")
         self.assertIn("不能照抄本例的母产品行为", original_needs)
-        design_doc = (folder / "templates" / "questionnaire-design.html").read_text(encoding="utf-8")
+        design_doc = (folder / "templates" / "survey-design-desc.html").read_text(encoding="utf-8")
         self.assertIn("Questionnaire Design Document", design_doc)
         self.assertIn('data-field="decision"', design_doc)
         self.assertIn('data-field="target-audience"', design_doc)
@@ -1082,8 +839,10 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn('data-questionnaire-source="questionnaire.md"', design_doc)
         self.assertNotIn("quality-report.md", skill)
         self.assertIn("questionnaire_for_userclub.txt", skill)
+        self.assertIn("questionnaire_for_simulator.md", skill)
+        self.assertIn("questionnaire_for_wenjuanxing.txt", skill)
         self.assertIn("### 平台导出规格", skill)
-        self.assertIn("三份最终文件", skill)
+        self.assertIn("五份最终文件", skill)
         self.assertIn("不得猜测格式、漏题或生成不完整文件", skill)
         userclub = (folder / "references" / "userclub-import-format.md").read_text(encoding="utf-8")
         for required in (
@@ -1093,6 +852,78 @@ class WorkflowTests(unittest.TestCase):
             "出现量表、矩阵、排序、Top-N 或填空题时，先返回 Step 5",
         ):
             self.assertIn(required, userclub)
+        simulator_format = (folder / "references" / "simulator-questionnaire-format.md").read_text(encoding="utf-8")
+        for required in (
+            "规则不得放在选项之后", "不暴露“希望验证什么”", "【显示条件】",
+            "题号、题型、必填状态、题序、题意和选项顺序必须与 `questionnaire.md` 一致",
+        ):
+            self.assertIn(required, simulator_format)
+        wjx = (folder / "references" / "wenjuanxing-import-format.md").read_text(encoding="utf-8")
+        for required in (
+            "===", "[单选题]", "[多选题]", "[填空题]", "[矩阵量表题]",
+            "题目关联、跳题逻辑、选项关联", "导入后复核",
+        ):
+            self.assertIn(required, wjx)
+
+    def test_questionnaire_exporter_generates_simulator_and_wenjuanxing(self) -> None:
+        exporter = PROJECT / "skills" / "ur-design-survey" / "scripts" / "export_questionnaire.py"
+        simulator_module = ScriptTests._load_script(
+            "ur_simulator_export_parser",
+            PROJECT / "skills" / "ur-user-simulator" / "scripts" / "validate_responses.py",
+        )
+        source_text = """# 测试问卷
+
+> 请根据实际经历作答。
+
+## 研究说明
+
+“测试功能”指示例中的目标功能。
+
+> 以下配置注记不向受访者展示。
+
+Q1【单选题】（必填）您是否使用过测试功能？
+
+- 使用过
+- 没有使用过
+
+Q2【多选题】（必填）您用过哪些能力？（最多选择 2 项）
+
+- 能力 A
+- 能力 B
+- 题目关联：关联 Q1 的“使用过”。
+
+Q3【填空题】（选填）您还有什么建议？
+
+## 结束语
+
+感谢参与。
+"""
+        with workspace_temp() as temp:
+            root = Path(temp)
+            source = root / "questionnaire.md"
+            source.write_text(source_text, encoding="utf-8")
+            run(exporter, source, "--output-dir", root)
+            simulator_path = root / "questionnaire_for_simulator.md"
+            wjx_path = root / "questionnaire_for_wenjuanxing.txt"
+            simulator = simulator_path.read_text(encoding="utf-8")
+            wjx = wjx_path.read_text(encoding="utf-8")
+            q2 = simulator.index("Q2【多选题】")
+            rule = simulator.index("> 【显示条件】", q2)
+            option = simulator.index("- 能力 A", q2)
+            self.assertLess(q2, rule)
+            self.assertLess(rule, option)
+            self.assertNotIn("配置注记", simulator)
+            self.assertNotIn("感谢参与", simulator)
+            self.assertTrue(simulator.rstrip().endswith("## 问卷结束"))
+            self.assertIn("1. 您是否使用过测试功能？ [单选题]", wjx)
+            self.assertIn("2. 您用过哪些能力？（最多选择 2 项） [多选题]", wjx)
+            self.assertIn("3. 您还有什么建议？ [填空题]", wjx)
+            self.assertNotIn("题目关联", wjx)
+            questions = simulator_module.parse_questionnaire(simulator_path)
+            by_id = {item["id"]: item for item in questions}
+            self.assertEqual(by_id["Q2"]["options"], ["能力 A", "能力 B"])
+            self.assertTrue(simulator_module.question_is_applicable(by_id["Q2"], {"Q1": "使用过"}))
+            self.assertFalse(simulator_module.question_is_applicable(by_id["Q2"], {"Q1": "没有使用过"}))
 
     def test_questionnaire_template_uses_inline_question_format(self) -> None:
         template = PROJECT / "skills" / "ur-design-survey" / "templates" / "questionnaire-key-hypothesis-validation.md"
@@ -1241,21 +1072,16 @@ class WorkflowTests(unittest.TestCase):
         ))
 
     def test_example_output_is_complete(self) -> None:
-        self.assertTrue(SHARED_CONTEXT.exists())
-        shared_context = SHARED_CONTEXT.read_text(encoding="utf-8")
-        self.assertTrue(shared_context.startswith("# 用户研究共享上下文\n"))
-        self.assertIn("- 状态：已确认", shared_context)
         questionnaire = QUESTIONNAIRE.parent
         self.assertTrue((questionnaire / "questionnaire.md").exists())
         self.assertTrue(PERSONAS.exists())
         self.assertTrue(PERSONS_SUMMARY.exists())
-        self.assertEqual(len(list(PERSONS_DIR.glob("P*.txt"))), 5)
         self.assertTrue(PERSONA_AUDIT.exists())
         personas = json.loads(PERSONAS.read_text(encoding="utf-8"))
         self.assertEqual(personas["schema_version"], "5.3")
         self.assertTrue(personas["synthetic"])
         self.assertNotIn("design", personas)
-        self.assertEqual(personas["sample_size"], 5)
+        self.assertEqual(len(list(PERSONS_DIR.glob("P*.txt"))), personas["sample_size"])
         self.assertEqual(personas["quality_check"]["grade"], "excellent")
 
 

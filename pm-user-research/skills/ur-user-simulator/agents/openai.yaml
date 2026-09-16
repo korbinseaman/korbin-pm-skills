@@ -1,4 +1,4 @@
 interface:
   display_name: "合成用户调研模拟"
   short_description: "让合成画像独立回答问卷并汇总为一个 Excel"
-  default_prompt: "使用 $ur-user-simulator 让全部合成画像并行、独立回答问卷，保留个人答卷，将所有人的回答汇总到一个 Excel，并生成质量报告。"
+  default_prompt: "使用 $ur-user-simulator 让全部合成画像并行、独立回答问卷，将所有人的原回答只汇总到一个 Excel，并生成质量报告。"

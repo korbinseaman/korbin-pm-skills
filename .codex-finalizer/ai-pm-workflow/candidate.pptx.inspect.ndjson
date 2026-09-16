@@ -1,0 +1,519 @@
+{"kind":"deck","id":"pr/12hwkh","name":"Deck"}
+{"kind":"layout","layoutId":"07653f27-d093-4a8f-b138-b0f4c10b1d72","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"d8887e20-3a46-414e-a00a-33c2617775fa","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/51care","slide":1,"title":"从会聊天","textShapes":4}
+{"kind":"shape","id":"sh/ozy5kfe1","slide":1,"bbox":[0,0,650,720]}
+{"kind":"shape","id":"sh/p076t0fm","slide":1,"bbox":[72,100,12,92]}
+{"kind":"textbox","id":"sh/e9wnelgz","slide":1,"text":"从会聊天\n到能交付","textPreview":"从会聊天 | 到能交付","textChars":9,"textLines":2,"bbox":[112,94,500,190]}
+{"kind":"textbox","id":"sh/fuponqx4","slide":1,"text":"我的 AI 产品经理工作流演变","textPreview":"我的 AI 产品经理工作流演变","textChars":15,"textLines":1,"bbox":[114,306,440,54]}
+{"kind":"shape","id":"sh/gvy5gvyp","slide":1,"bbox":[114,404,304,0]}
+{"kind":"textbox","id":"sh/1w76p0fa","slide":1,"text":"Prompt    Context    Agent    Harness","textPreview":"Prompt    Context    Agent    Harness","textChars":37,"textLines":1,"bbox":[114,424,440,28]}
+{"kind":"textbox","id":"sh/65wnqlgn","slide":1,"text":"产品经理团队分享  |  45 min","textPreview":"产品经理团队分享  |  45 min","textChars":19,"textLines":1,"bbox":[114,614,360,28]}
+{"kind":"image","id":"im/q9ori18r","slide":1,"name":"","alt":"对话节点扩展为可执行工作系统的抽象主视觉","bbox":[0,0,1280,720]}
+{"kind":"notes","id":"nt/51care","slide":1,"text":"建议用时：1 分钟\n开场：过去一年，我不断更换 AI 使用方式。变化最大的并不是模型名称，而是我逐渐把工作方法变成了一个可执行、可检查的系统。今天分享这条演进路线，以及我如何把产品经理经验沉淀成 Skill。\n主视觉由图像生成工具制作，用于表达从单点对话到多工具工作系统的扩展。"}
+{"kind":"slide","id":"sl/27m71f","slide":2,"title":"同一个产品任务，四种完成方式","textShapes":18}
+{"kind":"shape","id":"sh/y503q1w3","slide":2,"bbox":[56,48,8,54]}
+{"kind":"textbox","id":"sh/l8b21gfu","slide":2,"text":"同一个产品任务，四种完成方式","textPreview":"同一个产品任务，四种完成方式","textChars":14,"textLines":1,"bbox":[84,42,1050,62]}
+{"kind":"textbox","id":"sh/k7ilsbe9","slide":2,"text":"开场","textPreview":"开场","textChars":2,"textLines":1,"bbox":[1040,54,174,28]}
+{"kind":"textbox","id":"sh/b29kv6xc","slide":2,"text":"图库 AI 清理：需求研究、竞品判断、PRD 与原型","textPreview":"图库 AI 清理：需求研究、竞品判断、PRD 与原型","textChars":26,"textLines":1,"bbox":[84,112,900,40]}
+{"kind":"textbox","id":"sh/ah03m1w7","slide":2,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[84,176,72,42]}
+{"kind":"shape","id":"sh/x4r2xgfi","slide":2,"bbox":[84,228,230,0]}
+{"kind":"textbox","id":"sh/c3ilobex","slide":2,"text":"对话","textPreview":"对话","textChars":2,"textLines":1,"bbox":[84,252,230,52]}
+{"kind":"textbox","id":"sh/nepkrmxg","slide":2,"text":"生成一份\n看起来完整的答案","textPreview":"生成一份 | 看起来完整的答案","textChars":13,"textLines":2,"bbox":[84,326,228,94]}
+{"kind":"textbox","id":"sh/2dgjihwv","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[370,176,72,42]}
+{"kind":"shape","id":"sh/0ji1sj65","slide":2,"bbox":[370,228,230,0]}
+{"kind":"textbox","id":"sh/1kri1o7q","slide":2,"text":"上下文","textPreview":"上下文","textChars":3,"textLines":1,"bbox":[370,252,230,52]}
+{"kind":"textbox","id":"sh/ex0jq98f","slide":2,"text":"基于资料回答\n结论更贴近事实","textPreview":"基于资料回答 | 结论更贴近事实","textChars":14,"textLines":2,"bbox":[370,326,228,94]}
+{"kind":"textbox","id":"sh/fy90zepk","slide":2,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[656,176,72,42]}
+{"kind":"shape","id":"sh/svi1ozq9","slide":2,"bbox":[656,228,230,0]}
+{"kind":"textbox","id":"sh/dwrix47u","slide":2,"text":"Agent","textPreview":"Agent","textChars":5,"textLines":1,"bbox":[656,252,230,52]}
+{"kind":"textbox","id":"sh/qtgjmp83","slide":2,"text":"查、写、运行\n完成多步任务","textPreview":"查、写、运行 | 完成多步任务","textChars":13,"textLines":2,"bbox":[656,326,228,94]}
+{"kind":"textbox","id":"sh/rup0vupo","slide":2,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[942,176,72,42]}
+{"kind":"shape","id":"sh/cr21036d","slide":2,"bbox":[942,228,230,0]}
+{"kind":"textbox","id":"sh/xsb2987y","slide":2,"text":"Harness","textPreview":"Harness","textChars":7,"textLines":1,"bbox":[942,252,230,52]}
+{"kind":"textbox","id":"sh/587idoz2","slide":2,"text":"按规则执行\n验证后再交付","textPreview":"按规则执行 | 验证后再交付","textChars":12,"textLines":2,"bbox":[942,326,228,94]}
+{"kind":"shape","id":"sh/k7y1kjyh","slide":2,"bbox":[84,494,1112,118]}
+{"kind":"textbox","id":"sh/j6p0byhw","slide":2,"text":"输出质量不仅由模型决定","textPreview":"输出质量不仅由模型决定","textChars":11,"textLines":1,"bbox":[118,510,380,42]}
+{"kind":"textbox","id":"sh/i5gjitgr","slide":2,"text":"材料、工具、权限、规则和验证方式共同决定交付结果","textPreview":"材料、工具、权限、规则和验证方式共同决定交付结果","textChars":24,"textLines":1,"bbox":[118,558,900,30]}
+{"kind":"textbox","id":"sh/x47i9oz6","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1160,670,52,22]}
+{"kind":"notes","id":"nt/27m71f","slide":2,"text":"建议用时：2 分钟\n用一个大家熟悉的任务做对照。聊天框适合快速启动，加入检索后事实基础更好，Agent 可以真正行动，Harness 则让这些行动在稳定的边界里发生。\n互动问题：大家最近一次因为 AI 输出看起来正确、但无法直接交付而返工，问题出在哪里？"}
+{"kind":"slide","id":"sl/pyp3fj","slide":3,"title":"AI 工作流的四层控制面","textShapes":16}
+{"kind":"shape","id":"sh/g3q1kr6h","slide":3,"bbox":[56,48,8,54]}
+{"kind":"textbox","id":"sh/v2h0bmpc","slide":3,"text":"AI 工作流的四层控制面","textPreview":"AI 工作流的四层控制面","textChars":12,"textLines":1,"bbox":[84,42,1050,62]}
+{"kind":"textbox","id":"sh/u1ojihor","slide":3,"text":"工作流演变","textPreview":"工作流演变","textChars":5,"textLines":1,"bbox":[1040,54,174,28]}
+{"kind":"shape","id":"sh/5szihw7e","slide":3,"bbox":[84,156,360,72]}
+{"kind":"textbox","id":"sh/4rq1or6t","slide":3,"text":"回答","textPreview":"回答","textChars":2,"textLines":1,"bbox":[112,162,124,58]}
+{"kind":"textbox","id":"sh/36h0f6p8","slide":3,"text":"这一轮怎么说","textPreview":"这一轮怎么说","textChars":6,"textLines":1,"bbox":[246,163,180,56]}
+{"kind":"shape","id":"sh/i58jm1on","slide":3,"bbox":[84,260,520,72]}
+{"kind":"textbox","id":"sh/lwfi5c7u","slide":3,"text":"知识","textPreview":"知识","textChars":2,"textLines":1,"bbox":[112,266,124,58]}
+{"kind":"textbox","id":"sh/kv6hc769","slide":3,"text":"看见什么材料","textPreview":"看见什么材料","textChars":6,"textLines":1,"bbox":[246,267,340,56]}
+{"kind":"shape","id":"sh/m5gzudwb","slide":3,"bbox":[84,364,720,72]}
+{"kind":"textbox","id":"sh/n6pg3idw","slide":3,"text":"行动","textPreview":"行动","textChars":2,"textLines":1,"bbox":[112,370,124,58]}
+{"kind":"textbox","id":"sh/8ryhw3eh","slide":3,"text":"如何调用工具","textPreview":"如何调用工具","textChars":6,"textLines":1,"bbox":[246,371,540,56]}
+{"kind":"shape","id":"sh/9s7y58v2","slide":3,"bbox":[84,468,960,72]}
+{"kind":"textbox","id":"sh/at0zydwn","slide":3,"text":"系统","textPreview":"系统","textChars":2,"textLines":1,"bbox":[112,474,124,58]}
+{"kind":"textbox","id":"sh/vu907id8","slide":3,"text":"在什么边界内完成","textPreview":"在什么边界内完成","textChars":8,"textLines":1,"bbox":[246,475,780,56]}
+{"kind":"textbox","id":"sh/wvih0ned","slide":3,"text":"Prompt","textPreview":"Prompt","textChars":6,"textLines":1,"bbox":[1038,164,150,28]}
+{"kind":"textbox","id":"sh/xwri9svy","slide":3,"text":"Context / RAG","textPreview":"Context / RAG","textChars":13,"textLines":1,"bbox":[1038,268,150,28]}
+{"kind":"textbox","id":"sh/ix0z2xwj","slide":3,"text":"Agent","textPreview":"Agent","textChars":5,"textLines":1,"bbox":[1038,372,150,28]}
+{"kind":"textbox","id":"sh/jy90b2d4","slide":3,"text":"Harness","textPreview":"Harness","textChars":7,"textLines":1,"bbox":[1038,476,150,28]}
+{"kind":"textbox","id":"sh/f2tgz2tc","slide":3,"text":"每次升级都保留前一层，并增加新的可控对象","textPreview":"每次升级都保留前一层，并增加新的可控对象","textChars":20,"textLines":1,"bbox":[84,612,800,36]}
+{"kind":"textbox","id":"sh/u1kfqxsr","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1160,670,52,22]}
+{"kind":"notes","id":"nt/pyp3fj","slide":3,"text":"建议用时：2 分钟\n这四层并非相互替代。好的 Agent 仍然需要好提示词，也需要好上下文。演变发生在控制面扩展：从回答、知识、行动到整个运行系统。后面的案例都可以放回这四层看。"}
+{"kind":"slide","id":"sl/duilpx","slide":4,"title":"第一阶段：提示词工程","textShapes":10}
+{"kind":"shape","id":"sh/4jmh8bip","slide":4,"bbox":[56,48,8,54]}
+{"kind":"textbox","id":"sh/jidgf6h4","slide":4,"text":"第一阶段：提示词工程","textPreview":"第一阶段：提示词工程","textChars":10,"textLines":1,"bbox":[84,42,1050,62]}
+{"kind":"textbox","id":"sh/ih4z610z","slide":4,"text":"工作流演变","textPreview":"工作流演变","textChars":5,"textLines":1,"bbox":[1040,54,174,28]}
+{"kind":"shape","id":"sh/t8filgzm","slide":4,"bbox":[84,142,54,54]}
+{"kind":"textbox","id":"sh/s76hcbi1","slide":4,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[84,143,54,52]}
+{"kind":"textbox","id":"sh/rmx0jqhg","slide":4,"text":"把需求写清楚","textPreview":"把需求写清楚","textChars":6,"textLines":1,"bbox":[154,140,220,60]}
+{"kind":"shape","id":"sh/6lozal0v","slide":4,"bbox":[84,230,586,316]}
+{"kind":"textbox","id":"sh/1czi90zi","slide":4,"text":"你是一名资深产品经理。\n\n请分析图库 AI 清理需求，输出：\n1. 用户痛点\n2. 核心场景\n3. 功能优先级\n\n参考下面示例格式……","textPreview":"你是一名资深产品经理。 |  | 请分析图库 AI 清理需求，输出： | 1. 用户痛点 | 2. 核心场景 | 3. 功能优先级 |  | 参考下面示例格式……","textChars":67,"textLines":8,"bbox":[118,256,516,250]}
+{"kind":"textbox","id":"sh/gb6hgvyx","slide":4,"text":"得到什么","textPreview":"得到什么","textChars":4,"textLines":1,"bbox":[738,162,180,34]}
+{"kind":"textbox","id":"sh/el87q98z","slide":4,"text":"快速启动\n表达结构更稳定\n适合单次创作与分析","textPreview":"快速启动 | 表达结构更稳定 | 适合单次创作与分析","textChars":22,"textLines":3,"bbox":[738,206,430,124]}
+{"kind":"shape","id":"sh/fmh8zep4","slide":4,"bbox":[738,358,430,0]}
+{"kind":"textbox","id":"sh/gna9sjqp","slide":4,"text":"为什么继续升级","textPreview":"为什么继续升级","textChars":7,"textLines":1,"bbox":[738,386,210,34]}
+{"kind":"textbox","id":"sh/1ojq147a","slide":4,"text":"背景反复输入\n长对话逐渐漂移\n来源与质量难复查","textPreview":"背景反复输入 | 长对话逐渐漂移 | 来源与质量难复查","textChars":23,"textLines":3,"bbox":[738,430,430,124]}
+{"kind":"textbox","id":"sh/2psru98v","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1160,670,52,22]}
+{"kind":"notes","id":"nt/duilpx","slide":4,"text":"建议用时：2 分钟\n提示词工程让我第一次能稳定获得结构化内容。我逐渐形成角色、任务、格式、示例、限制等写法。瓶颈也很明显：同类任务每次重新写，资料散落在对话里，结果很难复查。\n这一阶段的关键经验是：提示词适合定义一轮回答，无法单独承担长任务的状态管理。"}
+{"kind":"slide","id":"sl/7fd16f","slide":5,"title":"第二阶段：上下文工程与 RAG","textShapes":16}
+{"kind":"shape","id":"sh/0z6lk7ex","slide":5,"bbox":[56,48,8,54]}
+{"kind":"textbox","id":"sh/zyx4b2dc","slide":5,"text":"第二阶段：上下文工程与 RAG","textPreview":"第二阶段：上下文工程与 RAG","textChars":15,"textLines":1,"bbox":[84,42,1050,62]}
+{"kind":"textbox","id":"sh/yxo3ihwr","slide":5,"text":"工作流演变","textPreview":"工作流演变","textChars":5,"textLines":1,"bbox":[1040,54,174,28]}
+{"kind":"shape","id":"sh/94zmhwve","slide":5,"bbox":[84,132,54,54]}
+{"kind":"textbox","id":"sh/83qlorut","slide":5,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[84,133,54,52]}
+{"kind":"textbox","id":"sh/n2x4fmdo","slide":5,"text":"让模型看到正确材料","textPreview":"让模型看到正确材料","textChars":9,"textLines":1,"bbox":[154,130,220,60]}
+{"kind":"shape","id":"sh/m1o3mhw3","slide":5,"bbox":[92,236,180,46]}
+{"kind":"textbox","id":"sh/p8v25sva","slide":5,"text":"历史 PRD","textPreview":"历史 PRD","textChars":6,"textLines":1,"bbox":[108,236,150,46]}
+{"kind":"shape","id":"sh/o7mlcnep","slide":5,"bbox":[272,259,114,92]}
+{"kind":"shape","id":"sh/6lo7mtc7","slide":5,"bbox":[92,304,180,46]}
+{"kind":"textbox","id":"sh/7mh8fyts","slide":5,"text":"用户反馈","textPreview":"用户反馈","textChars":4,"textLines":1,"bbox":[108,304,150,46]}
+{"kind":"shape","id":"sh/snqpojud","slide":5,"bbox":[272,327,114,24]}
+{"kind":"shape","id":"sh/tozqhoby","slide":5,"bbox":[92,372,180,46]}
+{"kind":"textbox","id":"sh/up87qtcj","slide":5,"text":"设计规范","textPreview":"设计规范","textChars":4,"textLines":1,"bbox":[108,372,150,46]}
+{"kind":"shape","id":"sh/fqh8jyto","slide":5,"bbox":[272,351,114,44]}
+{"kind":"shape","id":"sh/grqps3u9","slide":5,"bbox":[92,440,180,46]}
+{"kind":"textbox","id":"sh/hszql8bu","slide":5,"text":"竞品证据","textPreview":"竞品证据","textChars":4,"textLines":1,"bbox":[108,440,150,46]}
+{"kind":"shape","id":"sh/2d87udcf","slide":5,"bbox":[272,351,114,112]}
+{"kind":"shape","id":"sh/3e18nit0","slide":5,"bbox":[390,304,126,126]}
+{"kind":"textbox","id":"sh/zi1obi98","slide":5,"text":"检索","textPreview":"检索","textChars":2,"textLines":1,"bbox":[390,320,126,48]}
+{"kind":"textbox","id":"sh/ehs7id8n","slide":5,"text":"分块 / 元数据","textPreview":"分块 / 元数据","textChars":8,"textLines":1,"bbox":[390,370,126,28]}
+{"kind":"shape","id":"sh/1kj6d8ry","slide":5,"bbox":[516,367,116,0]}
+{"kind":"shape","id":"sh/0japknqd","slide":5,"bbox":[636,290,176,152]}
+{"kind":"textbox","id":"sh/ru1o7y9w","slide":5,"text":"LLM","textPreview":"LLM","textChars":3,"textLines":1,"bbox":[636,314,176,56]}
+{"kind":"textbox","id":"sh/qt8netsb","slide":5,"text":"基于材料生成","textPreview":"基于材料生成","textChars":6,"textLines":1,"bbox":[636,372,176,36]}
+{"kind":"shape","id":"sh/dgj698r2","slide":5,"bbox":[812,367,96,0]}
+{"kind":"shape","id":"sh/cfapg3qh","slide":5,"bbox":[912,274,260,184]}
+{"kind":"textbox","id":"sh/3qho3y90","slide":5,"text":"带来源的回答","textPreview":"带来源的回答","textChars":6,"textLines":1,"bbox":[940,302,204,38]}
+{"kind":"textbox","id":"sh/2p8natsf","slide":5,"text":"事实更贴近业务\n版本边界更清楚\n可以追溯依据","textPreview":"事实更贴近业务 | 版本边界更清楚 | 可以追溯依据","textChars":22,"textLines":3,"bbox":[940,354,204,84]}
+{"kind":"shape","id":"sh/8jmdov21","slide":5,"bbox":[84,574,1088,64]}
+{"kind":"textbox","id":"sh/9kvux03m","slide":5,"text":"新的治理问题：检索结果是否相关、是否过期、是否冲突、是否有权限使用","textPreview":"新的治理问题：检索结果是否相关、是否过期、是否冲突、是否有权限使用","textChars":33,"textLines":1,"bbox":[108,574,1038,64]}
+{"kind":"textbox","id":"sh/mh4vmlkv","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1160,670,52,22]}
+{"kind":"notes","id":"nt/7fd16f","slide":5,"text":"建议用时：3 分钟\nRAG 把外部知识引入生成过程。对产品经理来说，历史 PRD、用户反馈、规范和竞品证据都能成为可检索上下文。\n需要强调：检索命中不代表结论可靠。仍然要治理版本、冲突、来源等级和权限。\n来源：Lewis 等，Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks，2020，https://arxiv.org/abs/2005.11401\n来源：Anthropic，Contextual Retrieval，https://www.anthropic.com/engineering/contextual-retrieval"}
+{"kind":"slide","id":"sl/vkbqby","slide":6,"title":"第三阶段：Agent 模式","textShapes":16}
+{"kind":"shape","id":"sh/f6hona5w","slide":6,"bbox":[56,48,8,54]}
+{"kind":"textbox","id":"sh/07qpgf6h","slide":6,"text":"第三阶段：Agent 模式","textPreview":"第三阶段：Agent 模式","textChars":13,"textLines":1,"bbox":[84,42,1050,62]}
+{"kind":"textbox","id":"sh/1sz6pkn2","slide":6,"text":"工作流演变","textPreview":"工作流演变","textChars":5,"textLines":1,"bbox":[1040,54,174,28]}
+{"kind":"shape","id":"sh/2t87i5on","slide":6,"bbox":[84,132,54,54]}
+{"kind":"textbox","id":"sh/nuhora58","slide":6,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[84,133,54,52]}
+{"kind":"textbox","id":"sh/ovqpkf6d","slide":6,"text":"把语言模型接入行动","textPreview":"把语言模型接入行动","textChars":9,"textLines":1,"bbox":[154,130,220,60]}
+{"kind":"shape","id":"sh/9wzqtkny","slide":6,"bbox":[150,292,126,126]}
+{"kind":"textbox","id":"sh/axs7mp4j","slide":6,"text":"理解目标","textPreview":"理解目标","textChars":4,"textLines":1,"bbox":[150,292,126,126]}
+{"kind":"shape","id":"sh/by18vu54","slide":6,"bbox":[276,277,74,78]}
+{"kind":"shape","id":"sh/r2xkrup4","slide":6,"bbox":[350,214,126,126]}
+{"kind":"textbox","id":"sh/q1ojyp8j","slide":6,"text":"规划步骤","textPreview":"规划步骤","textChars":4,"textLines":1,"bbox":[350,214,126,126]}
+{"kind":"shape","id":"sh/dof2t47a","slide":6,"bbox":[476,277,94,78]}
+{"kind":"shape","id":"sh/c3610zqp","slide":6,"bbox":[570,292,126,126]}
+{"kind":"textbox","id":"sh/3ydkna98","slide":6,"text":"调用工具","textPreview":"调用工具","textChars":4,"textLines":1,"bbox":[570,292,126,126]}
+{"kind":"shape","id":"sh/2x4ju58n","slide":6,"bbox":[696,277,84,78]}
+{"kind":"shape","id":"sh/p0f2pkry","slide":6,"bbox":[780,214,126,126]}
+{"kind":"textbox","id":"sh/4zm1wfqt","slide":6,"text":"观察结果","textPreview":"观察结果","textChars":4,"textLines":1,"bbox":[780,214,126,126]}
+{"kind":"shape","id":"sh/nuhkzepc","slide":6,"bbox":[906,277,92,78]}
+{"kind":"shape","id":"sh/mt83q98r","slide":6,"bbox":[998,292,126,126]}
+{"kind":"textbox","id":"sh/ypsnydsz","slide":6,"text":"修正交付","textPreview":"修正交付","textChars":4,"textLines":1,"bbox":[998,292,126,126]}
+{"kind":"shape","id":"sh/jql4ri9k","slide":6,"bbox":[220,418,840,122]}
+{"kind":"shape","id":"sh/kru50na5","slide":6,"bbox":[184,540,148,54]}
+{"kind":"textbox","id":"sh/ls3mt8rq","slide":6,"text":"搜索","textPreview":"搜索","textChars":2,"textLines":1,"bbox":[184,540,148,54]}
+{"kind":"shape","id":"sh/6dcn2dsb","slide":6,"bbox":[364,540,148,54]}
+{"kind":"textbox","id":"sh/7elovi9g","slide":6,"text":"浏览器","textPreview":"浏览器","textChars":3,"textLines":1,"bbox":[364,540,148,54]}
+{"kind":"shape","id":"sh/8fu54na1","slide":6,"bbox":[544,540,148,54]}
+{"kind":"textbox","id":"sh/tg36xsrm","slide":6,"text":"代码","textPreview":"代码","textChars":2,"textLines":1,"bbox":[544,540,148,54]}
+{"kind":"shape","id":"sh/mh8nqtsr","slide":6,"bbox":[724,540,148,54]}
+{"kind":"textbox","id":"sh/nih4jytc","slide":6,"text":"文件","textPreview":"文件","textChars":2,"textLines":1,"bbox":[724,540,148,54]}
+{"kind":"shape","id":"sh/5c7qpwbu","slide":6,"bbox":[904,540,148,54]}
+{"kind":"textbox","id":"sh/4bypwru9","slide":6,"text":"办公应用","textPreview":"办公应用","textChars":4,"textLines":1,"bbox":[904,540,148,54]}
+{"kind":"textbox","id":"sh/3ap8nmto","slide":6,"text":"产品经理开始审查目标、边界和关键决策","textPreview":"产品经理开始审查目标、边界和关键决策","textChars":18,"textLines":1,"bbox":[84,632,760,34]}
+{"kind":"textbox","id":"sh/i9w7uhcj","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1160,670,52,22]}
+{"kind":"notes","id":"nt/vkbqby","slide":6,"text":"建议用时：3 分钟\nAgent 的最小特征是模型能动态决定下一步并使用工具。工作方式从复制粘贴每一步，变为定义目标和边界，再审查关键决策与最终产物。\n要区分 workflow 和 agent。预定义路径更可控，动态路径更灵活。实际工作常常混合使用。\n来源：Anthropic，Building Effective Agents，https://www.anthropic.com/engineering/building-effective-agents\n来源：OpenAI API Quickstart，工具与 Agents SDK，https://platform.openai.com/docs/quickstart"}
+{"kind":"slide","id":"sl/b6ysfv","slide":7,"title":"第四阶段：Harness","textShapes":16}
+{"kind":"shape","id":"sh/6pcvex8r","slide":7,"bbox":[56,48,8,54]}
+{"kind":"textbox","id":"sh/ts3epcri","slide":7,"text":"第四阶段：Harness","textPreview":"第四阶段：Harness","textChars":12,"textLines":1,"bbox":[84,42,900,62]}
+{"kind":"textbox","id":"sh/srudg7qx","slide":7,"text":"工作流演变","textPreview":"工作流演变","textChars":5,"textLines":1,"bbox":[1040,54,174,28]}
+{"kind":"shape","id":"sh/jm1wji9g","slide":7,"bbox":[84,132,54,54]}
+{"kind":"textbox","id":"sh/ilsvax8v","slide":7,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[84,133,54,52]}
+{"kind":"textbox","id":"sh/5ojelsr6","slide":7,"text":"让 Agent 在受控环境中持续交付","textPreview":"让 Agent 在受控环境中持续交付","textChars":18,"textLines":1,"bbox":[154,130,220,60]}
+{"kind":"shape","id":"sh/4nadcnql","slide":7,"bbox":[160,168,900,62]}
+{"kind":"textbox","id":"sh/vy1cfi94","slide":7,"text":"目标与人工判断","textPreview":"目标与人工判断","textChars":7,"textLines":1,"bbox":[192,168,240,62]}
+{"kind":"textbox","id":"sh/ux8v6d8j","slide":7,"text":"任务边界、确认点、审批","textPreview":"任务边界、确认点、审批","textChars":11,"textLines":1,"bbox":[450,168,540,62]}
+{"kind":"shape","id":"sh/4buxgbmt","slide":7,"bbox":[194,252,832,62]}
+{"kind":"textbox","id":"sh/5c3e9g3e","slide":7,"text":"Skill 与规则","textPreview":"Skill 与规则","textChars":9,"textLines":1,"bbox":[226,252,240,62]}
+{"kind":"textbox","id":"sh/i9cfe14n","slide":7,"text":"专业流程、输入输出、使用边界","textPreview":"专业流程、输入输出、使用边界","textChars":14,"textLines":1,"bbox":[484,252,472,62]}
+{"kind":"shape","id":"sh/3alw76l8","slide":7,"bbox":[228,336,764,62]}
+{"kind":"textbox","id":"sh/g7udcrmh","slide":7,"text":"工具与权限","textPreview":"工具与权限","textChars":5,"textLines":1,"bbox":[260,336,240,62]}
+{"kind":"textbox","id":"sh/h83e5w32","slide":7,"text":"搜索、文件、代码、应用、沙箱","textPreview":"搜索、文件、代码、应用、沙箱","textChars":14,"textLines":1,"bbox":[518,336,404,62]}
+{"kind":"shape","id":"sh/u5sva14r","slide":7,"bbox":[262,420,696,62]}
+{"kind":"textbox","id":"sh/v61w36lc","slide":7,"text":"状态与产物","textPreview":"状态与产物","textChars":5,"textLines":1,"bbox":[294,420,240,62]}
+{"kind":"textbox","id":"sh/03exov21","slide":7,"text":"工作目录、版本、日志、共享上下文","textPreview":"工作目录、版本、日志、共享上下文","textChars":16,"textLines":1,"bbox":[552,420,336,62]}
+{"kind":"shape","id":"sh/14neh03m","slide":7,"bbox":[296,504,628,62]}
+{"kind":"textbox","id":"sh/9oj6lwre","slide":7,"text":"验证与反馈","textPreview":"验证与反馈","textChars":5,"textLines":1,"bbox":[328,504,240,62]}
+{"kind":"textbox","id":"sh/ona5crqt","slide":7,"text":"测试、检查器、渲染、评审","textPreview":"测试、检查器、渲染、评审","textChars":12,"textLines":1,"bbox":[586,504,268,62]}
+{"kind":"textbox","id":"sh/nmh4jm98","slide":7,"text":"Harness 管理长任务中的状态、边界与质量","textPreview":"Harness 管理长任务中的状态、边界与质量","textChars":23,"textLines":1,"bbox":[84,632,850,34]}
+{"kind":"textbox","id":"sh/ml8nah8n","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1160,670,52,22]}
+{"kind":"notes","id":"nt/b6ysfv","slide":7,"text":"建议用时：3 分钟\n我把 Harness 理解为 Agent 的工作环境与控制系统。它包括模型之外的规则、工具、目录、权限、状态、测试和人工确认点。\n长任务失败经常来自状态丢失、一次做太多、没有验证、错误覆盖产物。结构化文件、增量推进和 evaluator 能显著改善这些问题。\n来源：Anthropic，Effective Harnesses for Long-Running Agents，https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents\n来源：Anthropic，Harness Design for Long-Running Application Development，https://www.anthropic.com/engineering/harness-design-long-running-apps"}
+{"kind":"slide","id":"sl/uriyjv","slide":8,"title":"Agent 工具的能力演变","textShapes":19}
+{"kind":"shape","id":"sh/9ozihkj6","slide":8,"bbox":[56,48,8,54]}
+{"kind":"textbox","id":"sh/mloj650v","slide":8,"text":"Agent 工具的能力演变","textPreview":"Agent 工具的能力演变","textChars":13,"textLines":1,"bbox":[84,42,1050,62]}
+{"kind":"textbox","id":"sh/nmh0fa1g","slide":8,"text":"工具演变","textPreview":"工具演变","textChars":4,"textLines":1,"bbox":[1040,54,174,28]}
+{"kind":"shape","id":"sh/wrq1cfix","slide":8,"bbox":[92,350,1088,0]}
+{"kind":"shape","id":"sh/xsz2lkji","slide":8,"bbox":[112,328,44,44]}
+{"kind":"shape","id":"sh/ap8jap0r","slide":8,"bbox":[134,240,0,88]}
+{"kind":"textbox","id":"sh/vqh0ju1c","slide":8,"text":"2022","textPreview":"2022","textChars":4,"textLines":1,"bbox":[94,164,100,30]}
+{"kind":"textbox","id":"sh/cv610vit","slide":8,"text":"聊天框","textPreview":"聊天框","textChars":3,"textLines":1,"bbox":[94,198,184,38]}
+{"kind":"textbox","id":"sh/dwfi90je","slide":8,"text":"生成与改写","textPreview":"生成与改写","textChars":5,"textLines":1,"bbox":[94,242,184,60]}
+{"kind":"shape","id":"sh/hsf2l8ja","slide":8,"bbox":[332,328,44,44]}
+{"kind":"shape","id":"sh/gr61s32p","slide":8,"bbox":[354,372,0,78]}
+{"kind":"textbox","id":"sh/vqxkjy14","slide":8,"text":"2023","textPreview":"2023","textChars":4,"textLines":1,"bbox":[314,392,100,30]}
+{"kind":"textbox","id":"sh/upojqtkj","slide":8,"text":"检索与函数","textPreview":"检索与函数","textChars":5,"textLines":1,"bbox":[314,426,184,38]}
+{"kind":"textbox","id":"sh/5gz2psj6","slide":8,"text":"外部知识\n结构化调用","textPreview":"外部知识 | 结构化调用","textChars":10,"textLines":2,"bbox":[314,470,184,60]}
+{"kind":"shape","id":"sh/4fq1wn2l","slide":8,"bbox":[552,328,44,44]}
+{"kind":"shape","id":"sh/3uhkni10","slide":8,"bbox":[574,240,0,88]}
+{"kind":"textbox","id":"sh/itojudkv","slide":8,"text":"2024","textPreview":"2024","textChars":4,"textLines":1,"bbox":[534,164,100,30]}
+{"kind":"textbox","id":"sh/dkz2tsji","slide":8,"text":"代码与 MCP","textPreview":"代码与 MCP","textChars":7,"textLines":1,"bbox":[534,198,184,38]}
+{"kind":"textbox","id":"sh/sjq10n2x","slide":8,"text":"执行任务\n标准化连接","textPreview":"执行任务 | 标准化连接","textChars":10,"textLines":2,"bbox":[534,242,184,60]}
+{"kind":"shape","id":"sh/cnylwrat","slide":8,"bbox":[772,328,44,44]}
+{"kind":"shape","id":"sh/xo7mpwre","slide":8,"bbox":[794,372,0,78]}
+{"kind":"textbox","id":"sh/q1g3u1s3","slide":8,"text":"2025","textPreview":"2025","textChars":4,"textLines":1,"bbox":[754,392,100,30]}
+{"kind":"textbox","id":"sh/bmp4n69o","slide":8,"text":"Coding Agent","textPreview":"Coding Agent","textChars":12,"textLines":1,"bbox":[754,426,184,38]}
+{"kind":"textbox","id":"sh/kril0bq5","slide":8,"text":"真实工作区\n持续迭代","textPreview":"真实工作区 | 持续迭代","textChars":10,"textLines":2,"bbox":[754,470,184,60]}
+{"kind":"shape","id":"sh/lsrmtgrq","slide":8,"bbox":[992,328,44,44]}
+{"kind":"shape","id":"sh/ypg3y18z","slide":8,"bbox":[1014,240,0,88]}
+{"kind":"textbox","id":"sh/zq94r69k","slide":8,"text":"2026+","textPreview":"2026+","textChars":5,"textLines":1,"bbox":[974,164,100,30]}
+{"kind":"textbox","id":"sh/gvelo7a1","slide":8,"text":"Skills 与协作","textPreview":"Skills 与协作","textChars":10,"textLines":1,"bbox":[974,198,184,38]}
+{"kind":"textbox","id":"sh/1wnmhcr6","slide":8,"text":"复用流程\n多 Agent 编排","textPreview":"复用流程 | 多 Agent 编排","textChars":15,"textLines":2,"bbox":[974,242,184,60]}
+{"kind":"shape","id":"sh/3mxgjex0","slide":8,"bbox":[84,606,1090,48]}
+{"kind":"textbox","id":"sh/i14fa9wf","slide":8,"text":"任务越长、动作越多、风险越高，越需要清晰的权限和验证机制","textPreview":"任务越长、动作越多、风险越高，越需要清晰的权限和验证机制","textChars":28,"textLines":1,"bbox":[106,606,1046,48]}
+{"kind":"textbox","id":"sh/5ofylof6","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1160,670,52,22]}
+{"kind":"notes","id":"nt/uriyjv","slide":8,"text":"建议用时：2 分钟\n这页讲能力形态，不追求列全厂商。工具演变大致经历聊天生成、外部检索、结构化工具调用、标准化连接、真实工作区执行，以及 Skill 和多 Agent 复用。\nMCP 把资源、提示和工具抽象为标准连接。Coding Agent 把文件、命令、浏览器和验证放进同一个工作台。\n时间点用于表达典型演进，不代表某个单一产品的精确发布时间。\n来源：MCP 规范，https://modelcontextprotocol.io/specification/2024-11-05\n来源：OpenAI Developers，Codex 能力与插件，https://developers.openai.com/\n来源：OpenAI Model Guidance，工具调用与多 Agent，https://developers.openai.com/api/docs/guides/latest-model"}
+{"kind":"slide","id":"sl/sgqqxu","slide":9,"title":"我的产品经理 AI 工作流地图","textShapes":22}
+{"kind":"shape","id":"sh/zipsz6p4","slide":9,"bbox":[56,48,8,54]}
+{"kind":"textbox","id":"sh/0jy98b69","slide":9,"text":"我的产品经理 AI 工作流地图","textPreview":"我的产品经理 AI 工作流地图","textChars":15,"textLines":1,"bbox":[84,42,1050,62]}
+{"kind":"textbox","id":"sh/147a1g7u","slide":9,"text":"Skill 系统","textPreview":"Skill 系统","textChars":8,"textLines":1,"bbox":[1040,54,174,28]}
+{"kind":"textbox","id":"sh/m5gbalof","slide":9,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[84,142,62,30]}
+{"kind":"shape","id":"sh/n6ps3qp0","slide":9,"bbox":[84,184,174,0]}
+{"kind":"textbox","id":"sh/o7ytcv6l","slide":9,"text":"发现","textPreview":"发现","textChars":2,"textLines":1,"bbox":[84,204,174,48]}
+{"kind":"textbox","id":"sh/987a5g76","slide":9,"text":"用研\n竞品\n行业洞察","textPreview":"用研 | 竞品 | 行业洞察","textChars":10,"textLines":3,"bbox":[84,274,174,112]}
+{"kind":"shape","id":"sh/29cryhob","slide":9,"bbox":[258,186,48,0]}
+{"kind":"textbox","id":"sh/3a5srmpw","slide":9,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[306,142,62,30]}
+{"kind":"shape","id":"sh/fqx4ruh8","slide":9,"bbox":[306,184,174,0]}
+{"kind":"textbox","id":"sh/eponip0n","slide":9,"text":"定义","textPreview":"定义","textChars":2,"textLines":1,"bbox":[306,204,174,48]}
+{"kind":"textbox","id":"sh/1sfmt4ze","slide":9,"text":"机会判断\n需求拆解\n优先级","textPreview":"机会判断 | 需求拆解 | 优先级","textChars":13,"textLines":3,"bbox":[306,274,174,112]}
+{"kind":"shape","id":"sh/gr65kzit","slide":9,"bbox":[480,186,48,0]}
+{"kind":"textbox","id":"sh/rmd4nuhw","slide":9,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[528,142,62,30]}
+{"kind":"shape","id":"sh/6l4nep0b","slide":9,"bbox":[528,184,174,0]}
+{"kind":"textbox","id":"sh/tofmpkz2","slide":9,"text":"设计","textPreview":"设计","textChars":2,"textLines":1,"bbox":[528,204,174,48]}
+{"kind":"textbox","id":"sh/snm5gzih","slide":9,"text":"PRD\n交互文案\n原型","textPreview":"PRD | 交互文案 | 原型","textChars":11,"textLines":3,"bbox":[528,274,174,112]}
+{"kind":"shape","id":"sh/jid4jah0","slide":9,"bbox":[702,186,48,0]}
+{"kind":"textbox","id":"sh/ih43a50f","slide":9,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[750,142,62,30]}
+{"kind":"shape","id":"sh/mtknm5k7","slide":9,"bbox":[750,184,174,0]}
+{"kind":"textbox","id":"sh/nutovals","slide":9,"text":"验证","textPreview":"验证","textChars":2,"textLines":1,"bbox":[750,204,174,48]}
+{"kind":"textbox","id":"sh/8v25of2d","slide":9,"text":"Pilot\n数据分析\n规则检查","textPreview":"Pilot | 数据分析 | 规则检查","textChars":15,"textLines":3,"bbox":[750,274,174,112]}
+{"kind":"shape","id":"sh/9gb6xk3y","slide":9,"bbox":[924,186,48,0]}
+{"kind":"textbox","id":"sh/uh4nqpkj","slide":9,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[972,142,62,30]}
+{"kind":"shape","id":"sh/vidozul4","slide":9,"bbox":[972,184,174,0]}
+{"kind":"textbox","id":"sh/wjm5sf29","slide":9,"text":"沉淀","textPreview":"沉淀","textChars":2,"textLines":1,"bbox":[972,204,174,48]}
+{"kind":"textbox","id":"sh/hkv61k3u","slide":9,"text":"Skill\nWorkflow\n测试","textPreview":"Skill | Workflow | 测试","textChars":17,"textLines":3,"bbox":[972,274,174,112]}
+{"kind":"shape","id":"sh/il4nupkf","slide":9,"bbox":[84,444,1098,148]}
+{"kind":"textbox","id":"sh/jmdo3ul0","slide":9,"text":"原子 Skill","textPreview":"原子 Skill","textChars":8,"textLines":1,"bbox":[112,466,176,38]}
+{"kind":"textbox","id":"sh/tgzqton2","slide":9,"text":"问卷设计、画像、模拟作答、数据综合、竞品矩阵、产品文案","textPreview":"问卷设计、画像、模拟作答、数据综合、竞品矩阵、产品文案","textChars":27,"textLines":1,"bbox":[304,466,820,38]}
+{"kind":"shape","id":"sh/sf69kjmh","slide":9,"bbox":[112,522,1004,0]}
+{"kind":"textbox","id":"sh/rex8re5c","slide":9,"text":"Workflow","textPreview":"Workflow","textChars":8,"textLines":1,"bbox":[112,540,176,38]}
+{"kind":"textbox","id":"sh/6dorit4r","slide":9,"text":"围绕业务终点组合能力，并管理共享上下文、检查点和产物","textPreview":"围绕业务终点组合能力，并管理共享上下文、检查点和产物","textChars":26,"textLines":1,"bbox":[304,540,820,38]}
+{"kind":"textbox","id":"sh/1kzqx8ne","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1160,670,52,22]}
+{"kind":"notes","id":"nt/sgqqxu","slide":9,"text":"建议用时：2 分钟\n我用产品流程来组织 Skill，而不是按模型或软件分类。发现、定义、设计、验证和沉淀构成一条闭环。原子 Skill 保持单一职责，Workflow 围绕业务终点组合它们。"}
+{"kind":"slide","id":"sl/k0b7ad","slide":10,"title":"当前仓库：9 个 Skill 的产品经理能力栈","textShapes":21}
+{"kind":"shape","id":"sh/twbqt032","slide":10,"bbox":[56,48,8,54]}
+{"kind":"textbox","id":"sh/6tk7y54r","slide":10,"text":"当前仓库：9 个 Skill 的产品经理能力栈","textPreview":"当前仓库：9 个 Skill 的产品经理能力栈","textChars":23,"textLines":1,"bbox":[84,42,1050,62]}
+{"kind":"textbox","id":"sh/7ut8ralw","slide":10,"text":"Skill 系统","textPreview":"Skill 系统","textChars":8,"textLines":1,"bbox":[1040,54,174,28]}
+{"kind":"textbox","id":"sh/kr2pwvml","slide":10,"text":"9","textPreview":"9","textChars":1,"textLines":1,"bbox":[84,142,180,72]}
+{"kind":"textbox","id":"sh/5sbqp036","slide":10,"text":"Skills","textPreview":"Skills","textChars":6,"textLines":1,"bbox":[84,214,180,28]}
+{"kind":"textbox","id":"sh/i507ul4f","slide":10,"text":"29","textPreview":"29","textChars":2,"textLines":1,"bbox":[302,142,180,72]}
+{"kind":"textbox","id":"sh/j6983ql0","slide":10,"text":"References","textPreview":"References","textChars":10,"textLines":1,"bbox":[302,214,180,28]}
+{"kind":"textbox","id":"sh/w3ipsbm9","slide":10,"text":"21","textPreview":"21","textChars":2,"textLines":1,"bbox":[520,142,180,72]}
+{"kind":"textbox","id":"sh/x4rq1g3u","slide":10,"text":"Templates","textPreview":"Templates","textChars":9,"textLines":1,"bbox":[520,214,180,28]}
+{"kind":"textbox","id":"sh/90vqloj2","slide":10,"text":"19","textPreview":"19","textChars":2,"textLines":1,"bbox":[738,142,180,72]}
+{"kind":"textbox","id":"sh/8zmpcj2h","slide":10,"text":"Scripts","textPreview":"Scripts","textChars":7,"textLines":1,"bbox":[738,214,180,28]}
+{"kind":"textbox","id":"sh/7yd8je1w","slide":10,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[956,142,180,72]}
+{"kind":"textbox","id":"sh/mx47a9kr","slide":10,"text":"Workflows","textPreview":"Workflows","textChars":9,"textLines":1,"bbox":[956,214,180,28]}
+{"kind":"shape","id":"sh/lwv6h4j6","slide":10,"bbox":[84,270,1094,0]}
+{"kind":"shape","id":"sh/kvmp8z2l","slide":10,"bbox":[84,316,10,46]}
+{"kind":"textbox","id":"sh/zudofu10","slide":10,"text":"用户研究","textPreview":"用户研究","textChars":4,"textLines":1,"bbox":[116,316,170,46]}
+{"kind":"textbox","id":"sh/ytk76pkf","slide":10,"text":"问卷设计 / 画像 / 模拟作答 / 研究报告","textPreview":"问卷设计 / 画像 / 模拟作答 / 研究报告","textChars":23,"textLines":1,"bbox":[306,316,852,46]}
+{"kind":"shape","id":"sh/xsb6d43u","slide":10,"bbox":[84,388,10,46]}
+{"kind":"textbox","id":"sh/c72pkz29","slide":10,"text":"竞品分析","textPreview":"竞品分析","textChars":4,"textLines":1,"bbox":[116,388,170,46]}
+{"kind":"textbox","id":"sh/onqhgjeh","slide":10,"text":"单功能对比 / 动态追踪 / 系统应用矩阵","textPreview":"单功能对比 / 动态追踪 / 系统应用矩阵","textChars":21,"textLines":1,"bbox":[306,388,852,46]}
+{"kind":"shape","id":"sh/pozypof2","slide":10,"bbox":[84,460,10,46]}
+{"kind":"textbox","id":"sh/2l8zetwb","slide":10,"text":"洞察表达","textPreview":"洞察表达","textChars":4,"textLines":1,"bbox":[116,460,170,46]}
+{"kind":"textbox","id":"sh/nmhgnyxw","slide":10,"text":"手机发布会速递 / 证据账本 / PPTX","textPreview":"手机发布会速递 / 证据账本 / PPTX","textChars":21,"textLines":1,"bbox":[306,460,852,46]}
+{"kind":"shape","id":"sh/0j6xcjel","slide":10,"bbox":[84,532,10,46]}
+{"kind":"textbox","id":"sh/1kfylofq","slide":10,"text":"产品设计","textPreview":"产品设计","textChars":4,"textLines":1,"bbox":[116,532,170,46]}
+{"kind":"textbox","id":"sh/exofa9wf","slide":10,"text":"系统应用文案已完成，PRD 与原型待补齐","textPreview":"系统应用文案已完成，PRD 与原型待补齐","textChars":20,"textLines":1,"bbox":[306,532,852,46]}
+{"kind":"textbox","id":"sh/fyxgjex0","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1160,670,52,22]}
+{"kind":"notes","id":"nt/k0b7ad","slide":10,"text":"建议用时：2 分钟\n数据来自当前仓库文件清单。9 个 Skill、29 个 reference 文件、21 个模板、19 个脚本和 2 个 Workflow。\n这里要主动说明现状：用研和竞品已经形成较完整系统，PRD 与原型仍是下一组要建设的能力，当前只有系统应用文案 Skill。"}
+{"kind":"slide","id":"sl/4ai28l","slide":11,"title":"Skill 与 Workflow 的分工","textShapes":10}
+{"kind":"shape","id":"sh/ytkf2dgj","slide":11,"bbox":[56,48,8,54]}
+{"kind":"textbox","id":"sh/lwbyx8fa","slide":11,"text":"Skill 与 Workflow 的分工","textPreview":"Skill 与 Workflow 的分工","textChars":20,"textLines":1,"bbox":[84,42,1050,62]}
+{"kind":"textbox","id":"sh/0v2x43yp","slide":11,"text":"Skill 系统","textPreview":"Skill 系统","textChars":8,"textLines":1,"bbox":[1040,54,174,28]}
+{"kind":"shape","id":"sh/bq9wryxs","slide":11,"bbox":[84,150,488,366]}
+{"kind":"shape","id":"sh/q50fytgn","slide":11,"bbox":[116,180,94,34]}
+{"kind":"textbox","id":"sh/dsbet8fy","slide":11,"text":"Skill","textPreview":"Skill","textChars":5,"textLines":1,"bbox":[116,180,94,34]}
+{"kind":"textbox","id":"sh/cr2x03yd","slide":11,"text":"一个可独立验收的专业能力","textPreview":"一个可独立验收的专业能力","textChars":12,"textLines":1,"bbox":[116,236,402,48]}
+{"kind":"textbox","id":"sh/vmdg3ixc","slide":11,"text":"触发条件\n输入与输出契约\n判断规则与使用边界\n模板、脚本和质量检查","textPreview":"触发条件 | 输入与输出契约 | 判断规则与使用边界 | 模板、脚本和质量检查","textChars":33,"textLines":4,"bbox":[116,310,390,144]}
+{"kind":"shape","id":"sh/u14faxgr","slide":11,"bbox":[648,150,548,366]}
+{"kind":"shape","id":"sh/0bqlkbah","slide":11,"bbox":[680,180,204,34]}
+{"kind":"textbox","id":"sh/1cz2tgr2","slide":11,"text":"Workflow / Command","textPreview":"Workflow / Command","textChars":18,"textLines":1,"bbox":[680,180,204,34]}
+{"kind":"textbox","id":"sh/e9o3i1sb","slide":11,"text":"围绕业务终点组合多项能力","textPreview":"围绕业务终点组合多项能力","textChars":12,"textLines":1,"bbox":[680,236,454,48]}
+{"kind":"textbox","id":"sh/zaxkr69w","slide":11,"text":"调用顺序与依赖\n共享上下文与文件状态\n人工确认点\n失败恢复与最终交付","textPreview":"调用顺序与依赖 | 共享上下文与文件状态 | 人工确认点 | 失败恢复与最终交付","textChars":34,"textLines":4,"bbox":[680,310,420,144]}
+{"kind":"textbox","id":"sh/cn6lgral","slide":11,"text":"能单独验收的能力做 Skill\n需要管理依赖和状态的端到端任务做 Workflow","textPreview":"能单独验收的能力做 Skill | 需要管理依赖和状态的端到端任务做 Workflow","textChars":41,"textLines":2,"bbox":[84,566,1112,68]}
+{"kind":"textbox","id":"sh/dof2pwr6","slide":11,"text":"11","textPreview":"11","textChars":2,"textLines":1,"bbox":[1160,670,52,22]}
+{"kind":"notes","id":"nt/4ai28l","slide":11,"text":"建议用时：2 分钟\nSkill 类似岗位能力说明书，Workflow 类似跨岗位项目 SOP。拆分标准不是文件大小，而是能否独立验收。\n一个 Skill 应该能在不同任务中单独使用。一个 Workflow 需要管理多个 Skill 之间的依赖、状态和人工确认点。"}
+{"kind":"slide","id":"sl/htrwe9","slide":12,"title":"案例一：用户研究拆成四个原子 Skill","textShapes":19}
+{"kind":"shape","id":"sh/9wz258je","slide":12,"bbox":[56,48,8,54]}
+{"kind":"textbox","id":"sh/mto3atkn","slide":12,"text":"案例一：用户研究拆成四个原子 Skill","textPreview":"案例一：用户研究拆成四个原子 Skill","textChars":20,"textLines":1,"bbox":[84,42,1010,62]}
+{"kind":"textbox","id":"sh/7uxk3y18","slide":12,"text":"用研案例","textPreview":"用研案例","textChars":4,"textLines":1,"bbox":[1040,54,174,28]}
+{"kind":"textbox","id":"sh/wzqlg325","slide":12,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[84,144,60,32]}
+{"kind":"shape","id":"sh/hkzm98ja","slide":12,"bbox":[84,188,228,0]}
+{"kind":"textbox","id":"sh/ux83etkz","slide":12,"text":"ur-design-survey","textPreview":"ur-design-survey","textChars":16,"textLines":1,"bbox":[84,212,248,56]}
+{"kind":"textbox","id":"sh/vyhk7y1k","slide":12,"text":"把模糊课题变成\n可分析问卷","textPreview":"把模糊课题变成 | 可分析问卷","textChars":13,"textLines":2,"bbox":[84,286,238,92]}
+{"kind":"textbox","id":"sh/c3ml4j2l","slide":12,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[366,144,60,32]}
+{"kind":"shape","id":"sh/xov2doj6","slide":12,"bbox":[366,188,228,0]}
+{"kind":"textbox","id":"sh/1w72x8bq","slide":12,"text":"ur-generate-personas","textPreview":"ur-generate-personas","textChars":20,"textLines":1,"bbox":[366,212,248,56]}
+{"kind":"textbox","id":"sh/0vyl43ul","slide":12,"text":"生成分层、可审计的\n合成画像","textPreview":"生成分层、可审计的 | 合成画像","textChars":14,"textLines":2,"bbox":[366,286,238,92]}
+{"kind":"textbox","id":"sh/zupkvyd0","slide":12,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[648,144,60,32]}
+{"kind":"shape","id":"sh/etg32tcf","slide":12,"bbox":[648,188,228,0]}
+{"kind":"textbox","id":"sh/90r21sb2","slide":12,"text":"ur-user-simulator","textPreview":"ur-user-simulator","textChars":17,"textLines":1,"bbox":[648,212,248,56]}
+{"kind":"textbox","id":"sh/ozil8nuh","slide":12,"text":"隔离模拟作答\n记录质量与模型","textPreview":"隔离模拟作答 | 记录质量与模型","textChars":14,"textLines":2,"bbox":[648,286,238,92]}
+{"kind":"textbox","id":"sh/nypkzitw","slide":12,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[930,144,60,32]}
+{"kind":"shape","id":"sh/mxg36dcb","slide":12,"bbox":[930,188,228,0]}
+{"kind":"textbox","id":"sh/x4r25sby","slide":12,"text":"ur-synthesize-report","textPreview":"ur-synthesize-report","textChars":20,"textLines":1,"bbox":[930,212,248,56]}
+{"kind":"textbox","id":"sh/w3ilcnud","slide":12,"text":"清理数据并完成\n统计与证据综合","textPreview":"清理数据并完成 | 统计与证据综合","textChars":15,"textLines":2,"bbox":[930,286,238,92]}
+{"kind":"shape","id":"sh/gjadov61","slide":12,"bbox":[84,434,1112,112]}
+{"kind":"textbox","id":"sh/hkjex0nm","slide":12,"text":"为什么拆分","textPreview":"为什么拆分","textChars":5,"textLines":1,"bbox":[112,456,164,32]}
+{"kind":"textbox","id":"sh/uhsvmlov","slide":12,"text":"每一步的输入、风险和验收方式不同，可以单用，也可以组合","textPreview":"每一步的输入、风险和验收方式不同，可以单用，也可以组合","textChars":27,"textLines":1,"bbox":[296,456,830,32]}
+{"kind":"textbox","id":"sh/fi1wvq5g","slide":12,"text":"使用边界","textPreview":"使用边界","textChars":4,"textLines":1,"bbox":[112,500,164,32]}
+{"kind":"textbox","id":"sh/47adsf6x","slide":12,"text":"合成用户用于 Pilot、管线验证和提出假设，不替代真实用户研究","textPreview":"合成用户用于 Pilot、管线验证和提出假设，不替代真实用户研究","textChars":32,"textLines":1,"bbox":[296,500,830,32]}
+{"kind":"textbox","id":"sh/p83e10ni","slide":12,"text":"12","textPreview":"12","textChars":2,"textLines":1,"bbox":[1160,670,52,22]}
+{"kind":"notes","id":"nt/htrwe9","slide":12,"text":"建议用时：2 分钟\n用户研究最初是一条很长的提示词，后来我发现问卷、画像、作答和报告拥有完全不同的输入契约与风险，因此拆成四个原子 Skill。\n合成研究必须明确使用边界：它适合检查问卷和数据管线、暴露假设，不能用于估计真实市场比例或替代真实用户。"}
+{"kind":"slide","id":"sl/wdgl37","slide":13,"title":"深拆 Skill：ur-design-survey","textShapes":24}
+{"kind":"shape","id":"sh/g7yl87md","slide":13,"bbox":[56,48,8,54]}
+{"kind":"textbox","id":"sh/f6pkf25s","slide":13,"text":"深拆 Skill：ur-design-survey","textPreview":"深拆 Skill：ur-design-survey","textChars":25,"textLines":1,"bbox":[84,42,1050,62]}
+{"kind":"textbox","id":"sh/e5gj6x47","slide":13,"text":"用研案例","textPreview":"用研案例","textChars":4,"textLines":1,"bbox":[1040,54,174,28]}
+{"kind":"shape","id":"sh/t472dsnm","slide":13,"bbox":[84,154,46,46]}
+{"kind":"textbox","id":"sh/s3y14nm1","slide":13,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[84,154,46,46]}
+{"kind":"textbox","id":"sh/r2pkb25g","slide":13,"text":"确认研究方向","textPreview":"确认研究方向","textChars":6,"textLines":1,"bbox":[64,214,130,56]}
+{"kind":"shape","id":"sh/61gj2x4b","slide":13,"bbox":[130,177,138,0]}
+{"kind":"shape","id":"sh/50n29snq","slide":13,"bbox":[268,154,46,46]}
+{"kind":"textbox","id":"sh/4fe10nm5","slide":13,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[268,154,46,46]}
+{"kind":"textbox","id":"sh/y5wjmt07","slide":13,"text":"目标与证据","textPreview":"目标与证据","textChars":5,"textLines":1,"bbox":[248,214,130,56]}
+{"kind":"shape","id":"sh/j650vyhs","slide":13,"bbox":[314,177,138,0]}
+{"kind":"shape","id":"sh/k7e1o3id","slide":13,"bbox":[452,154,46,46]}
+{"kind":"textbox","id":"sh/l8nix8zy","slide":13,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[452,154,46,46]}
+{"kind":"textbox","id":"sh/ahczit0b","slide":13,"text":"模块蓝图","textPreview":"模块蓝图","textChars":4,"textLines":1,"bbox":[432,214,130,56]}
+{"kind":"shape","id":"sh/bil0ry1w","slide":13,"bbox":[498,177,138,0]}
+{"kind":"shape","id":"sh/wje1k3ih","slide":13,"bbox":[636,154,46,46]}
+{"kind":"textbox","id":"sh/x4nit8j2","slide":13,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[636,154,46,46]}
+{"kind":"textbox","id":"sh/mdcze90f","slide":13,"text":"设计题目","textPreview":"设计题目","textChars":4,"textLines":1,"bbox":[616,214,130,56]}
+{"kind":"shape","id":"sh/nel0ne1k","slide":13,"bbox":[682,177,138,0]}
+{"kind":"shape","id":"sh/rihgfahc","slide":13,"bbox":[820,154,46,46]}
+{"kind":"textbox","id":"sh/qh8fmpg7","slide":13,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[820,154,46,46]}
+{"kind":"textbox","id":"sh/dkjyhkzi","slide":13,"text":"逻辑审查","textPreview":"逻辑审查","textChars":4,"textLines":1,"bbox":[800,214,130,56]}
+{"kind":"shape","id":"sh/cjqxofyx","slide":13,"bbox":[866,177,138,0]}
+{"kind":"shape","id":"sh/zm1gjuho","slide":13,"bbox":[1004,154,46,46]}
+{"kind":"textbox","id":"sh/elsfqpg3","slide":13,"text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[1004,154,46,46]}
+{"kind":"textbox","id":"sh/1ojyl4fu","slide":13,"text":"双格式交付","textPreview":"双格式交付","textChars":5,"textLines":1,"bbox":[984,214,130,56]}
+{"kind":"shape","id":"sh/0naxszy9","slide":13,"bbox":[84,304,1096,0]}
+{"kind":"shape","id":"sh/fqxw7qhk","slide":13,"bbox":[84,344,238,194]}
+{"kind":"shape","id":"sh/upofe5gz","slide":13,"bbox":[84,344,238,8]}
+{"kind":"textbox","id":"sh/kvmdoreh","slide":13,"text":"主 Skill","textPreview":"主 Skill","textChars":7,"textLines":1,"bbox":[106,372,194,38]}
+{"kind":"textbox","id":"sh/5wvuhwf2","slide":13,"text":"流程合同\n触发与排除\n输入输出","textPreview":"流程合同 | 触发与排除 | 输入输出","textChars":15,"textLines":3,"bbox":[106,424,194,94]}
+{"kind":"shape","id":"sh/it4vm1wr","slide":13,"bbox":[358,344,238,194]}
+{"kind":"shape","id":"sh/judcfmxw","slide":13,"bbox":[358,344,238,8]}
+{"kind":"textbox","id":"sh/wr2tkrel","slide":13,"text":"References","textPreview":"References","textChars":10,"textLines":1,"bbox":[380,372,194,38]}
+{"kind":"textbox","id":"sh/xsbudwf6","slide":13,"text":"研究方法\n题目标准\n逻辑清单","textPreview":"研究方法 | 题目标准 | 逻辑清单","textChars":14,"textLines":3,"bbox":[380,424,194,94]}
+{"kind":"shape","id":"sh/apkbihwf","slide":13,"bbox":[632,344,238,194]}
+{"kind":"shape","id":"sh/vqtcbmx0","slide":13,"bbox":[632,344,238,8]}
+{"kind":"textbox","id":"sh/gn6dwbep","slide":13,"text":"Templates","textPreview":"Templates","textChars":9,"textLines":1,"bbox":[654,372,194,38]}
+{"kind":"textbox","id":"sh/hofupgva","slide":13,"text":"四类场景\n确认卡\n平台格式","textPreview":"四类场景 | 确认卡 | 平台格式","textChars":13,"textLines":3,"bbox":[654,424,194,94]}
+{"kind":"shape","id":"sh/dwni1orq","slide":13,"bbox":[906,344,238,194]}
+{"kind":"shape","id":"sh/sve1sjq5","slide":13,"bbox":[906,344,238,8]}
+{"kind":"textbox","id":"sh/ru50ze9k","slide":13,"text":"Scripts","textPreview":"Scripts","textChars":7,"textLines":1,"bbox":[928,372,194,38]}
+{"kind":"textbox","id":"sh/qtwjq98z","slide":13,"text":"结构检查\n逻辑 lint\n文件校验","textPreview":"结构检查 | 逻辑 lint | 文件校验","textChars":17,"textLines":3,"bbox":[928,424,194,94]}
+{"kind":"textbox","id":"sh/1k7i5orm","slide":13,"text":"生成前确认方向，交付前运行确定性校验","textPreview":"生成前确认方向，交付前运行确定性校验","textChars":18,"textLines":1,"bbox":[84,582,1096,44]}
+{"kind":"textbox","id":"sh/0jy1wjq1","slide":13,"text":"13","textPreview":"13","textChars":2,"textLines":1,"bbox":[1160,670,52,22]}
+{"kind":"notes","id":"nt/wdgl37","slide":13,"text":"建议用时：3 分钟\n现场可以打开 SKILL.md，只展示三块：触发与排除、输入契约、六步流程。\n这个 Skill 的关键设计有两点。第一，生成前用确认卡锁定研究方向，避免问卷做完才发现目标错了。第二，Agent 负责专业判断，脚本负责题目结构、跳转和格式等确定性检查。\n本页内容依据仓库：pm-user-research/skills/ur-design-survey/SKILL.md。"}
+{"kind":"slide","id":"sl/pwu3y7","slide":14,"title":"深拆 Command：synthetic-survey","textShapes":20}
+{"kind":"shape","id":"sh/9o7q90fq","slide":14,"bbox":[56,48,8,54]}
+{"kind":"textbox","id":"sh/m1g7elgz","slide":14,"text":"深拆 Command：synthetic-survey","textPreview":"深拆 Command：synthetic-survey","textChars":27,"textLines":1,"bbox":[84,42,1050,62]}
+{"kind":"textbox","id":"sh/n2p87qxk","slide":14,"text":"用研案例","textPreview":"用研案例","textChars":4,"textLines":1,"bbox":[1040,54,174,28]}
+{"kind":"textbox","id":"sh/wripkvy1","slide":14,"text":"文件契约把状态从聊天记忆中移出来","textPreview":"文件契约把状态从聊天记忆中移出来","textChars":16,"textLines":1,"bbox":[84,112,820,42]}
+{"kind":"shape","id":"sh/xsrqd0fm","slide":14,"bbox":[84,204,202,68]}
+{"kind":"textbox","id":"sh/apg7i5gv","slide":14,"text":"shared_context.md","textPreview":"shared_context.md","textChars":17,"textLines":1,"bbox":[84,204,202,68]}
+{"kind":"shape","id":"sh/vqp8baxg","slide":14,"bbox":[286,238,44,0]}
+{"kind":"shape","id":"sh/cvep8byx","slide":14,"bbox":[330,204,202,68]}
+{"kind":"textbox","id":"sh/dwn61gfi","slide":14,"text":"questionnaire.md","textPreview":"questionnaire.md","textChars":16,"textLines":1,"bbox":[330,204,202,68]}
+{"kind":"shape","id":"sh/1kzadczi","slide":14,"bbox":[532,238,44,0]}
+{"kind":"shape","id":"sh/0j69k7yx","slide":14,"bbox":[576,204,202,68]}
+{"kind":"textbox","id":"sh/fixsb2hc","slide":14,"text":"personas.json","textPreview":"personas.json","textChars":13,"textLines":1,"bbox":[576,204,202,68]}
+{"kind":"shape","id":"sh/ehorixgr","slide":14,"bbox":[778,238,44,0]}
+{"kind":"shape","id":"sh/p8zahcze","slide":14,"bbox":[822,204,202,68]}
+{"kind":"textbox","id":"sh/o7q9oryt","slide":14,"text":"responses.xlsx","textPreview":"responses.xlsx","textChars":14,"textLines":1,"bbox":[822,204,202,68]}
+{"kind":"shape","id":"sh/n6hsfmho","slide":14,"bbox":[1024,238,44,0]}
+{"kind":"shape","id":"sh/258rmhg3","slide":14,"bbox":[1068,204,128,68]}
+{"kind":"textbox","id":"sh/xcjalwzq","slide":14,"text":"report.html","textPreview":"report.html","textChars":11,"textLines":1,"bbox":[1068,204,128,68]}
+{"kind":"textbox","id":"sh/cbq9sry5","slide":14,"text":"研究设计","textPreview":"研究设计","textChars":4,"textLines":1,"bbox":[270,292,120,28]}
+{"kind":"textbox","id":"sh/wfitov6h","slide":14,"text":"画像生成","textPreview":"画像生成","textChars":4,"textLines":1,"bbox":[516,292,120,28]}
+{"kind":"textbox","id":"sh/hgrux07m","slide":14,"text":"并行模拟","textPreview":"并行模拟","textChars":4,"textLines":1,"bbox":[762,292,120,28]}
+{"kind":"textbox","id":"sh/udgbm5ob","slide":14,"text":"数据综合","textPreview":"数据综合","textChars":4,"textLines":1,"bbox":[1008,292,120,28]}
+{"kind":"shape","id":"sh/vepcvqpw","slide":14,"bbox":[84,364,1112,170]}
+{"kind":"textbox","id":"sh/4jitsf6d","slide":14,"text":"Command 管理的不是调用次数","textPreview":"Command 管理的不是调用次数","textChars":17,"textLines":1,"bbox":[114,388,430,42]}
+{"kind":"shape","id":"sh/5kru1k7y","slide":14,"bbox":[116,458,24,24]}
+{"kind":"textbox","id":"sh/ih0bq5o7","slide":14,"text":"依赖顺序","textPreview":"依赖顺序","textChars":4,"textLines":1,"bbox":[150,444,142,52]}
+{"kind":"shape","id":"sh/ji9czaps","slide":14,"bbox":[318,458,24,24]}
+{"kind":"textbox","id":"sh/0netgb69","slide":14,"text":"共享状态","textPreview":"共享状态","textChars":4,"textLines":1,"bbox":[352,444,142,52]}
+{"kind":"shape","id":"sh/lo7upg7u","slide":14,"bbox":[520,458,24,24]}
+{"kind":"textbox","id":"sh/nexobid8","slide":14,"text":"人工确认点","textPreview":"人工确认点","textChars":5,"textLines":1,"bbox":[554,444,142,52]}
+{"kind":"shape","id":"sh/2donidc3","slide":14,"bbox":[722,458,24,24]}
+{"kind":"textbox","id":"sh/pgf6dsve","slide":14,"text":"失败恢复","textPreview":"失败恢复","textChars":4,"textLines":1,"bbox":[756,444,142,52]}
+{"kind":"shape","id":"sh/of65knut","slide":14,"bbox":[924,458,24,24]}
+{"kind":"textbox","id":"sh/fqdo7ydc","slide":14,"text":"产物路径","textPreview":"产物路径","textChars":4,"textLines":1,"bbox":[958,444,142,52]}
+{"kind":"textbox","id":"sh/ep4nedcr","slide":14,"text":"问卷、画像、个人答卷、Excel、质量报告和离线报告均可独立复查","textPreview":"问卷、画像、个人答卷、Excel、质量报告和离线报告均可独立复查","textChars":32,"textLines":1,"bbox":[84,578,1112,44]}
+{"kind":"textbox","id":"sh/1cf698vi","slide":14,"text":"14","textPreview":"14","textChars":2,"textLines":1,"bbox":[1160,670,52,22]}
+{"kind":"notes","id":"nt/pwu3y7","slide":14,"text":"建议用时：3 分钟\nWorkflow 的价值不是连续调用四次，而是管理依赖和状态。每一步通过文件契约交付，下一步只读取约定文件。这样任务跨多轮甚至跨工具时仍能恢复。\n需要保留人工确认点，包括研究方向、问卷定稿、异常样本排除和结论审阅。\n本页内容依据仓库：pm-user-research/workflows/synthetic-survey.md 与 pm-user-research/README.md。"}
+{"kind":"slide","id":"sl/1edpne","slide":15,"title":"案例二：竞品矩阵是一套证据系统","textShapes":9}
+{"kind":"shape","id":"sh/fah8fapk","slide":15,"bbox":[56,48,8,54]}
+{"kind":"textbox","id":"sh/gbq9of65","slide":15,"text":"案例二：竞品矩阵是一套证据系统","textPreview":"案例二：竞品矩阵是一套证据系统","textChars":15,"textLines":1,"bbox":[84,42,1050,62]}
+{"kind":"textbox","id":"sh/1czqhk7q","slide":15,"text":"竞品案例","textPreview":"竞品案例","textChars":4,"textLines":1,"bbox":[1040,54,174,28]}
+{"kind":"shape","id":"sh/2d8rqpov","slide":15,"bbox":[84,144,1040,58]}
+{"kind":"textbox","id":"sh/3e1sjupg","slide":15,"text":"Research Question","textPreview":"Research Question","textChars":17,"textLines":1,"bbox":[84,144,1040,58]}
+{"kind":"shape","id":"sh/ofa9sz61","slide":15,"bbox":[154,222,900,58]}
+{"kind":"textbox","id":"sh/pgjal47m","slide":15,"text":"竞品集合 + Feature Schema","textPreview":"竞品集合 + Feature Schema","textChars":21,"textLines":1,"bbox":[154,222,900,58]}
+{"kind":"shape","id":"sh/ihorelor","slide":15,"bbox":[224,300,760,58]}
+{"kind":"textbox","id":"sh/jix87qpc","slide":15,"text":"UI / 机制 / 定量 / 来源","textPreview":"UI / 机制 / 定量 / 来源","textChars":17,"textLines":1,"bbox":[224,300,760,58]}
+{"kind":"shape","id":"sh/fi9s36to","slide":15,"bbox":[294,378,620,58]}
+{"kind":"textbox","id":"sh/eh0ba1c3","slide":15,"text":"Feature Matrix + 证据明细","textPreview":"Feature Matrix + 证据明细","textChars":21,"textLines":1,"bbox":[294,378,620,58]}
+{"kind":"shape","id":"sh/1kra5gbu","slide":15,"bbox":[364,456,480,58]}
+{"kind":"textbox","id":"sh/0jitcbu9","slide":15,"text":"评分 / 定位图 / 产品方向","textPreview":"评分 / 定位图 / 产品方向","textChars":15,"textLines":1,"bbox":[364,456,480,58]}
+{"kind":"shape","id":"sh/re9sz6ts","slide":15,"bbox":[84,574,1090,58]}
+{"kind":"textbox","id":"sh/qtgr61c7","slide":15,"text":"“没有找到”保持未知，不自动写成“不支持”","textPreview":"“没有找到”保持未知，不自动写成“不支持”","textChars":21,"textLines":1,"bbox":[108,574,1042,58]}
+{"kind":"textbox","id":"sh/dgra1wby","slide":15,"text":"15","textPreview":"15","textChars":2,"textLines":1,"bbox":[1160,670,52,22]}
+{"kind":"notes","id":"nt/1edpne","slide":15,"text":"建议用时：3 分钟\n竞品分析最容易退化成搜索结果拼贴。这个 Skill 先定义问题、竞品选择和 Feature Schema，再收集 UI、机制、定量与来源证据，最后才做状态判断和产品建议。\n一个关键硬规则是：没有找到证据只能标记未知，不能自动推断为竞品不支持。\n目录设计采用瘦主 Skill。References 放专业判断，Config 放常量，Scripts 放并行研究与图表重生成，Templates 固定交付结构。\n本页内容依据仓库：pm-competitor-analysis/pm-system-app-competitor-matrix/SKILL.md 与 README.md。"}
+{"kind":"slide","id":"sl/otcm5a","slide":16,"title":"PRD 与原型：下一组需要补齐的 Skill","textShapes":16}
+{"kind":"shape","id":"sh/1g3ids32","slide":16,"bbox":[56,48,8,54]}
+{"kind":"textbox","id":"sh/edczidkb","slide":16,"text":"PRD 与原型：下一组需要补齐的 Skill","textPreview":"PRD 与原型：下一组需要补齐的 Skill","textChars":22,"textLines":1,"bbox":[84,42,1050,62]}
+{"kind":"textbox","id":"sh/fel0bilw","slide":16,"text":"设计闭环","textPreview":"设计闭环","textChars":4,"textLines":1,"bbox":[1040,54,174,28]}
+{"kind":"shape","id":"sh/o3ehon2d","slide":16,"bbox":[84,190,214,176]}
+{"kind":"textbox","id":"sh/p4nihs3y","slide":16,"text":"研究证据","textPreview":"研究证据","textChars":4,"textLines":1,"bbox":[102,214,178,42]}
+{"kind":"textbox","id":"sh/2hwzmdk7","slide":16,"text":"用研结果\n竞品证据","textPreview":"用研结果 | 竞品证据","textChars":9,"textLines":2,"bbox":[102,270,178,72]}
+{"kind":"shape","id":"sh/n250fils","slide":16,"bbox":[298,278,38,0]}
+{"kind":"shape","id":"sh/47ahc3m9","slide":16,"bbox":[336,190,214,176]}
+{"kind":"textbox","id":"sh/58jy5o3u","slide":16,"text":"pm-write-prd","textPreview":"pm-write-prd","textChars":12,"textLines":1,"bbox":[354,214,178,42]}
+{"kind":"textbox","id":"sh/hwz6pof2","slide":16,"text":"范围 / 场景\n状态 / 验收","textPreview":"范围 / 场景 | 状态 / 验收","textChars":15,"textLines":2,"bbox":[354,270,178,72]}
+{"kind":"shape","id":"sh/gvqpgjyh","slide":16,"bbox":[550,278,38,0]}
+{"kind":"shape","id":"sh/fuhonexw","slide":16,"bbox":[588,190,214,176]}
+{"kind":"textbox","id":"sh/ut87e9gb","slide":16,"text":"pm-prototype","textPreview":"pm-prototype","textChars":12,"textLines":1,"bbox":[606,214,178,42]}
+{"kind":"textbox","id":"sh/p0jqtofy","slide":16,"text":"信息架构\n流程 / 可点击原型","textPreview":"信息架构 | 流程 / 可点击原型","textChars":15,"textLines":2,"bbox":[606,270,178,72]}
+{"kind":"shape","id":"sh/4zapkjyd","slide":16,"bbox":[802,278,38,0]}
+{"kind":"shape","id":"sh/3yhorexs","slide":16,"bbox":[840,190,214,176]}
+{"kind":"textbox","id":"sh/2x87i9gn","slide":16,"text":"review","textPreview":"review","textChars":6,"textLines":1,"bbox":[858,214,178,42]}
+{"kind":"textbox","id":"sh/dojqx8fa","slide":16,"text":"需求覆盖\n分支 / 一致性","textPreview":"需求覆盖 | 分支 / 一致性","textChars":13,"textLines":2,"bbox":[858,270,178,72]}
+{"kind":"shape","id":"sh/c3apo3ep","slide":16,"bbox":[443,366,504,112]}
+{"kind":"shape","id":"sh/wj21grqx","slide":16,"bbox":[84,444,970,108]}
+{"kind":"textbox","id":"sh/xkbi9wri","slide":16,"text":"需求 ID 保持映射","textPreview":"需求 ID 保持映射","textChars":10,"textLines":1,"bbox":[112,462,250,32]}
+{"kind":"textbox","id":"sh/ahkze18r","slide":16,"text":"证据进入 PRD，PRD 驱动原型，评审问题回写 PRD","textPreview":"证据进入 PRD，PRD 驱动原型，评审问题回写 PRD","textChars":28,"textLines":1,"bbox":[378,462,630,32]}
+{"kind":"textbox","id":"sh/bit0769c","slide":16,"text":"当前已有：系统应用命名、Slogan、微文案和版本说明","textPreview":"当前已有：系统应用命名、Slogan、微文案和版本说明","textChars":27,"textLines":1,"bbox":[112,506,850,28]}
+{"kind":"shape","id":"sh/k7m1kbq9","slide":16,"bbox":[1086,194,96,34]}
+{"kind":"textbox","id":"sh/l8vidgru","slide":16,"text":"当前缺口","textPreview":"当前缺口","textChars":4,"textLines":1,"bbox":[1086,194,96,34]}
+{"kind":"textbox","id":"sh/ylkji183","slide":16,"text":"当前仓库还没有完整 PRD / 原型 Skill，本页表达下一阶段设计","textPreview":"当前仓库还没有完整 PRD / 原型 Skill，本页表达下一阶段设计","textChars":35,"textLines":1,"bbox":[84,590,1098,36]}
+{"kind":"textbox","id":"sh/j6t0b69o","slide":16,"text":"16","textPreview":"16","textChars":2,"textLines":1,"bbox":[1160,670,52,22]}
+{"kind":"notes","id":"nt/otcm5a","slide":16,"text":"建议用时：2 分钟\n这一页必须明确区分现状和规划。当前仓库已有用户研究、竞品分析和产品文案，但没有完整 PRD 与原型 Skill。\n建议新增三项能力：写 PRD、从 PRD 生成原型、对 PRD 与原型做覆盖检查。关键机制是需求 ID 映射，让证据、需求、界面和验收标准可以追溯。"}
+{"kind":"slide","id":"sl/8qouy1","slide":17,"title":"一个 Skill 的开发流程","textShapes":26}
+{"kind":"shape","id":"sh/tsrupwry","slide":17,"bbox":[56,48,8,54]}
+{"kind":"textbox","id":"sh/6pgvu187","slide":17,"text":"一个 Skill 的开发流程","textPreview":"一个 Skill 的开发流程","textChars":14,"textLines":1,"bbox":[84,42,900,62]}
+{"kind":"textbox","id":"sh/7q9cnm9s","slide":17,"text":"开发方法","textPreview":"开发方法","textChars":4,"textLines":1,"bbox":[1040,54,174,28]}
+{"kind":"shape","id":"sh/gvidkbqp","slide":17,"bbox":[84,160,46,46]}
+{"kind":"textbox","id":"sh/hwretgru","slide":17,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[84,160,46,46]}
+{"kind":"textbox","id":"sh/ut0vy18j","slide":17,"text":"找任务","textPreview":"找任务","textChars":3,"textLines":1,"bbox":[68,226,152,38]}
+{"kind":"textbox","id":"sh/vu9wr694","slide":17,"text":"高频\n边界清楚\n可验收","textPreview":"高频 | 边界清楚 | 可验收","textChars":11,"textLines":3,"bbox":[68,278,152,92]}
+{"kind":"shape","id":"sh/4z2dobql","slide":17,"bbox":[130,183,138,0]}
+{"kind":"shape","id":"sh/50bexgr6","slide":17,"bbox":[268,160,46,46]}
+{"kind":"textbox","id":"sh/dkz2t4fe","slide":17,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[268,160,46,46]}
+{"kind":"textbox","id":"sh/sjql0zyt","slide":17,"text":"找失败","textPreview":"找失败","textChars":3,"textLines":1,"bbox":[252,226,152,38]}
+{"kind":"textbox","id":"sh/rihkrux8","slide":17,"text":"真实案例\n错误模式\n专业判断","textPreview":"真实案例 | 错误模式 | 专业判断","textChars":14,"textLines":3,"bbox":[252,278,152,92]}
+{"kind":"shape","id":"sh/qh83ypgn","slide":17,"bbox":[314,183,138,0]}
+{"kind":"shape","id":"sh/18jmx4fa","slide":17,"bbox":[452,160,46,46]}
+{"kind":"textbox","id":"sh/0nal4zy5","slide":17,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[452,160,46,46]}
+{"kind":"textbox","id":"sh/fm1kvuxk","slide":17,"text":"定契约","textPreview":"定契约","textChars":3,"textLines":1,"bbox":[436,226,152,38]}
+{"kind":"textbox","id":"sh/els329gz","slide":17,"text":"触发\n输入输出\n确认点","textPreview":"触发 | 输入输出 | 确认点","textChars":11,"textLines":3,"bbox":[436,278,152,92]}
+{"kind":"shape","id":"sh/hcf2lkf6","slide":17,"bbox":[498,183,138,0]}
+{"kind":"shape","id":"sh/gr6lsfyl","slide":17,"bbox":[636,160,46,46]}
+{"kind":"textbox","id":"sh/8val8f6h","slide":17,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[636,160,46,46]}
+{"kind":"textbox","id":"sh/9wj2hkn2","slide":17,"text":"拆资源","textPreview":"拆资源","textChars":3,"textLines":1,"bbox":[620,226,152,38]}
+{"kind":"textbox","id":"sh/mts365ob","slide":17,"text":"主 Skill\n参考与模板\n脚本","textPreview":"主 Skill | 参考与模板 | 脚本","textChars":16,"textLines":3,"bbox":[620,278,152,92]}
+{"kind":"shape","id":"sh/7u1kfa5w","slide":17,"bbox":[682,183,138,0]}
+{"kind":"shape","id":"sh/wzulcz6t","slide":17,"bbox":[820,160,46,46]}
+{"kind":"textbox","id":"sh/h03mlkny","slide":17,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[820,160,46,46]}
+{"kind":"textbox","id":"sh/uxs3apon","slide":17,"text":"试跑","textPreview":"试跑","textChars":2,"textLines":1,"bbox":[804,226,152,38]}
+{"kind":"textbox","id":"sh/vy14ju58","slide":17,"text":"最小任务\n记录偏差\n补规则","textPreview":"最小任务 | 记录偏差 | 补规则","textChars":13,"textLines":3,"bbox":[804,278,152,92]}
+{"kind":"shape","id":"sh/4nulgz6p","slide":17,"bbox":[866,183,138,0]}
+{"kind":"shape","id":"sh/5o3mp4na","slide":17,"bbox":[1004,160,46,46]}
+{"kind":"textbox","id":"sh/fipofypc","slide":17,"text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[1004,160,46,46]}
+{"kind":"textbox","id":"sh/ehwn6t8r","slide":17,"text":"做评估","textPreview":"做评估","textChars":3,"textLines":1,"bbox":[988,226,152,38]}
+{"kind":"textbox","id":"sh/1k76h87i","slide":17,"text":"结构测试\n样例评估\n产物验证","textPreview":"结构测试 | 样例评估 | 产物验证","textChars":14,"textLines":3,"bbox":[988,278,152,92]}
+{"kind":"shape","id":"sh/0jy583qx","slide":17,"bbox":[84,432,1112,124]}
+{"kind":"textbox","id":"sh/ru5obypg","slide":17,"text":"判断交给 Agent","textPreview":"判断交给 Agent","textChars":10,"textLines":1,"bbox":[118,456,260,34]}
+{"kind":"textbox","id":"sh/6twn2t8v","slide":17,"text":"研究目标、证据强弱、产品取舍","textPreview":"研究目标、证据强弱、产品取舍","textChars":14,"textLines":1,"bbox":[118,498,430,28]}
+{"kind":"shape","id":"sh/twn6do76","slide":17,"bbox":[620,454,0,76]}
+{"kind":"textbox","id":"sh/sve54jq1","slide":17,"text":"确定性工作交给脚本","textPreview":"确定性工作交给脚本","textChars":9,"textLines":1,"bbox":[674,456,312,34]}
+{"kind":"textbox","id":"sh/bq9onipk","slide":17,"text":"格式、字段、逻辑、统计和文件完整性","textPreview":"格式、字段、逻辑、统计和文件完整性","textChars":17,"textLines":1,"bbox":[674,498,430,28]}
+{"kind":"textbox","id":"sh/apg7ed8z","slide":17,"text":"优先固化判断与验收，再补充更多知识","textPreview":"优先固化判断与验收，再补充更多知识","textChars":17,"textLines":1,"bbox":[84,608,1112,42]}
+{"kind":"textbox","id":"sh/yxgr2h4j","slide":17,"text":"17","textPreview":"17","textChars":2,"textLines":1,"bbox":[1160,670,52,22]}
+{"kind":"notes","id":"nt/8qouy1","slide":17,"text":"建议用时：2 分钟\n以用研 Skill 为例，开发从真实任务和失败模式开始。先定义边界与契约，再拆主 Skill、Reference、Template 和 Script。试跑之后，把重复失败变成规则，把确定性检查写成脚本。\n评估要覆盖结构、样例与最终产物。测试存在的意义不是追求数量，而是让能力变更可以被发现。\n参考：Anthropic，Writing Effective Tools for Agents，https://www.anthropic.com/engineering/writing-tools-for-agents\n参考：OpenAI Skills API 提供版本化的 Skill 资源，https://developers.openai.com/api/reference/python/resources/skills/methods/create"}
+{"kind":"slide","id":"sl/2x7clx","slide":18,"title":"把个人技巧变成团队工作系统","textShapes":22}
+{"kind":"shape","id":"sh/adwfuh0b","slide":18,"bbox":[56,48,8,54]}
+{"kind":"textbox","id":"sh/xgnepczm","slide":18,"text":"把个人技巧变成团队工作系统","textPreview":"把个人技巧变成团队工作系统","textChars":13,"textLines":1,"bbox":[84,42,1050,62]}
+{"kind":"textbox","id":"sh/wfexwry1","slide":18,"text":"团队落地","textPreview":"团队落地","textChars":4,"textLines":1,"bbox":[1040,54,174,28]}
+{"kind":"textbox","id":"sh/jipwrmhs","slide":18,"text":"第 1 周","textPreview":"第 1 周","textChars":5,"textLines":1,"bbox":[84,152,212,32]}
+{"kind":"shape","id":"sh/ihwfyhg7","slide":18,"bbox":[84,198,212,0]}
+{"kind":"textbox","id":"sh/5k7etwzy","slide":18,"text":"选一个高频任务","textPreview":"选一个高频任务","textChars":7,"textLines":1,"bbox":[84,224,220,46]}
+{"kind":"textbox","id":"sh/kjyx0ryd","slide":18,"text":"记录 3 个真实案例\n和主要失败模式","textPreview":"记录 3 个真实案例 | 和主要失败模式","textChars":18,"textLines":2,"bbox":[84,292,220,84]}
+{"kind":"textbox","id":"sh/7mpwv6ho","slide":18,"text":"第 2 周","textPreview":"第 2 周","textChars":5,"textLines":1,"bbox":[362,152,212,32]}
+{"kind":"shape","id":"sh/6lgf21gj","slide":18,"bbox":[362,198,212,0]}
+{"kind":"textbox","id":"sh/cn2lg7mp","slide":18,"text":"做最小 Skill","textPreview":"做最小 Skill","textChars":9,"textLines":1,"bbox":[362,224,220,46]}
+{"kind":"textbox","id":"sh/dobm9cna","slide":18,"text":"明确输入输出\n增加 1 个质量门槛","textPreview":"明确输入输出 | 增加 1 个质量门槛","textChars":17,"textLines":2,"bbox":[362,292,220,84]}
+{"kind":"textbox","id":"sh/qlk3ex4z","slide":18,"text":"第 3 周","textPreview":"第 3 周","textChars":5,"textLines":1,"bbox":[640,152,212,32]}
+{"kind":"shape","id":"sh/bmt4725k","slide":18,"bbox":[640,198,212,0]}
+{"kind":"textbox","id":"sh/0r2lk7m1","slide":18,"text":"交叉使用","textPreview":"交叉使用","textChars":4,"textLines":1,"bbox":[640,224,220,46]}
+{"kind":"textbox","id":"sh/lsvmdc3m","slide":18,"text":"由另一位产品经理试跑\n检查能否复现","textPreview":"由另一位产品经理试跑 | 检查能否复现","textChars":17,"textLines":2,"bbox":[640,292,220,84]}
+{"kind":"textbox","id":"sh/ypk3ih4v","slide":18,"text":"第 4 周","textPreview":"第 4 周","textChars":5,"textLines":1,"bbox":[918,152,212,32]}
+{"kind":"shape","id":"sh/zqt4b2lg","slide":18,"bbox":[918,198,212,0]}
+{"kind":"textbox","id":"sh/8fmlormx","slide":18,"text":"组合 Workflow","textPreview":"组合 Workflow","textChars":11,"textLines":1,"bbox":[918,224,220,46]}
+{"kind":"textbox","id":"sh/9gvmhw3i","slide":18,"text":"连接相关 Skill\n建立共享仓库","textPreview":"连接相关 Skill | 建立共享仓库","textChars":17,"textLines":2,"bbox":[918,292,220,84]}
+{"kind":"shape","id":"sh/x07ulsrq","slide":18,"bbox":[84,444,1112,140]}
+{"kind":"textbox","id":"sh/wzydcna5","slide":18,"text":"可复用","textPreview":"可复用","textChars":3,"textLines":1,"bbox":[118,470,220,46]}
+{"kind":"textbox","id":"sh/vypcji9k","slide":18,"text":"可组合","textPreview":"可组合","textChars":3,"textLines":1,"bbox":[410,470,220,46]}
+{"kind":"textbox","id":"sh/axgbadsz","slide":18,"text":"可验证","textPreview":"可验证","textChars":3,"textLines":1,"bbox":[702,470,220,46]}
+{"kind":"textbox","id":"sh/5orupcrm","slide":18,"text":"可追溯","textPreview":"可追溯","textChars":3,"textLines":1,"bbox":[994,470,160,46]}
+{"kind":"textbox","id":"sh/knidg7a1","slide":18,"text":"从一个任务开始，建立团队的 AI 交付标准","textPreview":"从一个任务开始，建立团队的 AI 交付标准","textChars":21,"textLines":1,"bbox":[118,530,1036,32]}
+{"kind":"textbox","id":"sh/j29cn29g","slide":18,"text":"Q&A","textPreview":"Q&A","textChars":3,"textLines":1,"bbox":[84,616,220,48]}
+{"kind":"textbox","id":"sh/i10vexsv","slide":18,"text":"你最想先做成 Skill 的产品经理任务是什么？","textPreview":"你最想先做成 Skill 的产品经理任务是什么？","textChars":24,"textLines":1,"bbox":[306,616,830,48]}
+{"kind":"textbox","id":"sh/lsnud8ri","slide":18,"text":"18","textPreview":"18","textChars":2,"textLines":1,"bbox":[1160,670,52,22]}
+{"kind":"notes","id":"nt/2x7clx","slide":18,"text":"建议用时：1 分钟总结，随后留 5 分钟 Q&A\n给团队一个四周小实验，不要求一次建设完整平台。先挑高频任务，做最小 Skill，让同事交叉使用，再把成熟能力组合成 Workflow。\n结尾问题：你最想先做成 Skill 的产品经理任务是什么？\n总结句：当工作方法具备可复用、可组合、可验证和可追溯四个特征时，AI 才从个人技巧变成团队工作系统。"}

@@ -6,14 +6,13 @@
 
 ```text
 <WORK_DIR>/用户调研/<YYYYMMDD><课题>/
-├── shared_context.md                                      # 可选；只用于课题与受众披露
 ├── questionnaire.md                                      # 必需；题目文本权威来源
-├── questionnaire-design.html                             # 必需；决策、目标、逐题用途、完整问卷
+├── survey-design-desc.html                               # 必需；决策、目标、逐题用途、完整问卷
 └── survey_response_data/
     └── survey_responses_<run_id>.xlsx                    # 必需；全量回答唯一来源
 
 <WORK_DIR>/用户调研/personas_data/
-└── persons_summary.txt                                   # 可选；仅样本构建背景披露
+└── persons_summary.html                                  # 可选；仅样本构建背景披露
 ```
 
 目录中有多个回答工作簿时，调用方必须明确指定其中一个，不自行选择最新批次。报告目录使用所选工作簿文件名中的 `run_id`。
@@ -23,16 +22,16 @@
 | 文件 | 可读取内容 | 禁止用途 |
 |---|---|---|
 | `questionnaire.md` | 标题、题干、受访者看到的选项/量表、概念卡和逻辑提示 | 不从对话记忆补题目 |
-| `questionnaire-design.html` | 产品决策、研究目标、逐题用途、分析建议和完整问卷附录 | 不把设计假设写成研究发现；题目结构仍以 `questionnaire.md` 为准 |
+| `survey-design-desc.html` | 产品决策、研究目标、逐题用途、分析建议和完整问卷附录 | 不把设计假设写成研究发现；题目结构仍以 `questionnaire.md` 为准 |
 | 回答 Excel | 全量样本、回答、回答原因、状态、实际模型和错误摘要 | 不用外部画像或摘要填补空白答案 |
-| `persons_summary.txt` | 合成样本构建分布 | 不报告为问卷结果或市场比例 |
+| `persons_summary.html` | 合成样本构建分布 | 不报告为问卷结果或市场比例 |
 
 ## questionnaire.md 前置要求
 
 - 必须有一级标题，并以 `## Q编号 ｜ 题型` 定义每道题。
 - 题号唯一；题型标签明确为单选、多选、排序、量表、NPS 或开放文本。
 - 选择题选项、量表范围、最大选择数、动态回填来源和逻辑提示直接从 Markdown 解析。
-- 研究目标只从 `questionnaire-design.html` 读取；`questionnaire.md` 不承担研究背景和分析计划。
+- 研究目标只从 `survey-design-desc.html` 读取；`questionnaire.md` 不承担研究背景和分析计划。
 
 ## 回答 Excel
 
@@ -57,7 +56,7 @@
 
 本技能只处理 `ur-user-simulator` 生成的合成问卷，`analysis_summary.json.data_source` 固定为 `synthetic`。不接收真实或混合来源，也不读取 `personas.json`、`persona_audit.json` 或 `persons/`。
 
-若调用方提供 `persons_summary.txt`，只可提取课题、画像总数和构建分布以披露样本如何构成。它不参与用户 ID 校验、统计、证据、分群或结论。
+若调用方提供 `persons_summary.html`，只可读取其中 `persona-summary-data` JSON 的课题、画像总数和构建分布以披露样本如何构成。它不参与用户 ID 校验、统计、证据、分群或结论。
 
 ## analysis_summary.json
 
@@ -90,6 +89,10 @@
   },
   "goal_coverage": [],
   "descriptive_results": [],
+  "interactive_data": {
+    "questions": [{"id": "Q1", "question": "...", "type": "single_choice", "options": []}],
+    "responses": [{"answers": {"Q1": "..."}}]
+  },
   "cross_tabulations": [],
   "scale_quality": [],
   "qualitative_observations": [],
@@ -100,7 +103,7 @@
 }
 ```
 
-准备阶段只写可机械复核的统计和原子文本。研究者补写的主题、解释和建议必须保留证据 ID 与分母，不覆盖原始描述统计。
+准备阶段只写可机械复核的统计和原子文本。`interactive_data` 仅保存清理后可分析样本的匿名封闭题答案，供单文件 HTML 在本地按条件筛选与重算描述统计；禁止放入用户 ID、姓名、任务 ID、模型、开放回答或回答原因。研究者补写的主题、解释和建议必须保留证据 ID 与分母，不覆盖原始描述统计。
 
 ## 最终输出
 
@@ -111,8 +114,8 @@ report_<run_id>/
 └── report_quality.md
 ```
 
-- `analysis_summary.json`：图表、结论和证据索引的可复核底稿。
-- `report.html`：UTF-8 单文件，内嵌 CSS、SVG 和必要数据，无外部依赖。
+- `analysis_summary.json`：图表、结论和证据 ID 的可复核底稿。
+- `report.html`：UTF-8 单文件，内嵌 CSS、SVG、匿名封闭题筛选数据与交互脚本，无外部依赖；支持多条件筛选、保存当前筛选状态的 HTML，以及本地 PNG/SVG 图片下载。筛选只重算封闭题描述统计与当前样本数。
 - `report_quality.md`：输入契约、Excel 统计抽查、证据回溯、来源披露、离线与视觉检查结果。
 
 三个文件都是必需产物，并对应同一 `run_id`。

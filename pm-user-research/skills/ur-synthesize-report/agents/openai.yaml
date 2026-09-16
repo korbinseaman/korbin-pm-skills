@@ -1,4 +1,4 @@
 interface:
   display_name: "用户研究报告综合"
   short_description: "直接综合全量问卷Excel与开放回答，生成可审计HTML报告"
-  default_prompt: "使用 $ur-synthesize-report 对指定 survey_responses_<run_id>.xlsx 先做可追溯清理，再完成描述统计、交叉/量表检验、定性综合，并生成 analysis_summary.json、离线 report.html 和 report_quality.md。"
+  default_prompt: "使用 $ur-synthesize-report 对指定 survey_responses_<run_id>.xlsx 先做可追溯清理，再完成描述统计、交叉/量表检验、定性综合，并生成支持本地多条件筛选、保存当前状态及 PNG/SVG 图片下载的离线 report.html、analysis_summary.json 和 report_quality.md。"

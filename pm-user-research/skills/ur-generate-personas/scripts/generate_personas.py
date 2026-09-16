@@ -9,8 +9,12 @@ writes the three library artifacts, and prepares a deterministic summary.
 from __future__ import annotations
 
 import argparse
+import html
 import json
+import os
 import re
+import shutil
+import subprocess
 import sys
 from collections import Counter
 from pathlib import Path
@@ -119,7 +123,7 @@ def distribution_lines(title: str, counts: Counter[str], total: int) -> list[str
     return lines
 
 
-def render_summary(data: dict[str, Any]) -> str:
+def summary_sections(data: dict[str, Any]) -> tuple[list[str], dict[str, Any]]:
     personas = data["personas"]
     total = len(personas)
     persona_ids = [persona["画像编号"] for persona in personas]
@@ -129,6 +133,7 @@ def render_summary(data: dict[str, Any]) -> str:
     })
     gender_counts = Counter(persona["性别"] for persona in personas)
     age_counts = Counter(age_band(persona["年龄"]) for persona in personas)
+    name_length_counts = Counter(f"{len(str(persona['姓名']).strip())}字全名" for persona in personas)
     experience_counts = Counter(
         "无相关经验" if persona["使用阶段"] == "潜在用户" else "有相关经验"
         for persona in personas
@@ -141,25 +146,76 @@ def render_summary(data: dict[str, Any]) -> str:
         for persona in experienced
     )
     barriers = Counter(persona["判断"].rsplit("采用顾虑：", 1)[-1] for persona in experienced)
-    lines = [
-        "用户画像汇总（合成）", "", f"调研课题：{data['topic']}", f"画像总数：{total}人",
-        f"全量用户ID：{json.dumps(persona_ids, ensure_ascii=False)}",
-        "说明：以下比例仅描述本次合成画像构成，不代表真实人口或产品用户分布。", "",
-    ]
     sections = [
         ("一、用户群体分布", group_counts, total),
         ("二、性别分布", gender_counts, total),
         ("三、年龄段分布", age_counts, total),
-        ("四、相关经验分布", experience_counts, total),
-        ("五、使用阶段分布", stage_counts, total),
-        ("六、系统App使用习惯分布", system_app_counts, total),
-        ("七、判断标准分布（仅有经验者）", success, len(experienced) or 1),
-        ("八、采用顾虑分布（仅有经验者）", barriers, len(experienced) or 1),
+        ("四、姓名结构分布", name_length_counts, total),
+        ("五、相关经验分布", experience_counts, total),
+        ("六、使用阶段分布", stage_counts, total),
+        ("七、系统App使用习惯分布", system_app_counts, total),
+        ("八、判断标准分布（仅有经验者）", success, len(experienced) or 1),
+        ("九、采用顾虑分布（仅有经验者）", barriers, len(experienced) or 1),
     ]
+    lines: list[str] = []
+    section_data: list[dict[str, Any]] = []
     for title, counts, denominator in sections:
-        lines.extend(distribution_lines(title, counts, denominator))
+        section_lines = distribution_lines(title, counts, denominator)
+        lines.extend(section_lines)
         lines.append("")
-    return "\n".join(lines).rstrip() + "\n"
+        section_data.append({
+            "title": title,
+            "items": [{"label": label, "count": count, "percent": round(count / denominator * 100, 1)} for label, count in counts.items()],
+        })
+    payload = {
+        "topic": data["topic"],
+        "total": total,
+        "persona_ids": persona_ids,
+        "construction_summary": lines,
+        "sections": section_data,
+    }
+    return lines, payload
+
+
+def render_summary_html(data: dict[str, Any]) -> str:
+    _, payload = summary_sections(data)
+    visible_lines = [
+        f"<p><strong>调研课题：</strong>{html.escape(str(data['topic']))}</p>",
+        f"<p><strong>画像总数：</strong>{len(data['personas'])}人</p>",
+        f"<p><strong>全量用户ID：</strong><code>{html.escape(json.dumps(payload['persona_ids'], ensure_ascii=False))}</code></p>",
+        "<p class=\"note\">以下比例仅描述本次合成画像构成，不代表真实人口或产品用户分布。</p>",
+    ]
+    for section in payload["sections"]:
+        visible_lines.append(f"<section><h2>{html.escape(section['title'])}</h2><ul>")
+        for item in section["items"]:
+            visible_lines.append(
+                f"<li>{html.escape(str(item['label']))}：{item['count']}人（{item['percent']:.1f}%）</li>"
+            )
+        visible_lines.append("</ul></section>")
+    serialized = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")
+    return """<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>用户画像汇总</title>
+  <style>
+    :root {{ color-scheme: light; font-family: Arial, "Microsoft YaHei", sans-serif; }}
+    body {{ margin: 32px auto; max-width: 1080px; padding: 0 24px; color: #1f2937; line-height: 1.6; }}
+    h1 {{ font-size: 24px; margin-bottom: 20px; }}
+    h2 {{ font-size: 17px; margin: 24px 0 8px; color: #1f4e78; }}
+    ul {{ margin-top: 4px; padding-left: 24px; }}
+    code {{ background: #f3f4f6; padding: 2px 6px; border-radius: 4px; }}
+    .note {{ color: #6b7280; font-size: 13px; }}
+  </style>
+</head>
+<body>
+  <h1>用户画像汇总（合成）</h1>
+  {body}
+  <script id="persona-summary-data" type="application/json">{payload}</script>
+</body>
+</html>
+""".format(body="\n  ".join(visible_lines), payload=serialized)
 
 
 def safe_filename(persona: dict[str, Any]) -> str:
@@ -171,19 +227,71 @@ def render_persona(persona: dict[str, Any]) -> str:
     return "\n".join(f"{key}：{value}" for key, value in persona.items()) + "\n"
 
 
-def write_outputs(data: dict[str, Any], output_json: Path, summary_path: Path, persons_dir: Path) -> None:
+def find_node_path() -> str:
+    candidates = [
+        os.environ.get("CODEX_NODE_PATH"),
+        shutil.which("node"),
+        str(Path.home() / ".cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe"),
+    ]
+    for candidate in candidates:
+        if candidate and Path(candidate).exists():
+            return candidate
+    raise ValueError("未找到 Node.js；请设置 CODEX_NODE_PATH 以生成 persons.xlsx")
+
+
+def find_artifact_tool_path() -> str:
+    candidates = [
+        os.environ.get("CODEX_ARTIFACT_TOOL_PATH"),
+        str(Path.home() / ".cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/@oai/artifact-tool/dist/artifact_tool.mjs"),
+    ]
+    for candidate in candidates:
+        if candidate and Path(candidate).exists():
+            return candidate
+    raise ValueError("未找到 @oai/artifact-tool；请设置 CODEX_ARTIFACT_TOOL_PATH 以生成 persons.xlsx")
+
+
+def render_xlsx(data_json: Path, persons_xlsx: Path, node_path: str | None = None) -> None:
+    helper = Path(__file__).resolve().parent / "render_personas_xlsx.mjs"
+    node = node_path or find_node_path()
+    artifact_tool = find_artifact_tool_path()
+    persons_xlsx.parent.mkdir(parents=True, exist_ok=True)
+    result = subprocess.run(
+        [node, str(helper), str(data_json), str(persons_xlsx), artifact_tool],
+        text=True,
+        encoding="utf-8",
+        capture_output=True,
+        timeout=120,
+    )
+    if result.returncode != 0:
+        detail = (result.stderr or result.stdout).strip()
+        if persons_xlsx.exists():
+            persons_xlsx.unlink()
+        raise ValueError(f"persons.xlsx 生成失败：{detail}")
+    inspect_sidecar = persons_xlsx.with_name(persons_xlsx.name + ".inspect.ndjson")
+    if inspect_sidecar.exists():
+        inspect_sidecar.unlink()
+
+
+def write_outputs(
+    data: dict[str, Any], output_json: Path, summary_path: Path, persons_dir: Path,
+    persons_xlsx: Path, node_path: str | None = None,
+) -> None:
     output_json.parent.mkdir(parents=True, exist_ok=True)
     summary_path.parent.mkdir(parents=True, exist_ok=True)
     persons_dir.mkdir(parents=True, exist_ok=True)
     for old in persons_dir.glob("P*.txt"):
         old.unlink()
     output_json.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    summary_path.write_text(render_summary(data), encoding="utf-8")
+    summary_path.write_text(render_summary_html(data), encoding="utf-8")
     for persona in data["personas"]:
         (persons_dir / safe_filename(persona)).write_text(render_persona(persona), encoding="utf-8")
     legacy = output_json.parent / "personas.txt"
     if legacy.exists():
         legacy.unlink()
+    legacy_summary = output_json.parent / "persons_summary.txt"
+    if legacy_summary.exists():
+        legacy_summary.unlink()
+    render_xlsx(output_json, persons_xlsx, node_path)
 
 
 def main() -> int:
@@ -194,11 +302,13 @@ def main() -> int:
     parser.add_argument("--output", type=Path, help="兼容参数，等同 --output-json")
     parser.add_argument("--output-summary", type=Path)
     parser.add_argument("--persons-dir", type=Path)
+    parser.add_argument("--persons-xlsx", type=Path)
+    parser.add_argument("--node-path", help="可选；生成 persons.xlsx 的 Node.js 路径")
     parser.add_argument("--replace-existing", action="store_true", help="明确允许重建已存在的全局画像库")
     args = parser.parse_args()
     try:
         if args.input.suffix.lower() != ".json":
-            raise ValueError("输入必须是大模型生成的 JSON；不能直接把 shared_context.md 当作画像内容")
+            raise ValueError("输入必须是大模型生成的画像 JSON；不接受 Markdown 研究文件")
         template_fields = load_template_fields()
         raw = json.loads(args.input.read_text(encoding="utf-8"))
         data = normalize_document(raw, template_fields)
@@ -206,17 +316,19 @@ def main() -> int:
         if args.output_dir and explicit_json:
             raise ValueError("--output-dir 与 --output-json/--output 只能选一个")
         output_json = (args.output_dir / "personas.json") if args.output_dir else (explicit_json or args.input)
-        summary_path = args.output_summary or output_json.parent / "persons_summary.txt"
+        summary_path = args.output_summary or output_json.parent / "persons_summary.html"
         persons_dir = args.persons_dir or output_json.parent / "persons"
+        persons_xlsx = args.persons_xlsx or output_json.parent / "persons.xlsx"
         if output_json.exists() and not args.replace_existing and output_json.resolve() != args.input.resolve():
             raise ValueError(f"输出画像库已存在：{output_json}；如需重建请显式使用 --replace-existing")
-        write_outputs(data, output_json, summary_path, persons_dir)
+        write_outputs(data, output_json, summary_path, persons_dir, persons_xlsx, args.node_path)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"画像落盘失败：{exc}", file=sys.stderr)
         return 2
     print(output_json)
     print(summary_path)
     print(persons_dir)
+    print(persons_xlsx)
     return 0
 
 

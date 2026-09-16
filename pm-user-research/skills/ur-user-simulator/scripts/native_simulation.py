@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare current-model task descriptors and validate their answer files."""
+"""Prepare, validate, and clean up current-model temporary answer files."""
 
 from __future__ import annotations
 
@@ -11,11 +11,13 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from validate_responses import (  # noqa: E402
+    cleanup_working_answers_dir,
     parse_persons_summary,
     parse_questionnaire,
     quality_markdown,
     resolve_persona_files,
     validate_answer_directory,
+    working_answers_dir,
 )
 
 
@@ -27,8 +29,8 @@ def prepare(args: argparse.Namespace) -> int:
     _, user_ids = parse_persons_summary(persons_summary)
     persona_files = resolve_persona_files(persons_dir, user_ids)
     run_id = args.run_id or datetime.now().strftime("%Y%m%d_%H%M%S")
-    answers_dir = args.output_dir.resolve() / f"answers_{run_id}"
-    answers_dir.mkdir(parents=True, exist_ok=True)
+    temp_answers_dir = working_answers_dir(run_id)
+    temp_answers_dir.mkdir(parents=True, exist_ok=True)
     model = args.model_label.strip() or "current-model"
     tasks = [
         {
@@ -36,16 +38,16 @@ def prepare(args: argparse.Namespace) -> int:
             "user_id": user_id,
             "questionnaire_path": str(questionnaire),
             "persona_path": str(persona_files[user_id]),
-            "output_path": str((answers_dir / f"{user_id}.md").resolve()),
+            "output_path": str((temp_answers_dir / f"{user_id}.md").resolve()),
             "model": model,
         }
         for user_id in user_ids
-        if not (answers_dir / f"{user_id}.md").exists()
+        if not (temp_answers_dir / f"{user_id}.md").exists()
     ]
     print(json.dumps({
         "run_id": run_id,
         "model": model,
-        "answers_dir": str(answers_dir),
+        "working_answers_dir": str(temp_answers_dir),
         "total_users": len(user_ids),
         "pending_tasks": len(tasks),
         "tasks": tasks,
@@ -57,20 +59,20 @@ def finalize(args: argparse.Namespace) -> int:
     questionnaire = args.questionnaire.resolve()
     persons_summary = args.persons_summary.resolve()
     persons_dir = args.persons_dir.resolve()
-    answers_dir = args.answers_dir.resolve()
+    temp_answers_dir = args.working_answers_dir.resolve()
     failures: dict[str, str] = {}
     for value in args.failure:
         if "=" not in value:
             raise ValueError("--failure 必须使用 USER_ID=ERROR 格式")
         user_id, message = value.split("=", 1)
         failures[user_id] = message
-    quality = validate_answer_directory(questionnaire, persons_summary, persons_dir, answers_dir, failures)
+    quality = validate_answer_directory(questionnaire, persons_summary, persons_dir, temp_answers_dir, failures)
     quality_report = args.quality_report.resolve()
     quality_report.parent.mkdir(parents=True, exist_ok=True)
     quality_report.write_text(quality_markdown(args.run_id, quality), encoding="utf-8")
     print(json.dumps({
         "run_id": args.run_id,
-        "answers_dir": str(answers_dir),
+        "working_answers_dir": str(temp_answers_dir),
         "quality_report": str(quality_report),
         "total": quality["total"],
         "completed": quality["completed"],
@@ -78,6 +80,16 @@ def finalize(args: argparse.Namespace) -> int:
         "data_integrity": quality["data_integrity"],
     }, ensure_ascii=False, indent=2))
     return 0 if quality["data_integrity"] in {"excellent", "good"} else 1
+
+
+def cleanup(args: argparse.Namespace) -> int:
+    temp_answers_dir = args.working_answers_dir.resolve()
+    removed = cleanup_working_answers_dir(temp_answers_dir)
+    print(json.dumps({
+        "working_answers_dir": str(temp_answers_dir),
+        "removed": removed,
+    }, ensure_ascii=False, indent=2))
+    return 0
 
 
 def main() -> int:
@@ -88,7 +100,6 @@ def main() -> int:
     prepare_parser.add_argument("--questionnaire", type=Path, required=True)
     prepare_parser.add_argument("--persons-summary", type=Path, required=True)
     prepare_parser.add_argument("--persons-dir", type=Path, required=True)
-    prepare_parser.add_argument("--output-dir", type=Path, required=True)
     prepare_parser.add_argument("--run-id")
     prepare_parser.add_argument("--model-label", default="current-model")
     prepare_parser.set_defaults(handler=prepare)
@@ -97,11 +108,15 @@ def main() -> int:
     finalize_parser.add_argument("--questionnaire", type=Path, required=True)
     finalize_parser.add_argument("--persons-summary", type=Path, required=True)
     finalize_parser.add_argument("--persons-dir", type=Path, required=True)
-    finalize_parser.add_argument("--answers-dir", type=Path, required=True)
+    finalize_parser.add_argument("--working-answers-dir", type=Path, required=True)
     finalize_parser.add_argument("--quality-report", type=Path, required=True)
     finalize_parser.add_argument("--run-id", required=True)
     finalize_parser.add_argument("--failure", action="append", default=[], metavar="USER_ID=ERROR")
     finalize_parser.set_defaults(handler=finalize)
+
+    cleanup_parser = subparsers.add_parser("cleanup")
+    cleanup_parser.add_argument("--working-answers-dir", type=Path, required=True)
+    cleanup_parser.set_defaults(handler=cleanup)
     args = parser.parse_args()
     try:
         return args.handler(args)

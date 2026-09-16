@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "presentation-finalization.v1",
+  "finalSha256": "08bdb58cfb0c324d85bbd9f8744e79a220595a8826e8dba84fd947f6123a20c5",
+  "byteCount": 2516695,
+  "packageIntegrity": {
+    "chart_count": 0,
+    "claim_boundary": "Structural package checks only; no slide text, notes, formulas, chart values, or native PowerPoint execution were inspected.",
+    "finding_count": 0,
+    "findings": [],
+    "notes_parts_skipped": 10,
+    "relationship_part_count": 34,
+    "slide_count": 10,
+    "status": "pass",
+    "exitCode": 0,
+    "findingCount": 0,
+    "warnings": []
+  },
+  "presentationLayout": {
+    "finding_count": 0,
+    "findings": [],
+    "font_policy": {
+      "checked_text_script_count": 842,
+      "native_font_rendering_verified": false,
+      "observed_font_families": [
+        "Arial",
+        "Microsoft YaHei"
+      ],
+      "observed_font_use_counts": {
+        "Arial": 514,
+        "Microsoft YaHei": 328
+      },
+      "passed": true,
+      "performed": true
+    },
+    "slide_count": 10,
+    "slide_size_in": [
+      13.3385,
+      7.5
+    ],
+    "warning_count": 8,
+    "warnings": [
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "8",
+        "object_kind": "sp",
+        "slide": 2
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "8",
+        "object_kind": "sp",
+        "slide": 3
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "8",
+        "object_kind": "sp",
+        "slide": 4
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "8",
+        "object_kind": "sp",
+        "slide": 5
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "8",
+        "object_kind": "sp",
+        "slide": 6
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "8",
+        "object_kind": "sp",
+        "slide": 7
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "8",
+        "object_kind": "sp",
+        "slide": 8
+      },
+      {
+        "kind": "object_outside_slide_boundary",
+        "object_id": "8",
+        "object_kind": "sp",
+        "slide": 9
+      }
+    ],
+    "exitCode": 0,
+    "findingCount": 0,
+    "fontPolicy": {
+      "checked_text_script_count": 842,
+      "native_font_rendering_verified": false,
+      "observed_font_families": [
+        "Arial",
+        "Microsoft YaHei"
+      ],
+      "observed_font_use_counts": {
+        "Arial": 514,
+        "Microsoft YaHei": 328
+      },
+      "passed": true,
+      "performed": true
+    }
+  },
+  "fontSelection": {
+    "basis": "reference",
+    "approvedFamilies": [
+      "Microsoft YaHei",
+      "Arial"
+    ],
+    "scriptFonts": {},
+    "referenceSha256": "c6f6cc8245ebec463396f1b35fe2700c34dc85edfd2836509cdbdd7e23f00127",
+    "referenceFontsVerifiedInEncodedText": true,
+    "checked_text_script_count": 842,
+    "native_font_rendering_verified": false,
+    "observed_font_families": [
+      "Arial",
+      "Microsoft YaHei"
+    ],
+    "observed_font_use_counts": {
+      "Arial": 514,
+      "Microsoft YaHei": 328
+    },
+    "passed": true,
+    "performed": true
+  },
+  "firstPartyImport": {
+    "performed": true,
+    "passed": true,
+    "slideCount": 10,
+    "sha256": "08bdb58cfb0c324d85bbd9f8744e79a220595a8826e8dba84fd947f6123a20c5",
+    "runtimeNodeModules": "C:\\Users\\mahai\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\node_modules",
+    "nodeExecutable": "C:\\Users\\mahai\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe"
+  },
+  "nativeTableArithmetic": {
+    "performed": true,
+    "checked_column_count": 0,
+    "checks": [],
+    "claim_boundary": "Displayed-value arithmetic with rounding tolerance; not source-data verification.",
+    "eligible_table_count": 0,
+    "finding_count": 0,
+    "findings": [],
+    "native_table_count": 0,
+    "passed": true,
+    "schema_version": "presentation-native-table-arithmetic.v1",
+    "skipped_tables": [],
+    "slide_count": 10,
+    "warning_count": 0,
+    "warnings": []
+  },
+  "nativeChartTitles": {
+    "performed": true,
+    "checks": [],
+    "finding_count": 0,
+    "findings": [],
+    "native_chart_count": 0,
+    "native_powerpoint_verified": false,
+    "passed": true,
+    "presentation_sha256": "08bdb58cfb0c324d85bbd9f8744e79a220595a8826e8dba84fd947f6123a20c5",
+    "schema_version": "presentation-native-chart-titles.v1",
+    "slide_count": 10,
+    "source_text_emitted": false,
+    "unresolved_linked_title_count": 0
+  },
+  "sourceDerivedPolicyFlags": [
+    "--expected-slide-size-emu",
+    "12196763,6858000",
+    "--validate-bullet-geometry",
+    "--validate-heading-fit",
+    "--cover-role",
+    "none",
+    "--expected-slide-count",
+    "10",
+    "--approved-font-family",
+    "Microsoft YaHei",
+    "--approved-font-family",
+    "Arial"
+  ],
+  "nativeChartValidation": {
+    "detectedOwnerSlides": [],
+    "detectedChartCount": 0,
+    "targetApplication": "portable",
+    "sourceChartOwnersExplicitlyDeclared": true,
+    "validatorRan": false,
+    "passed": true
+  },
+  "sourceTemplateFidelity": {
+    "report": {
+      "coverage_ratio": 0.8,
+      "dimensions_match": true,
+      "generated_slide_count": 10,
+      "geometry_match": true,
+      "issue_codes": [],
+      "matched_family_count": 1,
+      "matched_generated_slide_count": 8,
+      "minimum_coverage_ratio": 0.8,
+      "passed": true,
+      "photographic_background_matched": null,
+      "photographic_background_required": false,
+      "prompt_or_slide_text_included": false,
+      "reference_family_count": 3,
+      "schema_version": "template_source_fidelity.v1",
+      "status": "passed"
+    },
+    "exitCode": 0,
+    "referenceFamilyCount": 3,
+    "matchedFamilyCount": 1,
+    "coverageRatio": 0.8,
+    "minimumCoverageRatio": 0.8,
+    "sourceSha256": "c6f6cc8245ebec463396f1b35fe2700c34dc85edfd2836509cdbdd7e23f00127"
+  }
+}

@@ -5,13 +5,15 @@ description: 直接分析 ur-user-simulator 生成的全量合成问卷工作簿
 
 # 综合问卷数据并输出调研报告
 
-把一批已完成的问卷回答转换成能回溯到题目和 Excel 原始行的报告。`questionnaire.md` 是题目文本的权威来源，`questionnaire-design.html` 是研究决策、目标和分析建议的权威来源，回答工作簿是所有回答与统计的唯一来源。
+把一批已完成的问卷回答转换成能回溯到题目和 Excel 原始行的报告。`questionnaire.md` 是题目文本的权威来源，`survey-design-desc.html` 是研究决策、目标和分析建议的权威来源，回答工作簿是所有回答与统计的唯一来源。
+
+不读取任务级共享上下文文件；需要说明样本构成时，只读取本 Skill 输入契约允许的画像汇总文件。
 
 ## 运行约定
 
 - 把技能目录记为 `<SKILL_DIR>`，调用工作目录记为 `<WORK_DIR>`。
 - 输出到 `<WORK_DIR>/用户调研/<YYYYMMDD><课题>/report_<run_id>/`，不同运行不得相互覆盖。
-- 报告必须是 UTF-8 单文件 HTML，CSS、SVG 图表和必要数据全部内嵌，不依赖 CDN、远程字体或脚本。
+- 报告必须是 UTF-8 单文件 HTML，CSS、SVG 图表、交互脚本和必要的匿名封闭题答卷数据全部内嵌，不依赖 CDN、远程字体或脚本。
 - 所有中间和最终文件都写入调用者的任务目录，不写入 Skill 目录。
 
 ## 输入
@@ -21,7 +23,7 @@ description: 直接分析 ur-user-simulator 生成的全量合成问卷工作簿
 ### 研究设计输入
 
 - `<WORK_DIR>/用户调研/<YYYYMMDD><课题>/questionnaire.md`：必需；已由用户确认的正式问卷。
-- `<WORK_DIR>/用户调研/<YYYYMMDD><课题>/questionnaire-design.html`：必需；提供产品决策、研究目标、逐题用途、分析建议和完整问卷附录。
+- `<WORK_DIR>/用户调研/<YYYYMMDD><课题>/survey-design-desc.html`：必需；提供产品决策、研究目标、逐题用途、分析建议和完整问卷附录。
 
 从 `questionnaire.md` 的 Q 标题、题型标签、选项、量表端点、动态回填说明和逻辑提示解析完整问卷结构。题号重复、题型无法识别或 Excel 题目列与问卷不一致时停止分析。
 
@@ -35,18 +37,20 @@ description: 直接分析 ur-user-simulator 生成的全量合成问卷工作簿
 
 该文件是必需且唯一的回答批次输入，必须包含全量样本行、完成状态、实际模型、所有题目答案、条件性的回答原因和错误摘要。总样本、完成/失败、完成率、模型分布、缺失和问题摘要全部从工作簿直接计算。目录中存在多个工作簿时不得自行选择“最新”或跨批合并；使用用户指定的文件。
 
+最终 `report.html` 为实现浏览器内筛选，会内嵌清理后可分析样本的封闭题答案；该数据不包含用户 ID、姓名、任务 ID、实际模型、开放回答或回答原因。筛选、保存和图片下载均在本地浏览器执行，不上传数据。
+
 ### 可选样本构成说明
 
 - 默认不读取 `personas.json`、`persona_audit.json`、`persons/` 或任何逐人画像文件。
-- 只有需要说明样本如何构建时，才可选读取 `<WORK_DIR>/用户调研/personas_data/persons_summary.txt`。
-- `persons_summary.txt` 只提供批次级构建背景；不得当作问卷发现、分群字段、单个回答的解释、主题频次、用户原话或市场比例。
+- 只有需要说明样本如何构建时，才可选读取 `<WORK_DIR>/用户调研/personas_data/persons_summary.html`。
+- `persons_summary.html` 只提供批次级构建背景；不得当作问卷发现、分群字段、单个回答的解释、主题频次、用户原话或市场比例。
 
 ## 第一步：数据清理和准备
 
 先对指定工作簿做初步检查。原始 Excel 保持不改写；清理后的分析样本和每条剔除理由写入 `analysis_summary.json.data_cleaning`，以便审计。
 
 - 自动剔除可解析的结构性或逻辑无效完成回答：问卷外选项、重复排序、超过题目选择上限、非数值量表值、超出量表范围的值，以及违反“结束答题”、排他项跳题或明确显示条件的回答。
-- 对照 `questionnaire.md` 的逻辑提示、`questionnaire-design.html` 的调研诉求和回答原文，人工识别逻辑不自洽、与本次调研对象/诉求明显不符的完成回答。每条人工剔除必须保留用户 ID 和具体理由；不能凭印象筛选。
+- 对照 `questionnaire.md` 的逻辑提示、`survey-design-desc.html` 的调研诉求和回答原文，人工识别逻辑不自洽、与本次调研对象/诉求明显不符的完成回答。每条人工剔除必须保留用户 ID 和具体理由；不能凭印象筛选。
 - 带“错误摘要”的完成回答先列为人工复核，除非能说明其回答无效，否则不自动剔除。失败行不进入分析样本，但仍计入总样本、失败数和完成率。
 
 运行准备脚本。需要人工剔除时可重复追加 `--exclude-response "<用户ID>:<清理理由>"`：
@@ -61,7 +65,7 @@ python "<SKILL_DIR>/scripts/generate_report.py" \
   --prepare-only
 ```
 
-如需披露样本构成，在命令中追加 `--persons-summary "<PERSONS_SUMMARY_TXT>"`。没有人工剔除时省略 `--exclude-response`。本技能固定处理合成模拟问卷，不接收真实或混合来源参数。
+如需披露样本构成，在命令中追加 `--persons-summary "<PERSONS_SUMMARY_HTML>"`。没有人工剔除时省略 `--exclude-response`。本技能固定处理合成模拟问卷，不接收真实或混合来源参数。
 
 ## 第二步：描述性统计分析
 
@@ -72,7 +76,7 @@ python "<SKILL_DIR>/scripts/generate_report.py" \
 - 每题题干、题型、实际分母、缺失数、频数与百分比；
 - 排序题的第一选择和平均名次，量表题的有效数和描述统计；
 - 开放题回答及各题“回答原因”的原子文本，证据 ID 使用 `<用户ID>:<题号>` 或 `<用户ID>:<题号>:reason`；
-- 从 `questionnaire-design.html` 提取的研究目标与题目映射；没有证据时明确写 `evidence_gap`。
+- 从 `survey-design-desc.html` 提取的研究目标与题目映射；没有证据时明确写 `evidence_gap`。
 
 不得先把 Excel 转成另一份未定义的 `structured_data_*.json` 或 `raw_data_*.json`。统计从原工作簿直接产生，`analysis_summary.json` 是分析底稿，不是新的模拟器输出格式。
 
@@ -130,6 +134,8 @@ python "<SKILL_DIR>/scripts/generate_report.py" \
 - 抽查至少 3 个证据 ID，能回到 Excel 的用户行和题目/回答原因列。
 - 确认标题、研究目标结论、图表说明和限制中的来源披露一致。
 - 确认 HTML 没有外部资源，移动端和桌面端都可读。
+- 确认页面可按一个或多个不同封闭题选项叠加筛选（不同题目的条件为“同时满足”，同一题只保留一个选项），筛选后仅“封闭题描述统计”和当前样本数实时重算；研究目标结论、主题、交叉/量表结果和建议保留原批次分析，不自动改写。
+- 确认“保存当前筛选报告”会下载含当前条件的离线 HTML；确认 PNG 与 SVG 图片下载均能在本地浏览器完成。
 
 最终输出：
 

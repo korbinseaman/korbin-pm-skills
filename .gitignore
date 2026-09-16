@@ -1,0 +1,28 @@
+# IDE and local workspace metadata
+.idea/
+.vscode/
+
+# Previous repository metadata backup
+.git-pm-studio-backup-*/
+.git-copy-wrapper-*/
+
+# Python caches and test artifacts
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Dependencies
+node_modules/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+config/llm.json
+**/config/llm.json
+
+# Operating-system files
+.DS_Store
+Thumbs.db

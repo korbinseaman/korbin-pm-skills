@@ -1,0 +1,471 @@
+{"kind":"deck","id":"pr/oxl7gk","name":"Deck"}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/y90nupkv","slide":1,"title":"鸿蒙图库产品方案决策汇报","textShapes":4}
+{"kind":"shape","id":"sh/547294r6","slide":1,"name":"cover-dark-overlay","bbox":[0,0,720,720]}
+{"kind":"shape","id":"sh/k3yl0zql","slide":1,"name":"cover-red-angle-v","bbox":[72,108,5,80]}
+{"kind":"shape","id":"sh/7qp4be9c","slide":1,"name":"cover-red-angle-h","bbox":[72,108,80,5]}
+{"kind":"textbox","id":"sh/65g3298r","slide":1,"name":"cover-kicker","text":"鸿蒙图库产品方案决策汇报","textPreview":"鸿蒙图库产品方案决策汇报","textChars":12,"textLines":1,"bbox":[92,118,520,30]}
+{"kind":"textbox","id":"sh/ts7md4r2","slide":1,"name":"cover-title","text":"一句话清理图片","textPreview":"一句话清理图片","textChars":7,"textLines":1,"bbox":[92,186,560,92]}
+{"kind":"textbox","id":"sh/sryl4zqx","slide":1,"name":"cover-subtitle","text":"以自然语言降低整理成本，以可解释确认与可撤销机制控制误删风险","textPreview":"以自然语言降低整理成本，以可解释确认与可撤销机制控制误删风险","textChars":30,"textLines":1,"bbox":[94,298,568,66]}
+{"kind":"textbox","id":"sh/fu94fe98","slide":1,"name":"cover-meta","text":"产品方案评审  |  2026.08.30  |  Security Level: Internal","textPreview":"产品方案评审  |  2026.08.30  |  Security Level: Internal","textChars":50,"textLines":1,"bbox":[94,604,620,26]}
+{"kind":"image","id":"im/7mp0jixo","slide":1,"name":"","bbox":[0,0,1280,720]}
+{"kind":"image","id":"im/jqxw72dk","slide":1,"name":"","bbox":[1072,651.09,136,29.82]}
+{"kind":"notes","id":"nt/y90nupkv","slide":1,"text":"[Sources]\n- User brief and decision goal supplied in this conversation, 2026-08-30.\n- Huawei visual assets and brand rules: huawei-presentation local skill asset library.\n- Product mechanisms, thresholds and weights are proposal hypotheses; validate through research, usability testing, technical spike and privacy review."}
+{"kind":"slide","id":"sl/hwbqtkby","slide":2,"title":"低歧义任务先行与四重安全护栏构成产品决策基础","textShapes":26}
+{"kind":"shape","id":"sh/svedkvup","slide":2,"name":"s2-title-accent","bbox":[72,62,58,5]}
+{"kind":"textbox","id":"sh/9072xkry","slide":2,"name":"s2-title","text":"低歧义任务先行与四重安全护栏构成产品决策基础","textPreview":"低歧义任务先行与四重安全护栏构成产品决策基础","textChars":22,"textLines":1,"bbox":[72,78,1110,52]}
+{"kind":"textbox","id":"sh/ozy1ofad","slide":2,"name":"s2-judgment","text":"建议批准“搜索 + 解释性预览 + 显式确认 + 可撤销执行”的 MVP 路线","textPreview":"建议批准“搜索 + 解释性预览 + 显式确认 + 可撤销执行”的 MVP 路线","textChars":39,"textLines":1,"bbox":[72,140,1136,30]}
+{"kind":"shape","id":"sh/b29kza94","slide":2,"name":"s2-metric-bg-0","bbox":[72,190,260,116]}
+{"kind":"textbox","id":"sh/a10jqpsj","slide":2,"name":"s2-metric-k-0","text":"价值","textPreview":"价值","textChars":2,"textLines":1,"bbox":[88,202,76,24]}
+{"kind":"textbox","id":"sh/x4r21kru","slide":2,"name":"s2-metric-v-0","text":"表达成本","textPreview":"表达成本","textChars":4,"textLines":1,"bbox":[88,232,228,28]}
+{"kind":"textbox","id":"sh/w3i1sfa9","slide":2,"name":"s2-metric-note-0","text":"把多步筛选压缩为一句话任务","textPreview":"把多步筛选压缩为一句话任务","textChars":13,"textLines":1,"bbox":[88,266,228,34]}
+{"kind":"shape","id":"sh/r65knqtk","slide":2,"name":"s2-metric-bg-1","bbox":[356,190,260,116]}
+{"kind":"textbox","id":"sh/q5wjelsz","slide":2,"name":"s2-metric-k-1","text":"边界","textPreview":"边界","textChars":2,"textLines":1,"bbox":[372,202,76,24]}
+{"kind":"textbox","id":"sh/ove9o7yd","slide":2,"name":"s2-metric-v-1","text":"低歧义优先","textPreview":"低歧义优先","textChars":5,"textLines":1,"bbox":[372,232,228,28]}
+{"kind":"textbox","id":"sh/9wnqhczy","slide":2,"name":"s2-metric-note-1","text":"先覆盖时间、地点、截图、重复等条件","textPreview":"先覆盖时间、地点、截图、重复等条件","textChars":17,"textLines":1,"bbox":[372,266,228,34]}
+{"kind":"shape","id":"sh/mtwrmxg7","slide":2,"name":"s2-metric-bg-2","bbox":[640,190,260,116]}
+{"kind":"textbox","id":"sh/nu58f2hs","slide":2,"name":"s2-metric-k-2","text":"安全","textPreview":"安全","textChars":2,"textLines":1,"bbox":[656,202,76,24]}
+{"kind":"textbox","id":"sh/wjy9sry9","slide":2,"name":"s2-metric-v-2","text":"四重护栏","textPreview":"四重护栏","textChars":4,"textLines":1,"bbox":[656,232,228,28]}
+{"kind":"textbox","id":"sh/xk7qlczu","slide":2,"name":"s2-metric-note-2","text":"解释、确认、回收站、风险降级","textPreview":"解释、确认、回收站、风险降级","textChars":14,"textLines":1,"bbox":[656,266,228,34]}
+{"kind":"shape","id":"sh/ahwrqhgj","slide":2,"name":"s2-metric-bg-3","bbox":[924,190,260,116]}
+{"kind":"textbox","id":"sh/bip8jmho","slide":2,"name":"s2-metric-k-3","text":"决策","textPreview":"决策","textChars":2,"textLines":1,"bbox":[940,202,76,24]}
+{"kind":"textbox","id":"sh/cnupgny5","slide":2,"name":"s2-metric-v-3","text":"双阶段验证","textPreview":"双阶段验证","textChars":5,"textLines":1,"bbox":[940,232,228,28]}
+{"kind":"textbox","id":"sh/do3q9szq","slide":2,"name":"s2-metric-note-3","text":"可用性验证后再进入工程立项","textPreview":"可用性验证后再进入工程立项","textChars":13,"textLines":1,"bbox":[940,266,228,34]}
+{"kind":"textbox","id":"sh/t8byxkn2","slide":2,"name":"label-关键矛盾-72-334","text":"关键矛盾","textPreview":"关键矛盾","textChars":4,"textLines":1,"bbox":[72,334,160,26]}
+{"kind":"shape","id":"sh/s72xofmh","slide":2,"name":"s2-left","bbox":[72,372,336,190]}
+{"kind":"textbox","id":"sh/76twva5c","slide":2,"name":"s2-left-title","text":"用户希望“说完即完成”","textPreview":"用户希望“说完即完成”","textChars":11,"textLines":1,"bbox":[94,392,292,30]}
+{"kind":"textbox","id":"sh/65kfmpor","slide":2,"name":"s2-left-body","text":"减少筛选、全选、逐项核对与删除操作；但自然语言包含歧义、范围缺失和对象误识别。","textPreview":"减少筛选、全选、逐项核对与删除操作；但自然语言包含歧义、范围缺失和对象误识别。","textChars":39,"textLines":1,"bbox":[94,436,292,80]}
+{"kind":"shape","id":"sh/hcvy14ne","slide":2,"name":"s2-arrow","bbox":[428,445,42,34]}
+{"kind":"shape","id":"sh/gbmxszmt","slide":2,"name":"s2-center","bbox":[490,350,350,230]}
+{"kind":"textbox","id":"sh/fadgzu58","slide":2,"name":"s2-center-title","text":"推荐：可控自动化","textPreview":"推荐：可控自动化","textChars":8,"textLines":1,"bbox":[514,374,302,32]}
+{"kind":"shape","id":"sh/u94fqp4n","slide":2,"name":"chip-解释候选集-525-424","bbox":[525,424,132,34]}
+{"kind":"textbox","id":"sh/p0vy54na","slide":2,"name":"chip-text-解释候选集-525-424","text":"解释候选集","textPreview":"解释候选集","textChars":5,"textLines":1,"bbox":[533,429,116,22]}
+{"kind":"shape","id":"sh/4zmxwzmp","slide":2,"name":"chip-风险分级确认-673-424","bbox":[673,424,132,34]}
+{"kind":"textbox","id":"sh/mlgvq147","slide":2,"name":"chip-text-风险分级确认-673-424","text":"风险分级确认","textPreview":"风险分级确认","textChars":6,"textLines":1,"bbox":[681,429,116,22]}
+{"kind":"shape","id":"sh/nmpcj6ls","slide":2,"name":"chip-默认回收站-525-478","bbox":[525,478,132,34]}
+{"kind":"textbox","id":"sh/onydsbmd","slide":2,"name":"chip-text-默认回收站-525-478","text":"默认回收站","textPreview":"默认回收站","textChars":5,"textLines":1,"bbox":[533,483,116,22]}
+{"kind":"shape","id":"sh/9o7ulg3y","slide":2,"name":"chip-高风险降级-673-478","bbox":[673,478,132,34]}
+{"kind":"textbox","id":"sh/a9gvulkj","slide":2,"name":"chip-text-高风险降级-673-478","text":"高风险降级","textPreview":"高风险降级","textChars":5,"textLines":1,"bbox":[681,483,116,22]}
+{"kind":"shape","id":"sh/ba9cn6l4","slide":2,"name":"s2-arrow2","bbox":[860,445,42,34]}
+{"kind":"shape","id":"sh/wbidwb29","slide":2,"name":"s2-right","bbox":[922,372,286,190]}
+{"kind":"textbox","id":"sh/xcrupg3u","slide":2,"name":"s2-right-title","text":"本次需要批准","textPreview":"本次需要批准","textChars":6,"textLines":1,"bbox":[944,392,242,30]}
+{"kind":"textbox","id":"sh/id0vylkf","slide":2,"name":"s2-right-body","text":"① 推荐交互主链路\n② MVP 纳入与降级范围\n③ 验证指标和阶段门\n④ 跨团队责任","textPreview":"① 推荐交互主链路 | ② MVP 纳入与降级范围 | ③ 验证指标和阶段门 | ④ 跨团队责任","textChars":42,"textLines":4,"bbox":[944,430,242,108]}
+{"kind":"shape","id":"sh/je9crql0","slide":2,"name":"s2-action","bbox":[72,602,1136,50]}
+{"kind":"textbox","id":"sh/ru5cbqd4","slide":2,"name":"s2-action-text","text":"决策建议：通过方案方向，先启动原型验证与技术预研；未达到误选和可理解性门槛则不进入工程立项。","textPreview":"决策建议：通过方案方向，先启动原型验证与技术预研；未达到误选和可理解性门槛则不进入工程立项。","textChars":46,"textLines":1,"bbox":[94,614,1090,28]}
+{"kind":"textbox","id":"sh/69wbilcj","slide":2,"name":"s2-footer-left","text":"02   Huawei Confidential","textPreview":"02   Huawei Confidential","textChars":24,"textLines":1,"bbox":[72,682,380,18]}
+{"kind":"image","id":"im/0jmt47a9","slide":2,"name":"","bbox":[1102,673.38,106,23.24]}
+{"kind":"notes","id":"nt/hwbqtkby","slide":2,"text":"[Sources]\n- User brief and decision goal supplied in this conversation, 2026-08-30.\n- Huawei visual assets and brand rules: huawei-presentation local skill asset library.\n- Product mechanisms, thresholds and weights are proposal hypotheses; validate through research, usability testing, technical spike and privacy review."}
+{"kind":"slide","id":"sl/ofy9wn61","slide":3,"title":"用户清理需求集中于可描述条件组合，误删成本决定交互边界","textShapes":28}
+{"kind":"shape","id":"sh/21szqxcb","slide":3,"name":"s3-title-accent","bbox":[72,62,58,5]}
+{"kind":"textbox","id":"sh/cza94vmx","slide":3,"name":"s3-title","text":"用户清理需求集中于可描述条件组合，误删成本决定交互边界","textPreview":"用户清理需求集中于可描述条件组合，误删成本决定交互边界","textChars":27,"textLines":1,"bbox":[72,78,1110,52]}
+{"kind":"textbox","id":"sh/d0jax03i","slide":3,"name":"s3-lead","text":"用户并非要“理解图库”，而是要快速完成一个有范围、有条件、有后果的整理任务","textPreview":"用户并非要“理解图库”，而是要快速完成一个有范围、有条件、有后果的整理任务","textChars":37,"textLines":1,"bbox":[72,140,1136,30]}
+{"kind":"shape","id":"sh/298ryl4v","slide":3,"name":"s3-center","bbox":[480,260,320,180]}
+{"kind":"textbox","id":"sh/3ah8rqlg","slide":3,"name":"s3-center-a","text":"一句话任务","textPreview":"一句话任务","textChars":5,"textLines":1,"bbox":[535,292,210,36]}
+{"kind":"textbox","id":"sh/obq90bml","slide":3,"name":"s3-center-b","text":"对象 + 条件 + 范围 + 动作","textPreview":"对象 + 条件 + 范围 + 动作","textChars":17,"textLines":1,"bbox":[520,340,240,28]}
+{"kind":"textbox","id":"sh/pcjqtg36","slide":3,"name":"s3-center-c","text":"缺一项即增加解释或确认","textPreview":"缺一项即增加解释或确认","textChars":11,"textLines":1,"bbox":[520,382,240,26]}
+{"kind":"shape","id":"sh/m5cra54z","slide":3,"name":"s3-job-0","bbox":[72,200,350,104]}
+{"kind":"textbox","id":"sh/n6ls3alk","slide":3,"name":"s3-job-h-0","text":"时间条件","textPreview":"时间条件","textChars":4,"textLines":1,"bbox":[88,212,92,24]}
+{"kind":"textbox","id":"sh/n2l4fq98","slide":3,"name":"s3-job-q-0","text":"“删除上个月的截图”","textPreview":"“删除上个月的截图”","textChars":10,"textLines":1,"bbox":[88,240,318,26]}
+{"kind":"textbox","id":"sh/m1c3mlsn","slide":3,"name":"s3-job-n-0","text":"范围明确；对象可解释","textPreview":"范围明确；对象可解释","textChars":10,"textLines":1,"bbox":[88,270,318,28]}
+{"kind":"shape","id":"sh/943mhgre","slide":3,"name":"s3-job-1","bbox":[72,330,350,104]}
+{"kind":"textbox","id":"sh/83ulovat","slide":3,"name":"s3-job-h-1","text":"类型条件","textPreview":"类型条件","textChars":4,"textLines":1,"bbox":[88,342,92,24]}
+{"kind":"textbox","id":"sh/v6l4jq94","slide":3,"name":"s3-job-q-1","text":"“清理重复照片和模糊照片”","textPreview":"“清理重复照片和模糊照片”","textChars":13,"textLines":1,"bbox":[88,370,318,26]}
+{"kind":"textbox","id":"sh/a5c3ql8z","slide":3,"name":"s3-job-n-1","text":"质量判断需展示理由","textPreview":"质量判断需展示理由","textChars":9,"textLines":1,"bbox":[88,400,318,28]}
+{"kind":"shape","id":"sh/x8nml0ra","slide":3,"name":"s3-job-2","bbox":[72,460,350,104]}
+{"kind":"textbox","id":"sh/w7ulsvqp","slide":3,"name":"s3-job-h-2","text":"来源条件","textPreview":"来源条件","textChars":4,"textLines":1,"bbox":[88,472,92,24]}
+{"kind":"textbox","id":"sh/ja54na9g","slide":3,"name":"s3-job-q-2","text":"“删掉群聊保存的表情包”","textPreview":"“删掉群聊保存的表情包”","textChars":12,"textLines":1,"bbox":[88,500,318,26]}
+{"kind":"textbox","id":"sh/i9w3u58v","slide":3,"name":"s3-job-n-2","text":"来源识别能力待确认","textPreview":"来源识别能力待确认","textChars":9,"textLines":1,"bbox":[88,530,318,28]}
+{"kind":"shape","id":"sh/e10f2twf","slide":3,"name":"s3-job-3","bbox":[858,200,350,104]}
+{"kind":"textbox","id":"sh/f29gbyx0","slide":3,"name":"s3-job-h-3","text":"地点条件","textPreview":"地点条件","textChars":4,"textLines":1,"bbox":[874,212,92,24]}
+{"kind":"textbox","id":"sh/03ix43e5","slide":3,"name":"s3-job-q-3","text":"“清理出差期间的临时照片”","textPreview":"“清理出差期间的临时照片”","textChars":13,"textLines":1,"bbox":[874,240,318,26]}
+{"kind":"textbox","id":"sh/14ryd8fq","slide":3,"name":"s3-job-n-3","text":"地点与时间可能组合","textPreview":"地点与时间可能组合","textChars":9,"textLines":1,"bbox":[874,270,318,28]}
+{"kind":"shape","id":"sh/6d0fytg3","slide":3,"name":"s3-job-4","bbox":[858,330,350,104]}
+{"kind":"textbox","id":"sh/re9g7yxo","slide":3,"name":"s3-job-h-4","text":"人物条件","textPreview":"人物条件","textChars":4,"textLines":1,"bbox":[874,342,92,24]}
+{"kind":"textbox","id":"sh/sfix03y9","slide":3,"name":"s3-job-q-4","text":"“删掉没有家人的连拍”","textPreview":"“删掉没有家人的连拍”","textChars":11,"textLines":1,"bbox":[874,370,318,26]}
+{"kind":"textbox","id":"sh/tgry9ofu","slide":3,"name":"s3-job-n-4","text":"人物语义属于高敏高风险","textPreview":"人物语义属于高敏高风险","textChars":11,"textLines":1,"bbox":[874,400,318,28]}
+{"kind":"shape","id":"sh/a9kfadwn","slide":3,"name":"s3-job-5","bbox":[858,460,350,104]}
+{"kind":"textbox","id":"sh/batgjixs","slide":3,"name":"s3-job-h-5","text":"事件条件","textPreview":"事件条件","textChars":4,"textLines":1,"bbox":[874,472,92,24]}
+{"kind":"textbox","id":"sh/l4fi9cza","slide":3,"name":"s3-job-q-5","text":"“清理报销完成后的票据”","textPreview":"“清理报销完成后的票据”","textChars":12,"textLines":1,"bbox":[874,500,318,26]}
+{"kind":"textbox","id":"sh/k3m1g7yp","slide":3,"name":"s3-job-n-5","text":"状态语义缺少可靠证据","textPreview":"状态语义缺少可靠证据","textChars":10,"textLines":1,"bbox":[874,530,318,28]}
+{"kind":"shape","id":"sh/z2d07mh4","slide":3,"name":"chip-低风险：可解释-472-468","bbox":[472,468,160,34]}
+{"kind":"textbox","id":"sh/y14jehgj","slide":3,"name":"chip-text-低风险：可解释-472-468","text":"低风险：可解释","textPreview":"低风险：可解释","textChars":7,"textLines":1,"bbox":[480,473,144,22]}
+{"kind":"shape","id":"sh/x0vi5czy","slide":3,"name":"chip-中风险：质量语义-648-468","bbox":[648,468,160,34]}
+{"kind":"textbox","id":"sh/czmhc7id","slide":3,"name":"chip-text-中风险：质量语义-648-468","text":"中风险：质量语义","textPreview":"中风险：质量语义","textChars":8,"textLines":1,"bbox":[656,473,144,22]}
+{"kind":"shape","id":"sh/byd032h8","slide":3,"name":"chip-高风险：人物/事件-560-516","bbox":[560,516,176,34]}
+{"kind":"textbox","id":"sh/ax4zax0n","slide":3,"name":"chip-text-高风险：人物/事件-560-516","text":"高风险：人物/事件","textPreview":"高风险：人物/事件","textChars":9,"textLines":1,"bbox":[568,521,160,22]}
+{"kind":"shape","id":"sh/hwzihwzi","slide":3,"name":"s3-bottom","bbox":[72,588,1136,64]}
+{"kind":"textbox","id":"sh/wv61obyx","slide":3,"name":"s3-bottom-text","text":"产品边界：低风险请求可进入确认执行；中风险必须解释判定理由；高风险仅返回筛选结果，不提供一键删除。","textPreview":"产品边界：低风险请求可进入确认执行；中风险必须解释判定理由；高风险仅返回筛选结果，不提供一键删除。","textChars":49,"textLines":1,"bbox":[94,606,1090,28]}
+{"kind":"textbox","id":"sh/4nuhs7uh","slide":3,"name":"s3-footer-left","text":"03   Huawei Confidential","textPreview":"03   Huawei Confidential","textChars":24,"textLines":1,"bbox":[72,682,380,18]}
+{"kind":"image","id":"im/k3yp4bml","slide":3,"name":"","bbox":[1102,673.38,106,23.24]}
+{"kind":"notes","id":"nt/ofy9wn61","slide":3,"text":"[Sources]\n- User brief and decision goal supplied in this conversation, 2026-08-30.\n- Huawei visual assets and brand rules: huawei-presentation local skill asset library.\n- Product mechanisms, thresholds and weights are proposal hypotheses; validate through research, usability testing, technical spike and privacy review."}
+{"kind":"slide","id":"sl/jyx0ra1s","slide":4,"title":"意图、候选、解释、确认与撤销闭环降低执行不确定性","textShapes":38}
+{"kind":"shape","id":"sh/ulsrehkz","slide":4,"name":"s4-title-accent","bbox":[72,62,58,5]}
+{"kind":"textbox","id":"sh/1cj2d8b6","slide":4,"name":"s4-title","text":"意图、候选、解释、确认与撤销闭环降低执行不确定性","textPreview":"意图、候选、解释、确认与撤销闭环降低执行不确定性","textChars":24,"textLines":1,"bbox":[72,78,1110,52]}
+{"kind":"textbox","id":"sh/0ba143al","slide":4,"name":"s4-lead","text":"系统每一步都必须让用户知道“理解了什么、选中了什么、下一步会发生什么”","textPreview":"系统每一步都必须让用户知道“理解了什么、选中了什么、下一步会发生什么”","textChars":35,"textLines":1,"bbox":[72,140,1136,30]}
+{"kind":"shape","id":"sh/rm1k7yt4","slide":4,"name":"s4-arrow-0","bbox":[226,270,28,24]}
+{"kind":"shape","id":"sh/ql8jytsj","slide":4,"name":"s4-step-0","bbox":[72,206,154,170]}
+{"kind":"textbox","id":"sh/doj29oba","slide":4,"name":"s4-num-0","text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[86,220,40,24]}
+{"kind":"textbox","id":"sh/sna103ap","slide":4,"name":"s4-head-0","text":"输入意图","textPreview":"输入意图","textChars":4,"textLines":1,"bbox":[86,252,126,28]}
+{"kind":"textbox","id":"sh/3ihk3et8","slide":4,"name":"s4-core-0","text":"文本 / 语音","textPreview":"文本 / 语音","textChars":7,"textLines":1,"bbox":[86,294,126,26]}
+{"kind":"textbox","id":"sh/ih8ju9sn","slide":4,"name":"s4-note-0","text":"保留原句","textPreview":"保留原句","textChars":4,"textLines":1,"bbox":[86,332,126,28]}
+{"kind":"shape","id":"sh/kbm987y5","slide":4,"name":"s4-arrow-1","bbox":[414,270,28,24]}
+{"kind":"shape","id":"sh/5cva1cfq","slide":4,"name":"s4-step-1","bbox":[260,206,154,170]}
+{"kind":"textbox","id":"sh/i94r6xgz","slide":4,"name":"s4-num-1","text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[274,220,40,24]}
+{"kind":"textbox","id":"sh/jadsz2xk","slide":4,"name":"s4-head-1","text":"结构化解析","textPreview":"结构化解析","textChars":5,"textLines":1,"bbox":[274,252,126,28]}
+{"kind":"textbox","id":"sh/w72947yt","slide":4,"name":"s4-core-1","text":"对象·条件·范围","textPreview":"对象·条件·范围","textChars":8,"textLines":1,"bbox":[274,294,126,26]}
+{"kind":"textbox","id":"sh/x8vaxsfe","slide":4,"name":"s4-note-1","text":"暴露缺失项","textPreview":"暴露缺失项","textChars":5,"textLines":1,"bbox":[274,332,126,28]}
+{"kind":"shape","id":"sh/a5kr2xg3","slide":4,"name":"s4-arrow-2","bbox":[602,270,28,24]}
+{"kind":"shape","id":"sh/v6tsv2xo","slide":4,"name":"s4-step-2","bbox":[448,206,154,170]}
+{"kind":"textbox","id":"sh/g36tgryd","slide":4,"name":"s4-num-2","text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[462,220,40,24]}
+{"kind":"textbox","id":"sh/h4fa9wfy","slide":4,"name":"s4-head-2","text":"检索候选","textPreview":"检索候选","textChars":4,"textLines":1,"bbox":[462,252,126,28]}
+{"kind":"textbox","id":"sh/p0batw72","slide":4,"name":"s4-core-2","text":"本地索引优先","textPreview":"本地索引优先","textChars":6,"textLines":1,"bbox":[462,294,126,26]}
+{"kind":"textbox","id":"sh/oz29krqh","slide":4,"name":"s4-note-2","text":"显示数量","textPreview":"显示数量","textChars":4,"textLines":1,"bbox":[462,332,126,28]}
+{"kind":"shape","id":"sh/3ytsrmpw","slide":4,"name":"s4-arrow-3","bbox":[790,270,28,24]}
+{"kind":"shape","id":"sh/2xkrih8b","slide":4,"name":"s4-step-3","bbox":[636,206,154,170]}
+{"kind":"textbox","id":"sh/1wbapc7q","slide":4,"name":"s4-num-3","text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[650,220,40,24]}
+{"kind":"textbox","id":"sh/gv29g7q5","slide":4,"name":"s4-head-3","text":"解释预览","textPreview":"解释预览","textChars":4,"textLines":1,"bbox":[650,252,126,28]}
+{"kind":"textbox","id":"sh/fu9sn2p0","slide":4,"name":"s4-core-3","text":"分组与判定理由","textPreview":"分组与判定理由","textChars":7,"textLines":1,"bbox":[650,294,126,26]}
+{"kind":"textbox","id":"sh/et0reh8f","slide":4,"name":"s4-note-3","text":"支持排除","textPreview":"支持排除","textChars":4,"textLines":1,"bbox":[650,332,126,28]}
+{"kind":"shape","id":"sh/tsrqlc7u","slide":4,"name":"s4-arrow-4","bbox":[978,270,28,24]}
+{"kind":"shape","id":"sh/sri9s7q9","slide":4,"name":"s4-step-4","bbox":[824,206,154,170]}
+{"kind":"textbox","id":"sh/ilwf69kv","slide":4,"name":"s4-num-4","text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[838,220,40,24]}
+{"kind":"textbox","id":"sh/jm5gze1g","slide":4,"name":"s4-head-4","text":"显式确认","textPreview":"显式确认","textChars":4,"textLines":1,"bbox":[838,252,126,28]}
+{"kind":"textbox","id":"sh/knex8j21","slide":4,"name":"s4-core-4","text":"范围与后果复述","textPreview":"范围与后果复述","textChars":7,"textLines":1,"bbox":[838,294,126,26]}
+{"kind":"textbox","id":"sh/5ony1oj6","slide":4,"name":"s4-note-4","text":"高风险加签","textPreview":"高风险加签","textChars":5,"textLines":1,"bbox":[838,332,126,28]}
+{"kind":"shape","id":"sh/axcf29kj","slide":4,"name":"s4-step-5","bbox":[1012,206,154,170]}
+{"kind":"textbox","id":"sh/vy5gbe14","slide":4,"name":"s4-num-5","text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1026,220,40,24]}
+{"kind":"textbox","id":"sh/wzex4z2p","slide":4,"name":"s4-head-5","text":"执行与撤销","textPreview":"执行与撤销","textChars":5,"textLines":1,"bbox":[1026,252,126,28]}
+{"kind":"textbox","id":"sh/xknyx4ja","slide":4,"name":"s4-core-5","text":"进入回收站","textPreview":"进入回收站","textChars":5,"textLines":1,"bbox":[1026,294,126,26]}
+{"kind":"textbox","id":"sh/mtcfypkn","slide":4,"name":"s4-note-5","text":"保留恢复入口","textPreview":"保留恢复入口","textChars":6,"textLines":1,"bbox":[1026,332,126,28]}
+{"kind":"textbox","id":"sh/nulw7u18","slide":4,"name":"label-三类异常必须有明确分支-72-408","text":"三类异常必须有明确分支","textPreview":"三类异常必须有明确分支","textChars":11,"textLines":1,"bbox":[72,408,280,26]}
+{"kind":"shape","id":"sh/fm5c3q54","slide":4,"name":"s4-branch-0","bbox":[72,450,352,108]}
+{"kind":"textbox","id":"sh/elwba54j","slide":4,"name":"s4-branch-h-0","text":"解析不完整","textPreview":"解析不完整","textChars":5,"textLines":1,"bbox":[90,464,136,26]}
+{"kind":"textbox","id":"sh/18nu50nu","slide":4,"name":"s4-branch-b-0","text":"追问缺失条件，不自动补全范围","textPreview":"追问缺失条件，不自动补全范围","textChars":14,"textLines":1,"bbox":[90,496,316,44]}
+{"kind":"textbox","id":"sh/0netcvm9","slide":4,"name":"s4-branch-a-0","text":"返回可选条件","textPreview":"返回可选条件","textChars":6,"textLines":1,"bbox":[270,464,136,24]}
+{"kind":"shape","id":"sh/rilczq5s","slide":4,"name":"s4-branch-1","bbox":[450,450,352,108]}
+{"kind":"textbox","id":"sh/qhcb6l47","slide":4,"name":"s4-branch-h-1","text":"候选集过大","textPreview":"候选集过大","textChars":5,"textLines":1,"bbox":[468,464,136,26]}
+{"kind":"textbox","id":"sh/dknu10ny","slide":4,"name":"s4-branch-b-1","text":"先按时间、来源或类型分组","textPreview":"先按时间、来源或类型分组","textChars":12,"textLines":1,"bbox":[468,496,316,44]}
+{"kind":"textbox","id":"sh/sjut8vmd","slide":4,"name":"s4-branch-a-1","text":"要求二次缩小","textPreview":"要求二次缩小","textChars":6,"textLines":1,"bbox":[648,464,136,24]}
+{"kind":"shape","id":"sh/3elcv65w","slide":4,"name":"s4-branch-2","bbox":[828,450,352,108]}
+{"kind":"textbox","id":"sh/idcb2lob","slide":4,"name":"s4-branch-h-2","text":"高风险对象","textPreview":"高风险对象","textChars":5,"textLines":1,"bbox":[846,464,136,26]}
+{"kind":"textbox","id":"sh/8jq9c72t","slide":4,"name":"s4-branch-b-2","text":"人物、私密、票据等仅提供筛选","textPreview":"人物、私密、票据等仅提供筛选","textChars":14,"textLines":1,"bbox":[846,496,316,44]}
+{"kind":"textbox","id":"sh/tkjq5c3e","slide":4,"name":"s4-branch-a-2","text":"禁止直接执行","textPreview":"禁止直接执行","textChars":6,"textLines":1,"bbox":[1026,464,136,24]}
+{"kind":"shape","id":"sh/6x8rahk3","slide":4,"name":"s4-action","bbox":[72,590,1136,62]}
+{"kind":"textbox","id":"sh/7ih83mlo","slide":4,"name":"s4-action-text","text":"验收条件：用户在执行前可复述系统选择范围；执行后可在稳定入口恢复；任何异常分支不绕过确认。","textPreview":"验收条件：用户在执行前可复述系统选择范围；执行后可在稳定入口恢复；任何异常分支不绕过确认。","textChars":45,"textLines":1,"bbox":[94,608,1090,28]}
+{"kind":"textbox","id":"sh/gna9gr25","slide":4,"name":"s4-footer-left","text":"04   Huawei Confidential","textPreview":"04   Huawei Confidential","textChars":24,"textLines":1,"bbox":[72,682,380,18]}
+{"kind":"image","id":"im/gjixkbqp","slide":4,"name":"","bbox":[1102,673.38,106,23.24]}
+{"kind":"notes","id":"nt/jyx0ra1s","slide":4,"text":"[Sources]\n- User brief and decision goal supplied in this conversation, 2026-08-30.\n- Huawei visual assets and brand rules: huawei-presentation local skill asset library.\n- Product mechanisms, thresholds and weights are proposal hypotheses; validate through research, usability testing, technical spike and privacy review."}
+{"kind":"slide","id":"sl/i107q5of","slide":5,"title":"五层意图模型将自然语言请求约束为可执行图库查询","textShapes":28}
+{"kind":"shape","id":"sh/ehkzepsn","slide":5,"name":"s5-title-accent","bbox":[72,62,58,5]}
+{"kind":"textbox","id":"sh/dgbulwnm","slide":5,"name":"s5-title","text":"五层意图模型将自然语言请求约束为可执行图库查询","textPreview":"五层意图模型将自然语言请求约束为可执行图库查询","textChars":23,"textLines":1,"bbox":[72,78,1110,52]}
+{"kind":"textbox","id":"sh/cf2tcr61","slide":5,"name":"s5-lead","text":"解析结果必须同时满足查询可执行、用户可理解和风险可评估三项条件","textPreview":"解析结果必须同时满足查询可执行、用户可理解和风险可评估三项条件","textChars":31,"textLines":1,"bbox":[72,140,1136,30]}
+{"kind":"shape","id":"sh/z2tcnm5s","slide":5,"name":"s5-layer-bg-0","bbox":[72,196,690,62]}
+{"kind":"textbox","id":"sh/yhkbe1o7","slide":5,"name":"s5-layer-title-0","text":"对象层","textPreview":"对象层","textChars":3,"textLines":1,"bbox":[92,212,94,26]}
+{"kind":"textbox","id":"sh/l4bupwny","slide":5,"name":"s5-layer-mid-0","text":"截图 / 重复 / 模糊 / 视频 / 票据","textPreview":"截图 / 重复 / 模糊 / 视频 / 票据","textChars":22,"textLines":1,"bbox":[202,212,356,26]}
+{"kind":"textbox","id":"sh/032tgr6d","slide":5,"name":"s5-layer-out-0","text":"识别对象类别","textPreview":"识别对象类别","textChars":6,"textLines":1,"bbox":[574,212,166,26]}
+{"kind":"shape","id":"sh/n6dcr65o","slide":5,"name":"s5-layer-bg-1","bbox":[72,274,690,62]}
+{"kind":"textbox","id":"sh/m5kbi1oj","slide":5,"name":"s5-layer-title-1","text":"条件层","textPreview":"条件层","textChars":3,"textLines":1,"bbox":[92,290,94,26]}
+{"kind":"textbox","id":"sh/w32dkbuh","slide":5,"name":"s5-layer-mid-1","text":"时间 / 地点 / 来源 / 质量 / 大小","textPreview":"时间 / 地点 / 来源 / 质量 / 大小","textChars":22,"textLines":1,"bbox":[202,290,356,26]}
+{"kind":"textbox","id":"sh/x4vedgvm","slide":5,"name":"s5-layer-out-1","text":"形成过滤表达式","textPreview":"形成过滤表达式","textChars":7,"textLines":1,"bbox":[574,290,166,26]}
+{"kind":"shape","id":"sh/ahkvi1cb","slide":5,"name":"s5-layer-bg-2","bbox":[72,352,690,62]}
+{"kind":"textbox","id":"sh/v2twb6dw","slide":5,"name":"s5-layer-title-2","text":"范围层","textPreview":"范围层","textChars":3,"textLines":1,"bbox":[92,368,94,26]}
+{"kind":"textbox","id":"sh/k7mxovud","slide":5,"name":"s5-layer-mid-2","text":"全部 / 某相册 / 某时间段 / 某设备","textPreview":"全部 / 某相册 / 某时间段 / 某设备","textChars":21,"textLines":1,"bbox":[202,368,356,26]}
+{"kind":"textbox","id":"sh/58vehgvy","slide":5,"name":"s5-layer-out-2","text":"限制影响边界","textPreview":"限制影响边界","textChars":6,"textLines":1,"bbox":[574,368,166,26]}
+{"kind":"shape","id":"sh/i54fmlc7","slide":5,"name":"s5-layer-bg-3","bbox":[72,430,690,62]}
+{"kind":"textbox","id":"sh/j6dwfqds","slide":5,"name":"s5-layer-title-3","text":"动作层","textPreview":"动作层","textChars":3,"textLines":1,"bbox":[92,446,94,26]}
+{"kind":"textbox","id":"sh/sb6xsvu9","slide":5,"name":"s5-layer-mid-3","text":"筛选 / 建议清理 / 删除 / 归档","textPreview":"筛选 / 建议清理 / 删除 / 归档","textChars":19,"textLines":1,"bbox":[202,446,356,26]}
+{"kind":"textbox","id":"sh/tcfel0vu","slide":5,"name":"s5-layer-out-3","text":"决定确认强度","textPreview":"决定确认强度","textChars":6,"textLines":1,"bbox":[574,446,166,26]}
+{"kind":"shape","id":"sh/hgrmpwj2","slide":5,"name":"s5-layer-bg-4","bbox":[72,508,690,62]}
+{"kind":"textbox","id":"sh/gfi5grih","slide":5,"name":"s5-layer-title-4","text":"风险层","textPreview":"风险层","textChars":3,"textLines":1,"bbox":[92,524,94,26]}
+{"kind":"textbox","id":"sh/fe94nm1w","slide":5,"name":"s5-layer-mid-4","text":"敏感对象 / 低置信 / 超大候选集","textPreview":"敏感对象 / 低置信 / 超大候选集","textChars":18,"textLines":1,"bbox":[202,524,356,26]}
+{"kind":"textbox","id":"sh/ud0ne10b","slide":5,"name":"s5-layer-out-4","text":"触发降级策略","textPreview":"触发降级策略","textChars":6,"textLines":1,"bbox":[574,524,166,26]}
+{"kind":"shape","id":"sh/pkr6tgjy","slide":5,"name":"s5-main-arrow","bbox":[780,340,54,40]}
+{"kind":"shape","id":"sh/4ji5kbid","slide":5,"name":"s5-query","bbox":[856,196,352,228]}
+{"kind":"textbox","id":"sh/3i94r61s","slide":5,"name":"s5-query-title","text":"可解释查询计划","textPreview":"可解释查询计划","textChars":7,"textLines":1,"bbox":[880,220,304,30]}
+{"kind":"textbox","id":"sh/2h0ni107","slide":5,"name":"s5-query-code","text":"对象 = 截图\n时间 = 上个月\n范围 = 本机图库\n动作 = 建议清理\n风险 = 低 → 预览后确认","textPreview":"对象 = 截图 | 时间 = 上个月 | 范围 = 本机图库 | 动作 = 建议清理 | 风险 = 低 → 预览后确认","textChars":51,"textLines":5,"bbox":[880,270,304,126]}
+{"kind":"shape","id":"sh/5o7mhcju","slide":5,"name":"ann-1-856-452","bbox":[856,452,28,28]}
+{"kind":"textbox","id":"sh/kny587i9","slide":5,"name":"ann-num-1-856-452","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[856,454,28,22]}
+{"kind":"textbox","id":"sh/atcjidg7","slide":5,"name":"ann-head-1-856-452","text":"可执行性","textPreview":"可执行性","textChars":4,"textLines":1,"bbox":[894,451,314,26]}
+{"kind":"textbox","id":"sh/vu5kbihc","slide":5,"name":"ann-body-1-856-452","text":"任一条件无法映射到索引能力时，不生成删除计划。","textPreview":"任一条件无法映射到索引能力时，不生成删除计划。","textChars":23,"textLines":1,"bbox":[894,479,314,48]}
+{"kind":"shape","id":"sh/wve1knyx","slide":5,"name":"ann-2-856-530","bbox":[856,530,28,28]}
+{"kind":"textbox","id":"sh/xwn2dszi","slide":5,"name":"ann-num-2-856-530","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[856,532,28,22]}
+{"kind":"textbox","id":"sh/ihw3mxg3","slide":5,"name":"ann-head-2-856-530","text":"可理解性","textPreview":"可理解性","textChars":4,"textLines":1,"bbox":[894,529,314,26]}
+{"kind":"textbox","id":"sh/ji5kf2ho","slide":5,"name":"ann-body-2-856-530","text":"预览页使用用户原词，并展示系统补充或推断的条件。","textPreview":"预览页使用用户原词，并展示系统补充或推断的条件。","textChars":24,"textLines":1,"bbox":[894,557,314,48]}
+{"kind":"shape","id":"sh/kjelony9","slide":5,"name":"s5-bottom","bbox":[72,610,690,42]}
+{"kind":"textbox","id":"sh/5kn2hszu","slide":5,"name":"s5-bottom-text","text":"技术决策：意图模型输出结构化查询，不输出不可解释的“直接删除”指令。","textPreview":"技术决策：意图模型输出结构化查询，不输出不可解释的“直接删除”指令。","textChars":34,"textLines":1,"bbox":[92,620,650,24]}
+{"kind":"textbox","id":"sh/e1sjatgz","slide":5,"name":"s5-footer-left","text":"05   Huawei Confidential","textPreview":"05   Huawei Confidential","textChars":24,"textLines":1,"bbox":[72,682,380,18]}
+{"kind":"textbox","id":"sh/fid07u98","slide":5,"name":"s5-footer-brand-dark","text":"HUAWEI","textPreview":"HUAWEI","textChars":6,"textLines":1,"bbox":[1134,675,74,20]}
+{"kind":"image","id":"im/q1s3etsb","slide":5,"name":"","bbox":[1096.27,670,29.45,30]}
+{"kind":"notes","id":"nt/i107q5of","slide":5,"text":"[Sources]\n- User brief and decision goal supplied in this conversation, 2026-08-30.\n- Huawei visual assets and brand rules: huawei-presentation local skill asset library.\n- Product mechanisms, thresholds and weights are proposal hypotheses; validate through research, usability testing, technical spike and privacy review."}
+{"kind":"slide","id":"sl/x8f69ofe","slide":6,"title":"风险分级与逐级确认机制将删除动作限定在可恢复范围","textShapes":33}
+{"kind":"shape","id":"sh/netcjqxo","slide":6,"name":"s6-title-accent","bbox":[72,62,58,5]}
+{"kind":"textbox","id":"sh/yhg7epsj","slide":6,"name":"s6-title","text":"风险分级与逐级确认机制将删除动作限定在可恢复范围","textPreview":"风险分级与逐级确认机制将删除动作限定在可恢复范围","textChars":24,"textLines":1,"bbox":[72,78,1110,52]}
+{"kind":"textbox","id":"sh/zi98nu94","slide":6,"name":"s6-lead","text":"风险不是单一置信度，而是对象敏感度、候选规模、语义缺失与模型不确定性的组合","textPreview":"风险不是单一置信度，而是对象敏感度、候选规模、语义缺失与模型不确定性的组合","textChars":37,"textLines":1,"bbox":[72,140,1136,30]}
+{"kind":"shape","id":"sh/87ipkzal","slide":6,"name":"s6-level-0","bbox":[72,200,760,72]}
+{"kind":"textbox","id":"sh/98rqt4r6","slide":6,"name":"s6-level-code-0","text":"L0","textPreview":"L0","textChars":2,"textLines":1,"bbox":[90,220,50,28]}
+{"kind":"textbox","id":"sh/ml07i9sv","slide":6,"name":"s6-level-name-0","text":"只读筛选","textPreview":"只读筛选","textChars":4,"textLines":1,"bbox":[150,218,130,28]}
+{"kind":"textbox","id":"sh/7m98ru9g","slide":6,"name":"s6-level-cond-0","text":"人物、票据、私密相册；语义缺失或低置信","textPreview":"人物、票据、私密相册；语义缺失或低置信","textChars":19,"textLines":1,"bbox":[292,210,320,52]}
+{"kind":"textbox","id":"sh/oryp8fah","slide":6,"name":"s6-level-act-0","text":"返回结果，不出现执行按钮","textPreview":"返回结果，不出现执行按钮","textChars":12,"textLines":1,"bbox":[626,210,188,52]}
+{"kind":"shape","id":"sh/pc76hkr2","slide":6,"name":"s6-level-1","bbox":[72,290,760,72]}
+{"kind":"textbox","id":"sh/h4bupgn6","slide":6,"name":"s6-level-code-1","text":"L1","textPreview":"L1","textChars":2,"textLines":1,"bbox":[90,310,50,28]}
+{"kind":"textbox","id":"sh/w32twb6l","slide":6,"name":"s6-level-name-1","text":"标准确认","textPreview":"标准确认","textChars":4,"textLines":1,"bbox":[150,308,130,28]}
+{"kind":"textbox","id":"sh/v2tcn650","slide":6,"name":"s6-level-cond-1","text":"截图、缓存图、明确时间范围；候选规模可控","textPreview":"截图、缓存图、明确时间范围；候选规模可控","textChars":20,"textLines":1,"bbox":[292,300,320,52]}
+{"kind":"textbox","id":"sh/u1kbu1ov","slide":6,"name":"s6-level-act-1","text":"预览 → 全选/排除 → 确认","textPreview":"预览 → 全选/排除 → 确认","textChars":15,"textLines":1,"bbox":[626,300,188,52]}
+{"kind":"shape","id":"sh/5svutgni","slide":6,"name":"s6-level-2","bbox":[72,380,760,72]}
+{"kind":"textbox","id":"sh/47mt0b6x","slide":6,"name":"s6-level-code-2","text":"L2","textPreview":"L2","textChars":2,"textLines":1,"bbox":[90,400,50,28]}
+{"kind":"textbox","id":"sh/j6dcr65c","slide":6,"name":"s6-level-name-2","text":"增强确认","textPreview":"增强确认","textChars":4,"textLines":1,"bbox":[150,398,130,28]}
+{"kind":"textbox","id":"sh/i54bylor","slide":6,"name":"s6-level-cond-2","text":"质量判断、重复组、较大候选集或组合条件","textPreview":"质量判断、重复组、较大候选集或组合条件","textChars":19,"textLines":1,"bbox":[292,390,320,52]}
+{"kind":"textbox","id":"sh/twfux0ne","slide":6,"name":"s6-level-act-2","text":"分组解释 → 二次确认 → 回收站","textPreview":"分组解释 → 二次确认 → 回收站","textChars":17,"textLines":1,"bbox":[626,390,188,52]}
+{"kind":"shape","id":"sh/svmt4v6t","slide":6,"name":"s6-level-3","bbox":[72,470,760,72]}
+{"kind":"textbox","id":"sh/cbe5g3ih","slide":6,"name":"s6-level-code-3","text":"L3","textPreview":"L3","textChars":2,"textLines":1,"bbox":[90,490,50,28]}
+{"kind":"textbox","id":"sh/dcnm98zm","slide":6,"name":"s6-level-name-3","text":"禁止自动执行","textPreview":"禁止自动执行","textChars":6,"textLines":1,"bbox":[150,488,130,28]}
+{"kind":"textbox","id":"sh/qpwnet0b","slide":6,"name":"s6-level-cond-3","text":"敏感对象 + 大范围 + 低置信的任一高危组合","textPreview":"敏感对象 + 大范围 + 低置信的任一高危组合","textChars":23,"textLines":1,"bbox":[292,480,320,52]}
+{"kind":"textbox","id":"sh/bq547yhw","slide":6,"name":"s6-level-act-3","text":"强制降级为筛选并提示原因","textPreview":"强制降级为筛选并提示原因","textChars":12,"textLines":1,"bbox":[626,480,188,52]}
+{"kind":"textbox","id":"sh/0fy5k3id","slide":6,"name":"label-全级别通用护栏-870-190","text":"全级别通用护栏","textPreview":"全级别通用护栏","textChars":7,"textLines":1,"bbox":[870,190,280,26]}
+{"kind":"textbox","id":"sh/lg76d8zy","slide":6,"name":"s6-ann-num-0","text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[870,228,42,26]}
+{"kind":"textbox","id":"sh/ydgnit07","slide":6,"name":"s6-ann-head-0","text":"候选可解释","textPreview":"候选可解释","textChars":5,"textLines":1,"bbox":[920,228,250,26]}
+{"kind":"textbox","id":"sh/zep4byhs","slide":6,"name":"s6-ann-body-0","text":"展示条件、数量、分组与命中理由","textPreview":"展示条件、数量、分组与命中理由","textChars":15,"textLines":1,"bbox":[920,258,268,46]}
+{"kind":"textbox","id":"sh/gju58ji9","slide":6,"name":"s6-ann-num-1","text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[870,324,42,26]}
+{"kind":"textbox","id":"sh/1k3mhozu","slide":6,"name":"s6-ann-head-1","text":"动作可预期","textPreview":"动作可预期","textChars":5,"textLines":1,"bbox":[920,324,250,26]}
+{"kind":"textbox","id":"sh/jet8nm1c","slide":6,"name":"s6-ann-body-1","text":"确认页复述范围、后果与回收站期限","textPreview":"确认页复述范围、后果与回收站期限","textChars":16,"textLines":1,"bbox":[920,354,268,46]}
+{"kind":"textbox","id":"sh/idk7ehkr","slide":6,"name":"s6-ann-num-2","text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[870,420,42,26]}
+{"kind":"textbox","id":"sh/50bqpcj2","slide":6,"name":"s6-ann-head-2","text":"结果可恢复","textPreview":"结果可恢复","textChars":5,"textLines":1,"bbox":[920,420,250,26]}
+{"kind":"textbox","id":"sh/4f2pgr2h","slide":6,"name":"s6-ann-body-2","text":"默认进回收站，保留撤销入口","textPreview":"默认进回收站，保留撤销入口","textChars":13,"textLines":1,"bbox":[920,450,268,46]}
+{"kind":"textbox","id":"sh/va98j210","slide":6,"name":"s6-ann-num-3","text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[870,516,42,26]}
+{"kind":"textbox","id":"sh/u907axkf","slide":6,"name":"s6-ann-head-3","text":"边界可审计","textPreview":"边界可审计","textChars":5,"textLines":1,"bbox":[920,516,250,26]}
+{"kind":"textbox","id":"sh/hcrqlcj6","slide":6,"name":"s6-ann-body-3","text":"记录解析、确认与执行事件，不保存原图内容","textPreview":"记录解析、确认与执行事件，不保存原图内容","textChars":20,"textLines":1,"bbox":[920,546,268,46]}
+{"kind":"shape","id":"sh/wbipc72l","slide":6,"name":"s6-decision","bbox":[72,584,1136,68]}
+{"kind":"textbox","id":"sh/7698f214","slide":6,"name":"s6-decision-text","text":"产品红线：不得以“模型置信度高”为由跳过用户确认；不得对高风险对象提供一句话直接删除。","textPreview":"产品红线：不得以“模型置信度高”为由跳过用户确认；不得对高风险对象提供一句话直接删除。","textChars":43,"textLines":1,"bbox":[94,604,1090,28]}
+{"kind":"textbox","id":"sh/m5076xkj","slide":6,"name":"s6-footer-left","text":"06   Huawei Confidential","textPreview":"06   Huawei Confidential","textChars":24,"textLines":1,"bbox":[72,682,380,18]}
+{"kind":"image","id":"im/zy5kje58","slide":6,"name":"","bbox":[1102,673.38,106,23.24]}
+{"kind":"notes","id":"nt/x8f69ofe","slide":6,"text":"[Sources]\n- User brief and decision goal supplied in this conversation, 2026-08-30.\n- Huawei visual assets and brand rules: huawei-presentation local skill asset library.\n- Product mechanisms, thresholds and weights are proposal hypotheses; validate through research, usability testing, technical spike and privacy review."}
+{"kind":"slide","id":"sl/gnmp4jqx","slide":7,"title":"搜索并确认执行兼顾任务效率、解释性与误删控制","textShapes":26}
+{"kind":"shape","id":"sh/290bq1cz","slide":7,"name":"s7-title-accent","bbox":[72,62,58,5]}
+{"kind":"textbox","id":"sh/cb2tkvap","slide":7,"name":"s7-title","text":"搜索并确认执行兼顾任务效率、解释性与误删控制","textPreview":"搜索并确认执行兼顾任务效率、解释性与误删控制","textChars":22,"textLines":1,"bbox":[72,78,1110,52]}
+{"kind":"textbox","id":"sh/dcbud0ra","slide":7,"name":"s7-lead","text":"三种方案的核心差异不在语音入口，而在系统是否承担选择责任以及如何控制执行后果","textPreview":"三种方案的核心差异不在语音入口，而在系统是否承担选择责任以及如何控制执行后果","textChars":38,"textLines":1,"bbox":[72,140,1136,30]}
+{"kind":"shape","id":"sh/ydkbm5sv","slide":7,"name":"s7-opt-0","bbox":[72,198,352,346]}
+{"kind":"textbox","id":"sh/zedcfa9g","slide":7,"name":"s7-opt-title-0","text":"A  语义搜索","textPreview":"A  语义搜索","textChars":7,"textLines":1,"bbox":[92,218,312,32]}
+{"kind":"shape","id":"sh/kzmdova1","slide":7,"name":"chip-低风险 / 低闭环-92-262","bbox":[92,262,190,34]}
+{"kind":"textbox","id":"sh/l0vuh0rm","slide":7,"name":"chip-text-低风险 / 低闭环-92-262","text":"低风险 / 低闭环","textPreview":"低风险 / 低闭环","textChars":9,"textLines":1,"bbox":[100,267,174,22]}
+{"kind":"shape","id":"sh/eh0ba1sr","slide":7,"name":"s7-bullet-0-0","bbox":[94,322,10,10]}
+{"kind":"textbox","id":"sh/fi9c369c","slide":7,"name":"s7-row-0-0","text":"仅返回筛选结果","textPreview":"仅返回筛选结果","textChars":7,"textLines":1,"bbox":[116,313,278,28]}
+{"kind":"shape","id":"sh/baxkjqlk","slide":7,"name":"s7-bullet-0-1","bbox":[94,370,10,10]}
+{"kind":"textbox","id":"sh/a9ojq5kz","slide":7,"name":"s7-row-0-1","text":"用户自行全选与删除","textPreview":"用户自行全选与删除","textChars":9,"textLines":1,"bbox":[116,361,278,28]}
+{"kind":"shape","id":"sh/xcz2l03q","slide":7,"name":"s7-bullet-0-2","bbox":[94,418,10,10]}
+{"kind":"textbox","id":"sh/cbq1sv25","slide":7,"name":"s7-row-0-2","text":"解释成本低","textPreview":"解释成本低","textChars":5,"textLines":1,"bbox":[116,409,278,28]}
+{"kind":"shape","id":"sh/n6x0fqlo","slide":7,"name":"s7-bullet-0-3","bbox":[94,466,10,10]}
+{"kind":"textbox","id":"sh/25ojml43","slide":7,"name":"s7-row-0-3","text":"价值增量有限","textPreview":"价值增量有限","textChars":6,"textLines":1,"bbox":[116,457,278,28]}
+{"kind":"shape","id":"sh/p8fih03e","slide":7,"name":"s7-verdict-bg-0","bbox":[92,492,312,36]}
+{"kind":"textbox","id":"sh/o761ov2t","slide":7,"name":"s7-verdict-0","text":"保留现有操作负担","textPreview":"保留现有操作负担","textChars":8,"textLines":1,"bbox":[100,498,296,24]}
+{"kind":"shape","id":"sh/f2d0b6lc","slide":7,"name":"s7-opt-1","bbox":[450,198,352,346]}
+{"kind":"textbox","id":"sh/eh4jil4r","slide":7,"name":"s7-opt-title-1","text":"B  一句话直接删除","textPreview":"B  一句话直接删除","textChars":10,"textLines":1,"bbox":[470,218,312,32]}
+{"kind":"shape","id":"sh/id4ju1oz","slide":7,"name":"chip-高效率 / 高风险-470-262","bbox":[470,262,190,34]}
+{"kind":"textbox","id":"sh/jedkn654","slide":7,"name":"chip-text-高效率 / 高风险-470-262","text":"高效率 / 高风险","textPreview":"高效率 / 高风险","textChars":9,"textLines":1,"bbox":[478,267,174,22]}
+{"kind":"shape","id":"sh/4fm1wb6p","slide":7,"name":"s7-bullet-1-0","bbox":[472,322,10,10]}
+{"kind":"textbox","id":"sh/50v2pgna","slide":7,"name":"s7-row-1-0","text":"系统直接执行删除","textPreview":"系统直接执行删除","textChars":8,"textLines":1,"bbox":[494,313,278,28]}
+{"kind":"shape","id":"sh/q143ylov","slide":7,"name":"s7-bullet-1-1","bbox":[472,370,10,10]}
+{"kind":"textbox","id":"sh/r2dkrq5g","slide":7,"name":"s7-row-1-1","text":"交互最短","textPreview":"交互最短","textChars":4,"textLines":1,"bbox":[494,361,278,28]}
+{"kind":"shape","id":"sh/s3ml0v61","slide":7,"name":"s7-bullet-1-2","bbox":[472,418,10,10]}
+{"kind":"textbox","id":"sh/d4f2t0nm","slide":7,"name":"s7-row-1-2","text":"歧义放大为误删","textPreview":"歧义放大为误删","textChars":7,"textLines":1,"bbox":[494,409,278,28]}
+{"kind":"shape","id":"sh/e5o32lor","slide":7,"name":"s7-bullet-1-3","bbox":[472,466,10,10]}
+{"kind":"textbox","id":"sh/f6xkvq5c","slide":7,"name":"s7-row-1-3","text":"难以满足信任门槛","textPreview":"难以满足信任门槛","textChars":8,"textLines":1,"bbox":[494,457,278,28]}
+{"kind":"shape","id":"sh/p0zmlk7u","slide":7,"name":"s7-verdict-bg-1","bbox":[470,492,312,36]}
+{"kind":"textbox","id":"sh/ozq5szq9","slide":7,"name":"s7-verdict-1","text":"不建议进入 MVP","textPreview":"不建议进入 MVP","textChars":9,"textLines":1,"bbox":[478,498,296,24]}
+{"kind":"shape","id":"sh/nyh4jupo","slide":7,"name":"s7-opt-2","bbox":[828,198,352,346]}
+{"kind":"textbox","id":"sh/2x8nqp83","slide":7,"name":"s7-opt-title-2","text":"C  搜索并确认执行","textPreview":"C  搜索并确认执行","textChars":10,"textLines":1,"bbox":[848,218,312,32]}
+{"kind":"shape","id":"sh/x4j6p47q","slide":7,"name":"chip-推荐方案-848-262","bbox":[848,262,190,34]}
+{"kind":"textbox","id":"sh/c3a5wzq5","slide":7,"name":"chip-text-推荐方案-848-262","text":"推荐方案","textPreview":"推荐方案","textChars":4,"textLines":1,"bbox":[856,267,174,22]}
+{"kind":"shape","id":"sh/b2h4nupk","slide":7,"name":"s7-bullet-2-0","bbox":[850,322,10,10]}
+{"kind":"textbox","id":"sh/a18nup8z","slide":7,"name":"s7-row-2-0","text":"结构化解析与候选预览","textPreview":"结构化解析与候选预览","textChars":10,"textLines":1,"bbox":[872,313,278,28]}
+{"kind":"shape","id":"sh/lsj6t47m","slide":7,"name":"s7-bullet-2-1","bbox":[850,370,10,10]}
+{"kind":"textbox","id":"sh/kra50jqh","slide":7,"name":"s7-row-2-1","text":"用户可排除并确认","textPreview":"用户可排除并确认","textChars":8,"textLines":1,"bbox":[872,361,278,28]}
+{"kind":"shape","id":"sh/wneps3ap","slide":7,"name":"s7-bullet-2-2","bbox":[850,418,10,10]}
+{"kind":"textbox","id":"sh/honq18ru","slide":7,"name":"s7-row-2-2","text":"默认回收站与撤销","textPreview":"默认回收站与撤销","textChars":8,"textLines":1,"bbox":[872,409,278,28]}
+{"kind":"shape","id":"sh/ulc7qdsj","slide":7,"name":"s7-bullet-2-3","bbox":[850,466,10,10]}
+{"kind":"textbox","id":"sh/vm58zi94","slide":7,"name":"s7-row-2-3","text":"复杂请求自动降级","textPreview":"复杂请求自动降级","textChars":8,"textLines":1,"bbox":[872,457,278,28]}
+{"kind":"shape","id":"sh/8jupo3ad","slide":7,"name":"s7-verdict-bg-2","bbox":[848,492,312,36]}
+{"kind":"textbox","id":"sh/9k3qx8ry","slide":7,"name":"s7-verdict-2","text":"建议批准验证","textPreview":"建议批准验证","textChars":6,"textLines":1,"bbox":[856,498,296,24]}
+{"kind":"shape","id":"sh/mxc7mts7","slide":7,"name":"s7-decision","bbox":[72,576,1136,76]}
+{"kind":"textbox","id":"sh/7yl8vy9s","slide":7,"name":"s7-decision-title","text":"决策依据","textPreview":"决策依据","textChars":4,"textLines":1,"bbox":[94,590,100,26]}
+{"kind":"textbox","id":"sh/sfy907ah","slide":7,"name":"s7-decision-body","text":"推荐方案在不承诺“零误删”的前提下，将系统责任限定为可解释候选生成，将最终删除责任保留给用户确认，并提供恢复兜底。","textPreview":"推荐方案在不承诺“零误删”的前提下，将系统责任限定为可解释候选生成，将最终删除责任保留给用户确认，并提供恢复兜底。","textChars":57,"textLines":1,"bbox":[210,586,974,52]}
+{"kind":"textbox","id":"sh/tg7q9sr2","slide":7,"name":"s7-footer-left","text":"07   Huawei Confidential","textPreview":"07   Huawei Confidential","textChars":24,"textLines":1,"bbox":[72,682,380,18]}
+{"kind":"image","id":"im/m98za1cf","slide":7,"name":"","bbox":[1102,673.38,106,23.24]}
+{"kind":"notes","id":"nt/gnmp4jqx","slide":7,"text":"[Sources]\n- User brief and decision goal supplied in this conversation, 2026-08-30.\n- Huawei visual assets and brand rules: huawei-presentation local skill asset library.\n- Product mechanisms, thresholds and weights are proposal hypotheses; validate through research, usability testing, technical spike and privacy review."}
+{"kind":"slide","id":"sl/fu1gfa1s","slide":8,"title":"MVP聚焦可解释低歧义任务，复杂语义统一降级为筛选","textShapes":9}
+{"kind":"shape","id":"sh/kfixwbe1","slide":8,"name":"s8-title-accent","bbox":[72,62,58,5]}
+{"kind":"textbox","id":"sh/18byd4zy","slide":8,"name":"s8-title","text":"MVP聚焦可解释低歧义任务，复杂语义统一降级为筛选","textPreview":"MVP聚焦可解释低歧义任务，复杂语义统一降级为筛选","textChars":25,"textLines":1,"bbox":[72,78,1110,52]}
+{"kind":"textbox","id":"sh/g72x4zyd","slide":8,"name":"s8-lead","text":"范围判断以“索引能力可用、候选理由可展示、用户能够核对、删除后可恢复”为统一准入门","textPreview":"范围判断以“索引能力可用、候选理由可展示、用户能够核对、删除后可恢复”为统一准入门","textChars":41,"textLines":1,"bbox":[72,140,1136,30]}
+{"kind":"textbox","id":"sh/6h0fypgb","slide":8,"name":"label-MVP验收门-72-548","text":"MVP验收门","textPreview":"MVP验收门","textChars":6,"textLines":1,"bbox":[72,548,180,26]}
+{"kind":"shape","id":"sh/tkby9kzm","slide":8,"name":"chip-候选条件可解释-72-586","bbox":[72,586,206,34]}
+{"kind":"textbox","id":"sh/sjix0zy1","slide":8,"name":"chip-text-候选条件可解释-72-586","text":"候选条件可解释","textPreview":"候选条件可解释","textChars":7,"textLines":1,"bbox":[80,591,190,22]}
+{"kind":"shape","id":"sh/je9g3ahk","slide":8,"name":"chip-用户可排除误选-298-586","bbox":[298,586,206,34]}
+{"kind":"textbox","id":"sh/id0fu50z","slide":8,"name":"chip-text-用户可排除误选-298-586","text":"用户可排除误选","textPreview":"用户可排除误选","textChars":7,"textLines":1,"bbox":[306,591,190,22]}
+{"kind":"shape","id":"sh/o7ydoret","slide":8,"name":"chip-执行前显式确认-524-586","bbox":[524,586,206,34]}
+{"kind":"textbox","id":"sh/98rehwve","slide":8,"name":"chip-text-执行前显式确认-524-586","text":"执行前显式确认","textPreview":"执行前显式确认","textChars":7,"textLines":1,"bbox":[532,591,190,22]}
+{"kind":"shape","id":"sh/m5gvmhwn","slide":8,"name":"chip-默认回收站可恢复-750-586","bbox":[750,586,206,34]}
+{"kind":"textbox","id":"sh/n6pwfmd8","slide":8,"name":"chip-text-默认回收站可恢复-750-586","text":"默认回收站可恢复","textPreview":"默认回收站可恢复","textChars":8,"textLines":1,"bbox":[758,591,190,22]}
+{"kind":"shape","id":"sh/0jydkreh","slide":8,"name":"chip-高风险自动降级-976-586","bbox":[976,586,206,34]}
+{"kind":"textbox","id":"sh/1k7edwv2","slide":8,"name":"chip-text-高风险自动降级-976-586","text":"高风险自动降级","textPreview":"高风险自动降级","textChars":7,"textLines":1,"bbox":[984,591,190,22]}
+{"kind":"textbox","id":"sh/ehgvihwr","slide":8,"name":"s8-footer-left","text":"08   Huawei Confidential","textPreview":"08   Huawei Confidential","textChars":24,"textLines":1,"bbox":[72,682,380,18]}
+{"kind":"table","id":"tb/y9wvuhov","slide":8,"name":"","rows":6,"cols":5,"preview":"场景 | 示例表达 | 系统处理 | MVP结论 | 验证重点","bbox":[72,198,1136,324]}
+{"kind":"image","id":"im/yp8rix47","slide":8,"name":"","bbox":[1102,673.38,106,23.24]}
+{"kind":"notes","id":"nt/fu1gfa1s","slide":8,"text":"[Sources]\n- User brief and decision goal supplied in this conversation, 2026-08-30.\n- Huawei visual assets and brand rules: huawei-presentation local skill asset library.\n- Product mechanisms, thresholds and weights are proposal hypotheses; validate through research, usability testing, technical spike and privacy review."}
+{"kind":"slide","id":"sl/udsvah03","slide":9,"title":"验证指标应同时约束任务成功、误选风险、时延与隐私","textShapes":30}
+{"kind":"shape","id":"sh/mdsnatcn","slide":9,"name":"s9-title-accent","bbox":[72,62,58,5]}
+{"kind":"textbox","id":"sh/1cfmhgne","slide":9,"name":"s9-title","text":"验证指标应同时约束任务成功、误选风险、时延与隐私","textPreview":"验证指标应同时约束任务成功、误选风险、时延与隐私","textChars":24,"textLines":1,"bbox":[72,78,1110,52]}
+{"kind":"textbox","id":"sh/0b65obm9","slide":9,"name":"s9-lead","text":"当前无业务基线；先批准口径与退出条件，再通过原型测试和技术样机确认目标值","textPreview":"当前无业务基线；先批准口径与退出条件，再通过原型测试和技术样机确认目标值","textChars":36,"textLines":1,"bbox":[72,140,1136,30]}
+{"kind":"textbox","id":"sh/mdonql4z","slide":9,"name":"s9-chart-note","text":"决策权重建议（合计100%）｜待评审确认，不代表业务现状","textPreview":"决策权重建议（合计100%）｜待评审确认，不代表业务现状","textChars":28,"textLines":1,"bbox":[92,508,560,24]}
+{"kind":"textbox","id":"sh/9gzml0nq","slide":9,"name":"s9-metric-n-0","text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[708,204,36,24]}
+{"kind":"textbox","id":"sh/ofq5svm5","slide":9,"name":"s9-metric-h-0","text":"任务成功率","textPreview":"任务成功率","textChars":5,"textLines":1,"bbox":[752,202,150,26]}
+{"kind":"textbox","id":"sh/bih4na5w","slide":9,"name":"s9-metric-d-0","text":"完成目标任务且无需改写","textPreview":"完成目标任务且无需改写","textChars":11,"textLines":1,"bbox":[904,202,176,26]}
+{"kind":"textbox","id":"sh/ah8nu54b","slide":9,"name":"s9-metric-v-0","text":"基线待测｜目标待确认","textPreview":"基线待测｜目标待确认","textChars":10,"textLines":1,"bbox":[1086,202,122,42]}
+{"kind":"shape","id":"sh/oza1gfyh","slide":9,"name":"s9-line-0","bbox":[708,245,500,1]}
+{"kind":"textbox","id":"sh/p0ji9kf2","slide":9,"name":"s9-metric-n-1","text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[708,262,36,24]}
+{"kind":"textbox","id":"sh/2xsjepgb","slide":9,"name":"s9-metric-h-1","text":"候选误选率","textPreview":"候选误选率","textChars":5,"textLines":1,"bbox":[752,260,150,26]}
+{"kind":"textbox","id":"sh/3y107axw","slide":9,"name":"s9-metric-d-1","text":"候选中被用户排除的比例","textPreview":"候选中被用户排除的比例","textChars":11,"textLines":1,"bbox":[904,260,176,26]}
+{"kind":"textbox","id":"sh/cnu1kzyd","slide":9,"name":"s9-metric-v-1","text":"退出条件待定","textPreview":"退出条件待定","textChars":6,"textLines":1,"bbox":[1086,260,122,42]}
+{"kind":"shape","id":"sh/do3id4fy","slide":9,"name":"s9-line-1","bbox":[708,303,500,1]}
+{"kind":"textbox","id":"sh/qlcjipgn","slide":9,"name":"s9-metric-n-2","text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[708,320,36,24]}
+{"kind":"textbox","id":"sh/bml0buxs","slide":9,"name":"s9-metric-h-2","text":"确认放弃率","textPreview":"确认放弃率","textChars":5,"textLines":1,"bbox":[752,318,150,26]}
+{"kind":"textbox","id":"sh/0ru1ozyp","slide":9,"name":"s9-metric-d-2","text":"进入确认页后取消或返回","textPreview":"进入确认页后取消或返回","textChars":11,"textLines":1,"bbox":[904,318,176,26]}
+{"kind":"textbox","id":"sh/lsn2h4fa","slide":9,"name":"s9-metric-v-2","text":"解释不足信号","textPreview":"解释不足信号","textChars":6,"textLines":1,"bbox":[1086,318,122,42]}
+{"kind":"shape","id":"sh/98ji147e","slide":9,"name":"s9-line-2","bbox":[708,361,500,1]}
+{"kind":"textbox","id":"sh/87a18zqt","slide":9,"name":"s9-metric-n-3","text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[708,378,36,24]}
+{"kind":"textbox","id":"sh/76h0zup8","slide":9,"name":"s9-metric-h-3","text":"撤销 / 恢复率","textPreview":"撤销 / 恢复率","textChars":8,"textLines":1,"bbox":[752,376,150,26]}
+{"kind":"textbox","id":"sh/ml8j6p8n","slide":9,"name":"s9-metric-d-3","text":"执行后进入回收站并恢复","textPreview":"执行后进入回收站并恢复","textChars":11,"textLines":1,"bbox":[904,376,176,26]}
+{"kind":"textbox","id":"sh/hcji5o7a","slide":9,"name":"s9-metric-v-3","text":"误删风险信号","textPreview":"误删风险信号","textChars":6,"textLines":1,"bbox":[1086,376,122,42]}
+{"kind":"shape","id":"sh/wba1cjqp","slide":9,"name":"s9-line-3","bbox":[708,419,500,1]}
+{"kind":"textbox","id":"sh/va103ep4","slide":9,"name":"s9-metric-n-4","text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[708,436,36,24]}
+{"kind":"textbox","id":"sh/u9sja98z","slide":9,"name":"s9-metric-h-4","text":"P95端侧时延","textPreview":"P95端侧时延","textChars":7,"textLines":1,"bbox":[752,434,150,26]}
+{"kind":"textbox","id":"sh/xgzitk76","slide":9,"name":"s9-metric-d-4","text":"输入完成到候选首屏可见","textPreview":"输入完成到候选首屏可见","textChars":11,"textLines":1,"bbox":[904,434,176,26]}
+{"kind":"textbox","id":"sh/cf6h0fql","slide":9,"name":"s9-metric-v-4","text":"机型分层待测","textPreview":"机型分层待测","textChars":6,"textLines":1,"bbox":[1086,434,122,42]}
+{"kind":"shape","id":"sh/2l4faloj","slide":9,"name":"s9-line-4","bbox":[708,477,500,1]}
+{"kind":"textbox","id":"sh/nmdg3q54","slide":9,"name":"s9-metric-n-5","text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[708,494,36,24]}
+{"kind":"textbox","id":"sh/onmxcv69","slide":9,"name":"s9-metric-h-5","text":"敏感数据外发","textPreview":"敏感数据外发","textChars":6,"textLines":1,"bbox":[752,492,150,26]}
+{"kind":"textbox","id":"sh/pofy50nu","slide":9,"name":"s9-metric-d-5","text":"原图、人物标签、位置等","textPreview":"原图、人物标签、位置等","textChars":11,"textLines":1,"bbox":[904,492,176,26]}
+{"kind":"textbox","id":"sh/apofe5of","slide":9,"name":"s9-metric-v-5","text":"默认目标：0","textPreview":"默认目标：0","textChars":6,"textLines":1,"bbox":[1086,492,122,42]}
+{"kind":"shape","id":"sh/bqxg7q50","slide":9,"name":"s9-line-5","bbox":[708,535,500,1]}
+{"kind":"shape","id":"sh/cr6xgv6l","slide":9,"name":"s9-action","bbox":[72,566,1136,86]}
+{"kind":"textbox","id":"sh/xcfy90n6","slide":9,"name":"s9-action-head","text":"进入下一阶段的必要条件","textPreview":"进入下一阶段的必要条件","textChars":11,"textLines":1,"bbox":[94,582,230,28]}
+{"kind":"textbox","id":"sh/qtkf21ob","slide":9,"name":"s9-action-body","text":"任务成功、候选误选、可理解性三项同时达标；端侧性能满足分层机型预算；隐私评审确认数据最小化方案。任何红线不通过即回到范围或交互设计。","textPreview":"任务成功、候选误选、可理解性三项同时达标；端侧性能满足分层机型预算；隐私评审确认数据最小化方案。任何红线不通过即回到范围或交互设计。","textChars":66,"textLines":1,"bbox":[334,578,850,60]}
+{"kind":"textbox","id":"sh/rutwv65w","slide":9,"name":"s9-footer-left","text":"09   Huawei Confidential","textPreview":"09   Huawei Confidential","textChars":24,"textLines":1,"bbox":[72,682,380,18]}
+{"kind":"chart","id":"ch/d4natkfq","slide":9,"name":"Chart","chartType":"bar","bbox":[72,202,600,310]}
+{"kind":"image","id":"im/z25w3i14","slide":9,"name":"","bbox":[1102,673.38,106,23.24]}
+{"kind":"notes","id":"nt/udsvah03","slide":9,"text":"[Sources]\n- User brief and decision goal supplied in this conversation, 2026-08-30.\n- Huawei visual assets and brand rules: huawei-presentation local skill asset library.\n- Product mechanisms, thresholds and weights are proposal hypotheses; validate through research, usability testing, technical spike and privacy review."}
+{"kind":"slide","id":"sl/m90b6t0r","slide":10,"title":"端侧优先的分层架构支持语义清理并限制敏感数据外流","textShapes":34}
+{"kind":"shape","id":"sh/87atcb6p","slide":10,"name":"s10-title-accent","bbox":[72,62,58,5]}
+{"kind":"textbox","id":"sh/xc3mho32","slide":10,"name":"s10-title","text":"端侧优先的分层架构支持语义清理并限制敏感数据外流","textPreview":"端侧优先的分层架构支持语义清理并限制敏感数据外流","textChars":24,"textLines":1,"bbox":[72,78,1110,52]}
+{"kind":"textbox","id":"sh/cbu58j2h","slide":10,"name":"s10-lead","text":"原图内容与敏感标签默认留在设备侧；云侧能力仅作为可配置增强，不成为基础体验依赖","textPreview":"原图内容与敏感标签默认留在设备侧；云侧能力仅作为可配置增强，不成为基础体验依赖","textChars":39,"textLines":1,"bbox":[72,140,1136,30]}
+{"kind":"textbox","id":"sh/zelojyl8","slide":10,"name":"s10-layer-0","text":"体验层","textPreview":"体验层","textChars":3,"textLines":1,"bbox":[72,226,88,28]}
+{"kind":"shape","id":"sh/ydcnatkn","slide":10,"name":"s10-node-0-0","bbox":[178,204,176,68]}
+{"kind":"textbox","id":"sh/l036l83y","slide":10,"name":"s10-node-text-0-0","text":"文本 / 语音入口","textPreview":"文本 / 语音入口","textChars":9,"textLines":1,"bbox":[188,224,156,28]}
+{"kind":"shape","id":"sh/kzu5c32t","slide":10,"name":"s10-node-0-1","bbox":[374,204,176,68]}
+{"kind":"textbox","id":"sh/725onyl4","slide":10,"name":"s10-node-text-0-1","text":"候选分组","textPreview":"候选分组","textChars":4,"textLines":1,"bbox":[384,224,156,28]}
+{"kind":"shape","id":"sh/m1cnetkj","slide":10,"name":"s10-node-0-2","bbox":[570,204,176,68]}
+{"kind":"textbox","id":"sh/s7yt4b21","slide":10,"name":"s10-node-text-0-2","text":"解释预览","textPreview":"解释预览","textChars":4,"textLines":1,"bbox":[580,224,156,28]}
+{"kind":"shape","id":"sh/d87uxg3m","slide":10,"name":"s10-node-0-3","bbox":[766,204,176,68]}
+{"kind":"textbox","id":"sh/q5gb21kb","slide":10,"name":"s10-node-text-0-3","text":"确认 / 撤销","textPreview":"确认 / 撤销","textChars":7,"textLines":1,"bbox":[776,224,156,28]}
+{"kind":"textbox","id":"sh/r6pcv6lw","slide":10,"name":"s10-layer-1","text":"编排层","textPreview":"编排层","textChars":3,"textLines":1,"bbox":[72,312,88,28]}
+{"kind":"shape","id":"sh/0bit8b2d","slide":10,"name":"s10-node-1-0","bbox":[178,290,176,68]}
+{"kind":"textbox","id":"sh/1cru1g3y","slide":10,"name":"s10-node-text-1-0","text":"意图解析","textPreview":"意图解析","textChars":4,"textLines":1,"bbox":[188,310,156,28]}
+{"kind":"shape","id":"sh/e9gb61k7","slide":10,"name":"s10-node-1-1","bbox":[374,290,176,68]}
+{"kind":"textbox","id":"sh/fapcz6ls","slide":10,"name":"s10-node-text-1-1","text":"查询计划","textPreview":"查询计划","textChars":4,"textLines":1,"bbox":[384,310,156,28]}
+{"kind":"shape","id":"sh/ozitcv29","slide":10,"name":"s10-node-1-2","bbox":[570,290,176,68]}
+{"kind":"textbox","id":"sh/p0ru503u","slide":10,"name":"s10-node-text-1-2","text":"风险分级","textPreview":"风险分级","textChars":4,"textLines":1,"bbox":[580,310,156,28]}
+{"kind":"shape","id":"sh/xwnupgvy","slide":10,"name":"s10-node-1-3","bbox":[766,290,176,68]}
+{"kind":"textbox","id":"sh/wvetgbud","slide":10,"name":"s10-node-text-1-3","text":"降级策略","textPreview":"降级策略","textChars":4,"textLines":1,"bbox":[776,310,156,28]}
+{"kind":"textbox","id":"sh/bu5cnqd8","slide":10,"name":"s10-layer-2","text":"能力层","textPreview":"能力层","textChars":3,"textLines":1,"bbox":[72,398,88,28]}
+{"kind":"shape","id":"sh/atwbelcn","slide":10,"name":"s10-node-2-0","bbox":[178,376,176,68]}
+{"kind":"textbox","id":"sh/lk7ut0va","slide":10,"name":"s10-node-text-2-0","text":"图库索引","textPreview":"图库索引","textChars":4,"textLines":1,"bbox":[188,396,156,28]}
+{"kind":"shape","id":"sh/kjytkvup","slide":10,"name":"s10-node-2-1","bbox":[374,376,176,68]}
+{"kind":"textbox","id":"sh/jypcrqd4","slide":10,"name":"s10-node-text-2-1","text":"OCR / 类型","textPreview":"OCR / 类型","textChars":8,"textLines":1,"bbox":[384,396,156,28]}
+{"kind":"shape","id":"sh/yxgbilcj","slide":10,"name":"s10-node-2-2","bbox":[570,376,176,68]}
+{"kind":"textbox","id":"sh/1o3ahwvq","slide":10,"name":"s10-node-text-2-2","text":"重复 / 质量","textPreview":"重复 / 质量","textChars":7,"textLines":1,"bbox":[580,396,156,28]}
+{"kind":"shape","id":"sh/0nut8rul","slide":10,"name":"s10-node-2-3","bbox":[766,376,176,68]}
+{"kind":"textbox","id":"sh/q9srixs3","slide":10,"name":"s10-node-text-2-3","text":"人物与地点*","textPreview":"人物与地点*","textChars":6,"textLines":1,"bbox":[776,396,156,28]}
+{"kind":"textbox","id":"sh/ru18r2to","slide":10,"name":"s10-layer-3","text":"数据层","textPreview":"数据层","textChars":3,"textLines":1,"bbox":[72,484,88,28]}
+{"kind":"shape","id":"sh/cva9k7a9","slide":10,"name":"s10-node-3-0","bbox":[178,462,176,68]}
+{"kind":"textbox","id":"sh/dwjqtcbu","slide":10,"name":"s10-node-text-3-0","text":"本地元数据","textPreview":"本地元数据","textChars":5,"textLines":1,"bbox":[188,482,156,28]}
+{"kind":"shape","id":"sh/exsrmhsf","slide":10,"name":"s10-node-3-1","bbox":[374,462,176,68]}
+{"kind":"textbox","id":"sh/zyl8vmt0","slide":10,"name":"s10-node-text-3-1","text":"端侧特征","textPreview":"端侧特征","textChars":4,"textLines":1,"bbox":[384,482,156,28]}
+{"kind":"shape","id":"sh/0zu9ora5","slide":10,"name":"s10-node-3-2","bbox":[570,462,176,68]}
+{"kind":"textbox","id":"sh/103qxcbq","slide":10,"name":"s10-node-text-3-2","text":"回收站状态","textPreview":"回收站状态","textChars":5,"textLines":1,"bbox":[580,482,156,28]}
+{"kind":"shape","id":"sh/u187adsv","slide":10,"name":"s10-node-3-3","bbox":[766,462,176,68]}
+{"kind":"textbox","id":"sh/f2h8jitg","slide":10,"name":"s10-node-text-3-3","text":"审计事件","textPreview":"审计事件","textChars":4,"textLines":1,"bbox":[776,482,156,28]}
+{"kind":"shape","id":"sh/bmpgrah8","slide":10,"name":"s10-down-0","bbox":[545,266,38,30]}
+{"kind":"shape","id":"sh/algfy50n","slide":10,"name":"s10-down-1","bbox":[545,352,38,30]}
+{"kind":"shape","id":"sh/xo7ytkzy","slide":10,"name":"s10-down-2","bbox":[545,438,38,30]}
+{"kind":"shape","id":"sh/wnyx0fit","slide":10,"name":"s10-cloud","bbox":[996,204,212,326]}
+{"kind":"textbox","id":"sh/jq9gvuh4","slide":10,"name":"s10-cloud-title","text":"云侧可选增强","textPreview":"云侧可选增强","textChars":6,"textLines":1,"bbox":[1018,228,168,30]}
+{"kind":"textbox","id":"sh/ip0f2p0j","slide":10,"name":"s10-cloud-0","text":"• 复杂语言理解","textPreview":"• 复杂语言理解","textChars":8,"textLines":1,"bbox":[1024,286,156,28]}
+{"kind":"textbox","id":"sh/5cryx4za","slide":10,"name":"s10-cloud-1","text":"• 模型与规则更新","textPreview":"• 模型与规则更新","textChars":9,"textLines":1,"bbox":[1024,336,156,28]}
+{"kind":"textbox","id":"sh/kbix4zyp","slide":10,"name":"s10-cloud-2","text":"• 匿名质量统计","textPreview":"• 匿名质量统计","textChars":8,"textLines":1,"bbox":[1024,386,156,28]}
+{"kind":"textbox","id":"sh/7e9gzuhg","slide":10,"name":"s10-cloud-3","text":"• 地域与能力开关","textPreview":"• 地域与能力开关","textChars":9,"textLines":1,"bbox":[1024,436,156,28]}
+{"kind":"textbox","id":"sh/6d0f6pgv","slide":10,"name":"s10-cloud-rule","text":"不上传原图\n敏感字段默认关闭","textPreview":"不上传原图 | 敏感字段默认关闭","textChars":14,"textLines":2,"bbox":[1024,478,156,42]}
+{"kind":"textbox","id":"sh/4j2xwzet","slide":10,"name":"label-关键依赖与边界-72-556","text":"关键依赖与边界","textPreview":"关键依赖与边界","textChars":7,"textLines":1,"bbox":[72,556,220,26]}
+{"kind":"shape","id":"sh/pkbep4fe","slide":10,"name":"chip-图库索引字段与刷新时效待核验-72-584","bbox":[72,584,544,34]}
+{"kind":"textbox","id":"sh/2hkfu9w3","slide":10,"name":"chip-text-图库索引字段与刷新时效待核验-72-584","text":"图库索引字段与刷新时效待核验","textPreview":"图库索引字段与刷新时效待核验","textChars":14,"textLines":1,"bbox":[80,589,528,22]}
+{"kind":"shape","id":"sh/3itwnex8","slide":10,"name":"chip-质量与重复能力需给出可解释理由-640-584","bbox":[640,584,544,34]}
+{"kind":"textbox","id":"sh/gfixszex","slide":10,"name":"chip-text-质量与重复能力需给出可解释理由-640-584","text":"质量与重复能力需给出可解释理由","textPreview":"质量与重复能力需给出可解释理由","textChars":15,"textLines":1,"bbox":[648,589,528,22]}
+{"kind":"shape","id":"sh/hgrel4fi","slide":10,"name":"chip-人物/地点能力受隐私策略与地区限制-72-626","bbox":[72,626,544,34]}
+{"kind":"textbox","id":"sh/ud0vqpwr","slide":10,"name":"chip-text-人物/地点能力受隐私策略与地区限制-72-626","text":"人物/地点能力受隐私策略与地区限制","textPreview":"人物/地点能力受隐私策略与地区限制","textChars":17,"textLines":1,"bbox":[80,631,528,22]}
+{"kind":"shape","id":"sh/fe9wjuxc","slide":10,"name":"chip-低端机型需建立性能降级路径-640-626","bbox":[640,626,544,34]}
+{"kind":"textbox","id":"sh/sridofel","slide":10,"name":"chip-text-低端机型需建立性能降级路径-640-626","text":"低端机型需建立性能降级路径","textPreview":"低端机型需建立性能降级路径","textChars":13,"textLines":1,"bbox":[648,631,528,22]}
+{"kind":"textbox","id":"sh/tsrehkf6","slide":10,"name":"s10-footer-left","text":"10   Huawei Confidential","textPreview":"10   Huawei Confidential","textChars":24,"textLines":1,"bbox":[72,682,380,18]}
+{"kind":"image","id":"im/0jyl47y9","slide":10,"name":"","bbox":[1102,673.38,106,23.24]}
+{"kind":"notes","id":"nt/m90b6t0r","slide":10,"text":"[Sources]\n- User brief and decision goal supplied in this conversation, 2026-08-30.\n- Huawei visual assets and brand rules: huawei-presentation local skill asset library.\n- Product mechanisms, thresholds and weights are proposal hypotheses; validate through research, usability testing, technical spike and privacy review.\n- Asterisk indicates capability and policy availability must be confirmed by the responsible teams."}
+{"kind":"slide","id":"sl/jetc3ut0","slide":11,"title":"分阶段验证与退出条件可降低产品投入和上线决策风险","textShapes":35}
+{"kind":"shape","id":"sh/b2d8fa5w","slide":11,"name":"s11-title-accent","bbox":[72,62,58,5]}
+{"kind":"textbox","id":"sh/xcryxg7y","slide":11,"name":"s11-title","text":"分阶段验证与退出条件可降低产品投入和上线决策风险","textPreview":"分阶段验证与退出条件可降低产品投入和上线决策风险","textChars":24,"textLines":1,"bbox":[72,78,1110,52]}
+{"kind":"textbox","id":"sh/wbih4b6d","slide":11,"name":"s11-lead","text":"建议本次只批准方向、验证资源和阶段门；工程立项与上线范围由验证结果触发，不预先承诺","textPreview":"建议本次只批准方向、验证资源和阶段门；工程立项与上线范围由验证结果触发，不预先承诺","textChars":41,"textLines":1,"bbox":[72,140,1136,30]}
+{"kind":"shape","id":"sh/n69grmpw","slide":11,"name":"s11-arrow-0","bbox":[320,270,28,24]}
+{"kind":"shape","id":"sh/250zy18b","slide":11,"name":"s11-phase-0","bbox":[72,196,252,250]}
+{"kind":"textbox","id":"sh/98rytw72","slide":11,"name":"s11-code-0","text":"P0","textPreview":"P0","textChars":2,"textLines":1,"bbox":[90,214,44,26]}
+{"kind":"textbox","id":"sh/o7ih0r6h","slide":11,"name":"s11-name-0","text":"方案冻结","textPreview":"方案冻结","textChars":4,"textLines":1,"bbox":[138,212,168,30]}
+{"kind":"textbox","id":"sh/72t03qp0","slide":11,"name":"s11-deliver-0","text":"交互原型\n意图词表\n风险分级","textPreview":"交互原型 | 意图词表 | 风险分级","textChars":14,"textLines":3,"bbox":[90,264,216,84]}
+{"kind":"textbox","id":"sh/61kzalof","slide":11,"name":"s11-owner-label-0","text":"责任","textPreview":"责任","textChars":2,"textLines":1,"bbox":[90,362,48,24]}
+{"kind":"textbox","id":"sh/ofqtgnyt","slide":11,"name":"s11-owner-0","text":"产品 / 体验","textPreview":"产品 / 体验","textChars":7,"textLines":1,"bbox":[142,358,164,34]}
+{"kind":"shape","id":"sh/9gza9sze","slide":11,"name":"s11-gate-bg-0","bbox":[90,402,216,30]}
+{"kind":"textbox","id":"sh/mdobedg3","slide":11,"name":"s11-gate-0","text":"输出可评审","textPreview":"输出可评审","textChars":5,"textLines":1,"bbox":[96,407,204,20]}
+{"kind":"shape","id":"sh/nehs7iho","slide":11,"name":"s11-arrow-1","bbox":[604,270,28,24]}
+{"kind":"shape","id":"sh/0b6tc3yx","slide":11,"name":"s11-phase-1","bbox":[356,196,252,250]}
+{"kind":"textbox","id":"sh/1cfa58zi","slide":11,"name":"s11-code-1","text":"P1","textPreview":"P1","textChars":2,"textLines":1,"bbox":[374,214,44,26]}
+{"kind":"textbox","id":"sh/epobatgr","slide":11,"name":"s11-name-1","text":"可用性验证","textPreview":"可用性验证","textChars":5,"textLines":1,"bbox":[422,212,168,30]}
+{"kind":"textbox","id":"sh/zaxs3yhc","slide":11,"name":"s11-deliver-1","text":"任务脚本\n原型测试\n理解偏差清单","textPreview":"任务脚本 | 原型测试 | 理解偏差清单","textChars":16,"textLines":3,"bbox":[374,264,216,84]}
+{"kind":"textbox","id":"sh/cn6t83y1","slide":11,"name":"s11-owner-label-1","text":"责任","textPreview":"责任","textChars":2,"textLines":1,"bbox":[374,362,48,24]}
+{"kind":"textbox","id":"sh/dofa18z6","slide":11,"name":"s11-owner-1","text":"用户研究","textPreview":"用户研究","textChars":4,"textLines":1,"bbox":[426,358,164,34]}
+{"kind":"shape","id":"sh/tsnip0ny","slide":11,"name":"s11-gate-bg-1","bbox":[374,402,216,30]}
+{"kind":"textbox","id":"sh/87ehgv6d","slide":11,"name":"s11-gate-1","text":"口径达标","textPreview":"口径达标","textChars":4,"textLines":1,"bbox":[380,407,204,20]}
+{"kind":"shape","id":"sh/7650nq5s","slide":11,"name":"s11-arrow-2","bbox":[888,270,28,24]}
+{"kind":"shape","id":"sh/65wzelo7","slide":11,"name":"s11-phase-2","bbox":[640,196,252,250]}
+{"kind":"textbox","id":"sh/l43ilgn2","slide":11,"name":"s11-code-2","text":"P2","textPreview":"P2","textChars":2,"textLines":1,"bbox":[658,214,44,26]}
+{"kind":"textbox","id":"sh/k3uhcb6h","slide":11,"name":"s11-name-2","text":"技术预研","textPreview":"技术预研","textChars":4,"textLines":1,"bbox":[706,212,168,30]}
+{"kind":"textbox","id":"sh/j2lgjq5w","slide":11,"name":"s11-deliver-2","text":"端侧样机\n索引能力核验\n隐私设计","textPreview":"端侧样机 | 索引能力核验 | 隐私设计","textChars":16,"textLines":3,"bbox":[658,264,216,84]}
+{"kind":"textbox","id":"sh/y1czalob","slide":11,"name":"s11-owner-label-2","text":"责任","textPreview":"责任","textChars":2,"textLines":1,"bbox":[658,362,48,24]}
+{"kind":"textbox","id":"sh/p07ixkn6","slide":11,"name":"s11-owner-2","text":"算法 / 工程 / 隐私","textPreview":"算法 / 工程 / 隐私","textChars":12,"textLines":1,"bbox":[710,358,164,34]}
+{"kind":"shape","id":"sh/4zyhofml","slide":11,"name":"s11-gate-bg-2","bbox":[658,402,216,30]}
+{"kind":"textbox","id":"sh/m58fih43","slide":11,"name":"s11-gate-2","text":"红线通过","textPreview":"红线通过","textChars":4,"textLines":1,"bbox":[664,407,204,20]}
+{"kind":"shape","id":"sh/n61wbmlo","slide":11,"name":"s11-phase-3","bbox":[924,196,252,250]}
+{"kind":"textbox","id":"sh/o7axk7m9","slide":11,"name":"s11-code-3","text":"P3","textPreview":"P3","textChars":2,"textLines":1,"bbox":[942,214,44,26]}
+{"kind":"textbox","id":"sh/98jedc3u","slide":11,"name":"s11-name-3","text":"工程立项","textPreview":"工程立项","textChars":4,"textLines":1,"bbox":[990,212,168,30]}
+{"kind":"textbox","id":"sh/eh8fex47","slide":11,"name":"s11-deliver-3","text":"MVP开发\n灰度方案\n监控与回滚","textPreview":"MVP开发 | 灰度方案 | 监控与回滚","textChars":16,"textLines":3,"bbox":[942,264,216,84]}
+{"kind":"textbox","id":"sh/z2hw72lc","slide":11,"name":"s11-owner-label-3","text":"责任","textPreview":"责任","textChars":2,"textLines":1,"bbox":[942,362,48,24]}
+{"kind":"textbox","id":"sh/03qxg7mx","slide":11,"name":"s11-owner-3","text":"跨团队","textPreview":"跨团队","textChars":3,"textLines":1,"bbox":[994,358,164,34]}
+{"kind":"shape","id":"sh/14ze9c3i","slide":11,"name":"s11-gate-bg-3","bbox":[942,402,216,30]}
+{"kind":"textbox","id":"sh/ydcfq1kb","slide":11,"name":"s11-gate-3","text":"阶段门批准","textPreview":"阶段门批准","textChars":5,"textLines":1,"bbox":[948,407,204,20]}
+{"kind":"textbox","id":"sh/jylwj6lw","slide":11,"name":"label-本次决策项-72-474","text":"本次决策项","textPreview":"本次决策项","textChars":5,"textLines":1,"bbox":[72,474,180,26]}
+{"kind":"shape","id":"sh/3qhsfypc","slide":11,"name":"s11-ask-0","bbox":[72,512,352,72]}
+{"kind":"textbox","id":"sh/ip8bmtor","slide":11,"name":"s11-ask-h-0","text":"批准","textPreview":"批准","textChars":2,"textLines":1,"bbox":[90,532,72,26]}
+{"kind":"textbox","id":"sh/5sjah872","slide":11,"name":"s11-ask-b-0","text":"推荐交互主链路与低歧义 MVP 范围","textPreview":"推荐交互主链路与低歧义 MVP 范围","textChars":18,"textLines":1,"bbox":[170,520,232,50]}
+{"kind":"shape","id":"sh/4rato36h","slide":11,"name":"s11-ask-1","bbox":[450,512,352,72]}
+{"kind":"textbox","id":"sh/v2hsbyp0","slide":11,"name":"s11-ask-h-1","text":"授权","textPreview":"授权","textChars":2,"textLines":1,"bbox":[468,532,72,26]}
+{"kind":"textbox","id":"sh/u18bit8f","slide":11,"name":"s11-ask-b-1","text":"原型测试、端侧技术样机与隐私预评审资源","textPreview":"原型测试、端侧技术样机与隐私预评审资源","textChars":19,"textLines":1,"bbox":[548,520,232,50]}
+{"kind":"shape","id":"sh/h4zado76","slide":11,"name":"s11-ask-2","bbox":[828,512,352,72]}
+{"kind":"textbox","id":"sh/g3qtkj6l","slide":11,"name":"s11-ask-h-2","text":"确认","textPreview":"确认","textChars":2,"textLines":1,"bbox":[846,532,72,26]}
+{"kind":"textbox","id":"sh/fy1cnipk","slide":11,"name":"s11-ask-b-2","text":"指标口径、退出条件与跨团队责任","textPreview":"指标口径、退出条件与跨团队责任","textChars":15,"textLines":1,"bbox":[926,520,232,50]}
+{"kind":"shape","id":"sh/exsbudoz","slide":11,"name":"s11-exit","bbox":[72,606,1136,46]}
+{"kind":"textbox","id":"sh/c3mpof6h","slide":11,"name":"s11-exit-text","text":"退出条件：候选误选不可控、用户无法理解系统选择、端侧性能不满足预算或隐私红线不通过时，停止工程立项。","textPreview":"退出条件：候选误选不可控、用户无法理解系统选择、端侧性能不满足预算或隐私红线不通过时，停止工程立项。","textChars":50,"textLines":1,"bbox":[94,617,1090,24]}
+{"kind":"textbox","id":"sh/x4vqhknm","slide":11,"name":"s11-footer-left","text":"11   Huawei Confidential","textPreview":"11   Huawei Confidential","textChars":24,"textLines":1,"bbox":[72,682,380,18]}
+{"kind":"image","id":"im/b61ov6x4","slide":11,"name":"","bbox":[1102,673.38,106,23.24]}
+{"kind":"notes","id":"nt/jetc3ut0","slide":11,"text":"[Sources]\n- User brief and decision goal supplied in this conversation, 2026-08-30.\n- Huawei visual assets and brand rules: huawei-presentation local skill asset library.\n- Product mechanisms, thresholds and weights are proposal hypotheses; validate through research, usability testing, technical spike and privacy review."}

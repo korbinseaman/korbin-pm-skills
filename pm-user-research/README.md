@@ -8,15 +8,15 @@
 
 | 技能 | 职责 | 核心输出 |
 |---|---|---|
-| `ur-design-survey` | 定量问卷研究设计与题目设计 | `questionnaire.md`、`questionnaire-design.html` |
-| `ur-generate-personas` | 生成基础 + 课题扩展画像，分层和配额审计 | `personas.json`、`persons_summary.txt`、单人画像、`persona_audit.json` |
-| `ur-user-simulator` | 合成问卷作答、Excel 汇总、逻辑/模板化检查 | 个人答卷、`survey_responses_*.xlsx`、质量报告 |
+| `ur-design-survey` | 定量问卷研究设计与题目设计 | 主问卷、设计说明、模拟作答版和平台导入版 |
+| `ur-generate-personas` | 生成基础 + 课题扩展画像，分层和配额审计 | `personas.json`、`persons_summary.html`、`persons.xlsx`、单人画像、`persona_audit.json` |
+| `ur-user-simulator` | 合成问卷作答、Excel 汇总、逻辑/模板化检查 | `survey_responses_*.xlsx`、质量报告 |
 | `ur-synthesize-report` | 定量问卷、开放回答、证据综合和离线图表报告 | `analysis_summary.json`、`report.html`、`report_quality.md` |
 
 工作流：
 
-- `workflows/survey-design.md`：完成调查问卷设计，只调用 `ur-design-survey`。
-- `workflows/synthetic-survey.md`：组合四个原子 Skill，完成完整合成问卷调研。
+- `commands/survey-design.md`：完成调查问卷设计，只调用 `ur-design-survey`。
+- `commands/synthetic-survey.md`：组合四个原子 Skill，完成完整合成问卷调研。
 
 ## 目录
 
@@ -27,7 +27,7 @@ pm-user-research-skills/
 │   ├── ur-generate-personas/
 │   ├── ur-user-simulator/
 │   └── ur-synthesize-report/
-├── workflows/
+├── commands/
 ├── config/llm.example.yaml
 ├── output_example/20260815图库AI修图用户需求调研/
 └── tests/
@@ -59,7 +59,7 @@ $ur-design-survey 调研课题：图库 AI 修图；调研目标：识别高频�
 
 ### 1. 只设计研究方案
 
-按 `workflows/survey-design.md` 调用 `ur-design-survey`。技能把产物写到当前工作目录：
+按 `commands/survey-design.md` 调用 `ur-design-survey`。技能把产物写到当前工作目录：
 
 ```text
 用户调研/<YYYYMMDD><课题>/
@@ -85,20 +85,20 @@ DeepSeek、智谱、Kimi、Qwen、MiniMax（中国区）和 OpenAI 的提供商 
 
 ### 3. 运行模拟
 
-调用 `$ur-user-simulator`，提供已确认的 `questionnaire.md`、`persons_summary.txt`、`persons/` 目录和可选 LLM 配置。Skill 并行完成全部用户任务，最终只输出个人答卷目录、Excel 汇总和质量报告。
+调用 `$ur-user-simulator`，提供已确认的 `questionnaire_for_simulator.md`（缺失时回退 `questionnaire.md`）、`persons_summary.html`、`persons/` 目录和可选 LLM 配置。Skill 并行完成全部用户任务，最终只输出保留全部原回答的 Excel 和质量报告；逐人 Markdown 答卷仅临时使用并在 Excel 校验后删除。
 
 ### 4. 生成报告
 
 选定一个明确的 `<run_id>`，先生成描述性分析草稿：
 
 ```bash
-python "skills/ur-synthesize-report/scripts/generate_report.py" --questionnaire "用户调研/<项目>/questionnaire.md" --design-doc "用户调研/<项目>/questionnaire-design.html" --responses "用户调研/<项目>/survey_response_data/survey_responses_<run_id>.xlsx" --output-dir "用户调研/<项目>/report_<run_id>" --prepare-only
+python "skills/ur-synthesize-report/scripts/generate_report.py" --questionnaire "用户调研/<项目>/questionnaire.md" --design-doc "用户调研/<项目>/survey-design-desc.html" --responses "用户调研/<项目>/survey_response_data/survey_responses_<run_id>.xlsx" --output-dir "用户调研/<项目>/report_<run_id>" --prepare-only
 ```
 
 脚本会自动筛除问卷外选项、排序重复/超限和量表越界等结构性无效回答。若人工确认某个完成回答与调研诉求不符或逻辑不自洽，在两次命令中都追加 `--exclude-response "<用户ID>:<具体理由>"`，使清理记录可追溯。由 `ur-synthesize-report` 完成交叉/量表检验、证据化主题和建议后渲染：
 
 ```bash
-python "skills/ur-synthesize-report/scripts/generate_report.py" --questionnaire "用户调研/<项目>/questionnaire.md" --design-doc "用户调研/<项目>/questionnaire-design.html" --responses "用户调研/<项目>/survey_response_data/survey_responses_<run_id>.xlsx" --analysis "用户调研/<项目>/report_<run_id>/analysis_summary.json" --output-dir "用户调研/<项目>/report_<run_id>"
+python "skills/ur-synthesize-report/scripts/generate_report.py" --questionnaire "用户调研/<项目>/questionnaire.md" --design-doc "用户调研/<项目>/survey-design-desc.html" --responses "用户调研/<项目>/survey_response_data/survey_responses_<run_id>.xlsx" --analysis "用户调研/<项目>/report_<run_id>/analysis_summary.json" --output-dir "用户调研/<项目>/report_<run_id>"
 ```
 
 ## 数据契约
@@ -106,12 +106,12 @@ python "skills/ur-synthesize-report/scripts/generate_report.py" --questionnaire 
 技能之间只通过文件传递数据：
 
 ```text
-当前课题的 shared_context.md ──→ 大模型生成临时 personas.json ──→ 用户调研/personas_data/personas.json + persons_summary.txt + persons/ + persona_audit.json
-questionnaire.md + 用户调研/personas_data/persons_summary.txt + persons/ ──→ answers_<run_id>/ + survey_responses_<run_id>.xlsx + quality_report_<run_id>.md
-questionnaire.md + questionnaire-design.html + survey_responses_<run_id>.xlsx [+ 用户调研/personas_data/persons_summary.txt] ──→ analysis_summary.json + report.html + report_quality.md
+直接提供的画像生成输入 ──→ 大模型生成临时 personas.json ──→ 用户调研/personas_data/personas.json + persons_summary.html + persons.xlsx + persons/ + persona_audit.json
+questionnaire_for_simulator.md + 用户调研/personas_data/persons_summary.html + persons/ ──→ survey_responses_<run_id>.xlsx + quality_report_<run_id>.md
+questionnaire.md + survey-design-desc.html + survey_responses_<run_id>.xlsx [+ 用户调研/personas_data/persons_summary.html] ──→ analysis_summary.json + report.html + report_quality.md
 ```
 
-`questionnaire.md` 是报告所需问卷结构的权威来源，`questionnaire-design.html` 提供产品决策和研究目标，并附完整问卷供审阅。报告先对回答 Excel 执行可追溯清理，再计算逐题频数/百分比、量表均值/标准差以及满足条件的交叉或量表检验；仅在需要披露样本构成时可选读取 `persons_summary.txt`，且不将其视为回答证据。
+`questionnaire.md` 是报告所需问卷结构的权威来源，`survey-design-desc.html` 提供产品决策和研究目标，并附完整问卷供审阅。报告先对回答 Excel 执行可追溯清理，再计算逐题频数/百分比、量表均值/标准差以及满足条件的交叉或量表检验；仅在需要披露样本构成时可选读取 `persons_summary.html`，且不将其视为回答证据。
 
 ## 输出位置
 
@@ -121,15 +121,17 @@ questionnaire.md + questionnaire-design.html + survey_responses_<run_id>.xlsx [+
 用户调研/
 ├── personas_data/                         # 所有课题共用的用户画像库
 │   ├── personas.json
-│   ├── persons_summary.txt
+│   ├── persons_summary.html
+│   ├── persons.xlsx
 │   ├── persons/
 │   └── persona_audit.json
 └── <YYYYMMDD><课题>/
     ├── questionnaire.md
-    ├── questionnaire-design.html
+    ├── survey-design-desc.html
+    ├── questionnaire_for_simulator.md
     ├── questionnaire_for_userclub.txt
+    ├── questionnaire_for_wenjuanxing.txt
     ├── survey_response_data/
-    │   ├── answers_<run_id>/
     │   ├── survey_responses_<run_id>.xlsx
     │   └── quality_report_<run_id>.md
     └── report_<run_id>/

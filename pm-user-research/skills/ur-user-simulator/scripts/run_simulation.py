@@ -27,6 +27,7 @@ from validate_responses import (  # noqa: E402
     quality_markdown,
     resolve_persona_files,
     validate_answer_directory,
+    working_answers_dir,
     write_answer_markdown,
 )
 
@@ -307,12 +308,13 @@ def main() -> int:
         parser.error("mock 不能与真实提供商混合运行")
     run_id = args.run_id or datetime.now().strftime("%Y%m%d_%H%M%S")
     output_dir = args.output_dir.resolve()
-    answers_dir = output_dir / f"answers_{run_id}"
-    answers_dir.mkdir(parents=True, exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    temp_answers_dir = working_answers_dir(run_id)
+    temp_answers_dir.mkdir(parents=True, exist_ok=True)
     runtime = dict(config.get("runtime") or {})
     runtime["max_retries"] = args.max_retries
     assignments = [
-        (index, user_id, persona_files[user_id], questionnaire, answers_dir / f"{user_id}.md")
+        (index, user_id, persona_files[user_id], questionnaire, temp_answers_dir / f"{user_id}.md")
         for index, user_id in enumerate(user_ids)
     ]
     with concurrent.futures.ThreadPoolExecutor(max_workers=max(1, args.max_concurrency)) as executor:
@@ -323,13 +325,13 @@ def main() -> int:
         ]
         results = [future.result() for future in concurrent.futures.as_completed(futures)]
     failures = {item["user_id"]: item.get("error", "模型调用失败") for item in results if item["status"] == "failed"}
-    quality = validate_answer_directory(questionnaire, persons_summary, persons_dir, answers_dir, failures)
+    quality = validate_answer_directory(questionnaire, persons_summary, persons_dir, temp_answers_dir, failures)
     quality_path = output_dir / f"quality_report_{run_id}.md"
     quality_path.write_text(quality_markdown(run_id, quality), encoding="utf-8")
     print(json.dumps({
         "status": "completed",
         "run_id": run_id,
-        "answers_dir": str(answers_dir),
+        "working_answers_dir": str(temp_answers_dir),
         "quality_report": str(quality_path),
         "total": quality["total"],
         "completed": quality["completed"],

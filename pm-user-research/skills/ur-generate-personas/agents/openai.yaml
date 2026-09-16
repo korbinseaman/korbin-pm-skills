@@ -1,4 +1,4 @@
 interface:
   display_name: "调研目标用户画像生成"
   short_description: "根据课题和目标用户生成可信的合成用户画像"
-  default_prompt: "使用 $ur-generate-personas，从当前任务的 shared_context.md 读取课题、全量候选群体和目标用户。先确定画像数量与群体配额，再由大模型生成自洽的基础画像和调研相关画像。逐人检查年龄、职业、收入、婚育、设备与系统 App 使用习惯是否冲突。personas.json 按 templates/persona_template.json 使用扁平中文键值；当前人物没有实际内容的字段整项省略，不填 null、空字符串或“不适用”。每个画像都要有系统App使用习惯；无相关经验者不输出产品使用习惯和判断。通过脚本将大模型生成的 JSON 落盘为 persons_summary.txt、persons/ 下的一人一文件及审计结果。构建比例不代表真实用户分布，不读取问卷或 plan.json。"
+  default_prompt: "使用 $ur-generate-personas，根据我直接提供的课题、全量候选用户群体、目标用户和画像数量，生成自洽且差异化的合成用户画像；姓名要符合年龄对应的出生年代和地域文化，并逐人检查姓名年代、年龄、职业、收入、婚育与设备是否冲突；不要读取其他用户研究 Skill 的任务文件或问卷。"
