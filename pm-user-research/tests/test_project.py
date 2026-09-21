@@ -461,7 +461,49 @@ class SynthesizeReportContractTests(unittest.TestCase):
 
     def _inputs(self, root: Path) -> dict[str, Path]:
         questionnaire = root / "questionnaire.md"
-        questionnaire_text = QUESTIONNAIRE.read_text(encoding="utf-8")
+        questionnaire_text = """# 契约测试问卷
+
+## Q1 ｜ 单选
+
+您是否使用过测试功能？
+
+- 使用过
+- 没有使用过
+
+【逻辑提示】选择「没有使用过」后结束答题。
+
+## Q2 ｜ 单选
+
+您使用的系统是？
+
+- iPhone/iOS
+- Android
+
+## Q3 ｜ 单选
+
+您近期是否使用过编辑功能？
+
+- 是
+- 否
+
+## Q4 ｜ 单选
+
+您是否遇到过问题？
+
+- 是
+- 否
+
+## Q5 ｜ 开放文本
+
+请描述主要问题。
+
+## Q6 ｜ 单选
+
+您是否愿意继续使用？
+
+- 是
+- 否
+"""
         questionnaire.write_text(questionnaire_text, encoding="utf-8")
         design_doc = root / "survey-design-desc.html"
         design_doc.write_text(
@@ -519,16 +561,27 @@ class SynthesizeReportContractTests(unittest.TestCase):
                 "--questionnaire", paths["questionnaire"],
                 "--design-doc", paths["design"], "--responses", paths["responses"],
                 "--analysis", report_dir / "analysis_summary.json", "--output-dir", report_dir,
+                "--report-date", "20260918",
             )
-            report = (report_dir / "report.html").read_text(encoding="utf-8")
+            reports = list(report_dir.glob("*.html"))
+            self.assertEqual(len(reports), 1)
+            self.assertEqual(reports[0].name, f"20260918{analysis['topic']}_调研报告.html")
+            report = reports[0].read_text(encoding="utf-8")
             self.assertIn("contract-run", report)
             self.assertIn("样本构成说明", report)
             self.assertIn('id="filter-question"', report)
-            self.assertIn('id="save-report"', report)
-            self.assertIn('id="download-png"', report)
+            self.assertIn('id="download-conclusion-ppt"', report)
+            self.assertIn('id="tab-conclusions"', report)
+            self.assertNotIn('id="save-report"', report)
+            self.assertNotIn('id="download-png"', report)
+            self.assertNotIn('id="download-svg"', report)
             self.assertNotIn("<h2>证据索引</h2>", report)
             self.assertNotRegex(report, r'(?:src|href)=["\']https?://')
-            self.assertTrue((report_dir / "report_quality.md").exists())
+            self.assertFalse((report_dir / "report_quality.md").exists())
+            self.assertFalse((report_dir / "report.html").exists())
+            self.assertIn('id="report-audit"', report)
+            self.assertIn("结构检查通过", report)
+            self.assertIn("待检查", report)
 
     def test_report_rejects_duplicate_question_id(self) -> None:
         with workspace_temp() as temp:

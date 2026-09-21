@@ -612,6 +612,7 @@ def prepare_analysis(args: argparse.Namespace) -> dict[str, Any]:
         "study_id": f"questionnaire_{hashlib.sha256(title.encode('utf-8')).hexdigest()[:12]}",
         "run_id": run_id,
         "title": report_title,
+        "topic": topic.removesuffix("问卷"),
         "data_source": "synthetic",
         "generated_at": datetime.now().isoformat(timespec="seconds"),
         "inputs": {
@@ -654,15 +655,19 @@ def esc(value: Any) -> str:
 def bar_svg(distribution: list[dict[str, Any]], base_n: int) -> str:
     if not distribution:
         return '<p class="empty">本题没有可绘制的封闭题数据。</p>'
-    width, row_h, label_w, bar_w = 820, 40, 280, 420
-    height = 26 + row_h * len(distribution)
+    width, label_w, bar_w = 920, 310, 450
     maximum = max(int(item.get("count", 0)) for item in distribution) or 1
     rows = []
-    for index, item in enumerate(distribution):
-        y = 12 + index * row_h
+    y = 12
+    for item in distribution:
+        label = str(item.get("label", ""))
+        lines = [label[start:start + 21] for start in range(0, len(label), 21)] or [""]
         count = int(item.get("count", 0))
-        length = max(2, int(count / maximum * bar_w))
-        rows.append(f'<text x="0" y="{y + 17}" class="axis">{esc(item.get("label"))}</text><rect x="{label_w}" y="{y}" width="{length}" height="24" rx="4" class="bar"/><text x="{label_w + length + 8}" y="{y + 17}" class="value">{count}（{float(item.get("percent", 0)):.1f}%）</text>')
+        length = max(2, int(count / maximum * bar_w)) if count else 0
+        label_svg = "".join(f'<tspan x="0" dy="{0 if index == 0 else 22}">{esc(line)}</tspan>' for index, line in enumerate(lines))
+        rows.append(f'<text x="0" y="{y + 17}" class="axis">{label_svg}</text><rect x="{label_w}" y="{y}" width="{length}" height="24" rx="6" class="bar"/><text x="{label_w + length + 8}" y="{y + 17}" class="value">{count}（{float(item.get("percent", 0)):.1f}%）</text>')
+        y += max(42, len(lines) * 22 + 14)
+    height = y + 12
     return f'<div class="chart"><svg viewBox="0 0 {width} {height}" role="img" aria-label="回答分布，分母 {base_n}">{"".join(rows)}</svg></div>'
 
 
@@ -670,7 +675,104 @@ def source_label() -> tuple[str, str]:
     return "合成模拟数据", "用于检查研究工具和形成待验证假设，不代表真实用户或市场总体。"
 
 
-def render_report(analysis: dict[str, Any]) -> str:
+def conclusion_deck(analysis: dict[str, Any]) -> list[dict[str, Any]]:
+    """Three evidence-led slides; missing authored findings remain explicit gaps."""
+    goals = analysis.get("goal_coverage", [])
+    themes = analysis.get("themes", [])
+    context = analysis.get("research_context", {})
+    results = [item for item in analysis.get("descriptive_results", []) if item.get("type") != "open_text" and item.get("base_n")]
+    linked_ids = [qid for goal in goals for qid in goal.get("question_ids", [])]
+    results.sort(key=lambda item: (item.get("question_id") not in linked_ids, linked_ids.index(item["question_id"]) if item.get("question_id") in linked_ids else 999))
+    findings = [f'{goal.get("research_question", "研究目标")}：{goal.get("finding") or "尚未形成证据支持的结论"}' for goal in goals]
+    lines = [
+        ["背景：" + str(context.get("background") or "未提供独立背景说明；以下以已提供的产品决策作为分析起点。"),
+         "目的：" + str(context.get("decision") or "未提供产品决策或正式调研目的。"),
+         "用户现状：" + str(goals[0].get("finding") or "尚未形成现状分析，不能将人口属性或概念意愿当作实际行为。") if goals else "用户现状：未提供目标对应的现状结论。"],
+        [str(theme.get("insight") or theme.get("name") or theme.get("theme_id")) + "；证据：" + ", ".join(theme.get("evidence_ids", [])) for theme in themes] or ["未形成用户诉求与痛点的证据编码；不能由选项分布补造原因或用户原话。"],
+        findings or ["未提供正式研究目标；当前仅有描述统计，无法形成目标对应的关键结论。"],
+    ]
+    slides = []
+    for index, title in enumerate(["调研背景、目的与用户现状", "用户诉求与痛点", "调研目标与关键结论"]):
+        goal = goals[min(index, len(goals) - 1)] if goals else {}
+        candidates = [item for item in results if item.get("question_id") in goal.get("question_ids", [])]
+        if index == 0:
+            candidates.sort(key=lambda item: (bool(re.search("年龄|性别|品牌", item.get("question", ""))), not bool(re.search("频率|过去|近期|付费|使用", item.get("question", "")))))
+        result = (candidates or results or [{}])[0]
+        items = result.get("distribution", [])
+        if result.get("ranking"):
+            items = [{"label": row["label"], "count": row.get("first_choice_count", 0), "percent": row.get("first_choice_count", 0) / result["base_n"] * 100} for row in result["ranking"]]
+        items = sorted(items, key=lambda row: -row.get("percent", 0))
+        note = f'全批次；实际分母 n={result.get("base_n", 0)}；空白/未作答 {result.get("missing_n", 0)}。'
+        if result.get("type") == "multi_choice":
+            note += "多选为受访者占比，比例合计可超过100%。"
+        if result.get("type") == "ranking":
+            note += "按第一选择统计。"
+        if len(items) > 6:
+            note += "展示占比最高的6项，完整选项见普通分析。"
+        slides.append({"title": title, "lines": lines[index][:4], "chart": {"title": f'{result.get("question_id", "")} · {result.get("question", "暂无题目统计")}', "note": note, "items": items[:6]}})
+    return slides
+
+
+def report_filename(analysis: dict[str, Any], report_date: str | None = None) -> str:
+    """Build a safe, stable dated filename without renaming input artifacts."""
+    if report_date:
+        date = datetime.strptime(report_date, "%Y%m%d").strftime("%Y%m%d")
+        if date != report_date:
+            raise ValueError("报告日期必须为 YYYYMMDD")
+    else:
+        try:
+            date = datetime.fromisoformat(str(analysis.get("generated_at", ""))).strftime("%Y%m%d")
+        except ValueError:
+            date = datetime.now().strftime("%Y%m%d")
+    topic = str(analysis.get("topic") or analysis.get("title") or "未命名调研")
+    topic = topic.removesuffix("_调研报告").removesuffix("报告").removesuffix("问卷")
+    topic = re.sub(r"^\d{8}", "", topic).strip()
+    topic = re.sub(r'[<>:"/\\|?*\x00-\x1f]', "_", topic).strip(" .") or "未命名调研"
+    return f"{date}{topic}_调研报告.html"
+
+
+def render_quality_audit(analysis: dict[str, Any], problems: list[str] | None) -> str:
+    """Keep structural checks distinct from researcher/browser verification."""
+    checks = analysis.get("contract_checks", {})
+    names = {"questionnaire_parse": "正式问卷解析", "responses_filename": "回答批次标识", "xlsx_columns": "Excel 题目列", "xlsx_rows": "Excel 样本行", "data_cleaning": "数据清理", "persons_summary": "可选样本构建说明"}
+    labels = {"passed": "通过", "failed": "失败", "pending": "待检查", "not_provided": "未提供", "not_applicable": "不适用"}
+    contract_rows = "".join(f'<tr><td>{esc(names.get(key, key))}</td><td>{esc(labels.get(str(value), value))}</td></tr>' for key, value in checks.items()) or '<tr><td colspan="2">未提供输入契约检查记录</td></tr>'
+    structural = [
+        ("离线资源", ["HTML 包含外部资源"]),
+        ("SVG 图表", ["有封闭题数据但没有 SVG 图表"]),
+        ("筛选、分析与导出控件结构", ["HTML 缺少筛选、分析或报告下载控件", "HTML 缺少本地筛选所需的匿名答卷数据"]),
+        ("批次标识披露", ["HTML 未显示 run_id"]),
+        ("数据来源披露", ["合成数据披露不足"]),
+    ]
+    automatic_rows = "".join(f'<tr><td>{esc(name)}</td><td>{"待检查" if problems is None else "失败" if any(issue in problems for issue in issues) else "通过"}</td></tr>' for name, issues in structural)
+    manual_checks = [
+        ("statistics", "统计与 Excel 原始行抽查（至少3项，不足时全部）"),
+        ("evidence", "已有证据回溯及引语脱敏（至少3项，不足时全部）"),
+        ("cleaning", "剔除理由、缺失和待复核记录"),
+        ("privacy", "身份信息、稀有组合与重识别风险"),
+        ("desktop_mobile", "桌面与窄屏视觉、长文本及图表可读性"),
+        ("filters", "题目/选项筛选及统计实时重算"),
+        ("charts", "逐题六种视图及百分比口径"),
+        ("cross", "X/Y 添加、移除、交换及交叉分母"),
+        ("tabs", "四个 Tab 切换、键盘导航及导出隔离"),
+        ("office", "DOCX/PPTX/XLSX 与结论 PPT 可重新打开"),
+        ("downloads", "实际浏览器报告、结论 PPT 及 CSV 下载"),
+        ("conclusions", "目标对应结论、来源限制及未回答问题"),
+    ]
+    records = {item.get("check_id"): item for item in analysis.get("report_audit", [])}
+    manual_rows = []
+    for check_id, name in manual_checks:
+        record = records.get(check_id, {})
+        status = record.get("status", "pending")
+        if status not in {"passed", "failed", "pending", "not_applicable"}:
+            status = "pending"
+        manual_rows.append(f'<tr><td>{esc(name)}</td><td>{labels[status]}</td><td>{esc(record.get("note") or "尚未记录检查结果")}</td></tr>')
+    result = "结构检查待完成" if problems is None else "结构检查失败" if problems else "结构检查通过"
+    issues = "；".join(problems or []) or "无已记录结构问题"
+    return f'<div id="report-audit"><h3>报告检查与交付审计</h3><p>{esc(result)}；人工审计以各项记录为准。自动结构检查不等于浏览器交互、文件下载或视觉验收。</p><details class="data-details"><summary>输入契约检查</summary><div class="table-wrap"><table><thead><tr><th>检查项</th><th>结果</th></tr></thead><tbody>{contract_rows}</tbody></table></div></details><details class="data-details" open><summary>自动结构检查</summary><div class="table-wrap"><table><thead><tr><th>检查项</th><th>结果</th></tr></thead><tbody>{automatic_rows}</tbody></table></div><p>{esc(issues)}</p></details><details class="data-details" open><summary>人工检查及修订记录</summary><div class="table-wrap"><table><thead><tr><th>检查项</th><th>状态</th><th>记录 / 限制</th></tr></thead><tbody>{"".join(manual_rows)}</tbody></table></div></details></div>'
+
+
+def render_report(analysis: dict[str, Any], machine_problems: list[str] | None = None) -> str:
     label, disclosure = source_label()
     sample = analysis.get("sample", {})
     context = analysis.get("research_context", {})
@@ -682,7 +784,8 @@ def render_report(analysis: dict[str, Any]) -> str:
     cleaning = analysis.get("data_cleaning", {})
     cross_tabs = analysis.get("cross_tabulations", [])
     scale_quality = analysis.get("scale_quality", [])
-    interactive_payload = json.dumps(analysis.get("interactive_data", {}), ensure_ascii=False).replace("</", "<\\/")
+    quality_audit = render_quality_audit(analysis, machine_problems)
+    interactive_payload = json.dumps({**analysis.get("interactive_data", {}), "conclusion_deck": conclusion_deck(analysis)}, ensure_ascii=False).replace("</", "<\\/")
 
     goal_rows = "".join(f'<tr><td>{esc(goal.get("goal_id"))}</td><td>{esc(goal.get("research_question"))}</td><td>{esc(", ".join(goal.get("question_ids", [])) or "无")}</td><td>{esc(goal.get("status"))}</td><td>{esc(goal.get("finding"))}</td></tr>' for goal in goals) or '<tr><td colspan="5">survey-design-desc.html 未提供可识别的研究目标。</td></tr>'
 
@@ -691,8 +794,8 @@ def render_report(analysis: dict[str, Any]) -> str:
         if result.get("type") == "open_text":
             continue
         notes = []
-        if result.get("multi_select"):
-            notes.append("多选/排序的百分比合计可超过 100%")
+        if result.get("type") == "multi_choice":
+            notes.append("多选题的百分比合计可超过 100%")
         numeric = result.get("numeric_summary")
         if numeric:
             deviation = numeric.get("standard_deviation")
@@ -701,8 +804,12 @@ def render_report(analysis: dict[str, Any]) -> str:
         if ranking:
             ranked = sorted((item for item in ranking if item.get("selected_count")), key=lambda item: (-item.get("first_choice_count", 0), item.get("average_rank") or 99))
             notes.append("排序概览：" + "；".join(f"{item['label']} 首选 {item['first_choice_count']}，平均名次 {item['average_rank']}" for item in ranked[:3]))
+        distribution = result.get("distribution", [])
+        if ranking:
+            notes.append("图表按第一选择人数统计")
+            distribution = [{"label": item["label"], "count": item.get("first_choice_count", 0), "percent": round(item.get("first_choice_count", 0) / result["base_n"] * 100, 1) if result.get("base_n") else 0} for item in ranking]
         note_text = "；".join(notes)
-        charts.append(f'<section class="evidence"><h3>{esc(result.get("question_id"))} · {esc(result.get("question"))}</h3><p>实际分母 <strong>{result.get("base_n", 0)}</strong>，完成样本中的空白/未作答 {result.get("missing_n", 0)}。{esc(note_text)}。只描述本批次。</p>{bar_svg(result.get("distribution", []), int(result.get("base_n", 0)))}</section>')
+        charts.append(f'<section class="evidence"><h3>{esc(result.get("question_id"))} · {esc(result.get("question"))}</h3><p>实际分母 <strong>{result.get("base_n", 0)}</strong>，可分析样本中的空白/未作答 {result.get("missing_n", 0)}。{esc(note_text)}。只描述本批次。</p>{bar_svg(distribution, int(result.get("base_n", 0)))}</section>')
     if not charts:
         charts.append('<p class="empty">没有可绘制的封闭题结果。</p>')
 
@@ -728,121 +835,38 @@ def render_report(analysis: dict[str, Any]) -> str:
     construction_note = f'<div class="note"><strong>样本构成说明：</strong>{"；".join(construction_bits) or "已读取 persons_summary.html。"}。该文件只说明样本如何构建，不是回答证据、分群字段或市场比例。</div>' if construction else ""
     cross_rows = "".join(f"<tr><td>{esc(item.get('group_question_id'))}</td><td>{esc(item.get('target_question_id'))}</td><td>{esc(item.get('base_n'))}</td><td>{esc(item.get('finding'))}</td></tr>" for item in cross_tabs) or '<tr><td colspan="4">尚未形成满足样本量与研究目标要求的交叉分析。</td></tr>'
     scale_rows = "".join(f"<tr><td>{esc(item.get('scale_name') or item.get('question_ids'))}</td><td>{esc(item.get('method'))}</td><td>{esc(item.get('result'))}</td><td>{esc(item.get('interpretation'))}</td></tr>" for item in scale_quality) or '<tr><td colspan="4">没有满足同一构念、同一量表且样本条件足够的信效度检验。</td></tr>'
-    interactive_script = '''<script id="report-interactive-data" type="application/json">__PAYLOAD__</script>
-<script>
-(() => {
-  const data = JSON.parse(document.getElementById("report-interactive-data").textContent || "{}");
-  const questions = data.questions || [];
-  const responses = data.responses || [];
-  const active = Array.isArray(window.__reportFilters) ? [...window.__reportFilters] : [];
-  const questionSelect = document.getElementById("filter-question");
-  const valueSelect = document.getElementById("filter-value");
-  const chips = document.getElementById("active-filters");
-  const status = document.getElementById("filter-status");
-  const chartRoot = document.getElementById("interactive-charts");
-  const esc = value => String(value ?? "").replace(/[&<>\"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[char]));
-  const split = value => String(value || "").split(/[；;]/).map(item => item.trim()).filter(Boolean);
-  const questionById = id => questions.find(question => question.id === id);
-  const valuesFor = question => [...new Set([...(question.options || []), ...responses.flatMap(row => question.type === "multi_choice" || question.type === "ranking" ? split(row.answers[question.id]) : [row.answers[question.id]]).filter(value => value !== undefined && value !== null && value !== "")])];
-  const fillValues = () => {
-    const question = questionById(questionSelect.value);
-    valueSelect.innerHTML = (question ? valuesFor(question) : []).map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join("");
-  };
-  const matches = (row, filter) => {
-    const question = questionById(filter.question_id);
-    const value = row.answers[filter.question_id];
-    return question && (question.type === "multi_choice" || question.type === "ranking" ? split(value).includes(filter.value) : String(value) === filter.value);
-  };
-  const filtered = () => responses.filter(row => active.every(filter => matches(row, filter)));
-  const bars = (distribution, base) => {
-    if (!distribution.length) return '<p class="empty">当前筛选下本题没有有效回答。</p>';
-    const max = Math.max(...distribution.map(item => item.count), 1);
-    return `<div class="interactive-bars">${distribution.map(item => `<div class="bar-row"><span>${esc(item.label)}</span><div class="bar-track"><i style="width:${Math.max(2, item.count / max * 100)}%"></i></div><b>${item.count}（${(item.count / base * 100).toFixed(1)}%）</b></div>`).join("")}</div>`;
-  };
-  const renderCharts = () => {
-    const subset = filtered();
-    status.textContent = `当前筛选样本：${subset.length} / ${responses.length}`;
-    chartRoot.innerHTML = questions.map(question => {
-      const values = subset.map(row => row.answers[question.id]).filter(value => value !== undefined && value !== null && value !== "");
-      const counts = new Map();
-      const ranked = question.type === "ranking" ? values.map(split) : [];
-      (question.type === "multi_choice" ? values.flatMap(split) : question.type === "ranking" ? ranked.map(items => items[0]).filter(Boolean) : values).forEach(value => counts.set(String(value), (counts.get(String(value)) || 0) + 1));
-      const order = [...new Set([...(question.options || []), ...counts.keys()])];
-      const distribution = order.filter(label => counts.has(label)).map(label => ({label, count: counts.get(label)}));
-      let note = `实际分母 ${values.length}；筛选样本中空白/未作答 ${subset.length - values.length}。`;
-      if (question.type === "multi_choice") note += " 多选题的百分比合计可超过 100%。";
-      if (question.type === "ranking") {
-        const averages = order.map(label => {
-          const positions = ranked.map(items => items.indexOf(label) + 1).filter(position => position > 0);
-          return positions.length ? `${esc(label)} ${ (positions.reduce((sum, position) => sum + position, 0) / positions.length).toFixed(2) }` : "";
-        }).filter(Boolean);
-        note += ` 以下按第一选择统计；平均名次：${averages.join("；") || "无有效名次"}。`;
-      }
-      if ((question.type === "likert_scale" || question.type === "nps") && values.length) {
-        const nums = values.map(Number).filter(Number.isFinite);
-        if (nums.length) {
-          const mean = nums.reduce((sum, value) => sum + value, 0) / nums.length;
-          const variance = nums.length > 1 ? nums.reduce((sum, value) => sum + (value - mean) ** 2, 0) / (nums.length - 1) : null;
-          note += ` 均值 ${mean.toFixed(2)}；标准差 ${variance === null ? "样本不足" : Math.sqrt(variance).toFixed(2)}。`;
-        }
-      }
-      return `<section class="evidence"><h3>${esc(question.id)} · ${esc(question.question)}</h3><p>${note}</p>${bars(distribution, values.length || 1)}</section>`;
-    }).join("") || '<p class="empty">当前筛选没有可展示题目。</p>';
-  };
-  const renderFilters = () => {
-    chips.innerHTML = active.length ? active.map((filter, index) => `<button type="button" class="filter-chip" data-index="${index}">${esc(questionById(filter.question_id)?.id)}：${esc(filter.value)} ×</button>`).join("") : '<span class="empty">尚未添加筛选条件</span>';
-    chips.querySelectorAll("button").forEach(button => button.addEventListener("click", () => { active.splice(Number(button.dataset.index), 1); renderFilters(); renderCharts(); }));
-  };
-  questionSelect.innerHTML = questions.map(question => `<option value="${esc(question.id)}">${esc(question.id)} · ${esc(question.question)}</option>`).join("");
-  questionSelect.addEventListener("change", fillValues);
-  document.getElementById("add-filter").addEventListener("click", () => {
-    if (!questionSelect.value || !valueSelect.value) return;
-    const sameQuestion = active.findIndex(filter => filter.question_id === questionSelect.value);
-    if (sameQuestion >= 0) active.splice(sameQuestion, 1);
-    active.push({question_id: questionSelect.value, value: valueSelect.value});
-    renderFilters(); renderCharts();
-  });
-  document.getElementById("clear-filters").addEventListener("click", () => { active.splice(0); renderFilters(); renderCharts(); });
-  const download = (name, blob) => { const url = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = name; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); };
-  const exportedSvg = () => {
-    const original = document.querySelector("main");
-    const width = Math.max(1000, original.scrollWidth, original.offsetWidth);
-    const height = Math.max(800, original.scrollHeight, original.offsetHeight);
-    const report = original.cloneNode(true);
-    report.querySelectorAll("[data-export-exclude]").forEach(node => node.remove());
-    const style = document.querySelector("style").textContent;
-    return {width, height, markup: `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml"><style>${style} body{background:#fff} main{margin:0;box-shadow:none;max-width:none}</style>${report.outerHTML}</div></foreignObject></svg>`};
-  };
-  document.getElementById("save-report").addEventListener("click", () => {
-    const clone = document.documentElement.cloneNode(true);
-    clone.querySelectorAll("[data-export-exclude]").forEach(node => node.remove());
-    const state = document.createElement("script"); state.textContent = `window.__reportFilters=${JSON.stringify(active)};`; clone.head.appendChild(state);
-    download(`report_${document.body.dataset.runId || "filtered"}.html`, new Blob(["<!doctype html>\n", clone.outerHTML], {type:"text/html;charset=utf-8"}));
-  });
-  document.getElementById("download-svg").addEventListener("click", () => { const svg = exportedSvg(); download(`report_${document.body.dataset.runId || "filtered"}.svg`, new Blob([svg.markup], {type:"image/svg+xml;charset=utf-8"})); });
-  document.getElementById("download-png").addEventListener("click", () => {
-    const svg = exportedSvg(), image = new Image(), url = URL.createObjectURL(new Blob([svg.markup], {type:"image/svg+xml;charset=utf-8"}));
-    image.onload = () => { const ratio = Math.min(2, 16000 / Math.max(svg.width, svg.height)); const canvas = document.createElement("canvas"); canvas.width = Math.max(1, Math.floor(svg.width * ratio)); canvas.height = Math.max(1, Math.floor(svg.height * ratio)); const context = canvas.getContext("2d"); context.fillStyle = "#fff"; context.fillRect(0, 0, canvas.width, canvas.height); context.drawImage(image, 0, 0, canvas.width, canvas.height); canvas.toBlob(blob => { if (blob) download(`report_${document.body.dataset.runId || "filtered"}.png`, blob); else document.getElementById("download-status").textContent = "PNG 生成失败，可改用 SVG 图片。"; URL.revokeObjectURL(url); }, "image/png"); };
-    image.onerror = () => { URL.revokeObjectURL(url); document.getElementById("download-status").textContent = "PNG 生成失败，可改用 SVG 图片。"; };
-    image.src = url;
-  });
-  fillValues(); renderFilters(); renderCharts();
-})();
-</script>'''.replace("__PAYLOAD__", interactive_payload)
+    templates_dir = Path(__file__).resolve().parents[1] / "templates"
+    office_js = (templates_dir / "report-office.js").read_text(encoding="utf-8")
+    analysis_js = (templates_dir / "report-analysis.js").read_text(encoding="utf-8")
+    interactive_script = '<script id="report-interactive-data" type="application/json">' + interactive_payload + '</script><script>' + office_js + '</script><script>' + analysis_js + '</script>'
 
+    report_css = (Path(__file__).resolve().parents[1] / "templates" / "report.css").read_text(encoding="utf-8")
     return f'''<!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(analysis.get("title"))}</title>
-<style>:root{{--ink:#172033;--muted:#596274;--line:#dce2ec;--soft:#f5f7fb;--brand:#3157d5;--warn:#934800;--warnbg:#fff4e8}}*{{box-sizing:border-box}}body{{margin:0;background:#edf1f6;color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}}main{{max-width:1020px;margin:32px auto;background:#fff;padding:48px;border-radius:16px;box-shadow:0 10px 34px #18213a18}}h1{{font-size:34px;line-height:1.2;margin:0 0 8px}}h2{{margin-top:44px;border-bottom:2px solid var(--line);padding-bottom:8px}}h3{{margin-bottom:6px}}.banner{{padding:16px 18px;background:var(--warnbg);border-left:5px solid #df8427;border-radius:8px;margin:20px 0}}.banner strong{{color:var(--warn)}}.note{{padding:14px 16px;background:#eef4ff;border-radius:8px;margin:16px 0}}.controls{{border:1px solid var(--line);border-radius:12px;padding:18px;margin:22px 0;background:var(--soft)}}.control-grid{{display:grid;grid-template-columns:1fr 1fr auto auto;gap:10px;align-items:end}}label{{display:grid;gap:4px;font-size:14px;font-weight:600}}select,button{{font:inherit;padding:8px 10px;border:1px solid #bdc8da;border-radius:7px;background:#fff}}button{{cursor:pointer}}button.primary{{background:var(--brand);color:#fff;border-color:var(--brand)}}.filter-chips{{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}}.filter-chip{{background:#e8edff;color:#2544a2}}.toolbar{{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}}.status{{color:var(--muted);font-size:14px;margin:8px 0}}.metrics{{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}}.metric{{background:var(--soft);padding:13px;border-radius:10px}}.metric b{{display:block;font-size:23px}}table{{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}}th,td{{text-align:left;vertical-align:top;border:1px solid var(--line);padding:9px}}th{{background:var(--soft)}}.evidence,.card{{border:1px solid var(--line);border-radius:12px;padding:18px;margin:18px 0}}.chart{{overflow-x:auto}}svg{{width:100%;min-width:680px}}.bar{{fill:var(--brand)}}.axis{{font-size:13px;fill:var(--ink)}}.value{{font-size:13px;fill:var(--muted)}}.interactive-bars{{display:grid;gap:8px}}.bar-row{{display:grid;grid-template-columns:minmax(180px,1fr) minmax(100px,2fr) 100px;gap:10px;align-items:center;font-size:14px}}.bar-track{{height:16px;background:#e5eaf3;border-radius:9px;overflow:hidden}}.bar-track i{{display:block;height:100%;background:var(--brand);border-radius:9px}}.pill{{display:inline-block;padding:2px 8px;border-radius:99px;background:#e8edff;color:#2544a2;font-size:13px}}.empty,small{{color:var(--muted)}}code{{background:var(--soft);padding:2px 5px;border-radius:4px}}@media(max-width:760px){{main{{margin:0;padding:24px;border-radius:0}}.control-grid{{grid-template-columns:1fr 1fr}}.metrics{{grid-template-columns:repeat(2,1fr)}}.bar-row{{grid-template-columns:1fr;gap:4px}}h1{{font-size:28px}}}}</style></head><body data-run-id="{esc(analysis.get("run_id"))}"><main>
-<h1>{esc(analysis.get("title"))}</h1><p>批次：<code>{esc(analysis.get("run_id"))}</code> · 生成时间：{esc(analysis.get("generated_at"))}</p><div class="banner"><strong>{esc(label)}</strong><br>{esc(disclosure)}</div>{construction_note}
-<section class="controls" data-export-exclude><h2>交互筛选与保存</h2><div class="control-grid"><label>筛选题<select id="filter-question"></select></label><label>选项<select id="filter-value"></select></label><button id="add-filter" class="primary" type="button">添加条件</button><button id="clear-filters" type="button">清除条件</button></div><div id="active-filters" class="filter-chips"></div><p class="status">不同题目的条件按“同时满足”筛选；同一题添加新选项会替换该题已有条件。</p><p id="filter-status" class="status"></p><div class="toolbar"><button id="save-report" type="button">保存当前筛选报告</button><button id="download-png" type="button">下载 PNG 图片</button><button id="download-svg" type="button">下载 SVG 图片</button></div><p id="download-status" class="status">下载仅在本地浏览器完成，不会上传答卷数据。</p></section>
-<h2>研究目标与证据覆盖</h2><p><strong>产品决策：</strong>{esc(context.get("decision", "未提供"))}</p><p><strong>目标用户：</strong>{esc(context.get("target_audience", "未提供"))}</p><table><thead><tr><th>ID</th><th>研究目标</th><th>题目</th><th>状态</th><th>当前结论</th></tr></thead><tbody>{goal_rows}</tbody></table>
-<h2>样本、清理与数据质量</h2><div class="metrics"><div class="metric"><span>总样本</span><b>{sample.get("total", 0)}</b></div><div class="metric"><span>完成</span><b>{sample.get("completed", 0)}</b></div><div class="metric"><span>可分析</span><b>{sample.get("analyzable", 0)}</b></div><div class="metric"><span>失败</span><b>{sample.get("failed", 0)}</b></div><div class="metric"><span>完成率</span><b>{float(sample.get("completion_rate", 0)):.1%}</b></div></div><p>回答质量：<strong>{esc(sample.get("quality_grade"))}</strong>；完成回答清理前 {cleaning.get("completed_before_cleaning", 0)}，清理后 {cleaning.get("analyzable_after_cleaning", 0)}，剔除 {cleaning.get("excluded_count", 0)}。</p><h3>清理剔除记录</h3><ul>{cleaned_rows}</ul><h3>待人工复核</h3><ul>{review_rows}</ul><h3>实际模型</h3><ul>{model_items}</ul><h3>已记录问题</h3><ul>{issue_items}</ul>
-<h2>封闭题描述统计</h2><p>每张图使用本题实际回答分母；失败行不进入题目分母。使用上方筛选条件后，本节将实时重算。</p><div id="interactive-charts">{"".join(charts)}</div>
-<h2>高级与交叉分析</h2><h3>交叉分析</h3><table><thead><tr><th>分组题</th><th>目标题</th><th>有效样本</th><th>观察</th></tr></thead><tbody>{cross_rows}</tbody></table><h3>量表信效度</h3><table><thead><tr><th>量表/题项</th><th>方法</th><th>结果</th><th>解释</th></tr></thead><tbody>{scale_rows}</tbody></table>
-<h2>主题、痛点与需求</h2>{"".join(theme_cards)}
-<h2>分群观察与反例</h2><table><thead><tr><th>分群</th><th>来源</th><th>n</th><th>观察</th><th>限制</th></tr></thead><tbody>{segment_rows}</tbody></table>
-<h2>建议与下一步验证</h2><ol>{rec_items}</ol>
-<h2>限制与未回答问题</h2><ul>{limit_items}</ul>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(analysis.get("title"))}</title><style>{report_css}</style></head>
+<body data-run-id="{esc(analysis.get("run_id"))}"><main>
+<div class="topbar"><div class="brand"><span class="brand-mark" aria-hidden="true">▥</span>研究报告</div><div class="top-actions" data-export-exclude><button id="open-export" class="primary" type="button">下载报告</button></div></div>
+<header class="report-header"><div class="eyebrow">RESEARCH REPORT</div><h1>{esc(analysis.get("title"))}</h1><div class="meta"><span class="source-tag">{esc(label)}</span><span>批次 {esc(analysis.get("run_id"))}</span><span>{esc(analysis.get("generated_at"))}</span></div><div class="disclosure"><strong>数据边界</strong><span>{esc(disclosure)}</span></div></header>{construction_note}
+<div class="metrics"><div class="metric"><span>总样本</span><b>{sample.get("total", 0)}</b><small>完成 {sample.get("completed", 0)} · 失败 {sample.get("failed", 0)}</small></div><div class="metric"><span>可分析样本</span><b>{sample.get("analyzable", 0)}</b><small>清理后有效回答</small></div><div class="metric"><span>完成率</span><b>{float(sample.get("completion_rate", 0)):.1%}</b><small>完成回答 / 总样本</small></div><div class="metric"><span>清理剔除</span><b>{cleaning.get("excluded_count", 0)}</b><small>原始工作簿保持不变</small></div></div>
+<div class="workspace">
+<aside id="sample-filters" class="filters" data-export-exclude><div class="filter-heading"><h2>样本筛选</h2><button id="clear-filters" class="text-button" type="button">重置</button></div><label>筛选题目<select id="filter-question"></select></label><div class="field-label">筛选选项<span>可多选</span></div><select id="filter-value" multiple hidden aria-label="筛选选项"></select><div id="filter-options" class="filter-options"></div><button id="add-filter" class="primary apply-button" type="button">应用筛选</button><div id="active-filters" class="filter-chips"></div><p class="filter-caption">同一题满足任一选项；不同题同时满足条件。两个分析页共用筛选。</p></aside>
+<section class="analysis-area"><div class="analysis-top"><div class="analysis-tabs" role="tablist" aria-label="分析类型" data-export-exclude><button id="tab-ordinary" type="button" role="tab" aria-selected="true" aria-controls="panel-ordinary" tabindex="0">普通分析</button><button id="tab-cross" type="button" role="tab" aria-selected="false" aria-controls="panel-cross" tabindex="-1">交叉分析</button><button id="tab-conclusions" type="button" role="tab" aria-selected="false" aria-controls="panel-conclusions" tabindex="-1">调研分析结论</button><button id="tab-quality" type="button" role="tab" aria-selected="false" aria-controls="panel-quality" tabindex="-1">问卷质量报告</button></div><p id="filter-status" class="sample-status"></p></div><p id="view-context" class="view-context"></p>
+<article id="panel-ordinary" role="tabpanel" aria-labelledby="tab-ordinary"><div hidden><select id="chart-question"></select><select id="chart-type"></select></div><div id="ordinary-questions"></div></article>
+<article id="panel-cross" class="cross-panel" role="tabpanel" aria-labelledby="tab-cross" hidden><div class="cross-builder"><h3>我的交叉分析</h3><div class="cross-grid" data-export-exclude><div><label>自变量 X <small>分组题目，最多 2 题</small><select id="cross-group"></select></label><button id="add-cross-group" type="button">＋ 添加自变量</button><div id="cross-groups" class="filter-chips"></div></div><button id="swap-cross" type="button" aria-label="交换 X 与 Y">⇄</button><div><label>因变量 Y <small>分析题目，最多 10 题</small><select id="cross-target"></select></label><button id="add-cross-target" type="button">＋ 添加因变量</button><div id="cross-targets" class="filter-chips"></div></div></div><div class="cross-actions" data-export-exclude><button id="calculate-cross" class="primary" type="button">交叉分析</button><button id="export-cross-csv" type="button">下载交叉表 CSV</button></div><p id="cross-note" class="helper">可添加多个 X、Y 题目；未添加时使用下拉框当前题目。筛选条件同时适用于交叉分析。</p></div><div id="cross-table"></div></article>
+<article id="panel-conclusions" class="report-body" role="tabpanel" aria-labelledby="tab-conclusions" hidden>
+<div class="conclusion-heading"><div><h2>调研分析结论</h2><p class="helper">从背景与目的出发，分析现状、诉求与痛点，再形成目标对应的关键结论。</p></div><button id="download-conclusion-ppt" class="primary" type="button">下载结论 PPT（3页）</button></div><div id="conclusion-slides"></div>
+<p class="conclusion-context">以下为清理后全批次的研究分析结论，不随普通分析或交叉分析中的筛选条件变化。</p>
+
+
+
+</article>
+<article id="panel-quality" class="report-body" role="tabpanel" aria-labelledby="tab-quality" hidden>
+<section class="report-section"><div class="section-heading"><span class="section-index">01</span><h2>分群与研究者分析</h2></div><p>以下内容基于全批次，与上方筛选统计区分。</p><details class="data-details"><summary>分群观察与反例</summary><div class="table-wrap"><table><thead><tr><th>分群</th><th>来源</th><th>n</th><th>观察</th><th>限制</th></tr></thead><tbody>{segment_rows}</tbody></table></div></details><details class="data-details"><summary>预设交叉分析与量表检验</summary><div class="table-wrap"><table><thead><tr><th>分组题</th><th>目标题</th><th>有效样本</th><th>观察</th></tr></thead><tbody>{cross_rows}</tbody></table><table><thead><tr><th>量表 / 题项</th><th>方法</th><th>结果</th><th>解释</th></tr></thead><tbody>{scale_rows}</tbody></table></div></details></section>
+<section class="report-section"><div class="section-heading"><span class="section-index">02</span><h2>全批次描述统计</h2></div><p>清理后全批次结果保留原口径，不随上方筛选变化。</p><details class="data-details"><summary>展开全部题目图表</summary><div id="full-batch-charts">{"".join(charts)}</div></details></section>
+<section class="report-section"><div class="section-heading"><span class="section-index">03</span><h2>数据质量与清理记录</h2></div><p>质量等级：{esc(sample.get("quality_grade"))} · 完成回答清理前 {cleaning.get("completed_before_cleaning", 0)} · 清理后 {cleaning.get("analyzable_after_cleaning", 0)}</p><details class="data-details"><summary>查看清理与运行明细</summary><div class="method-grid"><div><h3>清理剔除记录</h3><ul>{cleaned_rows}</ul></div><div><h3>待人工复核</h3><ul>{review_rows}</ul></div><div><h3>实际模型</h3><ul>{model_items}</ul></div><div><h3>已记录问题</h3><ul>{issue_items}</ul></div></div></details>{quality_audit}</section>
+<section class="report-section"><div class="section-heading"><span class="section-index">04</span><h2>限制与未回答问题</h2></div><ul>{limit_items}</ul></section></article></section></div>
+<dialog id="export-dialog" data-export-exclude><div class="dialog-heading"><h2>下载报告</h2><button id="close-export" type="button" aria-label="关闭">×</button></div><label>选择文档格式<select id="export-format"><option value="docx">Word 文档（.docx）</option><option value="pptx">PowerPoint 演示文稿（.pptx）</option><option value="xlsx">Excel 工作簿（.xlsx）</option></select></label><label>Word 纸张大小<select id="export-paper"><option>A4</option><option>A3</option></select></label><p class="helper">导出当前分析 Tab 与当前筛选结果，并附报告正文的文字说明。研究结论保持全批次口径。Word/Excel 使用可编辑统计表，PowerPoint 使用可编辑条形图与统计表。结论页 PowerPoint 导出为三页结论与图表。</p><p id="export-error" role="alert"></p><div class="dialog-footer"><span>离线生成，不上传数据</span><button id="confirm-export" type="button" class="primary">下载报告</button></div></dialog>
+<p id="download-status" data-export-exclude>筛选、分析与导出均在本地完成。</p>
+<footer class="page-footer"><span>合成模拟数据 · 用于假设验证与研究工具检查</span><span>结论 PPT 使用全批次数据</span></footer>
 </main>{interactive_script}</body></html>'''
 
 
@@ -870,9 +894,9 @@ def machine_quality(report: str, analysis: dict[str, Any]) -> list[str]:
         problems.append("HTML 未显示 run_id")
     if "合成模拟数据" not in report or "不代表真实用户或市场总体" not in report:
         problems.append("合成数据披露不足")
-    required_controls = ('id="filter-question"', 'id="add-filter"', 'id="save-report"', 'id="download-png"', 'id="download-svg"')
+    required_controls = ('id="filter-question"', 'id="filter-value"', 'id="ordinary-questions"', 'id="tab-conclusions"', 'id="panel-conclusions"', 'id="tab-quality"', 'id="panel-quality"', 'id="cross-group"', 'id="cross-target"', 'id="add-cross-group"', 'id="add-cross-target"', 'id="calculate-cross"', 'id="open-export"', 'id="export-dialog"', 'id="export-format"', 'id="confirm-export"', 'id="export-cross-csv"', 'id="download-conclusion-ppt"', 'id="conclusion-slides"')
     if any(control not in report for control in required_controls):
-        problems.append("HTML 缺少筛选、保存或图片下载控件")
+        problems.append("HTML 缺少筛选、分析或报告下载控件")
     if "report-interactive-data" not in report:
         problems.append("HTML 缺少本地筛选所需的匿名答卷数据")
     if not analysis.get("limitations"):
@@ -880,45 +904,6 @@ def machine_quality(report: str, analysis: dict[str, Any]) -> list[str]:
     return problems
 
 
-def quality_markdown(analysis: dict[str, Any], problems: list[str]) -> str:
-    checks = analysis.get("contract_checks", {})
-    contract_rows = "\n".join(f"| {key} | {value} |" for key, value in checks.items())
-    result = "自动检查通过" if not problems else "自动检查失败"
-    return f"""# 报告质量检查
-
-## 批次
-
-- run_id：`{analysis.get('run_id')}`
-- 数据来源：`{analysis.get('data_source')}`
-- 结果：**{result}**
-
-## 输入契约
-
-| 检查项 | 结果 |
-|---|---|
-{contract_rows}
-
-## 自动检查
-
-- 离线资源：{'通过' if 'HTML 包含外部资源' not in problems else '失败'}
-- SVG 图表：{'通过' if '有封闭题数据但没有 SVG 图表' not in problems else '失败'}
-- 交互筛选与导出：{'通过' if 'HTML 缺少筛选、保存或图片下载控件' not in problems and 'HTML 缺少本地筛选所需的匿名答卷数据' not in problems else '失败'}
-- run_id 披露：{'通过' if 'HTML 未显示 run_id' not in problems else '失败'}
-- 数据来源披露：{'通过' if '合成数据披露不足' not in problems else '失败'}
-- 数据清理：完成行清理前 `{analysis.get('data_cleaning', {}).get('completed_before_cleaning', 0)}`，可分析 `{analysis.get('data_cleaning', {}).get('analyzable_after_cleaning', 0)}`，剔除 `{analysis.get('data_cleaning', {}).get('excluded_count', 0)}`。
-- 问题：{'无' if not problems else '；'.join(problems)}
-
-## 交付前人工审计
-
-- [ ] 至少 3 项统计已与 Excel 原行核对
-- [ ] 至少 3 个证据 ID 已回到 Excel 用户行与题目/回答原因列
-- [ ] 已复核数据清理清单；所有人工剔除均有研究相关或逻辑不自洽的书面理由
-- [ ] 已打开 HTML 检查桌面和窄屏布局
-- [ ] 标题、图表、表格和长文本无明显截断或重叠
-- [ ] 已添加至少一个筛选条件，并确认封闭题统计与当前筛选样本数同步重算
-- [ ] 已在本地浏览器验证“保存当前筛选报告”以及 PNG、SVG 图片下载
-- [ ] 研究目标结论、主题和建议已完成，或明确标为描述性底稿
-"""
 
 
 def main() -> int:
@@ -931,6 +916,7 @@ def main() -> int:
     parser.add_argument("--analysis", type=Path)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--prepare-only", action="store_true")
+    parser.add_argument("--report-date", help="可选；输出文件日期，格式 YYYYMMDD，默认使用报告生成日期")
     args = parser.parse_args()
     try:
         base = prepare_analysis(args)
@@ -949,11 +935,9 @@ def main() -> int:
             raise ValueError("回答质量为 poor：已保留 analysis_summary.json，但不生成正式报告")
         report = render_report(analysis)
         problems = machine_quality(report, analysis)
-        report_path = args.output_dir / "report.html"
-        report_path.write_text(report, encoding="utf-8")
-        quality_path = args.output_dir / "report_quality.md"
-        quality_path.write_text(quality_markdown(analysis, problems), encoding="utf-8")
-        print(json.dumps({"report": str(report_path), "analysis": str(analysis_path), "quality": str(quality_path), "machine_checks_passed": not problems, "problems": problems}, ensure_ascii=False, indent=2))
+        report_path = args.output_dir / report_filename(analysis, args.report_date)
+        report_path.write_text(render_report(analysis, problems), encoding="utf-8")
+        print(json.dumps({"report": str(report_path), "analysis": str(analysis_path), "quality_panel": "#panel-quality", "machine_checks_passed": not problems, "problems": problems}, ensure_ascii=False, indent=2))
         return 0 if not problems else 1
     except (OSError, ValueError, KeyError, json.JSONDecodeError, zipfile.BadZipFile, ET.ParseError) as exc:
         parser.error(str(exc))
