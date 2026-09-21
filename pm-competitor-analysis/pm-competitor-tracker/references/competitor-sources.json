@@ -1,0 +1,426 @@
+{
+  "schema_version": 2,
+  "description": "竞品系统应用动态追踪的厂商、图标与信息源配置。icon_path 相对于 Skill 根目录；priority 1 为厂商官方来源，2 为社区，3 为科技媒体。",
+  "vendors": {
+    "Apple": {
+      "platform": "iOS / macOS",
+      "display_name": "苹果",
+      "icon_path": "assets/vendor-icons/apple.svg",
+      "sources": [
+        {
+          "name": "Apple 新闻室",
+          "url": "https://www.apple.com/newsroom/",
+          "purpose": "产品与功能发布",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "iOS/macOS 更新说明",
+          "url": "https://support.apple.com/en-us/HT201222",
+          "purpose": "系统级应用更新",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "MacRumors",
+          "url": "https://www.macrumors.com/",
+          "purpose": "Apple 综合动态",
+          "type": "media",
+          "priority": 3
+        },
+        {
+          "name": "9to5Mac",
+          "url": "https://9to5mac.com/",
+          "purpose": "Apple 产品报道",
+          "type": "media",
+          "priority": 3
+        },
+        {
+          "name": "CNET",
+          "url": "https://www.cnet.com/tech/services-and-software/",
+          "purpose": "Apple 功能更新详解",
+          "type": "media",
+          "priority": 3
+        },
+        {
+          "name": "Forbes",
+          "url": "https://www.forbes.com/sites/paulmonckton/",
+          "purpose": "Apple 深度分析",
+          "type": "media",
+          "priority": 3
+        }
+      ],
+      "search_queries": [
+        "Apple {app_name} update {year}",
+        "Apple {app_name} new feature",
+        "Apple {app_name} changes",
+        "\"Apple {app_name}\" site:macrumors.com",
+        "\"Apple {app_name}\" update site:9to5mac.com"
+      ]
+    },
+    "Google": {
+      "platform": "Android",
+      "display_name": "谷歌",
+      "icon_path": "assets/vendor-icons/google.svg",
+      "sources": [
+        {
+          "name": "Google Blog",
+          "url": "https://blog.google/",
+          "purpose": "官方产品动态",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "Google Play",
+          "url": "https://play.google.com/store/apps",
+          "purpose": "应用更新日志",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "Reddit r/android",
+          "url": "https://www.reddit.com/r/android/",
+          "purpose": "用户反馈",
+          "type": "community",
+          "priority": 2
+        },
+        {
+          "name": "Android Authority",
+          "url": "https://www.androidauthority.com/",
+          "purpose": "Android 生态报道",
+          "type": "media",
+          "priority": 3
+        },
+        {
+          "name": "9to5Google",
+          "url": "https://9to5google.com/",
+          "purpose": "Google 产品报道",
+          "type": "media",
+          "priority": 3
+        },
+        {
+          "name": "Android Headlines",
+          "url": "https://www.androidheadlines.com/",
+          "purpose": "Android 应用更新",
+          "type": "media",
+          "priority": 3
+        }
+      ],
+      "search_queries": [
+        "Google {app_name} update {year}",
+        "Google {app_name} new feature",
+        "Google {app_name} changelog",
+        "\"Google {app_name}\" update site:9to5google.com"
+      ]
+    },
+    "华为": {
+      "platform": "HarmonyOS",
+      "display_name": "华为",
+      "icon_path": "assets/vendor-icons/huawei.svg",
+      "sources": [
+        {
+          "name": "华为消费者官网",
+          "url": "https://consumer.huawei.com/cn/",
+          "purpose": "产品动态",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "HarmonyOS 更新",
+          "url": "https://consumer.huawei.com/cn/support/harmonyos/",
+          "purpose": "系统版本更新",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "华为终端微博",
+          "url": "https://weibo.com/huaweimobile",
+          "purpose": "官方动态",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "华为开发者联盟",
+          "url": "https://developer.huawei.com/consumer/cn/",
+          "purpose": "技术公告与 API 更新",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "花粉俱乐部",
+          "url": "https://club.huawei.com/",
+          "purpose": "用户反馈",
+          "type": "community",
+          "priority": 2
+        }
+      ],
+      "search_queries": [
+        "华为 {app_name} 更新 {year}",
+        "HarmonyOS {app_name} 新功能",
+        "华为 {app_name} 用户反馈"
+      ]
+    },
+    "小米": {
+      "platform": "HyperOS / Android",
+      "display_name": "小米",
+      "icon_path": "assets/vendor-icons/xiaomi.svg",
+      "sources": [
+        {
+          "name": "澎湃OS 官网",
+          "url": "https://os.mi.com/",
+          "purpose": "版本计划与功能介绍",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "HyperOS",
+          "url": "https://www.mi.com/hyperos",
+          "purpose": "系统更新",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "小米微博",
+          "url": "https://weibo.com/xiaomishub",
+          "purpose": "官方动态",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "Bilibili 官方动态",
+          "url": "https://www.bilibili.com/opus/",
+          "purpose": "热更新公告",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "小米社区",
+          "url": "https://www.xiaomi.cn/",
+          "purpose": "用户反馈",
+          "type": "community",
+          "priority": 2
+        }
+      ],
+      "search_queries": [
+        "小米 {app_name} 更新 {year}",
+        "HyperOS {app_name} 新功能",
+        "小米 {app_name} 社区讨论"
+      ]
+    },
+    "OPPO": {
+      "platform": "ColorOS / Android",
+      "display_name": "OPPO",
+      "icon_path": "assets/vendor-icons/oppo.svg",
+      "sources": [
+        {
+          "name": "ColorOS",
+          "url": "https://www.coloros.com/",
+          "purpose": "系统更新",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "OPPO 微博",
+          "url": "https://weibo.com/oppo",
+          "purpose": "官方动态",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "OPPO 社区",
+          "url": "https://www.oppo.cn/community/",
+          "purpose": "用户反馈",
+          "type": "community",
+          "priority": 2
+        }
+      ],
+      "search_queries": [
+        "OPPO {app_name} 更新 {year}",
+        "ColorOS {app_name} 新功能",
+        "OPPO {app_name} 变化"
+      ]
+    },
+    "VIVO": {
+      "platform": "OriginOS / Android",
+      "display_name": "vivo",
+      "icon_path": "assets/vendor-icons/vivo.svg",
+      "sources": [
+        {
+          "name": "OriginOS",
+          "url": "https://www.vivo.com.cn/originos",
+          "purpose": "系统更新",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "VIVO 微博",
+          "url": "https://weibo.com/vivo",
+          "purpose": "官方动态",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "VIVO 社区",
+          "url": "https://bbs.vivo.com.cn/newbbs/",
+          "purpose": "用户反馈与系统升级公告",
+          "type": "community",
+          "priority": 2
+        }
+      ],
+      "search_queries": [
+        "VIVO {app_name} 更新 {year}",
+        "OriginOS {app_name} 新功能",
+        "VIVO {app_name} 社区"
+      ]
+    },
+    "荣耀": {
+      "platform": "MagicOS / Android",
+      "display_name": "荣耀",
+      "icon_path": "assets/vendor-icons/honor.svg",
+      "sources": [
+        {
+          "name": "MagicOS",
+          "url": "https://www.hihonor.com/cn/magic/",
+          "purpose": "系统更新",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "荣耀微博",
+          "url": "https://weibo.com/honorglobal",
+          "purpose": "官方动态",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "荣耀官网",
+          "url": "https://www.honor.com/cn/support/bulletin/",
+          "purpose": "安全更新公告",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "荣耀俱乐部",
+          "url": "https://club.hihonor.com/cn/",
+          "purpose": "用户反馈与系统升级公告",
+          "type": "community",
+          "priority": 2
+        }
+      ],
+      "search_queries": [
+        "荣耀 {app_name} 更新 {year}",
+        "MagicOS {app_name} 新功能",
+        "荣耀 {app_name} 用户反馈"
+      ]
+    },
+    "三星": {
+      "platform": "One UI / Android",
+      "display_name": "三星",
+      "icon_path": "assets/vendor-icons/samsung.svg",
+      "sources": [
+        {
+          "name": "Samsung Newsroom",
+          "url": "https://news.samsung.com/",
+          "purpose": "官方新闻",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "One UI 支持",
+          "url": "https://www.samsung.com/us/support/mobile-support/",
+          "purpose": "系统更新",
+          "type": "official",
+          "priority": 1
+        },
+        {
+          "name": "Samsung Members",
+          "url": "https://r1.community.samsung.com/",
+          "purpose": "用户社区",
+          "type": "community",
+          "priority": 2
+        },
+        {
+          "name": "Reddit r/samsung",
+          "url": "https://www.reddit.com/r/samsung/",
+          "purpose": "用户反馈",
+          "type": "community",
+          "priority": 2
+        }
+      ],
+      "search_queries": [
+        "Samsung {app_name} update {year}",
+        "Samsung {app_name} One UI",
+        "Samsung {app_name} new feature"
+      ]
+    }
+  },
+  "shared_sources": [
+    {
+      "name": "IT之家",
+      "url": "https://www.ithome.com/",
+      "purpose": "国内系统推送与厂商动态",
+      "type": "media",
+      "priority": 3
+    },
+    {
+      "name": "快科技",
+      "url": "https://news.mydrivers.com/",
+      "purpose": "系统更新与芯片动态",
+      "type": "media",
+      "priority": 3
+    },
+    {
+      "name": "什么值得买",
+      "url": "https://post.smzdm.com/",
+      "purpose": "深度体验文章",
+      "type": "media",
+      "priority": 3
+    },
+    {
+      "name": "酷安",
+      "url": "https://www.coolapk.com/",
+      "purpose": "安卓用户反馈",
+      "type": "community",
+      "priority": 2
+    },
+    {
+      "name": "知乎",
+      "url": "https://www.zhihu.com/",
+      "purpose": "深度讨论",
+      "type": "community",
+      "priority": 2
+    },
+    {
+      "name": "今日头条",
+      "url": "https://www.toutiao.com/",
+      "purpose": "自媒体与媒体聚合",
+      "type": "media",
+      "priority": 3
+    },
+    {
+      "name": "Bilibili",
+      "url": "https://www.bilibili.com/",
+      "purpose": "视频评测与官方动态",
+      "type": "community",
+      "priority": 2
+    },
+    {
+      "name": "抖音",
+      "url": "https://www.douyin.com/",
+      "purpose": "用户体验分享",
+      "type": "community",
+      "priority": 2
+    }
+  ],
+  "fallback_search_queries": [
+    "{vendor} {app_name} 更新 {year}",
+    "{vendor} {app_name} new feature",
+    "{vendor} {app_name} 用户反馈"
+  ],
+  "domestic_search_queries": [
+    "site:ithome.com {vendor} {app_name} 更新",
+    "site:coolapk.com {vendor} {app_name}",
+    "site:toutiao.com {vendor} {app_name}",
+    "site:bilibili.com {vendor} {app_name} 更新"
+  ]
+}

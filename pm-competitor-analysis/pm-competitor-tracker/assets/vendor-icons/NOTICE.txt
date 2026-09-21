@@ -1,0 +1,10 @@
+The SVG paths in this directory are derived from Simple Icons:
+https://github.com/simple-icons/simple-icons
+
+Source revision: b86d5c9a0bdd4f3f5c30898a63654dd32f39fd76
+Retrieved: 2026-09-22
+Simple Icons license: CC0-1.0
+
+All brand names and trademarks belong to their respective owners. Inclusion here
+does not imply endorsement. Review each brand's usage guidelines before public or
+commercial distribution.

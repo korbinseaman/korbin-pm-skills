@@ -1,15 +1,15 @@
 ---
 name: competitor-system-app-tracker
 description: >
-  追踪八大手机厂商任意系统级应用（照片、备忘录、设置、相机等）的新版本发布、功能更新、社区反馈和重要新闻，生成竞品周报。
+  以日报或周报模式追踪八大手机厂商任意系统级应用（照片、备忘录、设置、相机等）的新版本发布、功能更新、社区反馈和重要新闻，生成竞品动态摘要并维护本地历史 changelog。
   覆盖竞品：Apple、Google、华为、小米、OPPO、VIVO、荣耀、三星。
   触发条件：(1) 用户提供系统应用名称并请求竞品分析，(2) 用户询问某系统APP在各厂商的最新动态。
-  不适用于：非系统应用类竞品、非周报频率的请求。
+  不适用于：非系统应用类竞品。
 ---
 
 # 竞品系统应用动态追踪
 
-追踪 8 大手机厂商的系统级应用每周动态，输出结构化竞品分析报告。
+追踪 8 大手机厂商的系统级应用每日或每周动态，输出结构化竞品日报/周报，并将历史发现写入本地 changelog。
 
 ## 前置条件
 
@@ -58,15 +58,31 @@ description: >
 
 确认后将应用名称记为 `{app_name}`，贯穿后续所有步骤。
 
+同时确认运行模式：
+
+- `daily`：默认模式，生成竞品日报；
+- `weekly`：生成竞品周报；
+- 用户未指定时使用 `daily`。
+
 ### 步骤 1：生成研究计划
 
 运行辅助脚本获取所有信息源 URL：
 
 ```bash
-python3 scripts/research_plan.py --app "{app_name}"
+python3 scripts/research_plan.py \
+  --app "{app_name}" \
+  --mode "{daily|weekly}" \
+  --last-success-at "{可选：上次成功运行时间}"
 ```
 
-脚本输出结构化 JSON，包含各厂商竞品信息源。如果脚本未内置该应用的信息源，则使用脚本提供的通用源模板，并通过 `web_search` 补充搜索各厂商 + 应用名称的最新动态链接。
+脚本输出结构化 JSON，包含目标内容周期、带重叠的搜索窗口、厂商信息源和搜索关键词。如果脚本未内置该应用的信息源，则使用通用源模板，并通过 `web_search` 补充搜索各厂商 + 应用名称的最新动态链接。
+
+时间范围规则：
+
+- **日报**：内容周期为运行日前一个自然日；搜索窗口向前额外重叠 24 小时。
+- **周报**：内容周期为上一个完整自然周（周一 00:00 至周日 23:59）；搜索窗口向前额外重叠 48 小时。
+- 使用本地 changelog 稳定 ID 去重。目标周期外但本次首次发现的信息，日报最多补录最近 7 天、周报最多补录最近 14 天，并标注“补录”。
+- 日报只推送本次新增或发生变化的记录；周报按功能分类汇总目标周内容。若同时设置日报和周报，周报做聚合总结，不逐条重复日报正文。
 
 ### 步骤 2：抓取信息源
 
@@ -75,7 +91,7 @@ python3 scripts/research_plan.py --app "{app_name}"
 - **第二优先级**：社区论坛（Reddit、微博、产品论坛）
 - **第三优先级**：科技媒体（36氪、少数派、9to5Google 等）
 
-若 `references/competitor-sources.md` 中未收录该应用的源，先用 `web_search` 搜索 `{厂商} {app_name} 更新` 类关键词获取有效 URL，再进行抓取。
+读取 `references/competitor-sources.json` 获取按优先级排列的厂商信息源和搜索词。若 JSON 中未收录该应用的专属来源，使用其中的 `fallback_search_queries` 和 `domestic_search_queries` 补充搜索，再抓取有效 URL。
 
 ### 步骤 3：综合发现
 
@@ -86,9 +102,9 @@ python3 scripts/research_plan.py --app "{app_name}"
 
 **🔍 信息验证（硬性规则）：**
 - **时间校验 — 硬拦截**：
-  - 每条信息必须确认发布时间，**只收录发布日期在追踪周期内（周一至周日）的信息**
-  - 追踪周期外（包括上周、上月、更早）的内容一律排除，不得录入报告
-  - 来源页面没有明确发布日期的信息，除非能通过 web_search 确认属于本周，否则不收录
+  - 每条信息必须确认发布时间，优先收录发布日期在本次内容周期内的信息
+  - 仅允许按步骤 1 的补录规则收录周期外信息，并明确标注“补录”
+  - 来源页面没有明确发布日期的信息，除非能通过 web_search 确认属于本次内容周期，否则不收录
   - 不得将「近期」「本月」「持续更新」等模糊时间描述当作有效时间——必须具体到日期
 - **真实性校验**：优先采用官方公告、权威科技媒体报道；社区/自媒体信息需标注来源类型并交叉验证
 - 如果无法确认发布时间或来源可疑，标注「⚠️ 待核实」
@@ -97,67 +113,64 @@ python3 scripts/research_plan.py --app "{app_name}"
 
 **如果确实无法找到对应来源，必须通过 `web_search` 搜索补充，绝不能省略链接。**
 
-检查后无发现则标注「本周无重大更新」。
+检查后无发现则标注「本期无重大更新」。
 
-### 步骤 4：生成报告
+### 步骤 4：生成竞品日报
 
-以 `assets/report-template.md` 为模板，填充：
+读取 [references/output-formats.md](references/output-formats.md) 的“通讯工具摘要”规则，以 `assets/communication-digest-template.md` 生成供用户浏览的精简 Markdown。日报模式展示当日新增、更新和补录；周报模式展示目标周聚合结果。填充：
+
 - `{app_name}` → 用户指定的系统应用名称
-- `{date}` → `YYYY-MM-DD`（报告日期）
-- `{week_start}` / `{week_end}` → 周一至周日
-- `{generated_at}` → ISO 时间戳
-- `{competitor_name}` → 各厂商在该应用上的实际名称
-- `{content_or_none}` → 综合发现内容（格式见下方「输出格式规则」）
-- `{summary}` → 1–2 句竞争格局观察
+- `{updated_at_m_d}` → `M/D` 格式的生成日期
+- `{period_line}` → 日报留空；周报填入 `> 周报范围：M/D–M/D`
+- `{vendor_icon_markdown_or_fallback}` → 使用研究计划输出的 `icon_path` 生成 Logo Markdown；渠道不支持图片时使用 `🏢`
+- `{vendor_display_name}` → 用户熟悉的厂商中文名
+- `{updates_or_none}` → 最多 3 条精选更新，或 `暂无更新`
+- `{changelog_directory}` → 步骤 5 的本地 Changelog 目录
 
-保存到：`workspace/竞品分析/竞品周报-{app_name}-{date}.md`
+可将本次推送载荷保存到：
 
-### 步骤 5：同步至飞书（创建 + 写入内容 + 设置公开权限）
+- 日报：`workspace/竞品分析/outbox/竞品日报-{app_name}-{date}.md`
+- 周报：`workspace/竞品分析/outbox/竞品周报-{app_name}-{week_end}.md`
 
-1. 用 `feishu_doc`（action: create）创建飞书文档，获取 `doc_token`
-2. **立即用 `feishu_doc`（action: write, doc_token=上一步返回值）将步骤 4 生成的完整 Markdown 报告内容写入文档**
-   - ⚠️ 必须确认 write 返回 `success: true` 且 `blocks_added > 0`，否则重试或报错提醒用户
-3. **设置文档为互联网公开可读（任何人无需登录即可浏览）**：
-   - 从飞书配置中读取 `appId` 和 `appSecret`（位置：`~/.openclaw/config.yaml` → `channels.feishu`）
-   - 先用 tenant_access_token 获取授权，再调用飞书权限 API 设置 `link_share_entity` 为 `anyone_readable`：
-   ```bash
-   APP_ID="<从config读取的appId>"
-   APP_SECRET="<从config读取的appSecret>"
-   DOC_TOKEN="<步骤1获取的doc_token>"
-   # 获取 tenant_access_token
-   TOK_RESP=$(curl -s -X POST 'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal' \
-     -H 'Content-Type: application/json' \
-     -d "{\"app_id\":\"${APP_ID}\",\"app_secret\":\"${APP_SECRET}\"}")
-   TOKEN=$(echo "$TOK_RESP" | python3 -c "import sys,json;d=json.load(sys.stdin);print(d.get('tenant_access_token','') or exit(1))")
-   # 设置文档为公开可读
-   curl -s -X PATCH "https://open.feishu.cn/open-apis/drive/v1/permissions/${DOC_TOKEN}/public?type=docx" \
-     -H "Authorization: Bearer $TOKEN" \
-     -H 'Content-Type: application/json' \
-     -d '{"link_share_entity":"anyone_readable"}'
-   ```
-   - ⚠️ 必须确认返回 `"code": 0` 表示成功，否则报错提醒用户手动在飞书中设置「链接分享 → 互联网上获得链接的人可阅读」
-4. 将报告链接发送给用户
+该 Markdown 是本次通讯消息的载荷，不承担历史存储职责。
 
-## 输出格式规则
+### 步骤 5：写入本地竞品 Changelog
 
-### 内容结构
-- 每个厂商竞品一个独立章节，清晰分隔
-- 使用**数字序号列表**逐条展示，每条包含：分类标签（🆕/💬/📰）+ 内容描述 + 信息来源链接
-- **🔗 硬性要求：每一条信息（包括用户反馈的归纳性总结）都必须附上至少 1 个来源链接。绝对不允许出现没有链接的信息条目。**
-- 如果用户反馈是通过多个来源综合提炼的，至少附上 1–2 个支撑该结论的来源链接
-- 格式示例：
-  ```
-  1. 🆕 iOS 26.4.2 安全修复发布，修复 WebKit 漏洞。 — [MacRumors](https://www.macrumors.com/2026/04/22/apple-releases-ios-26-4-2/)
-  2. 📰 Apple 宣布 iOS 26.5 开发者测试版已推送。 — [9to5Mac](https://9to5mac.com/...)
-  3. 💬 Wardrobe 功能引发讨论，用户评价两极——创意新奇但实用性待验证。 — [9to5Google](https://9to5google.com/2026/04/29/google-photos-wardrobe/) · [IndiaTV](https://www.indiatvnews.com/technology/news/google-photos-gets-wardrobe-tool-how-the-new-ai-feature-helps-plan-outfits-easily-2026-04-30-1039463)
-  ```
-- 检查后无发现则标注「本周无重大更新」
+使用 UTF-8 JSONL 保存全部历史发现。每个厂商竞品与目标 App 一个文件：
 
-### 语言规则
-- **英文来源的内容直接显示英文原文**，不做翻译（如 Forbes、MacRumors、Android Authority 等）
-- **中文来源的内容直接显示中文原文**（如 IT之家、什么值得买、花粉俱乐部等）
-- 保持信息来源的原始语言，让用户看到第一手信息
+```text
+workspace/竞品分析/changelog/<竞品名称>_<应用名称>_changelog.jsonl
+```
 
-### 本周观察
-- 限 1–2 句，聚焦整体格局
-- 如某厂商在该应用上有独特命名或差异化功能，在章节标题中标注
+先将本次发现整理为符合 [references/changelog-schema.md](references/changelog-schema.md) 的 JSON，再执行：
+
+```bash
+python3 scripts/changelog_store.py \
+  --input "{本次 findings.json}" \
+  --output-dir "workspace/竞品分析/changelog" \
+  --run-id "{run_id}" \
+  --mode "{daily|weekly}" \
+  --seen-at "{generated_at}"
+```
+
+脚本按稳定 ID 更新或追加记录，返回每个文件的 `added`、`updated` 和 `total`。JSONL 的功能分类使用 `feature.path`，可按“一级功能 → 子功能 → 具体能力”检索。全部有效发现都写入 Changelog，包括因通讯摘要篇幅限制而未展示的记录。
+
+### 步骤 6：推送今日竞品日报
+
+本步骤只在用户配置了通讯工具或定时任务时执行：
+
+1. 读取步骤 4 生成的通讯摘要文件；
+2. 按用户配置调用对应推送 CLI，渠道可为飞书、WeLink、钉钉或其他工具；
+3. CLI 至少接收 `channel`、`target` 和 `input`，成功后返回消息 ID 或可访问链接；
+4. 未配置推送目标时跳过，不影响日报生成与本地 changelog。
+
+周报模式若需要推送，复用相同逻辑并传入周报文件。具体 CLI、鉴权和定时频率由创建自动化任务时指定，本 Skill 不内置渠道凭据。
+
+## 输出定义
+
+每次执行产生两个逻辑输出：
+
+1. **通讯工具摘要**：面向用户阅读的精简 Markdown，由步骤 4 生成并由步骤 6 推送；
+2. **本地历史 Changelog**：面向长期存储和检索的 JSONL，由步骤 5 写入。
+
+两类输出的边界、格式和对应关系见 [references/output-formats.md](references/output-formats.md)。Changelog 字段定义见 [references/changelog-schema.md](references/changelog-schema.md)。
