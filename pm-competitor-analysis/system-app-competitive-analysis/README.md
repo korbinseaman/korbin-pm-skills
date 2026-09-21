@@ -1,4 +1,4 @@
-# pm-system-app-competitor-matrix
+# system-app-competitive-analysis
 
 用于手机系统 APP 与系统级功能竞品分析的产品经理 Skill。
 

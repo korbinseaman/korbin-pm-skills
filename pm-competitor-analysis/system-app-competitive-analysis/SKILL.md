@@ -1,9 +1,9 @@
 ---
-name: pm-system-app-competitor-matrix
+name: system-app-competitive-analysis
 description: 面向手机系统 APP 与系统级功能的竞品矩阵分析 Skill。输入具体系统 APP、功能模块和调研主题后，基于证据完成产品定位、Feature 矩阵、竞品机制与界面明细、定量数据、可编辑竞品定位图，以及默认从 HarmonyOS 产品经理视角输出差异判断与后续发力方向。适用于图库/照片、云图库、文件管理、相机、备忘录、日历、浏览器、电话、短信、AI 助手、系统搜索、分享、备份、跨设备协同等系统软件课题。
 ---
 
-# PM System APP Competitor Matrix
+# System APP Competitive Analysis
 
 本 Skill 用于回答如下类型的产品经理问题：
 

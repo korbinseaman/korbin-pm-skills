@@ -1,8 +1,8 @@
 # 全局常量。重复使用的值统一在此定义，SKILL.md 与各 reference 仅引用，不重复定义。
 
 skill:
-  name: pm-system-app-competitor-matrix
-  display_name: PM System APP Competitor Matrix
+  name: system-app-competitive-analysis
+  display_name: System APP Competitive Analysis
 
 research:
   default_purpose: 综合分析
