@@ -20,12 +20,13 @@
     }
   ],
   "focus": ["特别关注的问题"],
+  "platforms": ["weibo", "xiaohongshu"],
   "start_date": "可选，YYYY-MM-DD",
   "end_date": "可选，YYYY-MM-DD"
 }
 ```
 
-未提供日期时，结束日期取运行日，开始日期取结束日期向前两个自然年。当前支持的平台固定为 `weibo`、`xiaohongshu`、`coolapk`。
+未提供日期时，结束日期取运行日，开始日期取结束日期向前两个自然年。`platforms` 可选；省略时使用全部已支持平台 `weibo`、`xiaohongshu`、`coolapk`，提供时只能传其中的非空子集。
 
 ## VoiceRecord 输入
 

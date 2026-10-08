@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Initialise a two-year, three-platform VOC study and emit its query task plan."""
+"""Initialise a two-year VOC study and emit its query task plan."""
 from __future__ import annotations
 
 import argparse
@@ -47,6 +47,23 @@ def load_request(path: Path) -> dict[str, Any]:
     return data
 
 
+def selected_platforms(request: dict[str, Any]) -> list[str]:
+    """Return the requested platform subset, defaulting to all supported platforms."""
+    requested = request.get("platforms")
+    if requested is None:
+        return sorted(PLATFORMS)
+    if not isinstance(requested, list) or not requested:
+        raise ValueError("platforms must be a non-empty array when provided")
+    platforms = []
+    for value in requested:
+        platform = require_text(value, "platforms[]").lower()
+        if platform not in PLATFORMS:
+            raise ValueError(f"unsupported platform: {platform}")
+        if platform not in platforms:
+            platforms.append(platform)
+    return sorted(platforms)
+
+
 def build_query_texts(competitor: dict[str, Any], feature: dict[str, Any]) -> list[str]:
     name = require_text(competitor.get("name"), "competitors[].name")
     product = require_text(competitor.get("product"), "competitors[].product")
@@ -76,6 +93,7 @@ def create_study(request: dict[str, Any], db_path: Path) -> dict[str, Any]:
     if start_date > end_date:
         raise ValueError("start_date cannot be after end_date")
     study_id = str(request.get("study_id") or make_study_id(subject, feature_name))
+    platforms = selected_platforms(request)
 
     conn = connect(db_path)
     try:
@@ -94,7 +112,7 @@ def create_study(request: dict[str, Any], db_path: Path) -> dict[str, Any]:
             competitor_name = require_text(competitor.get("name"), "competitors[].name")
             for query_text in build_query_texts(competitor, feature):
                 for month_start, month_end in months_between(start_date, end_date):
-                    for platform in sorted(PLATFORMS):
+                    for platform in platforms:
                         task_id = stable_hash(study_id, platform, competitor_name, query_text, month_start.isoformat())
                         row = {
                             "task_id": task_id,
@@ -122,7 +140,7 @@ def create_study(request: dict[str, Any], db_path: Path) -> dict[str, Any]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="创建三平台、近两年的竞品功能 VOC 研究库与查询计划")
+    parser = argparse.ArgumentParser(description="创建近两年的竞品功能 VOC 研究库与查询计划")
     parser.add_argument("--request", type=Path, required=True, help="StudyRequest JSON")
     parser.add_argument("--db", type=Path, default=Path("workspace/竞品用户洞察/social-voice.db"))
     parser.add_argument("--plan-output", type=Path, default=None, help="可选：写出 JSONL 查询计划")

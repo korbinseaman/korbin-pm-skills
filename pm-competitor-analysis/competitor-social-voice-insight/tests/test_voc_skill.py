@@ -82,6 +82,14 @@ def voice_records() -> list[dict]:
 
 
 class VocSkillTests(unittest.TestCase):
+    def test_request_platform_subset_limits_query_tasks(self):
+        with tempfile.TemporaryDirectory() as directory:
+            request_with_subset = request()
+            request_with_subset["platforms"] = ["weibo", "xiaohongshu"]
+            study = create_study(request_with_subset, Path(directory) / "social-voice.db")
+            self.assertGreater(study["task_count"], 0)
+            self.assertEqual({"weibo", "xiaohongshu"}, {task["platform"] for task in study["tasks"]})
+
     def test_end_to_end_exports_preserve_real_links(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
