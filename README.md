@@ -12,6 +12,7 @@
 |---|---|---|
 | [`competitor-app-feature-compare`](pm-competitor-analysis/pm-competitor-feature/) | 对系统 App 的单个功能进行 L4 级横向对比 | 功能规格、体验、UX 层级、文案和机制对比 |
 | [`competitor-system-app-tracker`](pm-competitor-analysis/pm-competitor-tracker/) | 按周追踪主流手机厂商系统应用动态 | 厂商动态、用户反馈、行业新闻和竞品周报 |
+| [`competitor-social-voice-insight`](pm-competitor-analysis/competitor-social-voice-insight/) | 基于微博、小红书、酷安近两年可访问用户原声，分析消费级 App 的竞品功能 VOC | 离线 HTML VOC 报告、XLSX 原始数据、覆盖报告和可复核证据包 |
 | [`pm-system-app-competitor-matrix`](pm-competitor-analysis/pm-system-app-competitor-matrix/) | 对系统 App 或系统级功能进行完整竞品矩阵分析 | 产品定位、Feature Matrix、证据明细、定量数据和定位图 |
 
 ### 产品洞察与表达
@@ -72,6 +73,10 @@ $competitor-app-feature-compare 对比 Apple、Google、华为图库的相册自
 
 ```text
 $pm-system-app-competitor-matrix 分析图库照片筛选功能，重点关注云同步状态与存储位置筛选。
+```
+
+```text
+$competitor-social-voice-insight 分析 Apple Photos、Google Photos 和华为图库的 AI 消除功能，采集微博、小红书、酷安近两年的用户原声，保留真实来源地址并输出 HTML VOC 报告和 XLSX 原始数据。
 ```
 
 ```text

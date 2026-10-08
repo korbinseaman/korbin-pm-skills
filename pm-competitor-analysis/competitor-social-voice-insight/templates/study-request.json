@@ -1,0 +1,22 @@
+{
+  "subject": "图库 AI 消除竞品反馈",
+  "feature": {
+    "name": "AI 消除",
+    "aliases": ["路人消除", "对象移除"]
+  },
+  "competitors": [
+    {
+      "name": "Apple",
+      "product": "Photos",
+      "aliases": ["苹果相册", "iPhone 相册"]
+    },
+    {
+      "name": "Google",
+      "product": "Google Photos",
+      "aliases": ["谷歌相册"]
+    }
+  ],
+  "focus": ["复杂背景修复", "旅行拍照", "功能稳定性"],
+  "start_date": "2024-10-07",
+  "end_date": "2026-10-07"
+}

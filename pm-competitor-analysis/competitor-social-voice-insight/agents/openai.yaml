@@ -1,0 +1,7 @@
+interface:
+  display_name: "竞品用户原声洞察"
+  short_description: "采集微博、小红书和酷安的竞品功能原声，输出可追溯 VOC 报告与原始数据"
+  default_prompt: "使用 $competitor-social-voice-insight 分析竞品功能的近两年用户反馈，保留每条原声真实来源地址，并输出 HTML VOC 报告和 XLSX 原始数据。"
+policy:
+  allow_implicit_invocation: true
+
