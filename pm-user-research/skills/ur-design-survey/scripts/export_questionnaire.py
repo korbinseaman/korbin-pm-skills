@@ -6,7 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 
@@ -37,6 +37,7 @@ class Question:
     required: str
     stem: str
     body: list[str]
+    context_before: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -55,22 +56,33 @@ def parse_source(path: Path) -> Survey:
     questions: list[Question] = []
     current: Question | None = None
     in_closing = False
+    pending_context: list[str] = []
 
     for line in lines:
         match = QUESTION.match(line.strip())
         if match and not in_closing:
             if current:
                 questions.append(current)
-            current = Question(match.group(1), match.group(2), match.group(3), match.group(4), [])
+            current = Question(match.group(1), match.group(2), match.group(3), match.group(4), [], pending_context)
+            pending_context = []
             continue
         if current and line.startswith("## ") and ("结束语" in line or "提前结束" in line):
             questions.append(current)
             current = None
             in_closing = True
+        elif current and line.startswith("## ") and any(
+            label in line for label in ("概念卡", "方案卡", "必要背景", "定义", "场景说明")
+        ):
+            questions.append(current)
+            current = None
+            pending_context = [line]
+            continue
         if in_closing:
             closing.append(line)
         elif current:
             current.body.append(line)
+        elif pending_context:
+            pending_context.append(line)
         else:
             preamble.append(line)
     if current:
@@ -86,23 +98,25 @@ def respondent_description(preamble: list[str]) -> str:
     parts = []
     for line in preamble:
         stripped = line.strip()
-        if stripped.startswith(">") and "配置注记" not in stripped:
+        if stripped.startswith(">") and not any(label in stripped for label in ("配置注记", "模板使用", "模板设计", "研究者")):
             parts.append(stripped.lstrip("> "))
     return " ".join(parts)
 
 
 def necessary_context(preamble: list[str]) -> list[str]:
     result: list[str] = []
-    in_research_note = False
+    in_context = False
     for line in preamble:
-        if line.strip() == "## 研究说明":
-            in_research_note = True
+        if line.startswith("## "):
+            in_context = any(label in line for label in ("必要背景", "概念卡", "方案卡", "定义", "场景说明"))
+            if in_context:
+                result.append(line)
             continue
-        if in_research_note and line.startswith("## "):
-            in_research_note = False
         stripped = line.strip()
-        if in_research_note and stripped and not stripped.startswith(">"):
-            result.append(stripped)
+        if in_context and not (stripped.startswith(">") and any(
+            label in stripped for label in ("配置注记", "模板使用", "模板设计", "研究者说明")
+        )):
+            result.append(line)
     return result
 
 
@@ -130,13 +144,23 @@ def simulator_markdown(survey: Survey) -> str:
     ]
     context = necessary_context(survey.preamble)
     if context:
-        lines.extend(["", "## 必要背景", "", *context])
+        lines.extend(["", *context])
     for question in survey.questions:
+        if question.context_before:
+            lines.extend(["", *question.context_before])
         rules, content = split_question_body(question.body)
         lines.extend(["", f"{question.qid}【{question.qtype}】（{question.required}）{question.stem}", ""])
         for label, rule in rules:
             lines.append(f"> 【{label}】{rule}")
         if rules and content:
+            lines.append("")
+        maximum = re.search(r"最多选择\s*(\d+)\s*项", question.stem)
+        if maximum:
+            lines.append(f"> 【作答约束】最多选择 {maximum.group(1)} 项。")
+        exclusive = [item for item in top_level_options(question.body) if "互斥" in item]
+        if exclusive:
+            lines.append("> 【排他规则】以下选项不可与其他选项同时选择：" + "；".join(exclusive))
+        if maximum or exclusive:
             lines.append("")
         lines.extend(content)
     lines.extend(["", "## 问卷结束"])
@@ -183,8 +207,12 @@ def wenjuanxing_text(survey: Survey) -> tuple[str, list[str]]:
         lines.append(description)
     lines.extend(["===", ""])
     warnings: list[str] = []
+    if necessary_context(survey.preamble):
+        warnings.append("问卷开场：按主问卷添加必要定义/材料，TXT 不自动导入材料")
 
     for index, question in enumerate(survey.questions, start=1):
+        if question.context_before:
+            warnings.append(f"{question.qid}：在题目前按主问卷添加概念/方案材料，TXT 不自动导入材料")
         wjx_type = WJX_TYPES.get(question.qtype)
         if not wjx_type:
             raise ValueError(f"{question.qid} 的题型“{question.qtype}”没有已验证的问卷星文本映射")
@@ -202,6 +230,7 @@ def wenjuanxing_text(survey: Survey) -> tuple[str, list[str]]:
             if not value_range:
                 raise ValueError(f"{question.qid} 量表题题干未提供可识别的数值范围")
             lines.append(value_range)
+            warnings.append(f"{question.qid}：导入后配置主问卷中的量表端点文字")
         elif wjx_type not in {"填空题"}:
             options = top_level_options(question.body)
             if not options:
@@ -218,25 +247,36 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="从 questionnaire.md 生成模拟作答版和问卷星导入版")
     parser.add_argument("questionnaire", type=Path)
     parser.add_argument("--output-dir", type=Path)
+    parser.add_argument("--formats", nargs="+", choices=["simulator", "wenjuanxing"], default=["simulator", "wenjuanxing"])
     args = parser.parse_args()
     source = args.questionnaire.resolve()
     output_dir = (args.output_dir or source.parent).resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
     survey = parse_source(source)
-    simulator = output_dir / "questionnaire_for_simulator.md"
-    wenjuanxing = output_dir / "questionnaire_for_wenjuanxing.txt"
-    simulator.write_text(simulator_markdown(survey), encoding="utf-8")
-    wjx_text, warnings = wenjuanxing_text(survey)
-    wenjuanxing.write_text(wjx_text, encoding="utf-8")
+    # Validate every requested format before writing any output.
+    rendered: dict[str, str] = {}
+    warnings: list[str] = []
+    if "simulator" in args.formats:
+        rendered["questionnaire_for_simulator.md"] = simulator_markdown(survey)
+    if "wenjuanxing" in args.formats:
+        wjx_text, warnings = wenjuanxing_text(survey)
+        rendered["questionnaire_for_wenjuanxing.txt"] = wjx_text
+    for name, content in rendered.items():
+        (output_dir / name).write_text(content, encoding="utf-8")
+    source_review = []
+    if any(line.strip() == "## 研究说明" for line in survey.preamble):
+        source_review.append("研究说明未复制到模拟版；若其中有作答必需的定义，请移入‘必要背景’并重新导出")
     print(json.dumps({
         "source": str(source),
         "question_count": len(survey.questions),
-        "simulator": str(simulator),
-        "wenjuanxing": str(wenjuanxing),
+        "simulator": str(output_dir / "questionnaire_for_simulator.md") if "simulator" in args.formats else None,
+        "wenjuanxing": str(output_dir / "questionnaire_for_wenjuanxing.txt") if "wenjuanxing" in args.formats else None,
         "post_import_review": warnings,
+        "source_review": source_review,
     }, ensure_ascii=False, indent=2))
     return 0
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

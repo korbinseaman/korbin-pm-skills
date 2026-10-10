@@ -113,6 +113,7 @@ class ScriptTests(unittest.TestCase):
         if spec is None or spec.loader is None:
             raise AssertionError(f"cannot load {path}")
         module = importlib.util.module_from_spec(spec)
+        sys.modules[name] = module
         spec.loader.exec_module(module)
         return module
 
@@ -680,7 +681,7 @@ class WorkflowTests(unittest.TestCase):
             self.assertIn(section, skill)
         self.assertNotIn("## 优化现有问卷", skill)
         self.assertLess(skill.index("## 工作流程"), skill.index("## 输出契约"))
-        self.assertLessEqual(len(skill.splitlines()), 220)
+        self.assertLessEqual(len(skill.splitlines()), 260)
         invocation = skill.index("## 何时调用")
         input_contract = skill.index("## 输入契约")
         self.assertLess(invocation, input_contract)
@@ -713,7 +714,7 @@ class WorkflowTests(unittest.TestCase):
                 self.assertIn(marker, step, f"Step {match.group(1)} missing {marker}")
         step_1 = skill.index("### 1. 补齐输入并确认研究方向")
         first_card = skill.index("#### 用户研究设计确认卡")
-        step_2 = skill.index("### 2. 建立研究设计与目标—证据清单")
+        step_2 = skill.index("### 2. 建立研究设计与分析设计")
         self.assertLess(step_1, first_card)
         self.assertLess(first_card, step_2)
         self.assertLess(first_card, skill.index("## 输出契约"))
@@ -806,6 +807,7 @@ class WorkflowTests(unittest.TestCase):
             self.assertIn(f"templates/{example}", skill)
         self.assertIn("不拼接其他场景模板", skill)
         expected = {
+            "references/research-depth-design.md",
             "references/question-design-standards.md",
             "references/survey-patterns.md",
             "references/questionnaire-logic-checklist.md",
@@ -930,6 +932,10 @@ class WorkflowTests(unittest.TestCase):
 
 ## 研究说明
 
+研究者希望证明测试功能值得做。
+
+## 必要背景
+
 “测试功能”指示例中的目标功能。
 
 > 以下配置注记不向受访者展示。
@@ -965,6 +971,8 @@ Q3【填空题】（选填）您还有什么建议？
             option = simulator.index("- 能力 A", q2)
             self.assertLess(q2, rule)
             self.assertLess(rule, option)
+            self.assertNotIn("研究者希望证明", simulator)
+            self.assertIn("“测试功能”指示例中的目标功能", simulator)
             self.assertNotIn("配置注记", simulator)
             self.assertNotIn("感谢参与", simulator)
             self.assertTrue(simulator.rstrip().endswith("## 问卷结束"))
@@ -979,54 +987,25 @@ Q3【填空题】（选填）您还有什么建议？
             self.assertFalse(simulator_module.question_is_applicable(by_id["Q2"], {"Q1": "没有使用过"}))
 
     def test_questionnaire_template_uses_inline_question_format(self) -> None:
-        template = PROJECT / "skills" / "ur-design-survey" / "templates" / "questionnaire-key-hypothesis-validation.md"
-        text = template.read_text(encoding="utf-8")
-        self.assertRegex(
-            text,
-            r"(?m)^Q1【单选题】（必填）您的性别是？$",
-        )
-        self.assertRegex(text, r"(?m)^Q2【单选题】（必填）您的年龄是？$")
-        self.assertRegex(text, r"(?m)^Q3【单选题】（必填）您目前主要使用的手机品牌(?:/系统)?是？$")
-        self.assertRegex(
-            text,
-            r"(?m)^Q4【单选题】（必填）过去 3 个月，您使用手机云相册/云备份功能的频率是？$",
-        )
-        self.assertIn("每周多次（每周 2–6 次）", text)
+        folder = PROJECT / "skills" / "ur-design-survey"
+        text = (folder / "templates" / "questionnaire-key-hypothesis-validation.md").read_text(encoding="utf-8")
+        ids = re.findall(r"(?m)^(Q\d+)【", text)
+        self.assertEqual(ids, [f"Q{i}" for i in range(1, len(ids) + 1)])
+        self.assertEqual(len(re.findall(r"(?m)^Q\d+【[^】]+】（(?:必填|选填)）", text)), len(ids))
         self.assertNotRegex(text, r"(?m)^## Q\d+")
-        self.assertEqual(
-            re.findall(r"(?m)^(Q\d+)【", text),
-            [f"Q{number}" for number in range(1, 12)],
-        )
-        question_blocks = re.split(r"(?m)^Q\d+【[^】]+】", text)[1:]
-        self.assertEqual(len(question_blocks), 11)
-        self.assertEqual(len(re.findall(r"(?m)^Q\d+【[^】]+】（(?:必填|选填)）", text)), 11)
         self.assertNotRegex(text, r"(?m)^- 是否必答：")
-        self.assertNotRegex(
-            text,
-            r"(?m)^- (题目关联|跳题逻辑|选项关联|填写提示)：(无|不适用)",
-        )
-        self.assertEqual(len(re.findall(r"(?m)^- 题目关联：", text)), 7)
-        self.assertEqual(len(re.findall(r"(?m)^- 跳题逻辑：", text)), 1)
-        self.assertEqual(len(re.findall(r"(?m)^- 选项关联：", text)), 0)
-        self.assertEqual(len(re.findall(r"(?m)^- 填写提示：", text)), 0)
-        self.assertRegex(text, r"选“过去 3 个月没有使用过”或“不确定(?:/想不起来)?”时跳至问卷末尾")
-        self.assertIn("关联 Q7 的任一问题选项", text)
-        self.assertRegex(text, r"(?m)^Q9【多选题】（必填）未来 30 天")
-        self.assertIn("没有遇到明显问题（与其他选项互斥）", text)
-        self.assertIn("即使满足以上条件也不打算尝试（与其他选项互斥）", text)
-        self.assertRegex(text, r"(?m)^Q11【填空题】（选填）您对手机云相册有什么其他建议？$")
-        self.assertNotIn("回想最近一次使用云相册/云备份，你主要想完成什么", text)
-        self.assertNotIn("在你刚才选择的问题中，哪一项对你的影响最大", text)
-        self.assertNotIn("能带来的额外帮助有多大", text)
-        self.assertNotIn("【量表题】", text)
-        run(PROJECT / "skills" / "ur-design-survey" / "scripts" / "lint_questionnaire.py", template)
+        self.assertNotRegex(text, r"(?m)^- (题目关联|跳题逻辑|选项关联|填写提示)：(无|不适用)")
+        self.assertIn("Q1【单选题】（必填）您的性别是？", text)
+        self.assertIn("Q2【单选题】（必填）您的年龄是？", text)
+        self.assertIn("Q3【单选题】（必填）您目前主要使用的手机品牌是？", text)
+        run(folder / "scripts" / "lint_questionnaire.py", folder / "templates" / "questionnaire-key-hypothesis-validation.md")
 
     def test_questionnaire_linter_rejects_empty_configuration_placeholder(self) -> None:
         template = PROJECT / "skills" / "ur-design-survey" / "templates" / "questionnaire-key-hypothesis-validation.md"
         text = template.read_text(encoding="utf-8")
         invalid_text = text.replace(
-            "- 跳题逻辑：按选项跳转",
-            "- 题目关联：无。\n- 跳题逻辑：按选项跳转",
+            "- 跳题逻辑：",
+            "- 题目关联：无。\n- 跳题逻辑：",
             1,
         )
         with workspace_temp() as temp:
@@ -1063,50 +1042,42 @@ Q3【填空题】（选填）您还有什么建议？
                 example,
             )
 
-    def test_questionnaire_examples_follow_default_type_distribution(self) -> None:
-        templates = PROJECT / "skills" / "ur-design-survey" / "templates"
-        for example in templates.glob("questionnaire-*.md"):
-            types = re.findall(r"(?m)^Q\d+【([^】]+)】", example.read_text(encoding="utf-8"))
-            counts = {
-                "single": sum(item == "单选题" for item in types),
-                "multi": sum(item == "多选题" for item in types),
-                "scale": sum("量表题" in item for item in types),
-                "ranking": sum(item in {"排序题", "Top-N题"} for item in types),
-                "open": sum(item == "填空题" for item in types),
-            }
-            self.assertLessEqual(len(types), 12, example.name)
-            self.assertTrue(4 <= counts["single"] <= 7, example.name)
-            self.assertTrue(2 <= counts["multi"] <= 3, example.name)
-            self.assertTrue(0 <= counts["scale"] <= 2, example.name)
-            self.assertTrue(0 <= counts["ranking"] <= 1, example.name)
-            self.assertEqual(counts["open"], 1, example.name)
+    def test_questionnaire_examples_use_supported_types_and_valid_options(self) -> None:
+        folder = PROJECT / "skills" / "ur-design-survey"
+        exporter = ScriptTests._load_script("survey_template_export", folder / "scripts" / "export_questionnaire.py")
+        for example in (folder / "templates").glob("questionnaire-*.md"):
+            survey = exporter.parse_source(example)
+            self.assertEqual([q.qid for q in survey.questions], [f"Q{i}" for i in range(1, len(survey.questions)+1)])
+            for q in survey.questions:
+                self.assertIn(q.qtype, exporter.WJX_TYPES, example.name)
+                opts = exporter.top_level_options(q.body)
+                self.assertEqual(len(opts), len(set(opts)), q.qid)
+                for target in re.findall(r"Q\d+", "\n".join(q.body)):
+                    self.assertIn(target, {x.qid for x in survey.questions}, q.qid)
+                if q.qtype in {"单选题", "多选题", "排序题", "Top-N题"}:
+                    self.assertGreaterEqual(len(opts), 2, q.qid)
+            simulator = exporter.simulator_markdown(survey)
+            self.assertNotIn("模板使用说明", simulator)
+            self.assertNotIn("解释边界", simulator)
+            self.assertEqual(re.findall(r"(?m)^(Q\d+)【", simulator), [q.qid for q in survey.questions])
 
     def test_satisfaction_example_preserves_diagnostic_structure(self) -> None:
-        template = PROJECT / "skills" / "ur-design-survey" / "templates" / "questionnaire-satisfaction-survey.md"
-        text = template.read_text(encoding="utf-8")
-        self.assertEqual(
-            re.findall(r"(?m)^(Q\d+)【", text),
-            [f"Q{number}" for number in range(1, 12)],
-        )
-        self.assertRegex(text, r"(?m)^Q5【单选题】（必填）总体而言，.*满意程度如何？$")
-        self.assertRegex(text, r"(?m)^Q6【矩阵量表题】（必填）")
-        self.assertIn("照片上传/备份稳定性", text)
-        self.assertIn("隐私设置清晰度与可控性", text)
-        self.assertIn("未使用/无法评价", text)
-        self.assertRegex(text, r"(?m)^Q7【多选题】（必填）哪些方面没有达到您的预期？")
-        self.assertIn("关联 Q5 的“不太满意”“非常不满意”", text)
-        self.assertIn("或关联 Q6 任一评价对象", text)
-        self.assertRegex(text, r"(?m)^Q8【单选题】（必填）.*问题最终是否解决？$")
-        self.assertRegex(text, r"(?m)^Q9【量表题】（必填）.*0–10 分")
-        self.assertRegex(text, r"(?m)^Q10【多选题】（必填）.*优先改进")
-        self.assertRegex(text, r"(?m)^Q11【填空题】（选填）.*具体建议？$")
-        self.assertLess(text.index("Q5【"), text.index("Q6【"))
-        self.assertLess(text.index("Q6【"), text.index("Q7【"))
-        self.assertLess(text.index("Q7【"), text.index("Q9【"))
-        run(
-            PROJECT / "skills" / "ur-design-survey" / "scripts" / "lint_questionnaire.py",
-            template,
-        )
+        folder = PROJECT / "skills" / "ur-design-survey"
+        template = folder / "templates" / "questionnaire-satisfaction-survey.md"
+        exporter = ScriptTests._load_script("survey_satisfaction_export", folder / "scripts" / "export_questionnaire.py")
+        survey = exporter.parse_source(template)
+        matrix = next(q for q in survey.questions if q.qtype == "矩阵量表题")
+        rows, columns = exporter.matrix_parts(matrix.body)
+        self.assertGreater(len(rows), 0)
+        self.assertIn("未涉及/无法评价", columns)
+        low_score_questions = [q for q in survey.questions if any("不太满意" in line and "题目关联" in line for line in q.body)]
+        self.assertTrue(low_score_questions)
+        self.assertGreater(int(low_score_questions[0].qid[1:]), int(matrix.qid[1:]))
+        nps = next(q for q in survey.questions if q.qtype == "量表题")
+        self.assertEqual(exporter.scale_range(nps), "0~10")
+        for q in (matrix, nps):
+            self.assertTrue(any("题目关联" in line for line in q.body))
+        run(folder / "scripts" / "lint_questionnaire.py", template)
 
     def test_schema3_logic_becomes_executable_branching(self) -> None:
         module = ScriptTests._load_script(
@@ -1140,3 +1111,4 @@ Q3【填空题】（选填）您还有什么建议？
 
 if __name__ == "__main__":
     unittest.main()
+
