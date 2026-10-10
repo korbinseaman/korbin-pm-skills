@@ -644,6 +644,7 @@ def prepare_analysis(args: argparse.Namespace) -> dict[str, Any]:
         "themes": [],
         "segment_observations": [],
         "recommendations": [],
+        "next_step_inputs": {"competitor_analysis": [], "experience_design": []},
         "limitations": limitations,
     }
 
@@ -676,40 +677,73 @@ def source_label() -> tuple[str, str]:
 
 
 def conclusion_deck(analysis: dict[str, Any]) -> list[dict[str, Any]]:
-    """Three evidence-led slides; missing authored findings remain explicit gaps."""
+    """Build 1–2 goal pages and two evidence-linked handoff pages."""
     goals = analysis.get("goal_coverage", [])
-    themes = analysis.get("themes", [])
-    context = analysis.get("research_context", {})
-    results = [item for item in analysis.get("descriptive_results", []) if item.get("type") != "open_text" and item.get("base_n")]
-    linked_ids = [qid for goal in goals for qid in goal.get("question_ids", [])]
-    results.sort(key=lambda item: (item.get("question_id") not in linked_ids, linked_ids.index(item["question_id"]) if item.get("question_id") in linked_ids else 999))
-    findings = [f'{goal.get("research_question", "研究目标")}：{goal.get("finding") or "尚未形成证据支持的结论"}' for goal in goals]
-    lines = [
-        ["背景：" + str(context.get("background") or "未提供独立背景说明；以下以已提供的产品决策作为分析起点。"),
-         "目的：" + str(context.get("decision") or "未提供产品决策或正式调研目的。"),
-         "用户现状：" + str(goals[0].get("finding") or "尚未形成现状分析，不能将人口属性或概念意愿当作实际行为。") if goals else "用户现状：未提供目标对应的现状结论。"],
-        [str(theme.get("insight") or theme.get("name") or theme.get("theme_id")) + "；证据：" + ", ".join(theme.get("evidence_ids", [])) for theme in themes] or ["未形成用户诉求与痛点的证据编码；不能由选项分布补造原因或用户原话。"],
-        findings or ["未提供正式研究目标；当前仅有描述统计，无法形成目标对应的关键结论。"],
-    ]
-    slides = []
-    for index, title in enumerate(["调研背景、目的与用户现状", "用户诉求与痛点", "调研目标与关键结论"]):
-        goal = goals[min(index, len(goals) - 1)] if goals else {}
-        candidates = [item for item in results if item.get("question_id") in goal.get("question_ids", [])]
-        if index == 0:
-            candidates.sort(key=lambda item: (bool(re.search("年龄|性别|品牌", item.get("question", ""))), not bool(re.search("频率|过去|近期|付费|使用", item.get("question", "")))))
-        result = (candidates or results or [{}])[0]
+    results = {item["question_id"]: item for item in analysis.get("descriptive_results", [])
+               if item.get("type") != "open_text" and item.get("base_n")}
+    source = "合成模拟数据" if analysis.get("data_source") == "synthetic" else "真实用户调研数据"
+    boundary = ("仅用于假设生成，须由真实用户研究验证。" if analysis.get("data_source") == "synthetic"
+                else "结论仅适用于本次样本及采集范围。")
+
+    def chart_for(question_ids: list[str]) -> dict[str, Any]:
+        result = next((results[qid] for qid in question_ids if qid in results), None)
+        if not result:
+            return {"title": "无匹配的封闭题图表", "note": "证据缺口：未找到与本页对应的有效题目统计。", "items": []}
         items = result.get("distribution", [])
         if result.get("ranking"):
-            items = [{"label": row["label"], "count": row.get("first_choice_count", 0), "percent": row.get("first_choice_count", 0) / result["base_n"] * 100} for row in result["ranking"]]
-        items = sorted(items, key=lambda row: -row.get("percent", 0))
-        note = f'全批次；实际分母 n={result.get("base_n", 0)}；空白/未作答 {result.get("missing_n", 0)}。'
+            items = [{"label": row["label"], "count": row.get("first_choice_count", 0),
+                      "percent": row.get("first_choice_count", 0) / result["base_n"] * 100}
+                     for row in result["ranking"]]
+        note = f'全批次；有效分母 n={result["base_n"]}；空白/未作答 {result.get("missing_n", 0)}。'
         if result.get("type") == "multi_choice":
             note += "多选为受访者占比，比例合计可超过100%。"
         if result.get("type") == "ranking":
             note += "按第一选择统计。"
         if len(items) > 6:
-            note += "展示占比最高的6项，完整选项见普通分析。"
-        slides.append({"title": title, "lines": lines[index][:4], "chart": {"title": f'{result.get("question_id", "")} · {result.get("question", "暂无题目统计")}', "note": note, "items": items[:6]}})
+            note += "仅展示占比最高的6项。"
+        return {"title": f'{result["question_id"]} · {result.get("question", "")}',
+                "note": note, "items": sorted(items, key=lambda row: -row.get("percent", 0))[:6]}
+
+    midpoint = (len(goals) + 1) // 2
+    groups = [goals[:midpoint], goals[midpoint:]] if len(goals) > 3 else [goals]
+    slides = []
+    for index, group in enumerate(groups):
+        lines = [f'{goal.get("research_question") or goal.get("goal_id") or "研究目标"}：'
+                 f'{goal.get("finding") or "证据不足，尚无可支持的结论"}'
+                 f'（题目：{", ".join(goal.get("question_ids", [])) or "未覆盖"}）'
+                 for goal in group]
+        if not lines:
+            lines = ["未提供正式研究目标；本次仅可作为探索性描述，不能宣称目标已经回答。"]
+        if len(lines) > 4:
+            pack = (len(lines) + 3) // 4
+            lines = [" / ".join(lines[pos:pos + pack]) for pos in range(0, len(lines), pack)]
+        linked = [qid for goal in group for qid in goal.get("question_ids", [])]
+        slides.append({"section": "研究结论", "title": f"围绕调研目标的结论{f'（{index+1}）' if len(groups)>1 else ''}",
+                       "lines": lines, "chart": chart_for(linked), "source": source, "boundary": boundary})
+
+    handoff = analysis.get("next_step_inputs") or {}
+    specs = [
+        ("competitor_analysis", "后续竞品分析输入", "竞品分析", "compare_dimensions", "verification_question", "decision_use"),
+        ("experience_design", "产品体验定义与设计输入", "体验设计", "design_implication", "validation_question", None),
+    ]
+    status_labels = {"research_finding": "研究发现", "product_hypothesis": "产品假设", "to_verify": "待验证"}
+    for key, title, section, detail, question, decision in specs:
+        entries = handoff.get(key) or []
+        lines, linked = [], []
+        for item in entries[:3]:
+            refs = list(item.get("question_ids") or []) + list(item.get("evidence_ids") or [])
+            linked.extend(item.get("question_ids") or [])
+            label = status_labels.get(item.get("status"), "待验证")
+            parts = [f'[{label}] {item.get("input") or "待补充"}', str(item.get(detail) or ""),
+                     f'待核实：{item.get(question) or "待补充"}']
+            if decision and item.get(decision):
+                parts.append(f'决策用途：{item[decision]}')
+            parts.append(f'证据：{", ".join(refs) or "待补研究"}')
+            lines.append("；".join(part for part in parts if part))
+        if not lines:
+            lines = [f"尚无可回溯证据支持的{section}输入；先补充相关用户研究，再定义比较维度或体验方案。"]
+        slides.append({"section": section, "title": title, "lines": lines, "chart": chart_for(linked),
+                       "source": source, "boundary": boundary})
     return slides
 
 
@@ -755,8 +789,8 @@ def render_quality_audit(analysis: dict[str, Any], problems: list[str] | None) -
         ("charts", "逐题六种视图及百分比口径"),
         ("cross", "X/Y 添加、移除、交换及交叉分母"),
         ("tabs", "四个 Tab 切换、键盘导航及导出隔离"),
-        ("office", "DOCX/PPTX/XLSX 与结论 PPT 可重新打开"),
-        ("downloads", "实际浏览器报告、结论 PPT 及 CSV 下载"),
+        ("office", "DOCX/PPTX/XLSX 与独立调研幻灯片可重新打开"),
+        ("downloads", "实际浏览器报告、调研幻灯片及 CSV 下载"),
         ("conclusions", "目标对应结论、来源限制及未回答问题"),
     ]
     records = {item.get("check_id"): item for item in analysis.get("report_audit", [])}
@@ -785,7 +819,8 @@ def render_report(analysis: dict[str, Any], machine_problems: list[str] | None =
     cross_tabs = analysis.get("cross_tabulations", [])
     scale_quality = analysis.get("scale_quality", [])
     quality_audit = render_quality_audit(analysis, machine_problems)
-    interactive_payload = json.dumps({**analysis.get("interactive_data", {}), "conclusion_deck": conclusion_deck(analysis)}, ensure_ascii=False).replace("</", "<\\/")
+    interactive_payload = json.dumps({**analysis.get("interactive_data", {}), "conclusion_deck": conclusion_deck(analysis),
+                                      "data_source": analysis.get("data_source", "synthetic")}, ensure_ascii=False).replace("</", "<\\/")
 
     goal_rows = "".join(f'<tr><td>{esc(goal.get("goal_id"))}</td><td>{esc(goal.get("research_question"))}</td><td>{esc(", ".join(goal.get("question_ids", [])) or "无")}</td><td>{esc(goal.get("status"))}</td><td>{esc(goal.get("finding"))}</td></tr>' for goal in goals) or '<tr><td colspan="5">survey-design-desc.html 未提供可识别的研究目标。</td></tr>'
 
@@ -853,7 +888,7 @@ def render_report(analysis: dict[str, Any], machine_problems: list[str] | None =
 <article id="panel-ordinary" role="tabpanel" aria-labelledby="tab-ordinary"><div hidden><select id="chart-question"></select><select id="chart-type"></select></div><div id="ordinary-questions"></div></article>
 <article id="panel-cross" class="cross-panel" role="tabpanel" aria-labelledby="tab-cross" hidden><div class="cross-builder"><h3>我的交叉分析</h3><div class="cross-grid" data-export-exclude><div><label>自变量 X <small>分组题目，最多 2 题</small><select id="cross-group"></select></label><button id="add-cross-group" type="button">＋ 添加自变量</button><div id="cross-groups" class="filter-chips"></div></div><button id="swap-cross" type="button" aria-label="交换 X 与 Y">⇄</button><div><label>因变量 Y <small>分析题目，最多 10 题</small><select id="cross-target"></select></label><button id="add-cross-target" type="button">＋ 添加因变量</button><div id="cross-targets" class="filter-chips"></div></div></div><div class="cross-actions" data-export-exclude><button id="calculate-cross" class="primary" type="button">交叉分析</button><button id="export-cross-csv" type="button">下载交叉表 CSV</button></div><p id="cross-note" class="helper">可添加多个 X、Y 题目；未添加时使用下拉框当前题目。筛选条件同时适用于交叉分析。</p></div><div id="cross-table"></div></article>
 <article id="panel-conclusions" class="report-body" role="tabpanel" aria-labelledby="tab-conclusions" hidden>
-<div class="conclusion-heading"><div><h2>调研分析结论</h2><p class="helper">从背景与目的出发，分析现状、诉求与痛点，再形成目标对应的关键结论。</p></div><button id="download-conclusion-ppt" class="primary" type="button">下载结论 PPT（3页）</button></div><div id="conclusion-slides"></div>
+<div class="conclusion-heading"><div><h2>调研分析结论与下一步输入</h2><p class="helper">先回答调研目标，再列出竞品分析与体验定义需要处理的问题。</p></div><button id="download-conclusion-ppt" class="primary" type="button">下载调研幻灯片（3–4页）</button></div><div id="conclusion-slides"></div>
 <p class="conclusion-context">以下为清理后全批次的研究分析结论，不随普通分析或交叉分析中的筛选条件变化。</p>
 
 
@@ -864,9 +899,9 @@ def render_report(analysis: dict[str, Any], machine_problems: list[str] | None =
 <section class="report-section"><div class="section-heading"><span class="section-index">02</span><h2>全批次描述统计</h2></div><p>清理后全批次结果保留原口径，不随上方筛选变化。</p><details class="data-details"><summary>展开全部题目图表</summary><div id="full-batch-charts">{"".join(charts)}</div></details></section>
 <section class="report-section"><div class="section-heading"><span class="section-index">03</span><h2>数据质量与清理记录</h2></div><p>质量等级：{esc(sample.get("quality_grade"))} · 完成回答清理前 {cleaning.get("completed_before_cleaning", 0)} · 清理后 {cleaning.get("analyzable_after_cleaning", 0)}</p><details class="data-details"><summary>查看清理与运行明细</summary><div class="method-grid"><div><h3>清理剔除记录</h3><ul>{cleaned_rows}</ul></div><div><h3>待人工复核</h3><ul>{review_rows}</ul></div><div><h3>实际模型</h3><ul>{model_items}</ul></div><div><h3>已记录问题</h3><ul>{issue_items}</ul></div></div></details>{quality_audit}</section>
 <section class="report-section"><div class="section-heading"><span class="section-index">04</span><h2>限制与未回答问题</h2></div><ul>{limit_items}</ul></section></article></section></div>
-<dialog id="export-dialog" data-export-exclude><div class="dialog-heading"><h2>下载报告</h2><button id="close-export" type="button" aria-label="关闭">×</button></div><label>选择文档格式<select id="export-format"><option value="docx">Word 文档（.docx）</option><option value="pptx">PowerPoint 演示文稿（.pptx）</option><option value="xlsx">Excel 工作簿（.xlsx）</option></select></label><label>Word 纸张大小<select id="export-paper"><option>A4</option><option>A3</option></select></label><p class="helper">导出当前分析 Tab 与当前筛选结果，并附报告正文的文字说明。研究结论保持全批次口径。Word/Excel 使用可编辑统计表，PowerPoint 使用可编辑条形图与统计表。结论页 PowerPoint 导出为三页结论与图表。</p><p id="export-error" role="alert"></p><div class="dialog-footer"><span>离线生成，不上传数据</span><button id="confirm-export" type="button" class="primary">下载报告</button></div></dialog>
+<dialog id="export-dialog" data-export-exclude><div class="dialog-heading"><h2>下载报告</h2><button id="close-export" type="button" aria-label="关闭">×</button></div><label>选择文档格式<select id="export-format"><option value="docx">Word 文档（.docx）</option><option value="pptx">PowerPoint 演示文稿（.pptx）</option><option value="xlsx">Excel 工作簿（.xlsx）</option></select></label><label>Word 纸张大小<select id="export-paper"><option>A4</option><option>A3</option></select></label><p class="helper">导出当前分析 Tab 与当前筛选结果，并附报告正文的文字说明。研究结论保持全批次口径。Word/Excel 使用可编辑统计表，PowerPoint 使用可编辑条形图与统计表。结论页 PowerPoint 导出研究结论与后续工作输入。</p><p id="export-error" role="alert"></p><div class="dialog-footer"><span>离线生成，不上传数据</span><button id="confirm-export" type="button" class="primary">下载报告</button></div></dialog>
 <p id="download-status" data-export-exclude>筛选、分析与导出均在本地完成。</p>
-<footer class="page-footer"><span>合成模拟数据 · 用于假设验证与研究工具检查</span><span>结论 PPT 使用全批次数据</span></footer>
+<footer class="page-footer"><span>合成模拟数据 · 用于假设验证与研究工具检查</span><span>调研幻灯片使用全批次数据</span></footer>
 </main>{interactive_script}</body></html>'''
 
 
@@ -882,6 +917,17 @@ def validate_analysis(base: dict[str, Any], analysis: dict[str, Any]) -> None:
     invalid = [item for item in analysis.get("themes", []) if item.get("confidence") in {"medium", "high"}]
     if invalid:
         raise ValueError("合成数据主题的置信等级最高只能为 low")
+    handoff = analysis.get("next_step_inputs") or {}
+    qids = {item["question_id"] for item in analysis.get("descriptive_results", [])}
+    evidence_ids = {item["evidence_id"] for item in analysis.get("qualitative_observations", [])}
+    for key in ("competitor_analysis", "experience_design"):
+        for item in handoff.get(key, []):
+            if not item.get("question_ids") and not item.get("evidence_ids"):
+                raise ValueError(f"{key} 每项输入必须关联题号或回答证据 ID")
+            if set(item.get("question_ids") or []) - qids or set(item.get("evidence_ids") or []) - evidence_ids:
+                raise ValueError(f"{key} 含未在分析底稿中出现的题号或证据 ID")
+            if item.get("status") not in {"research_finding", "product_hypothesis", "to_verify"}:
+                raise ValueError(f"{key} 的 status 无效")
 
 
 def machine_quality(report: str, analysis: dict[str, Any]) -> list[str]:
@@ -937,7 +983,10 @@ def main() -> int:
         problems = machine_quality(report, analysis)
         report_path = args.output_dir / report_filename(analysis, args.report_date)
         report_path.write_text(render_report(analysis, problems), encoding="utf-8")
-        print(json.dumps({"report": str(report_path), "analysis": str(analysis_path), "quality_panel": "#panel-quality", "machine_checks_passed": not problems, "problems": problems}, ensure_ascii=False, indent=2))
+        from build_research_slides import save_deck
+        slides_path = report_path.with_name(report_path.stem.removesuffix("_调研报告") + "_调研报告幻灯片.pptx")
+        save_deck(analysis, slides_path)
+        print(json.dumps({"report": str(report_path), "slides": str(slides_path), "analysis": str(analysis_path), "quality_panel": "#panel-quality", "machine_checks_passed": not problems, "problems": problems}, ensure_ascii=False, indent=2))
         return 0 if not problems else 1
     except (OSError, ValueError, KeyError, json.JSONDecodeError, zipfile.BadZipFile, ET.ParseError) as exc:
         parser.error(str(exc))
