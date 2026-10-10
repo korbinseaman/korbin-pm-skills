@@ -1,4 +1,4 @@
 interface:
   display_name: "用户研究报告综合"
   short_description: "综合问卷Excel，生成可审计报告及后续产品工作幻灯片"
-  default_prompt: "使用 $ur-synthesize-report 分析指定问卷 Excel，生成离线调研报告 HTML 和独立 PPTX：以1–2页回答研究目标，再给出竞品分析及体验定义设计输入；保留证据、分母、限制和问卷质量审计。"
+  default_prompt: "使用 $ur-synthesize-report 分析指定问卷 Excel，生成离线调研报告 HTML 和独立 PPTX：以2–3页逐一回答研究目标，每页一个结论、2–3项支撑数据，再给出竞品分析及体验定义设计输入；保留证据、分母、限制和问卷质量审计。"

@@ -54,9 +54,12 @@ def save_deck(analysis: dict, output: Path) -> Path:
         _text(slide, page["title"], 0.55, 0.72, 12.0, 0.65, 27, INK, True)
         _text(slide, f'全批次可分析样本 n={analysis.get("sample", {}).get("analyzable", "—")}', 0.55, 1.46, 6, 0.32, 11, MUTED)
         _rect(slide, 0.55, 1.94, 6.02, 4.59, RGBColor(247, 250, 252))
-        for row, line in enumerate(page["lines"][:4]):
-            # Long lines are intentionally limited in the authoring brief; fit conservatively.
-            _text(slide, f'{row + 1:02d}  {line}', 0.78, 2.12 + row * 1.06, 5.52, 0.99, 14, INK)
+        is_conclusion = bool(page.get("supporting_data"))
+        lines = page["lines"][:7] if is_conclusion else page["lines"][:4]
+        for row, line in enumerate(lines):
+            step = 0.65 if is_conclusion else 1.06
+            _text(slide, f'{row + 1:02d}  {line}', 0.78, 2.10 + row * step,
+                  5.52, 0.62 if is_conclusion else 0.99, 11 if is_conclusion else 14, INK)
 
         chart = page.get("chart") or {}
         _text(slide, chart.get("title") or "数据证据", 6.87, 1.98, 5.75, 0.55, 15, INK, True)

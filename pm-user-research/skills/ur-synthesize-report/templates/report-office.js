@@ -68,10 +68,10 @@
     const rect=(x,y,w,h)=>`<p:sp><p:nvSpPr><p:cNvPr id="${++shapeId}" name="Bar ${shapeId}"/><p:cNvSpPr/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm><a:off x="${x}" y="${y}"/><a:ext cx="${w}" cy="${h}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:solidFill><a:srgbClr val="0997F0"/></a:solidFill><a:ln><a:noFill/></a:ln></p:spPr></p:sp>`;
     const slide=(title,note,body)=>{shapeId=1;slides.push(`<p:sld ${NS}><p:cSld><p:bg><p:bgPr><a:solidFill><a:srgbClr val="FFFFFF"/></a:solidFill><a:effectLst/></p:bgPr></p:bg><p:spTree>${group}${box(title,550000,380000,11100000,900000,2600,"172C3D",true)}${box(note,550000,1250000,11100000,600000,1100,"6B7A87")}${body()}${box(`${model.runId} · ${model.dataSource==="real"?"真实用户调研数据":"合成模拟数据"} · ${slides.length+1}`,550000,6350000,11000000,240000,900,"8B98A3")}</p:spTree></p:cSld><p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr></p:sld>`);};
     if(model.mode==="conclusions" && model.conclusionSlides?.length){
-       model.conclusionSlides.slice(0,4).forEach((page,index)=>slide(page.title,(page.section||"研究结论")+" · 全批次样本 n="+model.sampleN+" · "+(page.boundary||""),()=>{
-        const lines=page.lines.map(line=>String(line).length>140?String(line).slice(0,138)+"…（详见HTML）":String(line));
+       model.conclusionSlides.forEach((page,index)=>slide(page.title,(page.section||"研究结论")+" · 全批次样本 n="+model.sampleN+" · "+(page.boundary||""),()=>{
+        const lines=page.lines.map(line=>String(line));
         const items=page.chart?.items||[], chart=page.chart||{};
-        let out=box(lines.join("\n\n"),550000,2050000,4800000,3850000,1500);
+        let out=box(lines.join("\n\n"),550000,2050000,4800000,4150000,page.supporting_data?.length?1150:1500);
         out+=box(chart.title||"数据证据",5700000,1900000,5900000,800000,1400,"172C3D",true);
         out+=box(chart.note||"暂无题目统计",5700000,5450000,5900000,700000,1000,"6B7A87");
         if(!items.length)return out+box("暂无可配对的数据图表",5700000,3200000,5800000,600000,1500,"8B98A3");
