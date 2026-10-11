@@ -65,7 +65,7 @@
     const group='<p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr><p:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="0" cy="0"/><a:chOff x="0" y="0"/><a:chExt cx="0" cy="0"/></a:xfrm></p:grpSpPr>';
     const slides=[];let shapeId=1;
     const box=(text,x,y,w,h,size=1400,color="263746",bold=false)=>`<p:sp><p:nvSpPr><p:cNvPr id="${++shapeId}" name="Text ${shapeId}"/><p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm><a:off x="${x}" y="${y}"/><a:ext cx="${w}" cy="${h}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/><a:ln><a:noFill/></a:ln></p:spPr><p:txBody><a:bodyPr wrap="square" lIns="0" tIns="0" rIns="0" bIns="0"><a:normAutofit/></a:bodyPr><a:lstStyle/>${String(text).split("\n").map(line=>`<a:p><a:r><a:rPr lang="zh-CN" sz="${size}" b="${bold?1:0}"><a:solidFill><a:srgbClr val="${color}"/></a:solidFill><a:latin typeface="Microsoft YaHei"/><a:ea typeface="Microsoft YaHei"/></a:rPr><a:t>${xml(line)}</a:t></a:r></a:p>`).join("")}</p:txBody></p:sp>`;
-    const rect=(x,y,w,h)=>`<p:sp><p:nvSpPr><p:cNvPr id="${++shapeId}" name="Bar ${shapeId}"/><p:cNvSpPr/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm><a:off x="${x}" y="${y}"/><a:ext cx="${w}" cy="${h}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:solidFill><a:srgbClr val="0997F0"/></a:solidFill><a:ln><a:noFill/></a:ln></p:spPr></p:sp>`;
+    const rect=(x,y,w,h,color="0997F0")=>`<p:sp><p:nvSpPr><p:cNvPr id="${++shapeId}" name="Bar ${shapeId}"/><p:cNvSpPr/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm><a:off x="${x}" y="${y}"/><a:ext cx="${w}" cy="${h}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:solidFill><a:srgbClr val="${color}"/></a:solidFill><a:ln><a:noFill/></a:ln></p:spPr>`;
     const slide=(title,note,body)=>{shapeId=1;slides.push(`<p:sld ${NS}><p:cSld><p:bg><p:bgPr><a:solidFill><a:srgbClr val="FFFFFF"/></a:solidFill><a:effectLst/></p:bgPr></p:bg><p:spTree>${group}${box(title,550000,380000,11100000,900000,2600,"172C3D",true)}${box(note,550000,1250000,11100000,600000,1100,"6B7A87")}${body()}${box(`${model.runId} · ${model.dataSource==="real"?"真实用户调研数据":"合成模拟数据"} · ${slides.length+1}`,550000,6350000,11000000,240000,900,"8B98A3")}</p:spTree></p:cSld><p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr></p:sld>`);};
     if(model.mode==="conclusions" && model.conclusionSlides?.length){
        model.conclusionSlides.forEach((page,index)=>slide(page.title,(page.section||"研究结论")+" · 全批次样本 n="+model.sampleN+" · "+(page.boundary||""),()=>{
@@ -75,9 +75,16 @@
         out+=box(chart.title||"数据证据",5700000,1900000,5900000,800000,1400,"172C3D",true);
         out+=box(chart.note||"暂无题目统计",5700000,5450000,5900000,700000,1000,"6B7A87");
         if(!items.length)return out+box("暂无可配对的数据图表",5700000,3200000,5800000,600000,1500,"8B98A3");
+        if(chart.type==="composition_100"){
+          const colors=["0997F0","2CBAAA","F5AB49"];let offset=0;
+          items.slice(0,3).forEach((item,i)=>{const width=Math.floor(item.percent/100*5100000);out+=rect(5900000+offset,2850000,width,350000,colors[i]);offset+=width;
+            out+=rect(5900000,3500000+i*480000,120000,120000,colors[i]);
+            out+=box(`${item.label} · ${item.count}/${item.base_n}（${item.percent.toFixed(1)}%）`,6150000,3430000+i*480000,5250000,380000,1200);
+          });return out;
+        }
         return out+items.slice(0,6).map((item,i)=>{
           const y=2800000+i*420000;
-          return box(item.label,5700000,y,2200000,390000,1150)+rect(8000000,y+70000,Math.floor(Math.max(0,Math.min(100,item.percent))/100*2600000),180000)+box(item.percent.toFixed(1)+"%",10700000,y,950000,390000,1200);
+          return box(item.label,5700000,y,2200000,390000,1150)+rect(8000000,y+70000,Math.floor(Math.max(0,Math.min(100,item.percent))/100*2600000),180000)+box(`${item.percent.toFixed(1)}%${item.base_n?` · ${item.count}/${item.base_n}`:""}`,10700000,y,1300000,390000,1100);
         }).join("");
       }));
     } else {
