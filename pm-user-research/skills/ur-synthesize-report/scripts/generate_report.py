@@ -678,7 +678,7 @@ def source_label() -> tuple[str, str]:
 
 
 def conclusion_deck(analysis: dict[str, Any]) -> list[dict[str, Any]]:
-    """Build 2–3 one-claim evidence pages and two evidence-linked handoff pages."""
+    """Build two purpose-specific conclusion pages and two evidence-linked handoff pages."""
     goals = analysis.get("goal_coverage", [])
     results = {item["question_id"]: item for item in analysis.get("descriptive_results", [])
                if item.get("type") != "open_text" and item.get("base_n")}
@@ -698,6 +698,7 @@ def conclusion_deck(analysis: dict[str, Any]) -> list[dict[str, Any]]:
         else:
             items = [{**row, "percent": int(row.get("count", 0)) / result["base_n"] * 100}
                      for row in items]
+        items = [{**row, "base_n": result["base_n"]} for row in items]
         note = f'全批次；有效分母 n={result["base_n"]}；空白/未作答 {result.get("missing_n", 0)}。'
         if result.get("type") == "multi_choice":
             note += "多选为受访者占比，比例合计可超过100%。"
@@ -710,10 +711,13 @@ def conclusion_deck(analysis: dict[str, Any]) -> list[dict[str, Any]]:
 
     goal_by_id = {str(goal.get("goal_id")): goal for goal in goals}
     authored = analysis.get("conclusion_slides") or []
-    if not 2 <= len(authored) <= 3:
-        raise ValueError("正式幻灯片需审定 2–3 条 conclusion_slides，一页一个核心结论；证据不足时先补研究，不自动凑页")
+    if len(authored) != 2:
+        raise ValueError("正式幻灯片须审定恰好 2 条 conclusion_slides：现状与问题、需求与决策条件；证据不足时先补研究")
+    expected_roles = ("current_state", "needs_and_conditions")
     slides, used_titles = [], set()
     for index, claim in enumerate(authored, 1):
+        if claim.get("page_role") != expected_roles[index - 1]:
+            raise ValueError(f"结论页 {index} 的 page_role 须为 {expected_roles[index - 1]}，并按固定两页顺序编排")
         title = str(claim.get("title") or "").strip()
         if not title or re.match(r"^Q\d+\b", title) or title.startswith(("调研结果", "数据分析")):
             raise ValueError(f"结论页 {index} 必须以直接回答研究问题的一句话结论为标题")
@@ -727,7 +731,9 @@ def conclusion_deck(analysis: dict[str, Any]) -> list[dict[str, Any]]:
         if not 2 <= len(supporting) <= 3:
             raise ValueError(f"结论页 {index} 必须有 2–3 项直接支撑数据")
         mapped_qids = {qid for gid in goal_ids for qid in goal_by_id[gid].get("question_ids", [])}
-        seen, proved, rows, chart_items, notes = set(), set(), [], [], []
+        seen, proved, rows, chart_items, notes, evidence_angles = set(), set(), [], [], [], set()
+        required_angles = ({"current_behavior", "friction"} if index == 1
+                           else {"need_priority", "decision_condition"})
         for datum in supporting:
             qid, label = str(datum.get("question_id") or ""), str(datum.get("option_label") or "")
             result = results.get(qid)
@@ -745,12 +751,19 @@ def conclusion_deck(analysis: dict[str, Any]) -> list[dict[str, Any]]:
             if proves in proved:
                 raise ValueError(f"结论页 {index} 的多项证据重复证明同一判断，请使用互补数据")
             proved.add(proves)
+            angle = str(datum.get("evidence_angle") or "")
+            if angle not in required_angles:
+                raise ValueError(f"结论页 {index} 的证据角度须为 {', '.join(sorted(required_angles))}")
+            evidence_angles.add(angle)
             count, base = int(option["count"]), int(result["base_n"])
             pct = count / base * 100
             kind = "多选" if result.get("type") == "multi_choice" else "单选/分类"
             rows.append(f"{qid} · {label}：{count}/{base}（{pct:.1f}%）[{kind}]；证明：{proves}")
-            chart_items.append({"label": f"{qid} · {label}", "count": count, "percent": pct, "base_n": base})
+            chart_items.append({"label": f"{qid} · {label}", "option_label": label, "question_id": qid, "count": count,
+                                "percent": pct, "base_n": base, "question_type": result.get("type")})
             notes.append(f"{qid} 有效分母 n={base}" + ("，多选可重叠" if kind == "多选" else ""))
+        if evidence_angles != required_angles:
+            raise ValueError(f"结论页 {index} 须同时具备 {', '.join(sorted(required_angles))} 两类证据")
         interpretation = str(claim.get("interpretation") or "").strip()
         implication = str(claim.get("product_implication") or "").strip()
         limitation = str(claim.get("counterevidence_or_limit") or "").strip()
@@ -758,8 +771,23 @@ def conclusion_deck(analysis: dict[str, Any]) -> list[dict[str, Any]]:
             raise ValueError(f"结论页 {index} 须填写综合解释、产品含义和反例/限制")
         lines = [f"研究问题：{claim.get('research_question') or goal_by_id[goal_ids[0]].get('research_question')}"] + rows
         lines += [f"综合解释：{interpretation}", f"产品含义（待验证）：{implication}", f"反例/限制：{limitation}"]
-        slides.append({"section": "研究结论", "title": title, "lines": lines,
-                       "chart": {"title": "支撑数据（分别按各题有效分母计算）", "items": chart_items, "note": "；".join(dict.fromkeys(notes))},
+        one_qid = len({item["question_id"] for item in chart_items}) == 1
+        one_base = len({item["base_n"] for item in chart_items}) == 1
+        complete_single_choice = (one_qid and one_base and
+                                  all(item["question_type"] == "single_choice" for item in chart_items) and
+                                  {item["option_label"] for item in chart_items} ==
+                                  {str(row.get("label")) for row in results[chart_items[0]["question_id"]].get("distribution", [])} and
+                                  sum(item["count"] for item in chart_items) == chart_items[0]["base_n"] and
+                                  sum(int(row.get("count", 0)) for row in results[chart_items[0]["question_id"]].get("distribution", [])) == chart_items[0]["base_n"])
+        chart_type = "composition_100" if complete_single_choice else "comparison_bars"
+        chart_note = "；".join(dict.fromkeys(notes))
+        if chart_type == "comparison_bars" and not one_qid:
+            chart_note += "；各条独立按本题分母计算，不相加。"
+        slides.append({"section": f"研究结论 {index}/2", "title": title, "lines": lines,
+                       "page_role": expected_roles[index - 1],
+                       "chart": {"type": chart_type,
+                                 "title": "互斥选项构成（合计 100%）" if complete_single_choice else "支撑数据（独立百分比）",
+                                 "items": chart_items, "note": chart_note},
                        "source": source, "boundary": boundary, "supporting_data": chart_items})
 
     handoff = analysis.get("next_step_inputs") or {}
@@ -929,7 +957,7 @@ def render_report(analysis: dict[str, Any], machine_problems: list[str] | None =
 <article id="panel-ordinary" role="tabpanel" aria-labelledby="tab-ordinary"><div hidden><select id="chart-question"></select><select id="chart-type"></select></div><div id="ordinary-questions"></div></article>
 <article id="panel-cross" class="cross-panel" role="tabpanel" aria-labelledby="tab-cross" hidden><div class="cross-builder"><h3>我的交叉分析</h3><div class="cross-grid" data-export-exclude><div><label>自变量 X <small>分组题目，最多 2 题</small><select id="cross-group"></select></label><button id="add-cross-group" type="button">＋ 添加自变量</button><div id="cross-groups" class="filter-chips"></div></div><button id="swap-cross" type="button" aria-label="交换 X 与 Y">⇄</button><div><label>因变量 Y <small>分析题目，最多 10 题</small><select id="cross-target"></select></label><button id="add-cross-target" type="button">＋ 添加因变量</button><div id="cross-targets" class="filter-chips"></div></div></div><div class="cross-actions" data-export-exclude><button id="calculate-cross" class="primary" type="button">交叉分析</button><button id="export-cross-csv" type="button">下载交叉表 CSV</button></div><p id="cross-note" class="helper">可添加多个 X、Y 题目；未添加时使用下拉框当前题目。筛选条件同时适用于交叉分析。</p></div><div id="cross-table"></div></article>
 <article id="panel-conclusions" class="report-body" role="tabpanel" aria-labelledby="tab-conclusions" hidden>
-<div class="conclusion-heading"><div><h2>调研分析结论与下一步输入</h2><p class="helper">2–3 页结论，每页一个判断和 2–3 项支撑数据；再列出竞品分析与体验定义输入。</p></div><button id="download-conclusion-ppt" class="primary" type="button">下载调研幻灯片（4–5页）</button></div><div id="conclusion-slides"></div>
+<div class="conclusion-heading"><div><h2>调研分析结论与下一步输入</h2><p class="helper">现状与关键问题、需求优先级与决策条件各一页，每页一个判断和 2–3 项支撑数据；再列出竞品分析与体验定义输入。</p></div><button id="download-conclusion-ppt" class="primary" type="button">下载调研幻灯片（4页）</button></div><div id="conclusion-slides"></div>
 <p class="conclusion-context">以下为清理后全批次的研究分析结论，不随普通分析或交叉分析中的筛选条件变化。</p>
 
 
