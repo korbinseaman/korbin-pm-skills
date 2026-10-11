@@ -783,7 +783,7 @@ def conclusion_deck(analysis: dict[str, Any]) -> list[dict[str, Any]]:
         chart_note = "；".join(dict.fromkeys(notes))
         if chart_type == "comparison_bars" and not one_qid:
             chart_note += "；各条独立按本题分母计算，不相加。"
-        slides.append({"section": f"研究结论 {index}/2", "title": title, "lines": lines,
+        slides.append({"section": "当前体验诊断" if index == 1 else "体验机会与采用边界", "title": title, "lines": lines,
                        "page_role": expected_roles[index - 1],
                        "chart": {"type": chart_type,
                                  "title": "互斥选项构成（合计 100%）" if complete_single_choice else "支撑数据（独立百分比）",
@@ -957,7 +957,7 @@ def render_report(analysis: dict[str, Any], machine_problems: list[str] | None =
 <article id="panel-ordinary" role="tabpanel" aria-labelledby="tab-ordinary"><div hidden><select id="chart-question"></select><select id="chart-type"></select></div><div id="ordinary-questions"></div></article>
 <article id="panel-cross" class="cross-panel" role="tabpanel" aria-labelledby="tab-cross" hidden><div class="cross-builder"><h3>我的交叉分析</h3><div class="cross-grid" data-export-exclude><div><label>自变量 X <small>分组题目，最多 2 题</small><select id="cross-group"></select></label><button id="add-cross-group" type="button">＋ 添加自变量</button><div id="cross-groups" class="filter-chips"></div></div><button id="swap-cross" type="button" aria-label="交换 X 与 Y">⇄</button><div><label>因变量 Y <small>分析题目，最多 10 题</small><select id="cross-target"></select></label><button id="add-cross-target" type="button">＋ 添加因变量</button><div id="cross-targets" class="filter-chips"></div></div></div><div class="cross-actions" data-export-exclude><button id="calculate-cross" class="primary" type="button">交叉分析</button><button id="export-cross-csv" type="button">下载交叉表 CSV</button></div><p id="cross-note" class="helper">可添加多个 X、Y 题目；未添加时使用下拉框当前题目。筛选条件同时适用于交叉分析。</p></div><div id="cross-table"></div></article>
 <article id="panel-conclusions" class="report-body" role="tabpanel" aria-labelledby="tab-conclusions" hidden>
-<div class="conclusion-heading"><div><h2>调研分析结论与下一步输入</h2><p class="helper">现状与关键问题、需求优先级与决策条件各一页，每页一个判断和 2–3 项支撑数据；再列出竞品分析与体验定义输入。</p></div><button id="download-conclusion-ppt" class="primary" type="button">下载调研幻灯片（4页）</button></div><div id="conclusion-slides"></div>
+<div class="conclusion-heading"><div><h2>调研分析结论与下一步输入</h2><p class="helper">当前体验诊断、体验机会与采用边界各一页，每页一个判断和 2–3 项支撑数据；再列出竞品分析与体验定义输入。</p></div><button id="download-conclusion-ppt" class="primary" type="button">下载调研幻灯片（4页）</button></div><div id="conclusion-slides"></div>
 <p class="conclusion-context">以下为清理后全批次的研究分析结论，不随普通分析或交叉分析中的筛选条件变化。</p>
 
 
