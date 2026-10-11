@@ -65,14 +65,26 @@ def save_deck(analysis: dict, output: Path) -> Path:
         _text(slide, chart.get("title") or "数据证据", 6.87, 1.98, 5.75, 0.55, 15, INK, True)
         items = chart.get("items") or []
         if items:
-            for row, item in enumerate(items[:6]):
-                y = 2.56 + row * 0.55
-                pct = max(0, min(100, float(item.get("percent") or 0)))
-                _text(slide, str(item.get("label") or "")[:21], 6.88, y, 2.1, 0.37, 11)
-                _rect(slide, 9.04, y + 0.04, 2.65, 0.23, PALE)
-                if pct:
-                    _rect(slide, 9.04, y + 0.04, 2.65 * pct / 100, 0.23, BLUE)
-                _text(slide, f'{item.get("count", 0)} · {pct:.1f}%', 11.83, y - 0.01, 1.27, 0.36, 10, MUTED)
+            if chart.get("type") == "composition_100":
+                colors = [BLUE, RGBColor(44, 186, 170), RGBColor(245, 171, 73)]
+                offset = 0.0
+                for row, item in enumerate(items[:3]):
+                    pct = float(item["percent"])
+                    _rect(slide, 6.88 + offset, 2.82, 5.35 * pct / 100, 0.40, colors[row])
+                    offset += 5.35 * pct / 100
+                    y = 3.52 + row * 0.59
+                    _rect(slide, 6.90, y + 0.07, 0.16, 0.16, colors[row])
+                    _text(slide, str(item["label"]), 7.19, y, 3.23, 0.38, 12)
+                    _text(slide, f'{item["count"]}/{item["base_n"]} · {pct:.1f}%', 10.48, y, 2.26, 0.38, 11, MUTED)
+            else:
+                for row, item in enumerate(items[:6]):
+                    y = 2.56 + row * 0.55
+                    pct = max(0, min(100, float(item.get("percent") or 0)))
+                    _text(slide, str(item.get("label") or "")[:21], 6.88, y, 2.1, 0.37, 11)
+                    _rect(slide, 9.04, y + 0.04, 2.65, 0.23, PALE)
+                    if pct:
+                        _rect(slide, 9.04, y + 0.04, 2.65 * pct / 100, 0.23, BLUE)
+                    _text(slide, f'{item.get("count", 0)}/{item.get("base_n", "—")} · {pct:.1f}%', 11.76, y - 0.01, 1.36, 0.36, 9, MUTED)
         else:
             _text(slide, "本页没有可对应的封闭题图表；证据缺口见左侧。", 6.88, 2.65, 5.7, 0.85, 14, MUTED)
         _text(slide, chart.get("note") or "", 6.88, 6.03, 5.72, 0.49, 10, MUTED)
